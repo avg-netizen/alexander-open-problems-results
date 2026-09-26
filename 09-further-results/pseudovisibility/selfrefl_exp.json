@@ -1,0 +1,140 @@
+{
+ "coupled": {
+  "optimum": 0.95,
+  "nash": 0.5,
+  "runs": {
+   "tab/sa/greedy/plain": {
+    "train_mean": 0.4679,
+    "train_se": 0.002,
+    "final_mean": 0.5,
+    "final_se": 0.0
+   },
+   "tab/sa/greedy/selfrefl": {
+    "train_mean": 0.4716,
+    "train_se": 0.002,
+    "final_mean": 0.5,
+    "final_se": 0.0
+   },
+   "tab/sa/sampled/plain": {
+    "train_mean": 0.422,
+    "train_se": 0.0025,
+    "final_mean": 0.5,
+    "final_se": 0.0
+   },
+   "tab/sa/sampled/selfrefl": {
+    "train_mean": 0.4936,
+    "train_se": 0.0019,
+    "final_mean": 0.5,
+    "final_se": 0.0
+   }
+  }
+ },
+ "drift_T2000": {
+  "optimum": 0.8565419198909738,
+  "nash": 0.8436169286878776,
+  "runs": {
+   "tab/sa/greedy/plain": {
+    "train_mean": 0.5713,
+    "train_se": 0.004,
+    "final_mean": 0.6309,
+    "final_se": 0.0052
+   },
+   "tab/sa/greedy/selfrefl": {
+    "train_mean": 0.5771,
+    "train_se": 0.0049,
+    "final_mean": 0.6521,
+    "final_se": 0.0064
+   },
+   "tab/0.1/greedy/plain": {
+    "train_mean": 0.5722,
+    "train_se": 0.0051,
+    "final_mean": 0.6258,
+    "final_se": 0.0054
+   },
+   "tab/0.1/greedy/selfrefl": {
+    "train_mean": 0.5742,
+    "train_se": 0.0055,
+    "final_mean": 0.6327,
+    "final_se": 0.006
+   },
+   "tab/sa/sampled/plain": {
+    "train_mean": 0.561,
+    "train_se": 0.0042,
+    "final_mean": 0.6308,
+    "final_se": 0.005
+   },
+   "tab/sa/sampled/selfrefl": {
+    "train_mean": 0.5651,
+    "train_se": 0.0046,
+    "final_mean": 0.6523,
+    "final_se": 0.0059
+   },
+   "lin/0.05/greedy/plain": {
+    "train_mean": 0.576,
+    "train_se": 0.005,
+    "final_mean": 0.6644,
+    "final_se": 0.0112
+   },
+   "lin/0.05/greedy/selfrefl": {
+    "train_mean": 0.6253,
+    "train_se": 0.0051,
+    "final_mean": 0.7486,
+    "final_se": 0.0075
+   }
+  }
+ },
+ "drift_T20000": {
+  "optimum": 0.8565419198909738,
+  "nash": 0.8436169286878776,
+  "runs": {
+   "tab/sa/greedy/plain": {
+    "train_mean": 0.7015,
+    "train_se": 0.0021,
+    "final_mean": 0.801,
+    "final_se": 0.0025
+   },
+   "tab/sa/greedy/selfrefl": {
+    "train_mean": 0.7204,
+    "train_se": 0.0022,
+    "final_mean": 0.8164,
+    "final_se": 0.0025
+   },
+   "tab/0.1/greedy/plain": {
+    "train_mean": 0.6656,
+    "train_se": 0.0029,
+    "final_mean": 0.7655,
+    "final_se": 0.0036
+   },
+   "tab/0.1/greedy/selfrefl": {
+    "train_mean": 0.6717,
+    "train_se": 0.0031,
+    "final_mean": 0.7767,
+    "final_se": 0.0035
+   },
+   "tab/sa/sampled/plain": {
+    "train_mean": 0.689,
+    "train_se": 0.0021,
+    "final_mean": 0.7998,
+    "final_se": 0.0026
+   },
+   "tab/sa/sampled/selfrefl": {
+    "train_mean": 0.7093,
+    "train_se": 0.0021,
+    "final_mean": 0.8181,
+    "final_se": 0.0024
+   },
+   "lin/0.05/greedy/plain": {
+    "train_mean": 0.7496,
+    "train_se": 0.0012,
+    "final_mean": 0.8306,
+    "final_se": 0.002
+   },
+   "lin/0.05/greedy/selfrefl": {
+    "train_mean": 0.7679,
+    "train_se": 0.0011,
+    "final_mean": 0.8379,
+    "final_se": 0.0019
+   }
+  }
+ }
+}

@@ -1,0 +1,7 @@
+{
+ "swaps": 4302,
+ "shared": 1637,
+ "lemma_a_ok": 4302,
+ "lemma_b_ok": 1637,
+ "mean_changed_clade_size_share": 0.5803
+}

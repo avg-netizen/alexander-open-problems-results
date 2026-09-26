@@ -1,0 +1,18 @@
+{
+  "status": "passed; all-environment mass uses the separate Kraft proof",
+  "special_agent_values": [
+    "1/4",
+    "1/4",
+    "1/8",
+    "1/8"
+  ],
+  "special_selected_values": [
+    "0",
+    "1/8"
+  ],
+  "residual_mass_bound": "1/16",
+  "premise_margin_at_least": "1/16",
+  "reversal_margin_at_least": "1/16",
+  "residual_box_corners_checked": 64,
+  "quantifier": "one explicit admissible universal machine; not every machine"
+}

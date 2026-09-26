@@ -1,0 +1,150 @@
+{
+ "T_eval": 10,
+ "split": 4,
+ "rows": [
+  {
+   "N": 6,
+   "sex": 0.7,
+   "buffer": 0,
+   "internodon_pair_dist": 0.0784,
+   "n_internodons": 12.4,
+   "deme_purity": 0.956,
+   "parent_diff": 0.6935
+  },
+  {
+   "N": 6,
+   "sex": 0.7,
+   "buffer": 4,
+   "internodon_pair_dist": 0.0637,
+   "n_internodons": 7.8,
+   "deme_purity": 0.9444,
+   "parent_diff": 0.7844
+  },
+  {
+   "N": 6,
+   "sex": 0.7,
+   "buffer": 8,
+   "internodon_pair_dist": 0.0624,
+   "n_internodons": 7.8,
+   "deme_purity": 0.8578,
+   "parent_diff": 0.7615
+  },
+  {
+   "N": 6,
+   "sex": 0.7,
+   "buffer": 12,
+   "internodon_pair_dist": 0.0809,
+   "n_internodons": 7.4,
+   "deme_purity": 0.9083,
+   "parent_diff": 0.7477
+  },
+  {
+   "N": 6,
+   "sex": 1.0,
+   "buffer": 0,
+   "internodon_pair_dist": 0.065,
+   "n_internodons": 11.0,
+   "deme_purity": 0.975,
+   "parent_diff": 0.7625
+  },
+  {
+   "N": 6,
+   "sex": 1.0,
+   "buffer": 4,
+   "internodon_pair_dist": 0.0647,
+   "n_internodons": 5.0,
+   "deme_purity": 0.9214,
+   "parent_diff": 0.8122
+  },
+  {
+   "N": 6,
+   "sex": 1.0,
+   "buffer": 8,
+   "internodon_pair_dist": 0.0382,
+   "n_internodons": 5.2,
+   "deme_purity": 0.9667,
+   "parent_diff": 0.8206
+  },
+  {
+   "N": 6,
+   "sex": 1.0,
+   "buffer": 12,
+   "internodon_pair_dist": 0.0659,
+   "n_internodons": 5.4,
+   "deme_purity": 0.9378,
+   "parent_diff": 0.8109
+  },
+  {
+   "N": 12,
+   "sex": 0.7,
+   "buffer": 0,
+   "internodon_pair_dist": 0.0732,
+   "n_internodons": 21.2,
+   "deme_purity": 0.9335,
+   "parent_diff": 0.7392
+  },
+  {
+   "N": 12,
+   "sex": 0.7,
+   "buffer": 4,
+   "internodon_pair_dist": 0.0887,
+   "n_internodons": 13.0,
+   "deme_purity": 0.9417,
+   "parent_diff": 0.8164
+  },
+  {
+   "N": 12,
+   "sex": 0.7,
+   "buffer": 8,
+   "internodon_pair_dist": 0.0956,
+   "n_internodons": 14.6,
+   "deme_purity": 0.9162,
+   "parent_diff": 0.8063
+  },
+  {
+   "N": 12,
+   "sex": 0.7,
+   "buffer": 12,
+   "internodon_pair_dist": 0.097,
+   "n_internodons": 12.4,
+   "deme_purity": 0.9238,
+   "parent_diff": 0.8182
+  },
+  {
+   "N": 12,
+   "sex": 1.0,
+   "buffer": 0,
+   "internodon_pair_dist": 0.0667,
+   "n_internodons": 20.6,
+   "deme_purity": 0.9628,
+   "parent_diff": 0.7964
+  },
+  {
+   "N": 12,
+   "sex": 1.0,
+   "buffer": 4,
+   "internodon_pair_dist": 0.0609,
+   "n_internodons": 7.6,
+   "deme_purity": 0.8448,
+   "parent_diff": 0.8704
+  },
+  {
+   "N": 12,
+   "sex": 1.0,
+   "buffer": 8,
+   "internodon_pair_dist": 0.0806,
+   "n_internodons": 9.6,
+   "deme_purity": 0.9103,
+   "parent_diff": 0.8553
+  },
+  {
+   "N": 12,
+   "sex": 1.0,
+   "buffer": 12,
+   "internodon_pair_dist": 0.0739,
+   "n_internodons": 11.0,
+   "deme_purity": 0.8958,
+   "parent_diff": 0.8542
+  }
+ ]
+}

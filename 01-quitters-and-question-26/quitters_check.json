@@ -1,0 +1,42 @@
+{
+ "proposition_20": {
+  "-1": {
+   "A": "3/2",
+   "B": "1",
+   "B_r": "1",
+   "A_r+1": "1",
+   "hypotheses_hold": true,
+   "conclusion_A_r+1_beats_B": false
+  },
+  "-1/2": {
+   "A": "3/2",
+   "B": "1",
+   "B_r": "1",
+   "A_r+1": "1",
+   "hypotheses_hold": true,
+   "conclusion_A_r+1_beats_B": false
+  },
+  "0": {
+   "A": "3/2",
+   "B": "1",
+   "B_r": "1",
+   "A_r+1": "1",
+   "hypotheses_hold": true,
+   "conclusion_A_r+1_beats_B": false
+  },
+  "1/4": {
+   "A": "3/2",
+   "B": "1",
+   "B_r": "1",
+   "A_r+1": "3/2",
+   "hypotheses_hold": true,
+   "conclusion_A_r+1_beats_B": true
+  }
+ },
+ "question_26_LH_normalisation": {
+  "r>=0 violations": 0,
+  "r<0 counterexamples found": 110,
+  "r<0 cases": 110,
+  "r>=0 cases": 90
+ }
+}

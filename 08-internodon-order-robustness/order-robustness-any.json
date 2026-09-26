@@ -1,0 +1,36 @@
+{
+ "rows": [
+  {
+   "N": 6,
+   "sex": 0.3,
+   "parent_diff": 0.5662,
+   "clade_diff": 0.503,
+   "internodon_pair_dist": 0.1447,
+   "mean_rank_displacement": 0.0898
+  },
+  {
+   "N": 6,
+   "sex": 1.0,
+   "parent_diff": 0.8317,
+   "clade_diff": 0.7561,
+   "internodon_pair_dist": 0.1069,
+   "mean_rank_displacement": 0.0547
+  },
+  {
+   "N": 12,
+   "sex": 0.3,
+   "parent_diff": 0.6205,
+   "clade_diff": 0.5512,
+   "internodon_pair_dist": 0.1039,
+   "mean_rank_displacement": 0.0971
+  },
+  {
+   "N": 12,
+   "sex": 1.0,
+   "parent_diff": 0.8673,
+   "clade_diff": 0.7867,
+   "internodon_pair_dist": 0.1191,
+   "mean_rank_displacement": 0.0581
+  }
+ ]
+}

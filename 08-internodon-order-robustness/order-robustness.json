@@ -1,0 +1,107 @@
+{
+ "T": 14,
+ "split": 6,
+ "orders_per_genealogy": 12,
+ "genealogies": 6,
+ "rows": [
+  {
+   "N": 6,
+   "sex": 0.3,
+   "organisms": 132,
+   "clade_diff": 0.3226,
+   "parent_diff": 0.51,
+   "internodon_pair_dist": 0.0796,
+   "n_internodons_ref": 12.8333,
+   "n_internodons_alt": 13.5278,
+   "sd_share": 0.601
+  },
+  {
+   "N": 6,
+   "sex": 0.7,
+   "organisms": 132,
+   "clade_diff": 0.5125,
+   "parent_diff": 0.7205,
+   "internodon_pair_dist": 0.0832,
+   "n_internodons_ref": 11.8333,
+   "n_internodons_alt": 11.6389,
+   "sd_share": 0.7765
+  },
+  {
+   "N": 6,
+   "sex": 1.0,
+   "organisms": 132,
+   "clade_diff": 0.5819,
+   "parent_diff": 0.7754,
+   "internodon_pair_dist": 0.0627,
+   "n_internodons_ref": 9.5,
+   "n_internodons_alt": 9.75,
+   "sd_share": 0.8384
+  },
+  {
+   "N": 12,
+   "sex": 0.3,
+   "organisms": 264,
+   "clade_diff": 0.4406,
+   "parent_diff": 0.5643,
+   "internodon_pair_dist": 0.0607,
+   "n_internodons_ref": 32.0,
+   "n_internodons_alt": 32.6667,
+   "sd_share": 0.6023
+  },
+  {
+   "N": 12,
+   "sex": 0.7,
+   "organisms": 264,
+   "clade_diff": 0.6266,
+   "parent_diff": 0.7568,
+   "internodon_pair_dist": 0.0669,
+   "n_internodons_ref": 24.6667,
+   "n_internodons_alt": 25.7917,
+   "sd_share": 0.7607
+  },
+  {
+   "N": 12,
+   "sex": 1.0,
+   "organisms": 264,
+   "clade_diff": 0.703,
+   "parent_diff": 0.8263,
+   "internodon_pair_dist": 0.0616,
+   "n_internodons_ref": 20.6667,
+   "n_internodons_alt": 19.3611,
+   "sd_share": 0.8207
+  },
+  {
+   "N": 24,
+   "sex": 0.3,
+   "organisms": 528,
+   "clade_diff": 0.4876,
+   "parent_diff": 0.5869,
+   "internodon_pair_dist": 0.0444,
+   "n_internodons_ref": 63.0,
+   "n_internodons_alt": 63.4583,
+   "sd_share": 0.5938
+  },
+  {
+   "N": 24,
+   "sex": 0.7,
+   "organisms": 528,
+   "clade_diff": 0.665,
+   "parent_diff": 0.7768,
+   "internodon_pair_dist": 0.0545,
+   "n_internodons_ref": 55.3333,
+   "n_internodons_alt": 52.5694,
+   "sd_share": 0.7475
+  },
+  {
+   "N": 24,
+   "sex": 1.0,
+   "organisms": 528,
+   "clade_diff": 0.7386,
+   "parent_diff": 0.8462,
+   "internodon_pair_dist": 0.06,
+   "n_internodons_ref": 39.8333,
+   "n_internodons_alt": 42.0833,
+   "sd_share": 0.8037
+  }
+ ]
+}

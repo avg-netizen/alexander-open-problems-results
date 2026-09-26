@@ -1,0 +1,27 @@
+{
+  "status": "finite controls passed; no infinite-closure or full-model certificate",
+  "derivation_checks": 30,
+  "truth_assignments_checked": 180,
+  "same_time_factivity_knowledge_obstructions": 5,
+  "auxiliary_windows_and_horizons": [
+    [
+      3,
+      3
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      3,
+      8
+    ]
+  ],
+  "auxiliary_schema_instances": 6258,
+  "incorrect_independent_L_value_negative_controls": 20,
+  "proof_scope": "countable syntax and theory closures are treated by the hand proof"
+}
