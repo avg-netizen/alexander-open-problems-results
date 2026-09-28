@@ -1,0 +1,39 @@
+{
+ "seed": 7,
+ "genealogies": 4,
+ "orders_per_genealogy": 6,
+ "rows": [
+  {
+   "N": 6,
+   "sex": 0.3,
+   "all_pairs_changed": 0.067,
+   "co_member_pairs_lost": 0.2241,
+   "co_member_jaccard": 0.6009,
+   "worst_co_member_loss": 0.5875
+  },
+  {
+   "N": 6,
+   "sex": 1.0,
+   "all_pairs_changed": 0.0871,
+   "co_member_pairs_lost": 0.1806,
+   "co_member_jaccard": 0.675,
+   "worst_co_member_loss": 0.4744
+  },
+  {
+   "N": 12,
+   "sex": 1.0,
+   "all_pairs_changed": 0.0699,
+   "co_member_pairs_lost": 0.2216,
+   "co_member_jaccard": 0.6405,
+   "worst_co_member_loss": 0.5174
+  },
+  {
+   "N": 24,
+   "sex": 1.0,
+   "all_pairs_changed": 0.0736,
+   "co_member_pairs_lost": 0.3083,
+   "co_member_jaccard": 0.5171,
+   "worst_co_member_loss": 0.6067
+  }
+ ]
+}

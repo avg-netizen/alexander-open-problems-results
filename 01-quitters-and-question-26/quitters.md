@@ -4,6 +4,17 @@ subtitle: "On S. A. Alexander, *Intelligence via Ultrafilters* (2019)"
 date: "25 September 2026"
 ---
 
+> **Correction (27 September 2026).** The summary overstated one point.
+> - *What was wrong.* The bounded-rewards hypothesis *does* apply to the initial reward, so
+>   r₁ ≤ 1.
+> - *What actually fails for r ≤ 0.* The proof needs the **strict** inequality r₁ < r + 1 before
+>   the first action. When r ≤ 0, r₁ = 1 ≥ r + 1 is allowed.
+> - *Unaffected.* The counterexample, the r > 0 repair and the Question 26 answer.
+>
+> The normalisation used in §2 is Legg and Hutter's **pathwise** one: every realised total is at
+> most 1. Under the expected-value normalisation of Alexander and Hutter (2021), the r ≥ 0 answer
+> changes; see note 13.
+
 **Status.** Elementary hand proofs, with an exact-arithmetic check script. No independent human
 review. A bounded search did not locate a published answer; priority is not established.
 
@@ -16,7 +27,7 @@ Intelligence 10(1), 2019. [arXiv:1910.09721](https://arxiv.org/abs/1910.09721),
 
 1. **Proposition 20 is false as printed for every r ≤ 0, and true for every r > 0.** The initial
    reward arrives before any action, so neither the skipping hypothesis nor the bounded-reward
-   hypothesis constrains it. It alone can reach r + 1.
+   hypothesis constrains it. It alone can reach r + 1. **[Corrected 27 Sep 2026; see the correction box above.]**
 2. **Question 26, under Legg and Hutter's own normalisation** (rewards in [0, 1], total reward at
    most 1): the answer is **yes for every r ≥ 0 and no for every r < 0**. The negative cases turn
    on the same initial-reward edge.
@@ -69,7 +80,7 @@ r + 1.
 
 Γ is Legg and Hutter's measure. Its environments have rewards in [0, 1] and **total reward at
 most 1** for every agent, and every environment of the restricted class gets a positive weight
-2^(−K).
+$2^{-K}$.
 
 **Two facts used throughout.**
 

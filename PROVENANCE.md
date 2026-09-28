@@ -33,3 +33,21 @@ answers to these specific questions. A bounded negative search does not establis
 not redistributed. Quotations from them are short and attributed.
 
 **Status.** Nothing has been sent to Samuel Allen Alexander or his coauthors.
+
+## 27 September 2026: audit and additions
+
+At the owner's request, OpenAI Codex audited the repository. It:
+- wrote the report, now summarised in `CORRECTIONS.md`;
+- wrote the proofs in notes 10–13;
+- wrote `audit-2026-09-27/controls.py`.
+
+Anthropic Claude (Opus 5.5) then:
+- verified each finding against the source papers and scripts, with a fresh re-computation of the
+  internodon metrics (`08-internodon-order-robustness/comembership_check.py`);
+- checked the four new proofs step by step;
+- inserted the dated correction boxes;
+- adapted notes 10–13 into self-contained form.
+
+Only the path to the repository changed in the audit's controls script, and its output reproduces
+the audit's byte for byte. No independent human review has been recorded, and nothing has been sent
+to the source authors.

@@ -23,6 +23,10 @@ DOCUMENTS = {
     "07-minimal-introspection-bundle": "minimal-introspection-bundle",
     "08-internodon-order-robustness": "internodon-order-robustness",
     "09-further-results": "further-results",
+    "10-species-equivalence-and-iap-completeness": "species-equivalence-and-iap-completeness",
+    "11-bounded-founders": "bounded-founders",
+    "12-pseudovisibility-private-information": "pseudovisibility-private-information",
+    "13-signed-quitting": "signed-quitting",
 }
 PANDOC_VARS = [
     "mainfont=DejaVu Serif", "monofont=DejaVu Sans Mono", "mathfont=DejaVu Math TeX Gyre",

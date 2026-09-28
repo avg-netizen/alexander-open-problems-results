@@ -12,6 +12,10 @@ The notes answer, correct or sharpen questions posed in Alexander's papers on:
 - reinforcement-learning frameworks;
 - mathematical biology.
 
+> **27 September 2026:** an external audit found three substantive errors, in notes 06, 08 and
+> 09, and several minor ones. They are corrected in place with dated boxes; see
+> [CORRECTIONS.md](CORRECTIONS.md). The audit also contributed four new results, notes 10–13.
+
 A companion packet on *Biologically unavoidable sequences* is published separately:
 [biological-unavoidability-results](https://github.com/avg-netizen/biological-unavoidability-results).
 Nothing here duplicates it.
@@ -25,28 +29,33 @@ Nothing here duplicates it.
 | 03 | [Temporal knower joint model](03-temporal-knower-joint-model/temporal-knower-joint-model.pdf): a factive model of the surprise-examination theory extended by self-referential sentences L_i, with later knowledge of their falsehood. | Aldini–Alexander–Graziani (2023), concluding conjecture | proposed resolution, hand proof + finite controls |
 | 04 | [Formula-language classification](04-formula-language-classification/formula-classification.pdf): the 2006 language describes exactly the partial functions with arithmetical graphs. | *Formulas for Computable and Noncomputable Functions* (2006), after Cor. 9 | hand proof |
 | 05 | [RL transformation counterexample](05-rl-transformation-counterexample/rl-transformation-counterexample.pdf): maps satisfying the printed Definition 2 that contradict Theorem 3. | *Representation and Invariance in RL*, arXiv v5 (2026) | explicit counterexample |
-| 06 | [Founding-cohort species](06-founding-cohort-species/founding-cohort-species.pdf): a CA-free axiom set that is upward generic and covers every organism; maximal species may have several founders. | *Specieslike Clusters* (2026), after Thm. 13 | hand proof |
+| 06 | [Founding-cohort species](06-founding-cohort-species/founding-cohort-species.pdf): a CA-free axiom set that is upward generic and covers every organism; maximal species may have several founders. | *Specieslike Clusters* (2026), after Thm. 13 | hand proof; one necessity sentence corrected |
 | 07 | [Minimal introspection bundle](07-minimal-introspection-bundle/minimal-introspection-bundle.pdf): i-Validity is redundant in Lemma 19; {Assigned Validity, i-Deduction} is the unique minimal bundle. | *Self-referential Theories* (2020), after Cor. 23 | hand proof + countermodels |
-| 08 | [Internodon order robustness](08-internodon-order-robustness/internodon-order-robustness.pdf): the undirforest is a merge tree; one adjacent swap changes at most one clade; measured robustness of internodon partitions. | *Alternative Construction of Internodons* (2015), concluding conjecture | two lemmas + measurements |
+| 08 | [Internodon order robustness](08-internodon-order-robustness/internodon-order-robustness.pdf): the undirforest is a merge tree; one adjacent swap changes at most one clade. Measurements: 18–32% of co-member pairs are separated by reordering within generations. | *Alternative Construction of Internodons* (2015), concluding conjecture | two lemmas + measurements; robustness claim corrected |
+| 10 | [Species equivalence and IAP complexity](10-species-equivalence-and-iap-completeness/species-equivalence-and-iap-completeness.pdf): founding-cohort and common-ancestor species give the same infinite ∼-classes; global IAP is Π⁰₃-complete. | Conjectures S1 and 2b of this repository | hand proof (audit) |
+| 11 | [Bounded founders](11-bounded-founders/bounded-founders.pdf): a fixed founder budget gives coverage and admits late founders. | *Specieslike Clusters*, after Thm. 13 | hand proof (audit) |
+| 12 | [Pseudo-visibility, private information](12-pseudovisibility-private-information/pseudovisibility-private-information.pdf): exact value formula; counterexamples to unconditional P1a; restricted P1b convergence theorem. | *Pseudo-visibility* (2022), better-performance conjecture | hand proof (audit) |
+| 13 | [Signed quitting](13-signed-quitting/signed-quitting.pdf): for every r, a symmetric universal machine with a Question 26 counterexample under expected-value normalisation. | *Intelligence via Ultrafilters*, Q. 26; *Reward-Punishment Symmetric Universal Intelligence* | hand proof + finite checks (audit) |
 
 ## Further results
 
 [further-results.pdf](09-further-results/further-results.pdf) collects:
-- **Pseudo-visibility.** A formalisation of the "better-performance" conjecture, with a proved
-  stochastic-policy case and an experiment. The experiment shows the deterministic tabular gain
-  is only in rates.
+- **Pseudo-visibility.** A formalisation of the "better-performance" conjecture, with an
+  experiment. The stochastic-policy case (P1a) was **wrong as stated**; see note 12.
 - **Species identity.** A theorem that it is not learnable in the limit: no observer of births
   converges on whether IAP holds, or on whether a split is permanent.
 - **Universality.** The same limit-learning impossibility for universality of the companion
   packet's avoiding populations.
 - **Problem statements** for pattern algorithms (ε, φ) and variadic Apply.
-- **Seven conjectures,** each with a proof route or test.
+- **Seven conjectures,** each with a proof route or test. Two are now resolved (notes 10 and 13).
 
 ## Reproducing
 
 The scripts need Python 3; `08` and `09` also need numpy. Run each script from its own folder:
 it rewrites its JSON output, which should match the committed file byte for byte. The longest
 runs (`08/order_robustness.py`, `09/pseudovisibility/selfrefl_exp.py`) take a few minutes.
+
+The audit checks are in `audit-2026-09-27/controls.py`.
 
 To rebuild the PDFs: `python3 build_documents.py --allow-downloads`. This needs pandoc ≥ 3,
 tectonic and the DejaVu fonts. `SHA256SUMS` lists checksums of the committed files.

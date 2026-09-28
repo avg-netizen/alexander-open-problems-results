@@ -4,6 +4,18 @@ subtitle: "An answer to the CA-free coverage question in S. A. Alexander, *Speci
 date: "25 September 2026"
 ---
 
+> **Correction (27 September 2026).** Proposition 4 is correct, but the conclusion drawn from it
+> is not.
+> - *What was claimed.* That any CA-free solution must exclude late founders.
+> - *What Proposition 4 actually shows.* An IAP-contained class cannot contain **every** extension
+>   S_α and still have the required maximal element.
+> - *A counterexample to the stronger claim.* A class with a *fixed* bound on the number of founders
+>   keeps upward genericity and coverage, and does admit founders born after non-founders (note
+>   11).
+> - *Unaffected.* Theorems 2 and 3 and the two-founder example.
+>
+> Conjecture S1 is now proved for infinite clusters (note 10, Theorem 1).
+
 **Status.** A hand proof by the same method as the paper's Theorem 9(4). Not machine-checked; no
 independent review. The literature was not checked for priority.
 
@@ -22,7 +34,7 @@ We would be particularly interested in a solution not requiring the CA property.
 - So every organism lies in a maximal such cluster.
 - Maximal FC clusters need not have a common ancestor: a species founded by a *population* keeps
   its whole founding cohort.
-- Any solution without CA must exclude founders who join late (Proposition 4).
+- Any solution without CA must exclude founders who join late (Proposition 4). **[Corrected 27 Sep 2026; see the correction box above.]**
 
 # Definitions
 
@@ -116,7 +128,7 @@ Sₐ = {v₁, v₂, …} ∪ {w₁, …, wₐ} and is contained in IAP has no ma
 - One containing finitely many wᵢ lies inside some Sᵦ, and every Sᵦ is properly contained in
   Sᵦ₊₁. ∎
 
-So any CA-free solution *must* exclude founders who join late, which is what FC does. REF and CONV
+So any CA-free solution *must* exclude founders who join late, which is what FC does. **[Corrected 27 Sep 2026; see the correction box above.]** REF and CONV
 remain necessary, by the paper's Example 15 biospheres (a) and (c): there the chains have a single
 founder and satisfy FC.
 

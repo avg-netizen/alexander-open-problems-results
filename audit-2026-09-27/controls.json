@@ -1,0 +1,1211 @@
+{
+  "IAP_reduction": {
+    "random_triangles": 40,
+    "vertices_checked": 4023,
+    "invariants": [
+      "one root",
+      "one older parent",
+      "outdegree <=2",
+      "row descendants",
+      "backbone descendants",
+      "stage-prefix consistency"
+    ]
+  },
+  "Kahn_distribution": {
+    "abc": "1/4",
+    "acb": "1/4",
+    "bac": "1/2"
+  },
+  "private_information": {
+    "order": [
+      "plain_optimum",
+      "annotated_optimum",
+      "copy_query"
+    ],
+    "flat_reward": [
+      "-1/8",
+      "0",
+      "0"
+    ],
+    "strict_gain_counterexample": [
+      "7/8",
+      "7/8",
+      "1/2"
+    ],
+    "shared_fair_seed_mismatch": "0",
+    "marginal_erased_action_floor": "1/2"
+  },
+  "signed_quitting": {
+    "special_pairs": [
+      {
+        "r": "-4",
+        "special_A_values": [
+          "1",
+          "-1/2"
+        ],
+        "simulation_prefix_bits": 4,
+        "positive_margin_at_least": "1/16"
+      },
+      {
+        "r": "-1",
+        "special_A_values": [
+          "1",
+          "-1/2"
+        ],
+        "simulation_prefix_bits": 4,
+        "positive_margin_at_least": "1/16"
+      },
+      {
+        "r": "-1/3",
+        "special_A_values": [
+          "1",
+          "-1/2"
+        ],
+        "simulation_prefix_bits": 4,
+        "positive_margin_at_least": "1/16"
+      },
+      {
+        "r": "0",
+        "special_A_values": [
+          "1",
+          "-1/2"
+        ],
+        "simulation_prefix_bits": 4,
+        "positive_margin_at_least": "1/16"
+      },
+      {
+        "r": "1/4",
+        "special_A_values": [
+          "1",
+          "-2/3"
+        ],
+        "simulation_prefix_bits": 4,
+        "positive_margin_at_least": "1/48"
+      },
+      {
+        "r": "1",
+        "special_A_values": [
+          "1",
+          "-2/3"
+        ],
+        "simulation_prefix_bits": 4,
+        "positive_margin_at_least": "1/48"
+      },
+      {
+        "r": "7/2",
+        "special_A_values": [
+          "1",
+          "-5/6"
+        ],
+        "simulation_prefix_bits": 5,
+        "positive_margin_at_least": "1/96"
+      },
+      {
+        "r": "20",
+        "special_A_values": [
+          "1",
+          "-21/22"
+        ],
+        "simulation_prefix_bits": 7,
+        "positive_margin_at_least": "5/1408"
+      }
+    ],
+    "threshold_and_dual_tape_checks": 8748,
+    "scope": "Finite controls; exact cancellation for all environments is a hand proof."
+  },
+  "internodon_metrics": {
+    "comparisons": [
+      {
+        "N": 6,
+        "sex": 0.3,
+        "genealogy": 0,
+        "order": 0,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 4,
+        "all_vertices": {
+          "pair_disagreement": 0.043256997455470736,
+          "old_same_pair_loss": 0.21785714285714286,
+          "positive_pair_jaccard": 0.7008,
+          "counts": [
+            876,
+            244,
+            130,
+            7396
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.04601377952755906,
+          "old_same_pair_loss": 0.21785714285714286,
+          "positive_pair_jaccard": 0.7008,
+          "counts": [
+            876,
+            244,
+            130,
+            6878
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 0.3,
+        "genealogy": 0,
+        "order": 1,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 4,
+        "all_vertices": {
+          "pair_disagreement": 0.07714550080962294,
+          "old_same_pair_loss": 0.5241071428571429,
+          "positive_pair_jaccard": 0.44416666666666665,
+          "counts": [
+            533,
+            587,
+            80,
+            7446
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.08206200787401575,
+          "old_same_pair_loss": 0.5241071428571429,
+          "positive_pair_jaccard": 0.44416666666666665,
+          "counts": [
+            533,
+            587,
+            80,
+            6928
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 0.3,
+        "genealogy": 0,
+        "order": 2,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 4,
+        "all_vertices": {
+          "pair_disagreement": 0.06546379828822577,
+          "old_same_pair_loss": 0.29642857142857143,
+          "positive_pair_jaccard": 0.5819793205317577,
+          "counts": [
+            788,
+            332,
+            234,
+            7292
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.06963582677165354,
+          "old_same_pair_loss": 0.29642857142857143,
+          "positive_pair_jaccard": 0.5819793205317577,
+          "counts": [
+            788,
+            332,
+            234,
+            6774
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 0.3,
+        "genealogy": 0,
+        "order": 3,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 4,
+        "all_vertices": {
+          "pair_disagreement": 0.056442285449919034,
+          "old_same_pair_loss": 0.26785714285714285,
+          "positive_pair_jaccard": 0.6269113149847095,
+          "counts": [
+            820,
+            300,
+            188,
+            7338
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.060039370078740155,
+          "old_same_pair_loss": 0.26785714285714285,
+          "positive_pair_jaccard": 0.6269113149847095,
+          "counts": [
+            820,
+            300,
+            188,
+            6820
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 0.3,
+        "genealogy": 1,
+        "order": 0,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 0,
+        "all_vertices": {
+          "pair_disagreement": 0.042563034929447144,
+          "old_same_pair_loss": 0.07713754646840149,
+          "positive_pair_jaccard": 0.7296105804555474,
+          "counts": [
+            993,
+            83,
+            285,
+            7285
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.042563034929447144,
+          "old_same_pair_loss": 0.07713754646840149,
+          "positive_pair_jaccard": 0.7296105804555474,
+          "counts": [
+            993,
+            83,
+            285,
+            7285
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 0.3,
+        "genealogy": 1,
+        "order": 1,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 0,
+        "all_vertices": {
+          "pair_disagreement": 0.08605135322692574,
+          "old_same_pair_loss": 0.34572490706319703,
+          "positive_pair_jaccard": 0.4861878453038674,
+          "counts": [
+            704,
+            372,
+            372,
+            7198
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.08605135322692574,
+          "old_same_pair_loss": 0.34572490706319703,
+          "positive_pair_jaccard": 0.4861878453038674,
+          "counts": [
+            704,
+            372,
+            372,
+            7198
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 0.3,
+        "genealogy": 1,
+        "order": 2,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 0,
+        "all_vertices": {
+          "pair_disagreement": 0.08975248669905159,
+          "old_same_pair_loss": 0.38940520446096655,
+          "positive_pair_jaccard": 0.4584787159804606,
+          "counts": [
+            657,
+            419,
+            357,
+            7213
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.08975248669905159,
+          "old_same_pair_loss": 0.38940520446096655,
+          "positive_pair_jaccard": 0.4584787159804606,
+          "counts": [
+            657,
+            419,
+            357,
+            7213
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 0.3,
+        "genealogy": 1,
+        "order": 3,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 0,
+        "all_vertices": {
+          "pair_disagreement": 0.07147814018043026,
+          "old_same_pair_loss": 0.39776951672862454,
+          "positive_pair_jaccard": 0.5118483412322274,
+          "counts": [
+            648,
+            428,
+            190,
+            7380
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.07147814018043026,
+          "old_same_pair_loss": 0.39776951672862454,
+          "positive_pair_jaccard": 0.5118483412322274,
+          "counts": [
+            648,
+            428,
+            190,
+            7380
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 0.3,
+        "genealogy": 2,
+        "order": 0,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 1,
+        "all_vertices": {
+          "pair_disagreement": 0.04614850798056905,
+          "old_same_pair_loss": 0.16853932584269662,
+          "positive_pair_jaccard": 0.6899766899766899,
+          "counts": [
+            888,
+            180,
+            219,
+            7359
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.04685848502642396,
+          "old_same_pair_loss": 0.16853932584269662,
+          "positive_pair_jaccard": 0.6899766899766899,
+          "counts": [
+            888,
+            180,
+            219,
+            7228
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 0.3,
+        "genealogy": 2,
+        "order": 1,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 1,
+        "all_vertices": {
+          "pair_disagreement": 0.05759888965995836,
+          "old_same_pair_loss": 0.1704119850187266,
+          "positive_pair_jaccard": 0.6401734104046243,
+          "counts": [
+            886,
+            182,
+            316,
+            7262
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.05848502642395772,
+          "old_same_pair_loss": 0.1704119850187266,
+          "positive_pair_jaccard": 0.6401734104046243,
+          "counts": [
+            886,
+            182,
+            316,
+            7131
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 0.3,
+        "genealogy": 2,
+        "order": 2,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 1,
+        "all_vertices": {
+          "pair_disagreement": 0.05054360397871848,
+          "old_same_pair_loss": 0.2743445692883895,
+          "positive_pair_jaccard": 0.6394389438943895,
+          "counts": [
+            775,
+            293,
+            144,
+            7434
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.05132119788608338,
+          "old_same_pair_loss": 0.2743445692883895,
+          "positive_pair_jaccard": 0.6394389438943895,
+          "counts": [
+            775,
+            293,
+            144,
+            7303
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 0.3,
+        "genealogy": 2,
+        "order": 3,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 1,
+        "all_vertices": {
+          "pair_disagreement": 0.046379828822576914,
+          "old_same_pair_loss": 0.1853932584269663,
+          "positive_pair_jaccard": 0.6845003933910306,
+          "counts": [
+            870,
+            198,
+            203,
+            7375
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.04709336465061656,
+          "old_same_pair_loss": 0.1853932584269663,
+          "positive_pair_jaccard": 0.6845003933910306,
+          "counts": [
+            870,
+            198,
+            203,
+            7244
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 1.0,
+        "genealogy": 0,
+        "order": 0,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 1,
+        "all_vertices": {
+          "pair_disagreement": 0.11045570205875549,
+          "old_same_pair_loss": 0.12937062937062938,
+          "positive_pair_jaccard": 0.5659090909090909,
+          "counts": [
+            1245,
+            185,
+            770,
+            6446
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.11215502055196712,
+          "old_same_pair_loss": 0.12937062937062938,
+          "positive_pair_jaccard": 0.5659090909090909,
+          "counts": [
+            1245,
+            185,
+            770,
+            6315
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 1.0,
+        "genealogy": 0,
+        "order": 1,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 1,
+        "all_vertices": {
+          "pair_disagreement": 0.06338191071015499,
+          "old_same_pair_loss": 0.18811188811188811,
+          "positive_pair_jaccard": 0.6793446459918081,
+          "counts": [
+            1161,
+            269,
+            279,
+            6937
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.06435701702877275,
+          "old_same_pair_loss": 0.18811188811188811,
+          "positive_pair_jaccard": 0.6793446459918081,
+          "counts": [
+            1161,
+            269,
+            279,
+            6806
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 1.0,
+        "genealogy": 0,
+        "order": 2,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 1,
+        "all_vertices": {
+          "pair_disagreement": 0.06604210039324543,
+          "old_same_pair_loss": 0.18041958041958042,
+          "positive_pair_jaccard": 0.672403901319564,
+          "counts": [
+            1172,
+            258,
+            313,
+            6903
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.06705813270698767,
+          "old_same_pair_loss": 0.18041958041958042,
+          "positive_pair_jaccard": 0.672403901319564,
+          "counts": [
+            1172,
+            258,
+            313,
+            6772
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 1.0,
+        "genealogy": 0,
+        "order": 3,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 1,
+        "all_vertices": {
+          "pair_disagreement": 0.06962757344436733,
+          "old_same_pair_loss": 0.05244755244755245,
+          "positive_pair_jaccard": 0.6923863055697497,
+          "counts": [
+            1355,
+            75,
+            527,
+            6689
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.07069876688197299,
+          "old_same_pair_loss": 0.05244755244755245,
+          "positive_pair_jaccard": 0.6923863055697497,
+          "counts": [
+            1355,
+            75,
+            527,
+            6558
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 1.0,
+        "genealogy": 1,
+        "order": 0,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 2,
+        "all_vertices": {
+          "pair_disagreement": 0.05227851029377747,
+          "old_same_pair_loss": 0.15748031496062992,
+          "positive_pair_jaccard": 0.8099243061396131,
+          "counts": [
+            1926,
+            360,
+            92,
+            6268
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.05390578413834228,
+          "old_same_pair_loss": 0.15748031496062992,
+          "positive_pair_jaccard": 0.8099243061396131,
+          "counts": [
+            1926,
+            360,
+            92,
+            6007
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 1.0,
+        "genealogy": 1,
+        "order": 1,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 2,
+        "all_vertices": {
+          "pair_disagreement": 0.05655794587092297,
+          "old_same_pair_loss": 0.20647419072615922,
+          "positive_pair_jaccard": 0.7876682587928788,
+          "counts": [
+            1814,
+            472,
+            17,
+            6343
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.05831842576028622,
+          "old_same_pair_loss": 0.20647419072615922,
+          "positive_pair_jaccard": 0.7876682587928788,
+          "counts": [
+            1814,
+            472,
+            17,
+            6082
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 1.0,
+        "genealogy": 1,
+        "order": 2,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 2,
+        "all_vertices": {
+          "pair_disagreement": 0.06072172102706454,
+          "old_same_pair_loss": 0.19728783902012248,
+          "positive_pair_jaccard": 0.777542372881356,
+          "counts": [
+            1835,
+            451,
+            74,
+            6286
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.0626118067978533,
+          "old_same_pair_loss": 0.19728783902012248,
+          "positive_pair_jaccard": 0.777542372881356,
+          "counts": [
+            1835,
+            451,
+            74,
+            6025
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 1.0,
+        "genealogy": 1,
+        "order": 3,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 2,
+        "all_vertices": {
+          "pair_disagreement": 0.07957436965070552,
+          "old_same_pair_loss": 0.2764654418197725,
+          "positive_pair_jaccard": 0.7062339880444065,
+          "counts": [
+            1654,
+            632,
+            56,
+            6304
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.08205128205128205,
+          "old_same_pair_loss": 0.2764654418197725,
+          "positive_pair_jaccard": 0.7062339880444065,
+          "counts": [
+            1654,
+            632,
+            56,
+            6043
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 1.0,
+        "genealogy": 2,
+        "order": 0,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 0,
+        "all_vertices": {
+          "pair_disagreement": 0.07367568817950497,
+          "old_same_pair_loss": 0.2481529769665363,
+          "positive_pair_jaccard": 0.7308829742289819,
+          "counts": [
+            1730,
+            571,
+            66,
+            6279
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.07367568817950497,
+          "old_same_pair_loss": 0.2481529769665363,
+          "positive_pair_jaccard": 0.7308829742289819,
+          "counts": [
+            1730,
+            571,
+            66,
+            6279
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 1.0,
+        "genealogy": 2,
+        "order": 1,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 0,
+        "all_vertices": {
+          "pair_disagreement": 0.027064538514920196,
+          "old_same_pair_loss": 0.09083007388092133,
+          "positive_pair_jaccard": 0.8993981083404987,
+          "counts": [
+            2092,
+            209,
+            25,
+            6320
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.027064538514920196,
+          "old_same_pair_loss": 0.09083007388092133,
+          "positive_pair_jaccard": 0.8993981083404987,
+          "counts": [
+            2092,
+            209,
+            25,
+            6320
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 1.0,
+        "genealogy": 2,
+        "order": 2,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 0,
+        "all_vertices": {
+          "pair_disagreement": 0.07460097154753643,
+          "old_same_pair_loss": 0.24554541503694047,
+          "positive_pair_jaccard": 0.7291054178916422,
+          "counts": [
+            1736,
+            565,
+            80,
+            6265
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.07460097154753643,
+          "old_same_pair_loss": 0.24554541503694047,
+          "positive_pair_jaccard": 0.7291054178916422,
+          "counts": [
+            1736,
+            565,
+            80,
+            6265
+          ]
+        }
+      },
+      {
+        "N": 6,
+        "sex": 1.0,
+        "genealogy": 2,
+        "order": 3,
+        "organisms": 132,
+        "uncovered_by_source_internodons": 0,
+        "all_vertices": {
+          "pair_disagreement": 0.0708998380754106,
+          "old_same_pair_loss": 0.23772272924815296,
+          "positive_pair_jaccard": 0.7410223912125052,
+          "counts": [
+            1754,
+            547,
+            66,
+            6279
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.0708998380754106,
+          "old_same_pair_loss": 0.23772272924815296,
+          "positive_pair_jaccard": 0.7410223912125052,
+          "counts": [
+            1754,
+            547,
+            66,
+            6279
+          ]
+        }
+      },
+      {
+        "N": 24,
+        "sex": 1.0,
+        "genealogy": 0,
+        "order": 0,
+        "organisms": 528,
+        "uncovered_by_source_internodons": 4,
+        "all_vertices": {
+          "pair_disagreement": 0.04091915358518774,
+          "old_same_pair_loss": 0.2203128215682239,
+          "positive_pair_jaccard": 0.5709871891484551,
+          "counts": [
+            7577,
+            2141,
+            3552,
+            125858
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.04154685972005313,
+          "old_same_pair_loss": 0.2203128215682239,
+          "positive_pair_jaccard": 0.5709871891484551,
+          "counts": [
+            7577,
+            2141,
+            3552,
+            123756
+          ]
+        }
+      },
+      {
+        "N": 24,
+        "sex": 1.0,
+        "genealogy": 0,
+        "order": 1,
+        "organisms": 528,
+        "uncovered_by_source_internodons": 4,
+        "all_vertices": {
+          "pair_disagreement": 0.050198378471623256,
+          "old_same_pair_loss": 0.21238938053097345,
+          "positive_pair_jaccard": 0.5228856401147698,
+          "counts": [
+            7654,
+            2064,
+            4920,
+            124490
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.05096842934917461,
+          "old_same_pair_loss": 0.21238938053097345,
+          "positive_pair_jaccard": 0.5228856401147698,
+          "counts": [
+            7654,
+            2064,
+            4920,
+            122388
+          ]
+        }
+      },
+      {
+        "N": 24,
+        "sex": 1.0,
+        "genealogy": 0,
+        "order": 2,
+        "organisms": 528,
+        "uncovered_by_source_internodons": 4,
+        "all_vertices": {
+          "pair_disagreement": 0.04385889253061929,
+          "old_same_pair_loss": 0.22967688824861082,
+          "positive_pair_jaccard": 0.5509272887842214,
+          "counts": [
+            7486,
+            2232,
+            3870,
+            125540
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.04453169471487163,
+          "old_same_pair_loss": 0.22967688824861082,
+          "positive_pair_jaccard": 0.5509272887842214,
+          "counts": [
+            7486,
+            2232,
+            3870,
+            123438
+          ]
+        }
+      },
+      {
+        "N": 24,
+        "sex": 1.0,
+        "genealogy": 0,
+        "order": 3,
+        "organisms": 528,
+        "uncovered_by_source_internodons": 4,
+        "all_vertices": {
+          "pair_disagreement": 0.04879679144385027,
+          "old_same_pair_loss": 0.1931467380119366,
+          "positive_pair_jaccard": 0.5359535201640465,
+          "counts": [
+            7841,
+            1877,
+            4912,
+            124498
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.049545341759957964,
+          "old_same_pair_loss": 0.1931467380119366,
+          "positive_pair_jaccard": 0.5359535201640465,
+          "counts": [
+            7841,
+            1877,
+            4912,
+            122396
+          ]
+        }
+      },
+      {
+        "N": 24,
+        "sex": 1.0,
+        "genealogy": 1,
+        "order": 0,
+        "organisms": 528,
+        "uncovered_by_source_internodons": 3,
+        "all_vertices": {
+          "pair_disagreement": 0.05198090966591915,
+          "old_same_pair_loss": 0.15495925821860074,
+          "positive_pair_jaccard": 0.6245457377219396,
+          "counts": [
+            12030,
+            2206,
+            5026,
+            119866
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.05257724463831334,
+          "old_same_pair_loss": 0.15495925821860074,
+          "positive_pair_jaccard": 0.6245457377219396,
+          "counts": [
+            12030,
+            2206,
+            5026,
+            118288
+          ]
+        }
+      },
+      {
+        "N": 24,
+        "sex": 1.0,
+        "genealogy": 1,
+        "order": 1,
+        "organisms": 528,
+        "uncovered_by_source_internodons": 3,
+        "all_vertices": {
+          "pair_disagreement": 0.1083965844402277,
+          "old_same_pair_loss": 0.41718179263838157,
+          "positive_pair_jaccard": 0.3549063221832492,
+          "counts": [
+            8297,
+            5939,
+            9142,
+            115750
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.10964013086150491,
+          "old_same_pair_loss": 0.41718179263838157,
+          "positive_pair_jaccard": 0.3549063221832492,
+          "counts": [
+            8297,
+            5939,
+            9142,
+            114172
+          ]
+        }
+      },
+      {
+        "N": 24,
+        "sex": 1.0,
+        "genealogy": 1,
+        "order": 2,
+        "organisms": 528,
+        "uncovered_by_source_internodons": 3,
+        "all_vertices": {
+          "pair_disagreement": 0.09269880972917026,
+          "old_same_pair_loss": 0.4399409946614217,
+          "positive_pair_jaccard": 0.38203162434115956,
+          "counts": [
+            7973,
+            6263,
+            6634,
+            118258
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.09376226826608507,
+          "old_same_pair_loss": 0.4399409946614217,
+          "positive_pair_jaccard": 0.38203162434115956,
+          "counts": [
+            7973,
+            6263,
+            6634,
+            116680
+          ]
+        }
+      },
+      {
+        "N": 24,
+        "sex": 1.0,
+        "genealogy": 1,
+        "order": 3,
+        "organisms": 528,
+        "uncovered_by_source_internodons": 3,
+        "all_vertices": {
+          "pair_disagreement": 0.07990483583462711,
+          "old_same_pair_loss": 0.40172801348693454,
+          "positive_pair_jaccard": 0.43378832637261894,
+          "counts": [
+            8517,
+            5719,
+            5398,
+            119494
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.08082151944747365,
+          "old_same_pair_loss": 0.40172801348693454,
+          "positive_pair_jaccard": 0.43378832637261894,
+          "counts": [
+            8517,
+            5719,
+            5398,
+            117916
+          ]
+        }
+      },
+      {
+        "N": 24,
+        "sex": 1.0,
+        "genealogy": 2,
+        "order": 0,
+        "organisms": 528,
+        "uncovered_by_source_internodons": 3,
+        "all_vertices": {
+          "pair_disagreement": 0.08963688114542004,
+          "old_same_pair_loss": 0.3439844587352626,
+          "positive_pair_jaccard": 0.4398580668343514,
+          "counts": [
+            9793,
+            5135,
+            7336,
+            116864
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.09066521264994547,
+          "old_same_pair_loss": 0.3439844587352626,
+          "positive_pair_jaccard": 0.4398580668343514,
+          "counts": [
+            9793,
+            5135,
+            7336,
+            115286
+          ]
+        }
+      },
+      {
+        "N": 24,
+        "sex": 1.0,
+        "genealogy": 2,
+        "order": 1,
+        "organisms": 528,
+        "uncovered_by_source_internodons": 3,
+        "all_vertices": {
+          "pair_disagreement": 0.09872922776148582,
+          "old_same_pair_loss": 0.3433815648445874,
+          "positive_pair_jaccard": 0.4164330019542867,
+          "counts": [
+            9802,
+            5126,
+            8610,
+            115590
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.09986186841148673,
+          "old_same_pair_loss": 0.3433815648445874,
+          "positive_pair_jaccard": 0.4164330019542867,
+          "counts": [
+            9802,
+            5126,
+            8610,
+            114012
+          ]
+        }
+      },
+      {
+        "N": 24,
+        "sex": 1.0,
+        "genealogy": 2,
+        "order": 2,
+        "organisms": 528,
+        "uncovered_by_source_internodons": 3,
+        "all_vertices": {
+          "pair_disagreement": 0.07833793341383474,
+          "old_same_pair_loss": 0.5033494105037514,
+          "positive_pair_jaccard": 0.4048490143613826,
+          "counts": [
+            7414,
+            7514,
+            3385,
+            120815
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.07923664122137404,
+          "old_same_pair_loss": 0.5033494105037514,
+          "positive_pair_jaccard": 0.4048490143613826,
+          "counts": [
+            7414,
+            7514,
+            3385,
+            119237
+          ]
+        }
+      },
+      {
+        "N": 24,
+        "sex": 1.0,
+        "genealogy": 2,
+        "order": 3,
+        "organisms": 528,
+        "uncovered_by_source_internodons": 3,
+        "all_vertices": {
+          "pair_disagreement": 0.06548645851302398,
+          "old_same_pair_loss": 0.3784833869239014,
+          "positive_pair_jaccard": 0.5045407580618848,
+          "counts": [
+            9278,
+            5650,
+            3461,
+            120739
+          ]
+        },
+        "covered_only": {
+          "pair_disagreement": 0.06623773173391494,
+          "old_same_pair_loss": 0.3784833869239014,
+          "positive_pair_jaccard": 0.5045407580618848,
+          "counts": [
+            9278,
+            5650,
+            3461,
+            119161
+          ]
+        }
+      }
+    ],
+    "asexual_chain_labels": {
+      "0": [
+        "nosd",
+        0
+      ],
+      "1": [
+        "nosd",
+        1
+      ]
+    },
+    "warning": "Finite controls under one model, not population-wide estimates."
+  }
+}

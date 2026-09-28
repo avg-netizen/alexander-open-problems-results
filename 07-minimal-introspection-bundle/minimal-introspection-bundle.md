@@ -4,6 +4,11 @@ subtitle: "An answer to the minimality question after Corollary 23 of S. A. Alex
 date: "25 September 2026"
 ---
 
+> **Correction (27 September 2026).** The stratified analogue of Lemma 19 is Lemma **65** of
+> *Self-referential theories*, not Lemma 64, which concerns validity. The minimality result is
+> unaffected. As stated, it holds among the three named schemas, under the source's own operator
+> semantics.
+
 **Status.** Hand proofs with explicit countermodels. Not machine-checked; no independent review.
 The literature was not checked for priority.
 
@@ -77,7 +82,7 @@ alphabetic variants. Let M have standard first-order part, interpret Tᵢφ[s] a
 interpret every other operator similarly by its own theory.
 
 This is a legitimate base-logic structure. Its truth value depends only on φˢ, which gives
-conditions 1 and 2. And (φ(x|y))ˢ = φ^{s(x|s(y))}, which gives condition 3. Check that M ⊨ Uᵢ:
+conditions 1 and 2. And (φ(x|y))ˢ = $\varphi^{s(x|s(y))}$, which gives condition 3. Check that M ⊨ Uᵢ:
 - *Substitution.* M interprets formulas by substitution, so M ⊨ AV (as in Lemma 8 / 18(1)).
 - *i-Validity.* M ⊨ ucl(Tᵢχ) for χ valid, since χˢ ∈ X.
 - *Closure members.* M ⊨ Tᵢσ for σ ∈ Uᵢ, since σ ∈ X, and likewise for iterates.
@@ -123,7 +128,7 @@ are exactly those containing **AV and iD**: {AV, iD} and {AV, iV, iD}. The uniqu
 - The analysis covers Lemma 19's schemas only. With other schemas in the pool (Peano arithmetic,
   SMT, the Tⱼφ (φ ∈ Tⱼ) schema) there could be other minimal bundles.
   **Conjecture G1:** none of Corollary 23's other blocks can replace AV or iD for introspection.
-- The stratified analogue (Lemma 64 / Corollary 71) should admit the same reduction: drop the
+- The stratified analogue (Lemma 65 / Corollary 71; corrected from "Lemma 64") should admit the same reduction: drop the
   validity schema, keep assigned validity and deduction. It was not checked here.
 - The paper's second question, how far the stratified generic construction can be strengthened, is
   open-ended and untouched.

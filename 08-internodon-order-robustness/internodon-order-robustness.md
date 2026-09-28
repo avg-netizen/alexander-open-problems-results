@@ -4,6 +4,31 @@ subtitle: "On the concluding conjecture of S. A. Alexander, A. de Bruin and D. J
 date: "25 September 2026"
 ---
 
+> **Correction (27 September 2026).** An external audit found that the empirical conclusion of
+> §§3 and 5 is overstated, and the statistic I used is to blame. The two proved results (§1, §2)
+> are unaffected.
+>
+> 1. **The all-pairs statistic hides lost co-membership.**
+>    - The reported 4–14% is the share of *all* organism pairs whose same/different status changes.
+>      Most pairs were never co-members, so that figure is small almost by construction.
+>    - Measured on originally co-clustered pairs, reordering within generations separated
+>      **18–32%** of them. The Jaccard overlap of co-member pairs was 0.48–0.73.
+>    - Single comparisons lost up to 52–61% of original co-memberships. Two independent
+>      re-computations with fresh draws agree: `../audit-2026-09-27/controls.json` (the audit's) and
+>      `comembership_check.py` → `comembership-check.json` (this folder).
+>    - So "species membership almost intact" is **not** warranted. The partition is moderately
+>      robust at best.
+> 2. **The "arbitrary order" sampler is not uniform.** `order_robustness_any.py` picks uniformly
+>    among the currently available vertices, not uniformly over linear extensions. For a→c plus an
+>    isolated b, it gives abc 1/4, acb 1/4 and bac 1/2.
+> 3. **One label is a code convention, not the source definition.** An organism that is not SD and
+>    has no SD ancestor gets a synthetic singleton label; under Definition 9 it lies in no
+>    internodon. In the audited draws, restricting to covered organisms left the co-membership
+>    metrics unchanged.
+>
+> Also, merge-tree interleaving stability does not by itself preserve the internodon labels of fixed
+> organisms. The labelled-pair persistence conjecture (note 09, §5.2) remains open.
+
 **Status.**
 - The merge-tree identification (§1) and the adjacent-swap locality lemma (§2) are hand proofs,
   each also checked exhaustively on random genealogies.
@@ -25,6 +50,8 @@ depend drastically on which topological order is used."
 - `order_robustness.py` → `order-robustness.json`. Its buffered mode (`python3 order_robustness.py
   buffered`) → `order-robustness-buffered.json`.
 - `order_robustness_any.py` → `order-robustness-any.json`: arbitrary topological orders.
+- `comembership_check.py` → `comembership-check.json`: lost co-membership (added with the
+  correction).
 
 **Answer in short.**
 1. The undirforest **is a merge tree** (the augmented join tree of the genealogy graph, with birth
@@ -33,7 +60,7 @@ depend drastically on which topological order is used."
    when no younger component touches both. This is proved below and checked on 4,302 swaps.
 3. Under realistic birth-order uncertainty (reordering within generations), the forest changes a
    great deal **at the organism level** (51–87% of undirparents change), but the **internodon
-   partition barely moves** (4–10% of organism pairs change status).
+   partition barely moves** (4–10% of organism pairs change status). **[Corrected 27 Sep 2026; see the correction box above.]**
 
 So the conjecture is true "in some sense": for clades counted one swap at a time, and for species
 partitions. It is false for parent pointers and for the *size* of the one clade that changes.
@@ -148,7 +175,7 @@ Internodons in the evaluated part fall from 11–21 to about 5–15. The pair-ch
 
 **Reading.** Birth-order uncertainty *within* a generation rewires most organism-level
 undirparents. That is expected: the forest's chains through a generation follow birth order. Yet
-it leaves species membership (internodon partition) almost intact. That is the paper's "in some
+it leaves species membership (internodon partition) almost intact. **[Corrected 27 Sep 2026; see the correction box above.]** That is the paper's "in some
 sense": robust where biology looks (the partition into internodons), not where the construction
 does its bookkeeping (who is whose undirparent).
 
@@ -182,7 +209,7 @@ not a code error.
 # 5. Arbitrary topological orders
 
 [`order_robustness_any.py`](order_robustness_any.py) → `order-robustness-any.json`. Same genealogy
-model; the alternative orders are uniformly random topological orders of the whole parent DAG
+model; the alternative orders are random topological orders of the whole parent DAG (not uniform over linear extensions; see the correction box)
 (the continuous-birthdate case, where uncertainty spans generations). 5 genealogies × 10 orders.
 
 | N | sex | undirparents changed | clades not shared | internodon pairs changed | mean rank displacement (share of n) |

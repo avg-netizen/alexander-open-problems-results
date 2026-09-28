@@ -3,6 +3,30 @@ title: "Further results, problem statements and conjectures on S. A. Alexander's
 date: "25 September 2026"
 ---
 
+> **Correction (27 September 2026).** An external audit found the following errors.
+> - **§1, P1a is false as stated.**
+>   - *The hidden assumption.* Keeping the policy's random seed fixed during a step does not make
+>     the visible and erased actions independent. A policy that outputs one shared coin flip at
+>     every observation has full-support marginals and never mismatches.
+>   - *Strict gain also fails.* With a uniform private query, q = 1/4 and base rewards (1, 0), the
+>     best plain and best annotated values are both 7/8.
+>   - *The correct statement* (note 12) is an exact value formula for a genuinely private query.
+>     A strict gain of q(1 − max_a p_a) holds when base rewards are equal across actions.
+>   - *The experiment* is a valid **private-query** protocol, but not evidence for the unconditional
+>     claim.
+> - **§1, P1b: now proved in a restricted form** (note 12). The setting is finite contextual
+>   bandits with sample-average tabular updates and unique maximisers. The constant-step-size runs
+>   alone establish neither convergence nor rates.
+> - **§2, overreach.** The theorem is about yes/no properties (IAP at an organism, IAP of G). It
+>   does not by itself show that no observer converges on *species-valued* outputs. Conjecture 2b is
+>   now proved (note 10, Theorem 2).
+> - **§3, wording.** "A 1 occurs somewhere" *is* positively certifiable, at the first 1. What it
+>   lacks is a two-sided finite decision.
+> - **§5.** 5.1 (S1) is proved for infinite clusters (note 10). 5.4 is proved for every r with a
+>   suitably chosen symmetric machine (note 13); the fixed-machine form is open. In 5.5 the correct
+>   reference is Lemma 65, not 64. The variadic-Apply card (§4) must first fix a function sort,
+>   codes or an indexed operator family, and say which semantics its completeness theorem is for.
+
 This document collects the smaller, partial or conjectural results that accompany the eight
 standalone notes in this repository. Each part states its own status. Nothing here has had
 independent human review, and none of it has been checked against the literature for priority.
@@ -20,7 +44,7 @@ independent human review, and none of it has been checked against the literature
 **Source.** S. A. Alexander, *Pseudo-visibility: a game mechanic involving willful ignorance*,
 FLAIRS-35, 2022. [doi:10.32473/flairs.v35i.130652](https://doi.org/10.32473/flairs.v35i.130652).
 
-**Status.** P1a is proved. P1b is a theorem target with the key case computed. P1c is a
+**Status.** P1a is proved. **[Corrected 27 Sep 2026; see the correction box above.]** P1b is a theorem target with the key case computed. P1c is a
 conjecture. The experiment script is `pseudovisibility/selfrefl_exp.py`, with results in
 `pseudovisibility/selfrefl_exp.json`.
 
@@ -52,7 +76,7 @@ its own action on the erased observation.
     gives every action probability ≥ δ at erased observations, it mismatches with probability
     ≥ $1-\max_b P(a'=b)$ ≥ (m − 1)δ, where m is the number of actions.
 
-  **P1a (proved).** In this regime SelfRefl has a strict capacity advantage. It gains at least
+  **P1a (proved).** In this regime SelfRefl has a strict capacity advantage. **[Corrected 27 Sep 2026; see the correction box above.]** It gains at least
   q·(m − 1)δ in expectation per pseudo-visible step during training.
 
 ## Experiment
@@ -153,13 +177,13 @@ non-computable one, converges on every biosphere to the right answer to either:
 **Reading.** In $G_b$, IAP fails exactly when the population has **permanently split** into two
 infinite lineages. So no one watching births can converge on whether a split is permanent. That
 fits the paper's objective-species theorem: the ∼-classes of maximal clusters are objective facts
-about G, and yet no observer converges on them. It also explains why the internodon measurements
+about G, and yet no observer converges on them. **[Corrected 27 Sep 2026; see the correction box above.]** It also explains why the internodon measurements
 in `08-internodon-order-robustness` had to stipulate a permanent split within a finite window.
 
 **Conjecture 2b.** Code biospheres as sequences of finite genealogies. Then "G ∈ IAP" is
 **Π⁰₃-complete**.
 - *The upper bound* is immediate: ∀v ¬(Π⁰₂ ∧ Π⁰₂), since descendant status is decided at birth.
-- *For hardness,* take P3 = {x ∈ 2^{ω×ω} : every row has finitely many 1s}, which is
+- *For hardness,* take P3 = {x ∈ $2^{\omega\times\omega}$ : every row has finitely many 1s}, which is
   Π⁰₃-complete. Let row k drive its own pair of lineages as b drives $G_b$.
 - *What remains* is to stop different rows from creating IAP failures across rows. Disjoint
   lineages each add infinitely many non-descendants to every organism, so the pairs must be joined
@@ -179,7 +203,7 @@ $$P_s\text{ realises every infinite binary sequence}\iff s\text{ is eventually p
 It also shows that no finite inspection certifies universality. The source question is from
 S. A. Alexander, *Biologically unavoidable sequences*, Electronic J. Combinatorics 20(1), 2013.
 
-**Proposition.** No function G : {0,1}^{<ω} → {0,1}, computable or not, has guesses G(s↾n)
+**Proposition.** No function G : $\{0,1\}^{<\omega}$ → {0,1}, computable or not, has guesses G(s↾n)
 that stabilise, for **every** s, to the correct answer about $P_s$'s universality.
 
 *Proof.*
@@ -195,7 +219,7 @@ that stabilise, for **every** s, to the correct answer about $P_s$'s universalit
 - even a procedure allowed arbitrarily many revisions cannot be eventually correct on every
   stream;
 - by contrast, "a 1 occurs somewhere" is guessable (answer no, and switch permanently at the
-  first 1) without ever being certifiable;
+  first 1) without ever being certifiable; **[Corrected 27 Sep 2026; see the correction box above.]**
 - promises change the picture. If every admissible stream is promised to have period p after
   position K, the first K + p symbols settle everything.
 
@@ -299,7 +323,7 @@ U. There:
 ## 5.5 Minimality of introspection bundles beyond Lemma 19
 
 From `07-minimal-introspection-bundle`.
-- **The stratified analogue** (Lemma 64 / Corollary 71 of *Self-referential theories*) should
+- **The stratified analogue** (Lemma 65 / Corollary 71 of *Self-referential theories*; corrected from "Lemma 64") should
   have the same answer: drop the validity schema, keep assigned validity and deduction. The proof
   of Theorem 1 there uses only compactness, membership of the valid sentence in AV, and closure.
   All three have stratified counterparts. The likely snag is that stratified closure runs only
