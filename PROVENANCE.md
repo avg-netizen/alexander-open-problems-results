@@ -51,3 +51,21 @@ Anthropic Claude (Opus 5.5) then:
 Only the path to the repository changed in the audit's controls script, and its output reproduces
 the audit's byte for byte. No independent human review has been recorded, and nothing has been sent
 to the source authors.
+
+## 30 September 2026: dissertation Questions 3-1-x (notes 14–16)
+
+OpenAI Codex (workspace actor `codex`), 28–29 September 2026, working at the owner's request:
+- the construction and proof for Question 3-1-1;
+- the construction and proof for Question 3-1-2 (transparent stratification, contextual collapse,
+  induction over all external interpretations, rebuilt truth filters);
+- the counterexample to Lemma 2.5.5.
+
+Anthropic Claude (Opus 5.5), 30 September 2026:
+- audited all three against the dissertation text, re-deriving every step;
+- wrote out in full the two lemmas the Codex draft only sketched (note 15, Lemmas A and B);
+- rewrote the three notes to be self-contained.
+
+The audit found no error in any of the three. Note 15 is long, and it depends on stratification
+lemmas that should be reviewed independently. Its status is **proposed**. Nothing here resolves
+Question 3-1-3. No independent human review has been recorded, and nothing has been sent to the
+author.

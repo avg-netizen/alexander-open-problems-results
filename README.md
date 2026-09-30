@@ -16,6 +16,11 @@ The notes answer, correct or sharpen questions posed in Alexander's papers on:
 > 09, and several minor ones. They are corrected in place with dated boxes; see
 > [CORRECTIONS.md](CORRECTIONS.md). The audit also contributed four new results, notes 10–13.
 
+> **30 September 2026:** notes 14–16 concern the three questions the dissertation left open,
+> Questions 3-1-x. 3-1-1 is answered. 3-1-2 has a proposed answer that is long and needs
+> independent review. Note 16 shows a gap in the printed proof of the dissertation's partial
+> result. **Question 3-1-3 remains open.**
+
 A companion packet on *Biologically unavoidable sequences* is published separately:
 [biological-unavoidability-results](https://github.com/avg-netizen/biological-unavoidability-results).
 Nothing here duplicates it.
@@ -36,6 +41,9 @@ Nothing here duplicates it.
 | 11 | [Bounded founders](11-bounded-founders/bounded-founders.pdf): a fixed founder budget gives coverage and admits late founders. | *Specieslike Clusters*, after Thm. 13 | hand proof (audit) |
 | 12 | [Pseudo-visibility, private information](12-pseudovisibility-private-information/pseudovisibility-private-information.pdf): exact value formula; counterexamples to unconditional P1a; restricted P1b convergence theorem. | *Pseudo-visibility* (2022), better-performance conjecture | hand proof (audit) |
 | 13 | [Signed quitting](13-signed-quitting/signed-quitting.pdf): for every r, a symmetric universal machine with a Question 26 counterexample under expected-value normalisation. | *Intelligence via Ultrafilters*, Q. 26; *Reward-Punishment Symmetric Universal Intelligence* | hand proof + finite checks (audit) |
+| 14 | [Thesis Question 3-1-1](14-thesis-question-3-1-1/several-knowing-machines-3-1-1.pdf): machines that know everyone's truthfulness and particular codes of their subordinates exist for every r.e. well-founded hierarchy. | *The Theory of Several Knowing Machines* (dissertation, 2013), Def. 1.1.1, Fig. 1 | hand proof (checked by a second AI system) |
+| 15 | [Thesis Question 3-1-2](15-thesis-question-3-1-2/several-knowing-machines-3-1-2.pdf): add known own mechanicalness, still with unrestricted mutual truthfulness. Proposed: transparent stratification, contextual collapse, induction over all external interpretations. | same, Def. 1.1.1; strengthens Thm. 2.5.11 | **proposed** hand proof; long, needs independent review |
+| 16 | [Lemma 2.5.5 counterexample](16-thesis-lemma-2-5-5/thesis-lemma-2-5-5.pdf): the dissertation's preservation lemma is false as printed, which leaves a gap in the proof of Thm. 2.5.11 (the theorem itself is not refuted). | same, Lemma 2.5.5, Thm. 2.5.11 | explicit countermodel |
 
 ## Further results
 
