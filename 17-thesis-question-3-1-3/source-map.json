@@ -1,0 +1,671 @@
+{
+  "schema_version": 1,
+  "project_id": "alexander-thesis-3-1-3-prose-paper",
+  "created_date": "2026-10-03",
+  "canonical_manuscript": "paper.tex",
+  "manuscript_sha256": "fd5fca2ee8406ea55471cc189f278a4d912fd56ad4756d6cfc393ecade52940f",
+  "path_base": "this_directory",
+  "status": {
+    "manuscript": "complete_editorial_expansion_of_proposed_full_hand_proof",
+    "recorded_source_hand_checks": "modal_audit_and_typed_ordinal_followthrough_complete",
+    "new_independent_mathematical_audit": "not_performed",
+    "lean_proof": "incomplete",
+    "lean_compilation": "not_run",
+    "publication": "not_submitted"
+  },
+  "sources": [
+    {
+      "id": "core-notes",
+      "file": "../../samuel-allen-alexander/continuation-3-1-3-codex-2026-09-30/13-common-core-and-code-extensions.md",
+      "sha256": "7067f6b45241322ae5e99df512614f677f74eddb798a087680176ba91f3c0672",
+      "description": "Fixed theories and effective inheritance"
+    },
+    {
+      "id": "transport-notes",
+      "file": "../../samuel-allen-alexander/continuation-3-1-3-codex-2026-09-30/24-expanded-transport-and-core-genericity.md",
+      "sha256": "1fc638bcaaaf0c21605aade25cb2135ceccf54f8c308bb40b009946f524067f7",
+      "description": "Recorded syntax, transport, masks and core genericity"
+    },
+    {
+      "id": "ordinal-extraction",
+      "file": "../../samuel-allen-alexander/continuation-3-1-3-codex-2026-09-30/25-ordinal-effectiveness-audit.md",
+      "sha256": "dc7d80cdfdaaac800191053495c16e171dfc16db722b531c674e3b89b4f729b1",
+      "description": "Recursive domain, relations and structural input"
+    },
+    {
+      "id": "full-proof",
+      "file": "../../samuel-allen-alexander/continuation-3-1-3-codex-2026-09-30/26-full-3-1-3-proposed-proof.md",
+      "sha256": "b7d2dddf29a5e0b77cdd55b457be53299a80062d5ec71dff7d331c540e9a7ca2",
+      "description": "Consolidated full hand argument"
+    },
+    {
+      "id": "typed-closure",
+      "file": "../../samuel-allen-alexander/continuation-3-1-3-codex-2026-09-30/27-uniform-typed-ordinal-closure.md",
+      "sha256": "2c2418ad2e5999ca380dfc45ff02ef8a35f7c2a0cfe9a49aee72a6f8ebcbf629",
+      "description": "Complete typed procedure closure check"
+    },
+    {
+      "id": "modal-audit",
+      "file": "../../samuel-allen-alexander/audit-full-3-1-3-2026-10-02.md",
+      "sha256": "09eec1c50945238044d2b4411e236f7a0bbd67922bdd101f3ae435da101d04dc",
+      "description": "Recorded modal/interface audit"
+    },
+    {
+      "id": "room-review",
+      "file": "../../samuel-allen-alexander/wf-3-1-3-2026-10-02/ordinal-package/REVIEW-JOINT-ROOM.md",
+      "sha256": "bfd4d265c9ad3e9dfceaf73794b5247859bd49745d4e001e339b453dd3a8e0d5",
+      "description": "Whole-copy separation and k >= 1"
+    },
+    {
+      "id": "alexander2013",
+      "file": "../../samuel-allen-alexander/text/2013-the-theory-of-several-knowing-machines.txt",
+      "sha256": "28de977288653690d7a53eb46c1b6d86a8929552ecaea6c8515c9475562bae65",
+      "description": "Primary dissertation text"
+    },
+    {
+      "id": "wilken2021",
+      "file": "../../samuel-allen-alexander/audit-3-1-x-claude-2026-09-30/sources/w2.txt",
+      "sha256": "d85eb7969232649852c8adbbbfc341c9bd5107a88f4d49f3123ca851a861c39b",
+      "description": "Archived primary arXiv v5 text"
+    },
+    {
+      "id": "style-paper",
+      "file": "../../biological-unavoidability-submission/paper.tex",
+      "sha256": "3690287cf8759eed420046c08ae8ada4603d957a90dc4e3e82404ecf08d750f5",
+      "description": "Main layout and explanatory style reference"
+    },
+    {
+      "id": "style-packet",
+      "file": "../../biological-unavoidability-author/results.tex",
+      "sha256": "c2c16243a79012b82f9eaf6486c282c8a89457639e04e673aac07b70656b375b",
+      "description": "Explanatory author-packet reference"
+    }
+  ],
+  "paper_claims": [
+    {
+      "id": "paper-claim-1",
+      "title": "Theorem 1 (full 3-1-3)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:statement",
+      "paper_start_line": 107,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-15",
+        "paper-claim-16",
+        "paper-claim-17"
+      ],
+      "source_passages": [
+        {
+          "source_id": "full-proof",
+          "heading": "## 1. The theorem",
+          "start_line": 23,
+          "end_line": 37
+        },
+        {
+          "source_id": "full-proof",
+          "heading": "## 7. The three required known schemas",
+          "start_line": 276,
+          "end_line": 312
+        },
+        {
+          "source_id": "full-proof",
+          "heading": "## 8. Remove the temporary core",
+          "start_line": 313,
+          "end_line": 335
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-2",
+      "title": "Corollary 2",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:statement",
+      "paper_start_line": 126,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-1"
+      ],
+      "source_passages": [
+        {
+          "source_id": "full-proof",
+          "heading": "## 1. The theorem",
+          "start_line": 23,
+          "end_line": 37
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-3",
+      "title": "Lemma 3 (own-known finite consequences)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:fixed",
+      "paper_start_line": 215,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [],
+      "source_passages": [
+        {
+          "source_id": "transport-notes",
+          "heading": "## 4. Erasure, support collapse and derived prefixes",
+          "start_line": 170,
+          "end_line": 214
+        },
+        {
+          "source_id": "core-notes",
+          "heading": "## 2. All mechanicalness schemas are inherited syntactically",
+          "start_line": 99,
+          "end_line": 127
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-4",
+      "title": "Lemma 4 (filtered structures)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:fixed",
+      "paper_start_line": 240,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [],
+      "source_passages": [
+        {
+          "source_id": "transport-notes",
+          "heading": "## 6. Model admissibility and collapse truth",
+          "start_line": 285,
+          "end_line": 310
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-5",
+      "title": "Lemma 5 (logical maps)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:recorded",
+      "paper_start_line": 351,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [],
+      "source_passages": [
+        {
+          "source_id": "transport-notes",
+          "heading": "## 1. Syntax and what an effective proof certificate contains",
+          "start_line": 15,
+          "end_line": 55
+        },
+        {
+          "source_id": "transport-notes",
+          "heading": "## 2. The logical-certificate maps, in both directions",
+          "start_line": 56,
+          "end_line": 100
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-6",
+      "title": "Lemma 6 (source erasure)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:transport",
+      "paper_start_line": 454,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-3",
+        "paper-claim-5"
+      ],
+      "source_passages": [
+        {
+          "source_id": "transport-notes",
+          "heading": "## 3. Generator table and effective admission",
+          "start_line": 101,
+          "end_line": 169
+        },
+        {
+          "source_id": "transport-notes",
+          "heading": "## 4. Erasure, support collapse and derived prefixes",
+          "start_line": 170,
+          "end_line": 214
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-7",
+      "title": "Lemma 7 (finite-support collapse)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:transport",
+      "paper_start_line": 468,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-5",
+        "paper-claim-17"
+      ],
+      "source_passages": [
+        {
+          "source_id": "transport-notes",
+          "heading": "## 4. Erasure, support collapse and derived prefixes",
+          "start_line": 170,
+          "end_line": 214
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-8",
+      "title": "Lemma 8 (prefixing a derived sentence)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:transport",
+      "paper_start_line": 488,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-3",
+        "paper-claim-5"
+      ],
+      "source_passages": [
+        {
+          "source_id": "transport-notes",
+          "heading": "## 4. Erasure, support collapse and derived prefixes",
+          "start_line": 170,
+          "end_line": 214
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-9",
+      "title": "Lemma 9 (guarded fixed-label transport)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:transport",
+      "paper_start_line": 511,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-5",
+        "paper-claim-6",
+        "paper-claim-7",
+        "paper-claim-8",
+        "paper-claim-17"
+      ],
+      "source_passages": [
+        {
+          "source_id": "transport-notes",
+          "heading": "## 5. Full fixed-label transport",
+          "start_line": 215,
+          "end_line": 284
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-10",
+      "title": "Lemma 10 (cofinal recovery)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:transport",
+      "paper_start_line": 571,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-6",
+        "paper-claim-7",
+        "paper-claim-9",
+        "paper-claim-17"
+      ],
+      "source_passages": [
+        {
+          "source_id": "transport-notes",
+          "heading": "## 5. Full fixed-label transport",
+          "start_line": 215,
+          "end_line": 284
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-11",
+      "title": "Lemma 11 (truth of contextual collapse)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:masks",
+      "paper_start_line": 612,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-4",
+        "paper-claim-7"
+      ],
+      "source_passages": [
+        {
+          "source_id": "transport-notes",
+          "heading": "## 6. Model admissibility and collapse truth",
+          "start_line": 285,
+          "end_line": 310
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-12",
+      "title": "Lemma 12 (reconstruction)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:masks",
+      "paper_start_line": 651,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-4",
+        "paper-claim-5",
+        "paper-claim-9"
+      ],
+      "source_passages": [
+        {
+          "source_id": "transport-notes",
+          "heading": "## 7. Complete reconstruction statement",
+          "start_line": 311,
+          "end_line": 365
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-13",
+      "title": "Lemma 13 (core genericity)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:core",
+      "paper_start_line": 728,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-4",
+        "paper-claim-8",
+        "paper-claim-9",
+        "paper-claim-10",
+        "paper-claim-11",
+        "paper-claim-12"
+      ],
+      "source_passages": [
+        {
+          "source_id": "transport-notes",
+          "heading": "## 8. Core genericity proved with these presentations",
+          "start_line": 366,
+          "end_line": 410
+        },
+        {
+          "source_id": "full-proof",
+          "heading": "## 4. Core genericity",
+          "start_line": 153,
+          "end_line": 173
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-14",
+      "title": "Lemma 14 (whole-ideal genericity)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:ideals",
+      "paper_start_line": 803,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-8",
+        "paper-claim-9",
+        "paper-claim-10",
+        "paper-claim-11",
+        "paper-claim-12",
+        "paper-claim-13"
+      ],
+      "source_passages": [
+        {
+          "source_id": "full-proof",
+          "heading": "## 5. Genericity for an entire original downward ideal",
+          "start_line": 174,
+          "end_line": 252
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-15",
+      "title": "Lemma 15 (actual-family soundness)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:finish",
+      "paper_start_line": 921,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-13",
+        "paper-claim-14"
+      ],
+      "source_passages": [
+        {
+          "source_id": "full-proof",
+          "heading": "## 6. Soundness of the actual full family",
+          "start_line": 253,
+          "end_line": 275
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-16",
+      "title": "Lemma 16 (effective core inheritance)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:finish",
+      "paper_start_line": 944,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [
+        "paper-claim-3"
+      ],
+      "source_passages": [
+        {
+          "source_id": "core-notes",
+          "heading": "## 2. All mechanicalness schemas are inherited syntactically",
+          "start_line": 99,
+          "end_line": 127
+        },
+        {
+          "source_id": "full-proof",
+          "heading": "## 7. The three required known schemas",
+          "start_line": 276,
+          "end_line": 312
+        }
+      ]
+    },
+    {
+      "id": "paper-claim-17",
+      "title": "Lemma 17 (effective label package)",
+      "paper_file": "paper.tex",
+      "paper_section_label": "sec:ordinals",
+      "paper_start_line": 1395,
+      "status": "proposed_hand_proof",
+      "depends_on_paper_claims": [],
+      "source_passages": [
+        {
+          "source_id": "ordinal-extraction",
+          "heading": "## 2. A single uniform recursive domain",
+          "start_line": 47,
+          "end_line": 94
+        },
+        {
+          "source_id": "ordinal-extraction",
+          "heading": "## 3. Closure and termination of the tracking procedures",
+          "start_line": 95,
+          "end_line": 141
+        },
+        {
+          "source_id": "ordinal-extraction",
+          "heading": "## 4. Deciding ≤₁ on every code",
+          "start_line": 142,
+          "end_line": 164
+        },
+        {
+          "source_id": "ordinal-extraction",
+          "heading": "## 5. Deciding ≤₂ without losing a predecessor branch",
+          "start_line": 165,
+          "end_line": 193
+        },
+        {
+          "source_id": "ordinal-extraction",
+          "heading": "## 6. Reflection, exact room and the cofinal chain",
+          "start_line": 194,
+          "end_line": 219
+        },
+        {
+          "source_id": "typed-closure",
+          "heading": "## 2. Public codes and the non-tracking primitives",
+          "start_line": 47,
+          "end_line": 93
+        },
+        {
+          "source_id": "typed-closure",
+          "heading": "## 3. The conversion invariant",
+          "start_line": 94,
+          "end_line": 160
+        },
+        {
+          "source_id": "typed-closure",
+          "heading": "## 4. Resolving all parameters is effective",
+          "start_line": 161,
+          "end_line": 192
+        },
+        {
+          "source_id": "typed-closure",
+          "heading": "## 5. Tracking-sequence and evaluation calls",
+          "start_line": 193,
+          "end_line": 235
+        },
+        {
+          "source_id": "typed-closure",
+          "heading": "## 6. Component enumeration: remove the apparent recursive cycle",
+          "start_line": 236,
+          "end_line": 296
+        },
+        {
+          "source_id": "typed-closure",
+          "heading": "## 7. The delicate relative-tracking conversion",
+          "start_line": 297,
+          "end_line": 340
+        },
+        {
+          "source_id": "typed-closure",
+          "heading": "## 8. Tracking chains, extensions and the final relation procedures",
+          "start_line": 341,
+          "end_line": 368
+        }
+      ]
+    }
+  ],
+  "primary_dependencies": [
+    {
+      "source_id": "alexander2013",
+      "paper_sections": [
+        "sec:statement",
+        "sec:fixed",
+        "sec:recorded",
+        "sec:transport"
+      ],
+      "passages": [
+        "Definition 1.1.1",
+        "Definitions 1.2.9, 1.2.15, 1.2.17, 1.2.19",
+        "Theorem 1.2.6",
+        "Lemma 1.2.22",
+        "Proposition 1.2.23",
+        "Section 1.3"
+      ]
+    },
+    {
+      "source_id": "wilken2021",
+      "paper_sections": [
+        "sec:room",
+        "sec:ordinals"
+      ],
+      "passages": [
+        "Definitions 1.5, 2.17, 3.39–3.44, 3.85, 3.87",
+        "Proposition 1.6",
+        "Lemma 1.7",
+        "Theorems 1.8, 2.18, 4.2(b)",
+        "Lemma 3.42",
+        "Corollary 4.6"
+      ],
+      "role": "Published theorem inputs with typed uniform extraction from the hand notes, not a reproof of all Wilken dependencies"
+    }
+  ],
+  "separate_formalization": {
+    "package": "../../alexander-thesis-3-1-3-lean/README.md",
+    "metadata": "../../alexander-thesis-3-1-3-lean/formalization.yaml",
+    "metadata_sha256": "b79714d751d26168009bb7ff13362b9a424966492b47a8da35bbddda22981b96",
+    "declaration_map": "../../alexander-thesis-3-1-3-lean/artifact-map.json",
+    "comparator_challenge": "../../alexander-thesis-3-1-3-lean/Challenge.lean",
+    "completion_gate": "../../alexander-thesis-3-1-3-lean/Completion.lean",
+    "correspondence_scope": "Subject and target correspondence only; not proof completion or certified equivalence",
+    "targets": [
+      {
+        "id": "thesis-3-1-1",
+        "paper_claim": "paper-claim-2",
+        "challenge_declaration": "Alexander313.Comparator.challenge311",
+        "intended_theorem_declaration": "Alexander313.thesis311",
+        "theorem_status": "not_constructed"
+      },
+      {
+        "id": "thesis-3-1-2",
+        "paper_claim": "paper-claim-2",
+        "challenge_declaration": "Alexander313.Comparator.challenge312",
+        "intended_theorem_declaration": "Alexander313.thesis312",
+        "theorem_status": "not_constructed"
+      },
+      {
+        "id": "thesis-3-1-3",
+        "paper_claim": "paper-claim-1",
+        "challenge_declaration": "Alexander313.Comparator.challenge313",
+        "intended_theorem_declaration": "Alexander313.thesis313",
+        "theorem_status": "not_constructed"
+      }
+    ],
+    "subject_links": [
+      {
+        "paper_claims": [
+          "paper-claim-4",
+          "paper-claim-5"
+        ],
+        "lean_files": [
+          "../../alexander-thesis-3-1-3-lean/Alexander313/Alexander/ModelTransport.lean",
+          "../../alexander-thesis-3-1-3-lean/Alexander313/RecordedLogic.lean",
+          "../../alexander-thesis-3-1-3-lean/Alexander313/SourceModels.lean"
+        ],
+        "coverage": "partial_draft_subject_correspondence_not_a_formal_proof_of_these_claims"
+      },
+      {
+        "paper_claims": [
+          "paper-claim-6",
+          "paper-claim-7",
+          "paper-claim-8",
+          "paper-claim-9",
+          "paper-claim-10"
+        ],
+        "lean_files": [
+          "../../alexander-thesis-3-1-3-lean/Alexander313/RecordedErasure.lean",
+          "../../alexander-thesis-3-1-3-lean/Alexander313/RecordedSupport.lean"
+        ],
+        "coverage": "partial_draft_subject_correspondence_not_a_formal_proof_of_these_claims"
+      },
+      {
+        "paper_claims": [
+          "paper-claim-12"
+        ],
+        "lean_files": [
+          "../../alexander-thesis-3-1-3-lean/Alexander313/RecordedReconstruction.lean"
+        ],
+        "coverage": "partial_draft_subject_correspondence_not_a_formal_proof_of_these_claims"
+      },
+      {
+        "paper_claims": [
+          "paper-claim-13",
+          "paper-claim-14",
+          "paper-claim-15"
+        ],
+        "lean_files": [
+          "../../alexander-thesis-3-1-3-lean/Alexander313/GenericityReduction.lean"
+        ],
+        "coverage": "partial_draft_subject_correspondence_not_a_formal_proof_of_these_claims"
+      },
+      {
+        "paper_claims": [
+          "paper-claim-16"
+        ],
+        "lean_files": [
+          "../../alexander-thesis-3-1-3-lean/Alexander313/SourceColumns.lean",
+          "../../alexander-thesis-3-1-3-lean/Alexander313/Effective/UnaryColumns.lean"
+        ],
+        "coverage": "partial_draft_subject_correspondence_not_a_formal_proof_of_these_claims"
+      },
+      {
+        "paper_claims": [
+          "paper-claim-17"
+        ],
+        "lean_files": [
+          "../../alexander-thesis-3-1-3-lean/Alexander313/Wilken/RelativeTerms.lean",
+          "../../alexander-thesis-3-1-3-lean/Alexander313/Wilken/TypedTranslations.lean",
+          "../../alexander-thesis-3-1-3-lean/Alexander313/Wilken/PredecessorDecision.lean"
+        ],
+        "coverage": "partial_draft_subject_correspondence_not_a_formal_proof_of_these_claims"
+      }
+    ]
+  }
+}

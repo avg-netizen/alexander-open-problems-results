@@ -1,0 +1,10 @@
+note: using only cached resource files
+note: Running TeX ...
+note: Rerunning TeX because "paper.aux" changed ...
+note: Running xdvipdfmx ...
+note: Writing `paper.log` (32.2275390625 KiB)
+note: Writing `paper.pdf` (145.3564453125 KiB)
+note: Skipped writing 1 intermediate files (use --keep-intermediates to keep them)
+warning: paper.tex:1447: Underfull \hbox (badness 1472) in paragraph at lines 1441--1447
+warning: paper.tex:1447: Underfull \hbox (badness 1472) in paragraph at lines 1441--1447
+warning: warnings were issued by the TeX engine; use --print and/or --keep-logs for details.

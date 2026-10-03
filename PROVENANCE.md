@@ -69,3 +69,16 @@ The audit found no error in any of the three. Note 15 is long, and it depends on
 lemmas that should be reviewed independently. Its status is **proposed**. Nothing here resolves
 Question 3-1-3. No independent human review has been recorded, and nothing has been sent to the
 author.
+
+## 3 October 2026: dissertation Question 3-1-3 (note 17)
+
+OpenAI Codex wrote the paper in note 17, at the owner's request. It expands the proposed hand
+proof assembled over 30 September – 2 October 2026 in working notes that are not published
+here. Its own [PROVENANCE.md](17-thesis-question-3-1-3/PROVENANCE.md) lists those sources and
+the checks recorded on them: a hand audit of the modal argument, conditional on its ordinal
+input, and a follow-up verification of the uniform typed ordinal closure that condition required.
+
+Anthropic Claude (Opus 5.5) moved the folder into this repository on 3 October 2026 and updated
+its relative paths. The manuscript is unchanged, and no new mathematical audit was made at
+placement. The status is **proposed**. No independent human review has been recorded, and
+nothing has been sent to the author.

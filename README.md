@@ -21,6 +21,11 @@ The notes answer, correct or sharpen questions posed in Alexander's papers on:
 > independent review. Note 16 shows a gap in the printed proof of the dissertation's partial
 > result. **Question 3-1-3 remains open.**
 
+> **3 October 2026:** note 17 is a standalone paper giving a **proposed** affirmative hand proof
+> of Question 3-1-3, for every r.e. well-founded hierarchy. Questions 3-1-1 and 3-1-2 follow as
+> corollaries. It has had recorded AI hand checks but no independent human review, and its Lean
+> formalisation is incomplete.
+
 A companion packet on *Biologically unavoidable sequences* is published separately:
 [biological-unavoidability-results](https://github.com/avg-netizen/biological-unavoidability-results).
 Nothing here duplicates it.
@@ -44,6 +49,7 @@ Nothing here duplicates it.
 | 14 | [Thesis Question 3-1-1](14-thesis-question-3-1-1/several-knowing-machines-3-1-1.pdf): machines that know everyone's truthfulness and particular codes of their subordinates exist for every r.e. well-founded hierarchy. | *The Theory of Several Knowing Machines* (dissertation, 2013), Def. 1.1.1, Fig. 1 | hand proof (checked by a second AI system) |
 | 15 | [Thesis Question 3-1-2](15-thesis-question-3-1-2/several-knowing-machines-3-1-2.pdf): add known own mechanicalness, still with unrestricted mutual truthfulness. Proposed: transparent stratification, contextual collapse, induction over all external interpretations. | same, Def. 1.1.1; strengthens Thm. 2.5.11 | **proposed** hand proof; long, needs independent review |
 | 16 | [Lemma 2.5.5 counterexample](16-thesis-lemma-2-5-5/thesis-lemma-2-5-5.pdf): the dissertation's preservation lemma is false as printed, which leaves a gap in the proof of Thm. 2.5.11 (the theorem itself is not refuted). | same, Lemma 2.5.5, Thm. 2.5.11 | explicit countermodel |
+| 17 | [Thesis Question 3-1-3](17-thesis-question-3-1-3/paper.pdf): knowing machines that know everyone's truthfulness, particular codes of their subordinates, and everyone's mechanicalness exist for every r.e. well-founded hierarchy and unrestricted modal formulas. A 20-page paper. | same, Def. 1.1.1, Question 3-1-3 | **proposed** hand proof; AI modal audit + typed ordinal check; Lean formalisation incomplete |
 
 ## Further results
 
@@ -66,7 +72,9 @@ runs (`08/order_robustness.py`, `09/pseudovisibility/selfrefl_exp.py`) take a fe
 The audit checks are in `audit-2026-09-27/controls.py`.
 
 To rebuild the PDFs: `python3 build_documents.py --allow-downloads`. This needs pandoc ≥ 3,
-tectonic and the DejaVu fonts. `SHA256SUMS` lists checksums of the committed files.
+tectonic and the DejaVu fonts. Note 17 is maintained directly in LaTeX and has its own
+build script; see [its README](17-thesis-question-3-1-3/README.md).
+`SHA256SUMS` lists checksums of the committed files.
 
 ## Provenance
 

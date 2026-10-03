@@ -1,0 +1,71 @@
+{
+  "built_at_utc": "2026-10-03T09:25:20.725151+00:00",
+  "command": [
+    "tectonic",
+    "--keep-logs",
+    "--only-cached",
+    "paper.tex"
+  ],
+  "engine": "Tectonic 0.17.0",
+  "pages": 20,
+  "pdf_text_words": 10384,
+  "latex_labels": 32,
+  "missing_labels": [],
+  "duplicate_labels": [],
+  "unresolved_references_or_citations": [],
+  "missing_glyphs": [],
+  "fonts": [
+    {
+      "name": "IHAIZV+LMRoman17-Regular-Identity-H",
+      "embedded": true
+    },
+    {
+      "name": "BZIVMZ+LMRoman12-Regular-Identity-H",
+      "embedded": true
+    },
+    {
+      "name": "IXFAWU+LMRoman12-Bold-Identity-H",
+      "embedded": true
+    },
+    {
+      "name": "TQTHRL+LMRoman10-Regular-Identity-H",
+      "embedded": true
+    },
+    {
+      "name": "YEUUOC+LatinModernMath-Regular-Identity-H",
+      "embedded": true
+    },
+    {
+      "name": "AKHCZK+LMRoman10-Bold-Identity-H",
+      "embedded": true
+    },
+    {
+      "name": "VDVGTR+LMRoman10-Italic-Identity-H",
+      "embedded": true
+    },
+    {
+      "name": "DDIEWW+MSAM10",
+      "embedded": true
+    },
+    {
+      "name": "CAFSZL+LMRoman8-Regular-Identity-H",
+      "embedded": true
+    }
+  ],
+  "overfull_boxes": [],
+  "underfull_boxes": [
+    "Underfull \\hbox (badness 1472) in paragraph at lines 1441--1447"
+  ],
+  "engine_font_access_diagnostics": 0,
+  "artifacts": {
+    "paper.tex": {
+      "sha256": "fd5fca2ee8406ea55471cc189f278a4d912fd56ad4756d6cfc393ecade52940f",
+      "bytes": 71626
+    },
+    "paper.pdf": {
+      "sha256": "71b9062d91b6efa94e0dcd3a6806af64f0d58ac9308cd22d6f7bc8b3629b05cb",
+      "bytes": 148845
+    }
+  },
+  "verification_scope": "Document build and cross-references only; no mathematical or Lean certification."
+}
