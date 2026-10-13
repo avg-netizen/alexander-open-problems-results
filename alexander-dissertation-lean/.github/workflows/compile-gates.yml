@@ -1,0 +1,84 @@
+name: Compile checked gates
+
+# One job for every gate listed in ci/gates.txt. Project build products are
+# cached between runs (Lake rebuilds only modules whose inputs changed), so a
+# push that touches a few modules costs minutes, not the full closure.
+
+on:
+  push:
+    paths:
+      - ci/gates-inputs.sha256
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compile-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'true'
+      - name: Restore project build products
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: gates-build-${{ github.sha }}
+          restore-keys: gates-build-
+      - name: Build the gates' import closure
+        id: build
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          lake build $(sed 's/^/+/' ci/gate-modules.txt) 2>&1 | tee logs/build.log
+      - name: Save project build products
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: gates-build-${{ github.sha }}
+      - name: Check every gate and audit its axioms
+        id: gates
+        if: always()
+        run: |
+          mkdir -p logs/gates
+          status=0
+          while read -r gate; do
+            [ -z "$gate" ] && continue
+            name="${gate%.lean}"
+            if lake env lean "$gate" > "logs/gates/$name.log" 2>&1 \
+               && python3 scripts/check_axioms.py "logs/gates/$name.log" > "logs/gates/$name-axioms.log" 2>&1; then
+              echo "PASS $gate" | tee -a logs/gates.txt
+            else
+              echo "FAIL $gate" | tee -a logs/gates.txt
+              status=1
+            fi
+          done < ci/gates.txt
+          exit $status
+      - name: Summarise diagnostics
+        if: always()
+        run: |
+          mkdir -p logs
+          {
+            echo "commit: $GITHUB_SHA"
+            echo "run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "build: ${{ steps.build.outcome }}"
+            echo "gates: ${{ steps.gates.outcome }}"
+            echo "lean: $(lean --version 2>/dev/null || echo unavailable)"
+            cat logs/gates.txt 2>/dev/null || true
+          } | tee logs/summary.txt
+          grep -rnE '^error|: error' logs --include='*.log' > logs/errors.txt || true
+          grep -rn "declaration uses 'sorry'" logs --include='*.log' > logs/sorry.txt || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compile-gates-logs
+          path: logs/
+          if-no-files-found: warn

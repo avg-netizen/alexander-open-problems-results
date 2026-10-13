@@ -1,0 +1,106 @@
+name: Compile Carlson exactness and effective comparison
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Alexander313/Carlson/**'
+      - 'CompileCarlsonRationalExactness.lean'
+      - 'CompileCarlsonComputableComparison.lean'
+      - '.github/workflows/compile-carlson-effective-comparison.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.lean'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  pull_request:
+    paths:
+      - 'Alexander313/Carlson/**'
+      - 'CompileCarlsonRationalExactness.lean'
+      - 'CompileCarlsonComputableComparison.lean'
+      - '.github/workflows/compile-carlson-effective-comparison.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.lean'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: carlson-effective-comparison-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  effective-comparison:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reserve disk space for Lean and mathlib
+        run: |
+          # Remove only unused preinstalled SDKs on this disposable runner.
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet
+          df -h .
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Fetch pinned mathlib build artifacts
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          # Downstream project names are not roots in mathlib's cache graph.
+          # Use the standard pinned fetch, without a duplicate whole-.lake archive.
+          lake exe cache get 2>&1 | tee logs/dependencies.log
+          test -f .lake/packages/mathlib/.lake/build/lib/lean/Mathlib/Computability/Primrec/Basic.olean
+          df -h .
+      - name: Restore project build products
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: effective-comparison-build-${{ github.sha }}
+          restore-keys: |
+            effective-comparison-build-
+            pointed-comparison-build-
+            derivation-progress-build-
+            recursive-certificates-build-
+            exactness-build-
+            reflection-constructors-build-
+            gates-build-
+      - name: Build exactness, certificate search and comparison machines
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          timeout --kill-after=10s 10m lake build +Alexander313.Carlson.PrimitiveRationalExactness +Alexander313.Carlson.PrimitiveAmalgamationCertificates +Alexander313.Carlson.PartialPointedComparison 2>&1 | tee logs/build.log
+      - name: Build the kernel regressions
+        run: |
+          set -o pipefail
+          timeout --kill-after=10s 5m lake build +Alexander313.Carlson.RationalExactnessExamples +Alexander313.Carlson.AmalgamationCertificateExamples 2>&1 | tee logs/regressions.log
+      - name: Check both focused gates and audit their axioms
+        run: |
+          set -o pipefail
+          lake env lean CompileCarlsonRationalExactness.lean 2>&1 | tee logs/exactness-axioms.log
+          python3 scripts/check_axioms.py logs/exactness-axioms.log | tee logs/exactness-axiom-audit.log
+          lake env lean CompileCarlsonComputableComparison.lean 2>&1 | tee logs/computable-axioms.log
+          python3 scripts/check_axioms.py logs/computable-axioms.log | tee logs/computable-axiom-audit.log
+      - name: Save project build products
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: effective-comparison-build-${{ github.sha }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: carlson-effective-comparison-logs
+          path: logs/
+          if-no-files-found: warn

@@ -1,0 +1,105 @@
+name: Compile Carlson generation and pointed comparison
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Alexander313/Carlson/**'
+      - 'CompileCarlsonGenerationCharacterization.lean'
+      - 'CompileCarlsonPointedComparison.lean'
+      - '.github/workflows/compile-carlson-pointed-comparison.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.lean'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  pull_request:
+    paths:
+      - 'Alexander313/Carlson/**'
+      - 'CompileCarlsonGenerationCharacterization.lean'
+      - 'CompileCarlsonPointedComparison.lean'
+      - '.github/workflows/compile-carlson-pointed-comparison.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.lean'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: carlson-pointed-comparison-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pointed-comparison:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reserve disk space for Lean and mathlib
+        run: |
+          # Remove only unused preinstalled SDKs on this disposable runner.
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet
+          df -h .
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Fetch pinned mathlib build artifacts
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          # Downstream project names are not roots in mathlib's cache graph.
+          # Use the standard pinned fetch, without a duplicate whole-.lake archive.
+          lake exe cache get 2>&1 | tee logs/dependencies.log
+          test -f .lake/packages/mathlib/.lake/build/lib/lean/Mathlib/Computability/Primrec/Basic.olean
+          df -h .
+      - name: Restore project build products
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: pointed-comparison-build-${{ github.sha }}
+          restore-keys: |
+            pointed-comparison-build-
+            derivation-progress-build-
+            recursive-certificates-build-
+            exactness-build-
+            reflection-constructors-build-
+            gates-build-
+      - name: Build generation and amalgamation proofs
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          timeout --kill-after=10s 10m lake build +Alexander313.Carlson.GenerationCharacterization +Alexander313.Carlson.PointedPatternComparison +Alexander313.Carlson.RationalAmalgamation 2>&1 | tee logs/build.log
+      - name: Build the kernel regressions
+        run: |
+          set -o pipefail
+          timeout --kill-after=10s 5m lake build +Alexander313.Carlson.GenerationCharacterizationExamples +Alexander313.Carlson.PointedPatternComparisonExamples +Alexander313.Carlson.RationalAmalgamationExamples 2>&1 | tee logs/regressions.log
+      - name: Check both focused gates and audit their axioms
+        run: |
+          set -o pipefail
+          lake env lean CompileCarlsonGenerationCharacterization.lean 2>&1 | tee logs/generation-axioms.log
+          python3 scripts/check_axioms.py logs/generation-axioms.log | tee logs/generation-axiom-audit.log
+          lake env lean CompileCarlsonPointedComparison.lean 2>&1 | tee logs/pointed-axioms.log
+          python3 scripts/check_axioms.py logs/pointed-axioms.log | tee logs/pointed-axiom-audit.log
+      - name: Save project build products
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: pointed-comparison-build-${{ github.sha }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: carlson-pointed-comparison-logs
+          path: logs/
+          if-no-files-found: warn

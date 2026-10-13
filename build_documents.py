@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild every PDF in this repository from its Markdown source.
+"""Rebuild the numbered Markdown-note PDFs in this repository.
 
 Requires pandoc (>= 3) and tectonic, plus the DejaVu fonts (DejaVu Serif, DejaVu Sans Mono,
 DejaVu Math TeX Gyre), which cover the Unicode mathematics used in the notes;
@@ -27,9 +27,9 @@ DOCUMENTS = {
     "11-bounded-founders": "bounded-founders",
     "12-pseudovisibility-private-information": "pseudovisibility-private-information",
     "13-signed-quitting": "signed-quitting",
-    "14-thesis-question-3-1-1": "several-knowing-machines-3-1-1",
-    "15-thesis-question-3-1-2": "several-knowing-machines-3-1-2",
-    "16-thesis-lemma-2-5-5": "thesis-lemma-2-5-5",
+    "14-dissertation-question-3-1-1": "several-knowing-machines-3-1-1",
+    "15-dissertation-question-3-1-2": "several-knowing-machines-3-1-2",
+    "16-dissertation-lemma-2-5-5": "dissertation-lemma-2-5-5",
 }
 PANDOC_VARS = [
     "mainfont=DejaVu Serif", "monofont=DejaVu Sans Mono", "mathfont=DejaVu Math TeX Gyre",

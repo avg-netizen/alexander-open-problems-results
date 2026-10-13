@@ -1,0 +1,115 @@
+name: Compile Carlson effective core presentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Alexander313/**'
+      - 'CompileCarlsonCorePresentation.lean'
+      - 'CompileRevisedPaper.lean'
+      - 'Completion.lean'
+      - 'paper/**'
+      - '.github/workflows/compile-carlson-core-presentation.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.lean'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  pull_request:
+    paths:
+      - 'Alexander313/**'
+      - 'CompileCarlsonCorePresentation.lean'
+      - 'CompileRevisedPaper.lean'
+      - 'Completion.lean'
+      - 'paper/**'
+      - '.github/workflows/compile-carlson-core-presentation.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.lean'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: carlson-core-presentation-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core-presentation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Record exact validation inputs
+        run: |
+          mkdir -p logs
+          git rev-parse HEAD | tee logs/commit.txt
+          git ls-files '*.lean' | xargs sha256sum > logs/lean-sources.sha256
+          cp README.md logs/README.snapshot.md
+          sha256sum paper/REVISED-3-1-3-PROOF.md > logs/paper.sha256
+          cp paper/LEAN-COMPARISON-2026-10-13.md logs/paper-comparison.snapshot.md
+          test "$(git hash-object Alexander313/ComparatorChallenge.lean)" = a7e8fbd6eadd102465a8244a9ade9a3f06d5265e
+      - name: Reserve disk space for Lean and mathlib
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet
+          df -h .
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Fetch pinned mathlib build artifacts
+        run: |
+          set -o pipefail
+          lake exe cache get 2>&1 | tee logs/dependencies.log
+          test -f .lake/packages/mathlib/.lake/build/lib/lean/Mathlib/Computability/Primrec/Basic.olean
+      - name: Restore project build products
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: core-presentation-build-${{ github.sha }}
+          restore-keys: |
+            core-presentation-build-
+            effective-comparison-build-
+            pointed-comparison-build-
+            derivation-progress-build-
+            gates-build-
+      - name: Build the package, unconditional theorem and controls
+        run: |
+          set -o pipefail
+          timeout --kill-after=10s 25m lake build +Alexander313.Thesis313Unconditional +Alexander313.PaperComparison +Alexander313.Carlson.CorePresentationExamples 2>&1 | tee logs/build.log
+      - name: Check the effective core gate and axiom whitelist
+        run: |
+          set -o pipefail
+          lake env lean CompileCarlsonCorePresentation.lean 2>&1 | tee logs/axioms.log
+          python3 scripts/check_axioms.py logs/axioms.log | tee logs/axiom-audit.log
+      - name: Check unconditional comparator targets and their axioms
+        run: |
+          set -o pipefail
+          lake env lean Completion.lean 2>&1 | tee logs/completion.log
+          python3 scripts/check_axioms.py logs/completion.log | tee logs/completion-audit.log
+      - name: Check revised-paper schemas, inheritance and axioms
+        run: |
+          set -o pipefail
+          lake env lean CompileRevisedPaper.lean 2>&1 | tee logs/revised-paper.log
+          python3 scripts/check_axioms.py logs/revised-paper.log | tee logs/revised-paper-audit.log
+      - name: Save project build products
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: core-presentation-build-${{ github.sha }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: carlson-core-presentation-logs
+          path: logs/
+          if-no-files-found: warn

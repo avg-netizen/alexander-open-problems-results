@@ -1,0 +1,97 @@
+name: Compile Carlson finite checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Alexander313/Carlson/**'
+      - 'CompileCarlsonFiniteChecks.lean'
+      - '.github/workflows/compile-carlson-finite-checks.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.lean'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  pull_request:
+    paths:
+      - 'Alexander313/Carlson/**'
+      - 'CompileCarlsonFiniteChecks.lean'
+      - '.github/workflows/compile-carlson-finite-checks.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.lean'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: carlson-finite-checks-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  finite-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reserve disk space for Lean and mathlib
+        run: |
+          # Remove only unused preinstalled SDKs on this disposable runner.
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet
+          df -h .
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Fetch pinned mathlib build artifacts
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          # Downstream project names are not roots in mathlib's cache graph.
+          # Use the standard pinned fetch, without a duplicate whole-.lake archive.
+          lake exe cache get 2>&1 | tee logs/dependencies.log
+          test -f .lake/packages/mathlib/.lake/build/lib/lean/Mathlib/Computability/Primrec/Basic.olean
+          df -h .
+      - name: Restore project build products
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: finite-checks-build-${{ github.sha }}
+          restore-keys: |
+            finite-checks-build-
+            gates-build-
+      - name: Build the finite checker proofs
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          timeout --kill-after=10s 10m lake build +Alexander313.Carlson.PrimitiveFiniteChecks +Alexander313.Carlson.PrimitivePatternChecks +Alexander313.Carlson.PrimitiveEmbeddingChecks +Alexander313.Carlson.PrimitiveContinuityChecks +Alexander313.Carlson.PrimitiveFiniteEnumeration +Alexander313.Carlson.PrimitiveContinuousEmbeddingChecks +Alexander313.Carlson.PrimitiveReflectionChecks +Alexander313.Carlson.PrimitiveLiftingChecks +Alexander313.Carlson.PrimitiveMinimalityChecks 2>&1 | tee logs/build.log
+      - name: Build the kernel regressions
+        run: |
+          set -o pipefail
+          timeout --kill-after=10s 5m lake build +Alexander313.Carlson.PrimitiveFiniteChecksExamples +Alexander313.Carlson.PrimitivePatternChecksExamples +Alexander313.Carlson.PrimitiveEmbeddingChecksExamples +Alexander313.Carlson.PrimitiveContinuityChecksExamples +Alexander313.Carlson.PrimitiveContinuousEmbeddingChecksExamples +Alexander313.Carlson.PrimitiveReflectionChecksExamples +Alexander313.Carlson.PrimitiveLiftingChecksExamples +Alexander313.Carlson.PrimitiveMinimalityChecksExamples 2>&1 | tee logs/regressions.log
+      - name: Check the focused gate and audit its axioms
+        run: |
+          set -o pipefail
+          lake env lean CompileCarlsonFiniteChecks.lean 2>&1 | tee logs/axioms.log
+          python3 scripts/check_axioms.py logs/axioms.log | tee logs/axiom-audit.log
+      - name: Save project build products
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: finite-checks-build-${{ github.sha }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: carlson-finite-checks-logs
+          path: logs/
+          if-no-files-found: warn

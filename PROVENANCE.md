@@ -22,8 +22,9 @@ proof of Theorem 3) during assembly.
 **Verification.**
 - **The scripts are finite or exact-arithmetic controls.** Each script was re-run from this
   repository during assembly and reproduced its committed JSON output byte for byte.
-- **The infinite claims rest on the hand arguments in the notes.** No proof-assistant
-  formalisation exists for any result here.
+- **At the initial September assembly, the infinite claims rested on the hand arguments
+  in the notes.** The October addition below includes a Lean formalisation of the
+  dissertation Questions 3-1-x.
 - **No independent human mathematical review** has been recorded.
 
 **Priority.** Targeted public searches, recorded in the individual notes, did not locate earlier
@@ -74,7 +75,7 @@ author.
 
 OpenAI Codex wrote the paper in note 17, at the owner's request. It expands the proposed hand
 proof assembled over 30 September – 2 October 2026 in working notes that are not published
-here. Its own [PROVENANCE.md](17-thesis-question-3-1-3/PROVENANCE.md) lists those sources and
+here. Its own [PROVENANCE.md](17-dissertation-question-3-1-3/PROVENANCE.md) lists those sources and
 the checks recorded on them: a hand audit of the modal argument, conditional on its ordinal
 input, and a follow-up verification of the uniform typed ordinal closure that condition required.
 
@@ -82,3 +83,23 @@ Anthropic Claude (Opus 5.5) moved the folder into this repository on 3 October 2
 its relative paths. The manuscript is unchanged, and no new mathematical audit was made at
 placement. The status is **proposed**. No independent human review has been recorded, and
 nothing has been sent to the author.
+
+## 13 October 2026: dissertation naming and embedded Lean project
+
+At the owner's request, OpenAI Codex renamed notes 14–17 and their index labels
+to use dissertation terminology. Their mathematical text and PDFs are unchanged;
+the phrase "mechanistic thesis" remains where it names Reinhardt's thesis or a
+published paper. The earlier 3 October proof is retained.
+
+The [embedded Lean project](alexander-dissertation-lean/README.md) is a tracked-file
+copy of the standalone repository at `b06b50a`, including the revised 8 October
+paper, its 31-page PDF and the detailed paper comparison. Its
+[import record](alexander-dissertation-lean/IMPORT-PROVENANCE.json) preserves
+the original repository identity and file hashes. All Lean source files are
+unchanged; title and workflow labels use dissertation terminology.
+
+The preceding proof checkpoint `02be37a` passed its focused
+[GitHub workflow](https://github.com/avg-netizen/alexander-thesis-3-1-1-lean/actions/runs/38440882592).
+Local validation of that development covered 321 project modules and 107 axiom
+reports. This placement and naming change adds no new mathematical audit;
+the embedded comparison and receipts state the formal result's scope.
