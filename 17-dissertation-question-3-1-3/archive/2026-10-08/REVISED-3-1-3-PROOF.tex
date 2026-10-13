@@ -1,0 +1,2284 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+\documentclass[
+  11pt,
+  letterpaper,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{microtype}
+\usepackage{needspace}
+\usepackage{etoolbox}
+\pretocmd{\section}{\Needspace{5\baselineskip}}{}{}
+\pretocmd{\subsection}{\Needspace{4\baselineskip}}{}{}
+\setlength{\emergencystretch}{3em}
+\allowdisplaybreaks[1]
+% Latin Modern Math supplies the standard small set-difference glyph.
+\AtBeginDocument{\let\setminus\smallsetminus}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={An affirmative 3-1-3 proof using finite guards},
+  colorlinks=true,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{An affirmative 3-1-3 proof using finite guards}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Revised prose proof}
+\author{}
+\date{8 October 2026}
+
+\begin{document}
+\maketitle
+
+This proof uses a fixed auxiliary theory whose primitive mechanicalness
+axioms concern the original agents. Its extension argument uses one
+finite ordinal room for each formula, inside the complete pure
+\(\Sigma_2\) core. The genericity hypothesis requires each numerical
+column to be r.e.; it does not require a computable choice of indices
+for all temporary semantic predicates.
+
+The theorem concerns the unrestricted original language. Neither the
+formula arguments nor the well-founded hierarchy are bounded. Sections
+1--17 give the proof; Section 18 identifies additional conclusions and
+compares the revised auxiliary theory with the larger theory used in the
+earlier proof. The ordinal results used here are stated precisely in
+Section 6 and sourced in the references. This is a prose proof, with
+proof-assistant verification a separate task.
+
+\section{1. The theorem}\label{the-theorem}
+
+Let \(\mathcal L\) be first-order arithmetic with modal operators
+\(K_i\), \(i\in\mathbb N\), interpreted in Alexander's base logic. Fix
+the usual enumeration \((W_e)_{e\in\mathbb N}\) of r.e. subsets of
+\(\mathbb N\), with a standard arithmetic formula \(W(e,x)\)
+representing membership.
+
+Let \(R\) be any r.e. well-founded relation on \(\mathbb N\). The
+convention is that \(jRi\) means that \(j\) is subordinate to \(i\).
+
+\textbf{Theorem.} There is a uniformly r.e. family
+\((T_i)_{i\in\mathbb N}\) of closed, base-logically consequence-closed
+\(\mathcal L\)-theories such that the standard-arithmetic structure \[
+\mathcal M\models K_i\varphi[s]
+\quad\Longleftrightarrow\quad
+T_i\vdash_{\mathrm{BL}}\varphi^s
+\tag{T}
+\] satisfies self-doubting Epistemic Arithmetic and all three schemas
+below:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  For all \(i,j\) and all \(\mathcal L\)-formulas \(\varphi\), \[
+  \mathcal M\models
+  K_i\,\operatorname{ucl}(K_j\varphi\to\varphi).
+  \tag{Truth}
+  \]
+\item
+  For all \(jRi\) and all \(\varphi\) with
+  \(\operatorname{FV}(\varphi)=\{x\}\), \[
+  \mathcal M\models
+  \exists e\,K_i\forall x
+     \bigl(K_j\varphi\leftrightarrow W(e,x)\bigr).
+  \tag{Code}
+  \]
+\item
+  For all \(i,j\) and all such unary \(\varphi\), \[
+  \mathcal M\models
+  K_i\exists e\,\forall x
+     \bigl(K_j\varphi\leftrightarrow W(e,x)\bigr).
+  \tag{Mechanical}
+  \]
+\end{enumerate}
+
+Here \(\varphi^s\) is the result of replacing each free variable by the
+canonical numeral for its value under \(s\), and \(\operatorname{ucl}\)
+is universal closure. The bound index variable is always chosen fresh.
+No transitivity, decidable downward closure, recursive rank, finite
+branching, bounded height, modal-depth bound, or restriction on
+arithmetic complexity is assumed.
+
+The distinction between (Code) and (Mechanical) is the placement of the
+existential quantifier relative to \(K_i\). The construction also gives
+the parameter version of (Mechanical) stated in Section 18.1.
+
+\section{2. Logical and computability
+preliminaries}\label{logical-and-computability-preliminaries}
+
+\subsection{2.1. The base logic}\label{the-base-logic}
+
+Alexander's modal structures satisfy free-variable independence,
+invariance under alphabetic changes of bound variables, and capture-free
+variable-for-variable substitution. They do not in general satisfy
+arbitrary term substitution through a modal operator. We use his sound
+and complete base consequence relation, written \(\vdash\) below. See
+{[}A, §1.2, especially Definition 1.2.3 and Theorem 1.2.6{]}.
+
+For closed premises, the finite-certificate form of completeness is: \[
+\Sigma\vdash\theta
+\quad\Longleftrightarrow\quad
+\text{some }\sigma_1,\ldots,\sigma_m\in\Sigma
+\text{ make }
+\sigma_1\to\cdots\to\sigma_m\to\theta
+\text{ base-logically valid}.
+\tag{L1}
+\] The empty list is allowed. Validity is r.e. in any effective
+countable modal language. One can enumerate its certificates using the
+ordinary first-order encoding in which each modal formula is a predicate
+on its ordered free-variable tuple, with the alphabetic and
+weak-substitution axioms BL1 and BL2.
+
+All raw theorem predicates below reject nonclosed formulas. A
+consequence-closed theory of closed sentences is invariant under
+alphabetic changes, since such changes give base-logically equivalent
+sentences.
+
+Write \(\mathrm{PA}^{\mathcal L}\) for ordinary PA with induction
+extended to every formula of the displayed modal language. Its induction
+instances are \[
+\operatorname{ucl}\left[
+\varphi(x\mid0)\to
+\left(\forall x\bigl(\varphi\to\varphi(x\mid S(x))\bigr)
+ \to\forall x\,\varphi\right)\right].
+\tag{L2}
+\] The remaining PA axioms are the usual arithmetic axioms. This is
+Alexander's Definition 1.2.19.
+
+\subsection{2.2. Assigned validity and numerical
+instantiation}\label{assigned-validity-and-numerical-instantiation}
+
+For every base-logical validity \(\eta\), include each closed numerical
+instance \(\eta^s\) as an \textbf{Assigned Validity} axiom. This is a
+substantive axiom scheme: a numerical instance of a base-logical
+validity need not itself be valid in every base-logical structure {[}A,
+Example 1.2.13{]}.
+
+All standard-arithmetic structures constructed below have the
+numerical-assignment property \[
+M\models\eta[s]\quad\Longleftrightarrow\quad M\models\eta^s.
+\tag{L3}
+\] Consequently they satisfy Assigned Validity.
+
+A useful permitted numerical-instantiation argument is the following.
+Choose a fresh variable \(y\). The variable-instantiation implication \[
+\forall x\,\eta\ \to\ \eta(x\mid y)
+\] is base-logically valid. Numerically close this implication,
+assigning \(y\) the desired number and closing any remaining free
+parameters. Assigned Validity supplies the resulting implication as an
+axiom. For several universal quantifiers, iterate this procedure. This
+derives the concrete instances used below without assuming a general
+modal term-substitution rule.
+
+\subsection{2.3. Arithmetic enumeration}\label{arithmetic-enumeration}
+
+Fix an effective syntax and a standard acceptable enumeration of
+programs. Choose \(W(e,x)\) by a finite-computation representation, so
+that in standard arithmetic \[
+\mathbb N\models W(\bar e,\bar n)
+\quad\Longleftrightarrow\quad n\in W_e,
+\] and every true concrete instance \(W(\bar e,\bar n)\) is provable in
+PA. The latter follows by exhibiting the finite accepting computation
+and verifying its arithmetic trace. Only this positive trace property is
+used; PA is not required to decide nonmembership.
+
+An r.e. sentence theory has an effective unary-column compiler: given a
+formula \(\varphi\) with sole free variable \(x\), a program enumerates
+the numbers \(n\) for which the theory proves \(\varphi(x\mid\bar n)\).
+Dovetailing finite consequence certificates gives this program. The
+compiler is uniform in a program enumerating the theory and the formula.
+
+These elementary computability facts, together with the
+\(s\)-\(m\)-\(n\) theorem and Kleene's recursion theorem, are the
+computability inputs to the source construction.
+
+\section{3. The fixed source theories}\label{the-fixed-source-theories}
+
+Temporarily enlarge the language by one operator \(K_*\). Let \[
+I=\{*\}\sqcup\mathbb N,\qquad \mathcal L_*=\mathcal L\cup\{K_*\}.
+\] All formula schemes in this section range over the complete enlarged
+language, including formulas that contain \(K_*\).
+
+\subsection{3.1. Background and own-prefix
+closure}\label{background-and-own-prefix-closure}
+
+For each holder \(a\in I\), let \(B_a\) consist of the following closed
+sentences:
+
+\begin{itemize}
+\tightlist
+\item
+  All axioms of \(\mathrm{PA}^{\mathcal L_*}\).
+\item
+  All Assigned Validity sentences.
+\item
+  Own validity \(\operatorname{ucl}(K_a\varphi)\), for every actual
+  base-logical validity \(\varphi\).
+\item
+  Own deduction \[
+  \operatorname{ucl}\bigl(K_a(\varphi\to\psi)
+       \to(K_a\varphi\to K_a\psi)\bigr).
+  \]
+\item
+  Own positive introspection \[
+  \operatorname{ucl}(K_a\varphi\to K_aK_a\varphi).
+  \]
+\item
+  All-agent reflection \[
+  \operatorname{ucl}(K_b\varphi\to\varphi),\qquad b\in I.
+  \]
+\end{itemize}
+
+For a set \(X\) of closed generators, define \[
+\operatorname{cl}_a(X)=
+\operatorname{Cn}_{\mathrm{BL}}
+ \{K_a^n\sigma:\sigma\in X,\ n\in\mathbb N\},
+\tag{S1}
+\] where \(K_a^0\sigma=\sigma\), and \(\operatorname{Cn}_{\mathrm{BL}}\)
+here retains closed consequences.
+
+The following syntactic fact will be used repeatedly.
+
+\textbf{Own sentence necessity.} If \(S=\operatorname{cl}_a(X)\), with
+\(B_a\subseteq X\), and \(S\vdash\sigma\), then \(S\vdash K_a\sigma\).
+
+\textbf{Proof.} Take a finite certificate with prefixed-generator
+premises \(\eta_1,\ldots,\eta_m\) and valid closed implication
+\(V=\eta_1\to\cdots\to\eta_m\to\sigma\). The next prefix puts
+\(K_a\eta_j\) among the axioms. Own validity gives \(K_aV\), and
+repeated own deduction gives \(K_a\sigma\). This uses no soundness
+assumption. \(\square\)
+
+\subsection{3.2. The smaller auxiliary
+core}\label{the-smaller-auxiliary-core}
+
+For a formula \(\varphi\), a chosen input variable \(x\), and a fresh
+variable \(e\ne x\), put \[
+\operatorname{MC}_b(\varphi;x)=
+\operatorname{ucl}\left[
+\exists e\,\forall x
+ \bigl(K_b\varphi\leftrightarrow W(e,x)\bigr)\right].
+\tag{S2}
+\] Thus the other free parameters of \(\varphi\) are universally
+quantified outside \(\exists e\). The formula need not have \(x\) as its
+only free variable, or even have \(x\) free.
+
+Define \[
+U=
+\operatorname{cl}_*\left(
+ B_*+
+ \{\operatorname{MC}_j(\varphi;x):
+                  j\in\mathbb N,\ \varphi,\ x\}
+ \right).
+\tag{S3}
+\] The primitive mechanicalness targets are the original agents \(j\).
+In particular, this definition includes no primitive
+\(\operatorname{MC}_*(\varphi;x)\) generators. Arguments \(\varphi\) may
+still contain \(K_*\).
+
+The theory \(U\) is r.e. and independent of \(R\). Fix once and for all
+a total computable compiler \(d\) such that, for every unary
+\(\varphi\), \[
+n\in W_{d(\varphi)}
+\quad\Longleftrightarrow\quad
+U\vdash\varphi(x\mid\bar n).
+\tag{S4}
+\] This compiler is chosen before the hierarchy-dependent recursion
+fixed point.
+
+\subsection{3.3. The original theories and their fixed
+point}\label{the-original-theories-and-their-fixed-point}
+
+Let \(q\) be a program intended to enumerate pairs \((i,\sigma)\) of
+original owners and their closed theorems. Uniformly from
+\(q,j,\varphi\), obtain a program \(c(q,j,\varphi)\) enumerating \[
+\{n:q\text{ enumerates }(j,\varphi(x\mid\bar n))\}.
+\]
+
+For a prospective \(q\), set \[
+\begin{split}
+T_i(q)=\operatorname{cl}_i\bigl(
+ B_i
+ &+\{C_{*,\varphi}(d(\varphi)):\operatorname{FV}(\varphi)=\{x\}\}\\
+ &+\{C_{j,\varphi}(c(q,j,\varphi)):
+                    jRi,\ \operatorname{FV}(\varphi)=\{x\}\}
+\bigr),
+\end{split}
+\tag{S5}
+\] where \[
+C_{b,\varphi}(p)=
+\forall x\bigl(K_b\varphi\leftrightarrow W(\bar p,x)\bigr).
+\tag{S6}
+\] The enumeration of \(R\) supplies positive edge witnesses. All other
+admissions, own prefixes, and finite logical consequences are
+effectively enumerated. Thus there is a total computable operation
+taking \(q\) to a program enumerating all pairs \((i,\sigma)\) with
+\(T_i(q)\vdash\sigma\).
+
+Kleene's recursion theorem gives a \(q\) whose enumerated pairs are
+exactly those produced by this operation. Fix such a \(q\), and set
+\(T_i=T_i(q)\). Then \[
+n\in W_{c(q,j,\varphi)}
+\quad\Longleftrightarrow\quad
+T_j\vdash\varphi(x\mid\bar n).
+\tag{S7}
+\] The source family \(S_*=U,\ S_i=T_i\) is uniformly r.e. and
+consequence-closed.
+
+This completes the source construction before any semantic argument. In
+every auxiliary model below, these same theories, source formulas, and
+program numerals remain fixed. Masking a semantic predicate does not
+rerun the fixed point or change a displayed \(W\)-index.
+
+For convenient notation write \[
+p(*,\varphi)=d(\varphi),\qquad
+p(j,\varphi)=c(q,j,\varphi)\quad(j\in\mathbb N).
+\tag{S8}
+\] For each source code generator, its \(p(w,\varphi)\) enumerates
+exactly the corresponding full source-theorem column.
+
+\section{4. Filtered models, shape agreement, and
+genericity}\label{filtered-models-shape-agreement-and-genericity}
+
+\subsection{4.1. Filtered truth}\label{filtered-truth}
+
+A raw predicate family \(P=(P_a)_{a\in I}\) assigns an alphabetically
+invariant predicate to closed \(\mathcal L_*\)-formulas, and rejects
+nonclosed formulas. Define a standard-arithmetic filtered structure
+\(F(P)\) recursively by \[
+F(P)\models K_a\varphi[s]
+\quad\Longleftrightarrow\quad
+P_a(\varphi^s)\ \land\ F(P)\models\varphi[s].
+\tag{F1}
+\] This is recursion on formula syntax, so it requires no fixed-point or
+soundness assumption. Formula induction gives the base-logic structure
+conditions and the numerical-assignment property (L3).
+
+Say that \(P_a\) is \textbf{raw-sound in \(F(P)\)} if \[
+P_a(\sigma)\quad\Longrightarrow\quad F(P)\models\sigma
+\] for every closed \(\sigma\). When every \(P_a\) is raw-sound, the
+truth conjunct in (F1) is redundant. Formula induction then identifies
+\(F(P)\) with the unfiltered interpretation using exactly the predicates
+\(P_a\). Our task is to prove this when \(P_a=\operatorname{Th}(S_a)\).
+
+Reflection is always true in the filtered model, before raw soundness
+has been proved.
+
+\subsection{4.2. Column admissibility and finite query
+restrictions}\label{column-admissibility-and-finite-query-restrictions}
+
+Call \(P\) \textbf{column-admissible} if it is alphabetic as above and,
+for every owner \(a\), formula \(\varphi\), variable \(x\), and
+numerical parameter assignment \(s\), there is an \(e\) such that \[
+n\in W_e
+\quad\Longleftrightarrow\quad
+P_a\bigl(\varphi^{s[x:=n]}\bigr)
+\qquad(n\in\mathbb N).
+\tag{F2}
+\] The actual source family has this property by uniform r.e.
+theoremhood. Temporary families need only satisfy the displayed
+per-column condition. A uniform computable selection of all its
+witnesses is not part of the definition.
+
+The \textbf{shape} of a formula keeps logical constructors, modal
+owners, and arithmetic predicate symbols, and forgets terms and
+binder-variable names. Let \[
+Q(\theta)=
+\{(a,\operatorname{sh}(\varphi)):
+       K_a\varphi\text{ occurs anywhere in }\theta\}.
+\tag{F3}
+\] Occurrences below other modal operators are included. This is a
+finite hereditary set: retaining an argument shape includes every modal
+query occurring inside that shape. Numerical closure, alphabetic change,
+and term variants preserve shape and the query set.
+
+Two raw families that agree on every closed formula of every owner/shape
+class in \(Q(\theta)\) give the same truth value to \(\theta\), at every
+assignment. This follows by formula induction. The universal quantifier
+case needs agreement on all numerical instances of an argument shape,
+which is why agreement is not restricted to a finite list of literal
+subformulas.
+
+A selection depending only on owner and shape preserves column
+admissibility. For a fixed numerical column, owner and shape do not vary
+with \(n\); the selected column is therefore one fixed old r.e. column
+or the empty column. A piecewise choice between two column-admissible
+families has the same property. The selector itself need not be
+computable.
+
+\subsection{4.3. Whole-ideal genericity}\label{whole-ideal-genericity}
+
+Let \(R^+\) be the transitive closure of \(R\), and write \[
+D_R(J)=\{i:i\in J\text{ or }iR^+j\text{ for some }j\in J\}.
+\] For a finite \(R^+\)-antichain \(J\), define \(G(J)\) to be this
+statement:
+
+\begin{quote}
+For every column-admissible \(P\) such that \(P_*=\operatorname{Th}(U)\)
+and \(P_i=\operatorname{Th}(T_i)\) for all \(i\in D_R(J)\), if every
+original \(P_i\) outside \(D_R(J)\) is raw-sound in \(F(P)\), then the
+core and every predicate in the retained ideal are raw-sound in
+\(F(P)\).
+\end{quote}
+
+No effectiveness of \(D_R(J)\) is required. The source predicates
+retained on it are the fixed full theorem predicates.
+
+We will prove \(G(\varnothing)\) directly and the other cases by
+well-founded induction. The stronger temporary-model class in (F2) is
+needed when a finite formula is reconstructed while an infinite lower
+ideal is retained literally.
+
+\section{5. Direct genericity of the smaller
+core}\label{direct-genericity-of-the-smaller-core}
+
+\textbf{Core genericity lemma.} Suppose \(P\) is column-admissible,
+\(P_*=\operatorname{Th}(U)\), and every original \(P_j\) is raw-sound in
+\(F(P)\). Then \(P_*\) is raw-sound there. Thus \(G(\varnothing)\)
+holds.
+
+\textbf{Proof.} First verify the unprefixed core generators.
+
+Arithmetic holds in the standard first-order part. Modal induction
+follows by ordinary induction on the set of numbers satisfying its
+formula in \(F(P)\); the numerical-assignment property identifies the
+literal \(0\) and successor instances {[}A, Lemma 1.2.22 and Proposition
+1.2.23{]}. Actual validities and Assigned Validity are true by the
+base-logic structure conditions and (L3).
+
+For core own validity, if \(\varphi\) is valid then \(\varphi\) is true
+at every assignment, and \(U\) contains its numerical instance
+\(\varphi^s\). These give both conjuncts of \(K_*\varphi[s]\).
+
+For core deduction, the raw theory \(U\) is closed under modus ponens.
+The truth conjuncts of its antecedents give the corresponding
+implication of truths. For core introspection, \(U\vdash\varphi^s\)
+implies \(U\vdash K_*\varphi^s\) by own sentence necessity. If the inner
+filtered modal formula is true, that same formula supplies the outer
+truth conjunct. All reflection generators hold directly by (F1). None of
+these verifications assumes core raw soundness.
+
+Consider \(\operatorname{MC}_j(\varphi;x)\), with \(j\) original. Fix
+values for the outer parameters. Column admissibility supplies an \(e\)
+enumerating \[
+\{n:P_j(\varphi^{s[x:=n]})\}.
+\] Original-owner raw soundness makes
+\(F(P)\models K_j\varphi[s[x:=n]]\) equivalent to this raw test. The
+chosen \(e\) therefore witnesses the code existential for every \(n\).
+Freshness of \(e\) ensures its value does not alter the argument column.
+Taking every parameter assignment verifies the universally closed
+generator. Arguments containing \(K_*\) cause no extra assumption: the
+stipulated original raw soundness already concerns their complete truth
+in this same \(F(P)\).
+
+Finally, if a core generator \(\sigma\) is true, every \(K_*^n\sigma\)
+is true by induction on \(n\). Its body is true by the preceding step
+and is a literal core axiom, hence passes the raw \(U\)-test. All
+prefixed generators are therefore true. Base-logical soundness and
+finite certificates make every \(U\)-theorem true.
+
+This proves the lemma without a staged core argument. \(\square\)
+
+\section{6. The effective finite-guard ordinal
+input}\label{the-effective-finite-guard-ordinal-input}
+
+Let \((\mathrm{Ord};<,\leq_1,\leq_2)\) be the true \textbf{pure}
+pattern-of-resemblance structure of order 2. The relations are the
+corresponding elementary-substructure relations in the pure language; no
+arithmetic operations are added to this ordinal language.
+
+Write \(\upsilon_1=1^\infty\). The entire pure core is the initial
+segment \([0,\upsilon_1)\). We use its effective presentation and the
+following exact properties.
+
+\textbf{Ordinal lemma.} There is a countably infinite recursive label
+domain \(L\), with a recursive well-order \(<\) and recursive relations
+\(\leq_1,\leq_2\), isomorphic to this core, satisfying:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Both resemblance relations are reflexive and transitive, and \[
+  \leq_2\ \subseteq\ \leq_1\ \subseteq\ \leq.
+  \]
+\item
+  \textbf{Connectedness:} if \(p\leq_1r\) and \(p\leq q\leq r\), then
+  \(p\leq_1q\).
+\item
+  \textbf{Finite-pattern reflection:} if \(\alpha\leq_1\beta\), every
+  finite \(F\subset[0,\beta)\) has a map \[
+  f:F\longrightarrow[0,\alpha)
+  \] fixing \(F\cap[0,\alpha)\) and preserving and reflecting equality,
+  \(<\), \(\leq_1\), and \(\leq_2\) on \(F\).
+\item
+  \textbf{Finite tallness:} for every natural \(k\), there are \[
+  h_0<\cdots<h_k
+  \] with \(h_i\leq_2h_j\) for every \(i<j\). Such a list, beginning at
+  \(h_0=\nu\), is called a guard \(G_k(\nu)\). Thus a rank-\(k\) guard
+  has \(k+1\) points.
+\item
+  \textbf{Finite room:} suppose \(G_{k+1}(\lambda)\) is given, \(X\) is
+  a finite set with \(x<\lambda\) and \(x\leq_1\lambda\) for all
+  \(x\in X\), and \(N\in\mathbb N\). Then there are \(N\) lists \[
+  Y_j=(y_{j,0},\ldots,y_{j,k}),\qquad j<N,
+  \] each a rank-\(k\) guard, such that every point is below and
+  \(\leq_1\)-below \(\lambda\), every point lies above every member of
+  \(X\), and \[
+  \max Y_i<\min Y_j\qquad(i<j<N).
+  \tag{O1}
+  \] The assertions for \(X=\varnothing\) and \(N=0\) have their usual
+  vacuous meanings.
+\end{enumerate}
+
+\textbf{Proof of the ordinal lemma.} First work with the actual core.
+The inclusions, transitivity, and connectedness are the
+elementary-substructure and respecting-forest properties of the true
+pure relations {[}W21, pp.~5--6{]}.
+
+For finite reflection, use the points of \(F\cap\alpha\) as parameters
+in the existential closure of the complete finite atomic diagram of
+\(F\). Include the negations of false atomic facts and the inequalities
+of distinct points. This is a \(\Sigma_1\) assertion in the pure
+language containing both resemblance relations, true below \(\beta\).
+Reflection at \(\alpha\leq_1\beta\) gives its witnesses below
+\(\alpha\). The parameter entries are fixed, and the full diagram gives
+exactly the required finite isomorphism. The case \(\alpha=\beta\) uses
+the identity. A finite map may be extended arbitrarily to other labels
+when a total syntactic relabeling is wanted.
+
+Finite tallness follows from the isominimal realization of every
+realizable finite pattern in the core {[}W18, Corollaries 4.8 and 4.10;
+W21, p.~6{]}. For each \(k\), a finite increasing pairwise-\(\leq_2\)
+pattern of length \(k+1\) is realizable; for example it occurs on the
+corresponding finite segment \(\upsilon_2,\ldots,\upsilon_{k+2}\) of the
+global sequence in {[}W21, Theorem 1.8{]}. Its isominimal finite copy
+lies in the core. This produces each finite guard separately.
+
+For room, write the given guard as \[
+\lambda=h_0<h_1<\cdots<h_{k+1}.
+\] Apply {[}W21, Lemma 1.7(2){]} with \(\alpha=h_0\), \(\beta=h_{k+1}\),
+and \[
+Y=\{h_0,\ldots,h_k\}\subset[\alpha,\beta).
+\] Every \(y\in Y\) satisfies \(y<_1\beta\). The lemma supplies a copy
+of \(Y\) below \(\alpha\), above the finite set \(X\), preserving its
+pattern over \(X\); all copied points are \(<_1\alpha\). This gives the
+first required rank-\(k\) copy. Enlarge \(X\) by that entire copy and
+apply the same lemma again. Repeating finitely many times gives
+complete-copy separation (O1). Every enlarged parameter set remains
+finite and consists of points \(<_1\alpha\). This includes \(k=0\); the
+set being copied is then a singleton. The last guard point \(h_{k+1}\)
+is deliberately excluded from \(Y\).
+
+The effective presentation is supplied by the elementary-recursive
+characterization of the core {[}W17, §5.1 and Corollary 5.8{]}, using
+the corrected semantic characterization in {[}W21, Theorem 4.2 and
+Corollary 4.6{]}. The latter repairs an earlier semantic proof, so the
+corrected identification is part of the cited input. Order and both
+resemblance relations are recursive on the canonical notation domain. If
+that domain is an infinite recursive set of numerical codes, enumerate
+its members in ordinary numerical order and pull back the relations
+along this computable bijection with \(\mathbb N\). This gives the
+required recursive presentation on a domain coded by all natural
+numbers. Every property above transfers along the isomorphism.
+\(\square\)
+
+Only finite witnesses from this presentation enter stage enumeration.
+Their existence can be used classically in the proof, and a needed
+finite witness can also be found by search through its decidable finite
+conditions.
+
+A useful consequence of connectedness is that any set \(C\) of points
+each \(\leq_1\)-below the same top \(\lambda\) is coherent in its
+increasing order: \[
+u,v\in C,\quad u\leq v
+\quad\Longrightarrow\quad u\leq_1v.
+\tag{O2}
+\] In particular this holds for all points of the room copies together
+with \(X\).
+
+Within the core, finite guards of unbounded rank cannot all lie in one
+fixed proper initial segment {[}W17, introduction; W21, p.~6{]}. Nothing
+in the proof chooses an infinite \(\leq_2\)-chain in that core.
+
+\section{7. Labels, recorded syntax, and recording
+maps}\label{labels-recorded-syntax-and-recording-maps}
+
+Let \(L\) be the effective well-ordered label set, with relations
+\(\leq_1,\leq_2\). We use reflexivity of \(\leq_1\), the implication
+\(\alpha\leq_1\beta\Rightarrow\alpha\leq\beta\), connectedness of
+\(\leq_1\), finite-pattern reflection along \(\leq_1\), and the stated
+finite-room property. Write \(G_r(\nu)\) for a list of \(r+1\) points
+beginning at \(\nu\), strictly increasing and pairwise \(\leq_2\). No
+infinite chain is assumed.
+
+Fix finite sets \(A,E\subseteq\mathbb N\), disjoint from one another,
+with the following extension side conditions:
+
+\begin{itemize}
+\tightlist
+\item
+  The core \(*\) is neither active nor external.
+\item
+  If \(a\in A\) and \(wRa\), then \(w\notin A\cup E\).
+\end{itemize}
+
+In the genericity application \(A\) is the finite frontier \(J\), and
+\(E\) lies outside its downward ideal, so these conditions follow from
+antichainness.
+
+Recorded modal heads are \(K_d\), \(K_b^\nu\), and \(Z_e\), with
+erasures \(K_d,K_b,K_e\), respectively. All arithmetic terms and all
+numerical constants are unchanged by erasure \(\epsilon\). A recorded
+formula is \textbf{allowed} when every indexed owner belongs to \(A\),
+every unindexed owner lies outside \(A\), and every ghost owner belongs
+to \(E\). It is \textbf{globally admissible} when it is allowed and, at
+every indexed occurrence \(K_b^\nu\eta\), every indexed label anywhere
+inside \(\eta\) is strictly below \(\nu\). Inspection descends through
+unindexed heads, ghosts, Boolean connectives, and quantifiers.
+
+The finite support \(\operatorname{supp}(\eta)\) is the set of all
+indexed labels in the whole formula. In particular, labels below live or
+ghost heads remain in its support. The notation
+\(\operatorname{supp}(\eta)<\nu\) means that every point of this finite
+set is strictly below \(\nu\), and is vacuous when the support is empty.
+Numerical closure, partial numerical substitution, and alphabetic
+variation preserve support and global admissibility.
+
+The shape \(\operatorname{sh}(\phi)\) retains logical constructors,
+modal owners, and arithmetic relation symbols, but forgets terms and
+binder-variable names. Its rank \(r(\phi)\) is its constructor count.
+The query set is \[
+Q(\phi)=\{(b,\operatorname{sh}(\psi)):K_b\psi
+\text{ is any modal occurrence in }\phi\}.
+\] It includes occurrences below other modal heads. It is finite and
+hereditary: if \((b,s)\in Q(\phi)\), every query inside \(s\) lies in
+\(Q(\phi)\).
+
+Let \(H\) be any finite hereditary set of owner/shape queries. Let
+\(\ell(b,s)\in L\) be a label table. Define \(t=t_{H,\ell}\)
+recursively, leaving terms, binders and Boolean structure unchanged, and
+setting \[
+t(K_b\psi)=
+\begin{cases}
+K_b^{\ell(b,\operatorname{sh}\psi)}t\psi,&b\in A,\\
+K_b t\psi,&b\in E,\ (b,\operatorname{sh}\psi)\in H,\\
+Z_b t\psi,&b\in E,\ (b,\operatorname{sh}\psi)\notin H,\\
+K_b t\psi,&b\notin A\cup E.
+\end{cases}
+\] The only relevant entries of \(\ell\) for a finite formula or
+certificate form a finite table. It can be extended arbitrarily
+elsewhere. No globally admissible extension of the table is needed to
+establish validity preservation.
+
+This construction has four immediate invariants:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(\epsilon(t\phi)=\phi\).
+\item
+  \(t\) preserves free variables and commutes with capture-free
+  syntactic substitutions, alphabetic changes, and numerical closure.
+  This includes the substitutions displayed in modal induction. It is a
+  property of the translation, not a claim that these substitutions
+  preserve base-logical validity.
+\item
+  All formulas of one source shape have the same recorded support,
+  admissibility condition, and query-label assignments.
+\item
+  If an external occurrence is kept live, heredity makes its entire
+  recorded argument ghost-free.
+\end{enumerate}
+
+The proofs are structural inductions. At a modal occurrence, syntactic
+substitution or numerical closure does not change the argument shape, so
+it does not change the chosen head. The induction hypothesis identifies
+the transformed argument. The other constructors are unchanged.
+
+\subsection{Lemma 1: preservation of actual base-logical
+validity}\label{lemma-1-preservation-of-actual-base-logical-validity}
+
+Erasure, arbitrary label renaming, and every recording map
+\(t_{H,\ell}\) preserve base-logical validity in their forward
+directions.
+
+\textbf{Proof.} Pull an arbitrary target modal structure back along the
+chosen translation. Interpret a source modal application \(K_b\psi\) by
+the target interpretation of its translated modal application, with
+translated argument. Because the translation preserves free variables,
+irrelevant-variable invariance is inherited. Because it preserves
+alphabetic equivalence and commutes with the permitted variable
+substitutions, the alphabetic and variable-substitution conditions on
+modal interpretations are inherited. The arithmetic structure is
+unchanged. Induction on formulas then identifies truth in the
+pulled-back structure with truth of the translation. A source validity
+is consequently true after translation in every target structure.
+
+Equivalently, in Alexander's first-order encoding, a pure modal formula
+names a predicate on its ordered tuple of free variables. Each
+translation replaces that predicate name by the name of its translated
+modal formula without changing arity. Images of the alphabetic and
+variable-substitution axioms BL1/BL2 are instances of the same axioms. A
+finite first-order validity derivation can therefore be translated line
+by line. Predicate identification under erasure causes no problem.
+
+This argument needs only source sharing by owner and argument shape. It
+does \textbf{not} require the recording map to make every formula in the
+entire infinite source language globally admissible. Global
+admissibility is checked separately on each formula admitted to the
+stage.
+
+The converse is unavailable: validity of \(\epsilon\eta\) says nothing
+by itself about validity of \(\eta\). In particular,
+\(K_e\psi\leftrightarrow Z_e\psi\) is not admitted on account of its
+tautological erasure.
+
+\textbf{Numerical-substitution distinction.} The fact that a translation
+commutes with numerical closure does not assert that numerical closure
+preserves base-logical validity. Assigned-validity rows below supply
+numerical instances explicitly. None of the subsequent syntactic
+arguments uses unrestricted term substitution through modal operators.
+
+\section{8. The actual stage generator
+set}\label{the-actual-stage-generator-set}
+
+For each active holder \(a\in A\), define a set \(\Gamma_a\) of closed
+recorded generators by the following rules. Take the recorded modal
+language to consist of precisely the allowed heads. Thus the cut
+predicates for active holders suffice to interpret every indexed head,
+while arbitrary formulas in this language need not be globally
+admissible.
+
+\subsection{Background rows}\label{background-rows}
+
+Admit each of the following whenever the entire displayed formula is
+globally admissible:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Every modal PA axiom in the recorded language, including induction
+  with an arbitrary recorded formula.
+\item
+  \(\eta^s\), for every actual base-logical validity \(\eta\) and every
+  numerical assignment to its finitely many free variables.
+\item
+  \(\operatorname{ucl}(K_a^\nu\eta)\), for every actual validity
+  \(\eta\).
+\item
+  Same-label deduction: \[
+  \operatorname{ucl}\bigl(
+  K_a^\nu(\eta\to\zeta)\to
+  (K_a^\nu\eta\to K_a^\nu\zeta)\bigr).
+  \]
+\item
+  Introspection, for \(\mu<\nu\): \[
+  \operatorname{ucl}\bigl(
+  K_a^\mu\eta\to K_a^\nu K_a^\mu\eta\bigr).
+  \]
+\item
+  Truthfulness \(\operatorname{ucl}(O\eta\to\eta)\) for every allowed
+  indexed, unindexed, or ghost head \(O\).
+\item
+  Contextual collapse, for \(\mu\leq_1\nu\): \[
+  \operatorname{ucl}\bigl(
+  C[K_b^\mu\eta]\leftrightarrow C[K_b^\nu\eta]\bigr),
+  \tag{CC}
+  \] where \(C[-]\) is any one-hole recorded formula context and both
+  fillings are globally admissible.
+\end{enumerate}
+
+There is no source-sharing requirement on these background rows. In
+particular, the two fillings of a contextual-collapse row may assign
+different labels to different occurrences of one original source shape.
+This is essential: contextual collapse changes one occurrence at a time.
+
+\subsection{Padded main-code rows}\label{padded-main-code-rows}
+
+Let \(a\in A\), and let \(C_{w,\phi}\) be one of \(a\)'s actual source
+code generators. By the side conditions, \(w\notin A\cup E\), so its
+outer head remains \(K_w\).
+
+Choose one hereditary \(H\) and one source-shared label table \(\ell\)
+for the whole source sentence and its distinguished atom \(K_w\phi\).
+Require \(tC_{w,\phi}\) to be globally admissible. Inspect the whole
+recorded distinguished atom \(t(K_w\phi)\). At each live external
+occurrence \(K_e\chi\) in it, impose the following on every indexed
+occurrence \(K_b^\nu\beta\) inside \(\chi\):
+
+\begin{itemize}
+\tightlist
+\item
+  There is a displayed guard \(G_{r(\epsilon\chi)}(\nu)\).
+\item
+  Every label \(\xi\in\operatorname{supp}(\beta)\) satisfies both
+  \(\xi<\nu\) and \(\xi\leq_1\nu\).
+\end{itemize}
+
+Inspection also descends under ghosts. A ghost occurrence itself imposes
+no external guard, but a live external occurrence below it does. The
+code head \(K_w\) is inspected and imposes no external guard because
+\(w\notin E\).
+
+Let \(B\) be a finite set containing every point of every displayed
+guard, including its base. Choose distinct arithmetic tautologies
+\(\tau_1,\ldots,\tau_m\), one for each listed point \(h_1,\ldots,h_m\)
+of \(B\), with their shapes absent from the following finite forbidden
+pool: all subformula shapes of the source code sentence and all
+subshapes of the argument shapes in \(H\). During a finite proof
+transformation the pool may be enlarged by the finitely many shapes of
+that certificate; choosing tags outside this larger pool also satisfies
+the admission rule. One explicit infinite supply is \[
+\tau_0=(\bot\to\bot),\qquad \tau_{n+1}=(\bot\to\tau_n).
+\] Their ranks \(2n+3\) are distinct, so a finite forbidden pool is
+avoided by choosing sufficiently large indices. These indices are tags,
+not encodings of labels. When labels move, the tags do not move.
+
+Admit the closed padded sentence \[
+K_a^{h_1}\tau_1\to
+\bigl(K_a^{h_2}\tau_2\to\cdots
+(K_a^{h_m}\tau_m\to tC_{w,\phi})\cdots\bigr).
+\tag{M}
+\] The markers are holder-local. Their arguments are arithmetic and have
+empty label support, so padding preserves global admissibility. The
+exact support of (M) is \[
+B\cup\operatorname{supp}(tC_{w,\phi}).
+\] Thus every guard point is literal formula support. There are no
+mechanicalness main rows in these extension stages.
+
+The source numeral \(\overline{p(w,\phi)}\) in (M) is unchanged. It is
+not replaced by an index computed from \(t\phi\), and it does not encode
+a fresh or renamed outside owner. The marker bundle may be empty when no
+guards are needed; in that case the padded row is just its main
+sentence.
+
+\subsection{Own-prefix closure}\label{own-prefix-closure}
+
+If \(\sigma\in\Gamma_a\), \(a\in A\), and
+\(\operatorname{supp}(\sigma)<\nu\), admit \(K_a^\nu\sigma\). Iterate
+this rule finitely. Every resulting generator is closed and globally
+admissible.
+
+Set \[
+\Gamma_a^{<\nu}=
+\{\sigma\in\Gamma_a:\operatorname{supp}(\sigma)<\nu\}.
+\] The cut predicate on a closed formula \(\eta\) is
+\(\Gamma_a^{<\nu}\vdash\eta\), where consequence is Alexander's actual
+base-logical consequence. It is false on nonclosed formulas. No
+admissibility condition is placed on arbitrary logical conclusions. In
+particular, this cut is not defined by intersecting source theoremhood
+with an erasure condition.
+
+\subsection{Lemma 2: effectivity of the actual
+cut}\label{lemma-2-effectivity-of-the-actual-cut}
+
+The predicates \(\sigma\in\Gamma_a\), \(\sigma\in\Gamma_a^{<\nu}\), and
+\(\Gamma_a^{<\nu}\vdash\eta\) are uniformly r.e. in their finite
+parameters.
+
+\textbf{Proof.} Enumerate finite syntax, finite masks, finite tables,
+finite guard lists, finite marker bundles, and finite prefix trees.
+Allowed-head checks, heredity, shape equality, freshness and global
+support calculations are finite syntactic checks. Every order,
+\(\leq_1\), and \(\leq_2\) assertion has a positive enumerating
+certificate. Source-code admissions use the actual source schema and
+positive \(R\)-edge certificates. Actual validity has an r.e. proof
+system. A cut consequence is witnessed by a finite list of admitted cut
+generators and a valid implication chain to its conclusion. All these
+certificates can be dovetailed. No negative reachability test, soundness
+test, or computable rank is used.
+
+For any fixed recorded formula \(\eta\), label \(\nu\), owner \(a\),
+assignment \(s\), and variable \(x\), the numerical column \[
+\{n:\Gamma_a^{<\nu}\vdash\eta^{s[x:=n]}\}
+\] is therefore r.e. The finitely many values of \(s\) used by \(\eta\)
+are hard-coded, and \(n\mapsto\eta^{s[x:=n]}\) is a computable syntax
+operation.
+
+\section{9. Erasure and the finite local prefix
+lemma}\label{erasure-and-the-finite-local-prefix-lemma}
+
+\subsection{Lemma 3: source sentence
+necessity}\label{lemma-3-source-sentence-necessity}
+
+For every source holder \(a\), \(S_a\vdash\chi\) implies
+\(S_a\vdash K_a\chi\) for closed \(\chi\). This is the purely syntactic
+necessity lemma proved in Section 3.1; it applies to the fixed theories
+of Section 3 without a source-soundness assumption.
+
+\subsection{Lemma 4: erasure}\label{lemma-4-erasure}
+
+If \(\Gamma_a^{<\nu}\vdash\eta\) and \(\eta\) is closed, then
+\(S_a\vdash\epsilon\eta\). The same assertion holds without a cut.
+
+\textbf{Proof.} Each background row erases to a source theorem: modal PA
+and structural rows erase to their source instances; assigned validity
+erases to an assigned source validity by Lemma 1; reflection erases to
+source truthfulness. A contextual-collapse row erases to
+\(\operatorname{ucl}(\zeta\leftrightarrow\zeta)\), an actual validity.
+
+A padded main row erases to an implication chain with the original
+source code generator as conclusion. That generator is already a theorem
+of \(S_a\), so propositional logic gives the padded implication,
+irrespective of its marker antecedents. A generated own prefix erases to
+an own prefix of a source theorem, and Lemma 3 applies.
+
+Translate the finite valid implication of a cut proof by erasure using
+Lemma 1. Its erased premises are all source theorems by the preceding
+induction, so its erased conclusion follows. Numeric constants, source
+formulas and assignments have not changed.
+
+\subsection{Lemma 5: local prefixing of a derived cut
+consequence}\label{lemma-5-local-prefixing-of-a-derived-cut-consequence}
+
+Suppose \(a\in A\), \(\chi\) is closed and globally admissible,
+\(\operatorname{supp}(\chi)<\nu<\delta\), and
+\(\Gamma_a^{<\nu}\vdash\chi\). Then \[
+\Gamma_a^{<\delta}\vdash K_a^\nu\chi.
+\]
+
+\textbf{Proof.} Choose a finite certificate with admitted cut premises
+\(\eta_1,\ldots,\eta_m\). They are closed and globally admissible, and
+their whole supports lie below \(\nu\), including any markers or earlier
+prefix labels. The exact valid chain \[
+V=\eta_1\to\cdots\to\eta_m\to\chi
+\] is consequently closed, globally admissible, and supported below
+\(\nu\). Its validity is the actual validity certificate, not a
+conclusion drawn from erasure. Own validity admits \(K_a^\nu V\) below
+\(\delta\). Own-prefix closure admits each \(K_a^\nu\eta_j\) below
+\(\delta\). Same-label deduction distributes \(K_a^\nu\) through the
+chain, yielding \(K_a^\nu\chi\). All new labels are \(\nu\), hence below
+\(\delta\).
+
+This proof uses arbitrary globally admissible background rows. The
+premise list may contain different source-shared main-row tables, and
+its combined implication need not possess one common source table.
+
+\subsection{Lemma 6: markers can be discharged in their own
+cut}\label{lemma-6-markers-can-be-discharged-in-their-own-cut}
+
+Every marker \(K_a^h\tau\) with \(a\in A\) is derivable in every cut
+strictly above \(h\). Therefore a padded main row whose whole support
+lies below \(\delta\) yields its unpadded main sentence in
+\(\Gamma_a^{<\delta}\).
+
+\textbf{Proof.} The marker itself is an own-validity row, because
+\(\tau\) is an actual closed arithmetic validity with empty support.
+Repeated modus ponens discharges the marker antecedents of (M).
+
+\section{10. Syntactic contextual equivalence and cut
+collapse}\label{syntactic-contextual-equivalence-and-cut-collapse}
+
+\subsection{Lemma 7: contextual substitution inside one
+cut}\label{lemma-7-contextual-substitution-inside-one-cut}
+
+If \(\mu\leq_1\nu\), the two fillings \[
+\eta=C[K_b^\mu\phi],\qquad
+\zeta=C[K_b^\nu\phi]
+\] are globally admissible, and both supports lie below \(\delta\), then
+for every assignment \(s\), \[
+\Gamma_a^{<\delta}\vdash\eta^s
+\iff
+\Gamma_a^{<\delta}\vdash\zeta^s.
+\tag{1}
+\]
+
+\textbf{Proof.} Numerically close the context, preserving the binders on
+the path to the hole. More precisely, start with the partial
+substitution assigning \(s(x)\) to every free variable. On entering a
+quantifier binding \(x\), remove \(x\) from that substitution; transform
+each fixed side formula using the current substitution. At the hole use
+the resulting substitution on \(\phi\). This produces a context \(C_s\)
+and a filler \(\phi_s\) satisfying the literal identities \[
+\eta^s=C_s[K_b^\mu\phi_s],\qquad
+\zeta^s=C_s[K_b^\nu\phi_s].
+\] Both completed fillings are closed. They remain globally admissible
+and have the same supports as before. Apply the contextual-collapse
+admission rule to \(C_s,\phi_s,\mu,\nu\). Its universal closure is
+vacuous, so the admitted formula is exactly
+\(\eta^s\leftrightarrow\zeta^s\), and it lies below \(\delta\).
+Propositional logic gives (1).
+
+This proof deliberately does not infer numerical instances through modal
+syntax from an arbitrary universal closure. The closed equivalence is a
+new literal instance of the same contextual schema.
+
+\subsection{Lemma 8: finite-pattern preservation of
+generators}\label{lemma-8-finite-pattern-preservation-of-generators}
+
+Let \(F\subseteq L\) be finite and \(f:L\to L\) preserve
+\(<,\leq_1,\leq_2\) on \(F\). If \(\sigma\in\Gamma_a\) and
+\(\operatorname{supp}(\sigma)\subseteq F\), then its label-renaming
+\(f\sigma\) belongs to \(\Gamma_a\).
+
+\textbf{Proof.} Inspect the admission certificate.
+
+\begin{itemize}
+\tightlist
+\item
+  Allowed owners do not change. Every nesting inequality is preserved
+  because its two endpoints occur in the formula support.
+\item
+  Modal PA commutes with label renaming. Actual validity is preserved by
+  Lemma 1, and assigned rows retain their assignment.
+\item
+  Structural and truthfulness rows retain their syntax. Their label
+  inequalities remain true.
+\item
+  Both endpoints of a contextual-collapse row occur in its whole
+  support, so its \(\leq_1\) premise remains true. Rename the arbitrary
+  context and filler.
+\item
+  A main row retains its source code sentence, source numeral, owner,
+  hereditary mask, tag formulas, and tag order. Replace its table by
+  \(f\circ\ell\). Every displayed guard point occurs among its markers,
+  so it belongs to \(F\). Renaming therefore preserves all guard-chain
+  relations and all whole-argument \(\leq_1\) conditions. Freshness
+  refers to unchanged source shapes and unchanged tags.
+\item
+  A prefix row remains a prefix row because its complete body and prefix
+  label occur in the support, and every required strict bound is
+  preserved.
+\end{itemize}
+
+Induction on the finite prefix certificate completes the proof. Forward
+relation preservation suffices for this argument.
+
+\subsection{Lemma 9: exact cut
+collapse}\label{lemma-9-exact-cut-collapse}
+
+If \(\alpha\leq_1\beta\) and \(\operatorname{supp}(\eta)<\alpha\), then
+\[
+\Gamma_a^{<\alpha}\vdash\eta
+\iff
+\Gamma_a^{<\beta}\vdash\eta.
+\tag{2}
+\]
+
+\textbf{Proof.} The forward implication is monotonicity of cut
+generators. For the reverse, take a finite certificate below \(\beta\),
+and let \(F\) be the union of the supports of its conclusion and
+displayed premises. Every point of \(F\) is below \(\beta\). In
+particular, all guard markers and earlier prefix labels are included.
+
+Finite reflection at \(\alpha\leq_1\beta\) gives a pattern map \(f\)
+taking \(F\) below \(\alpha\) and fixing its points already below
+\(\alpha\). Lemma 8 transports each displayed generator premise into the
+cut below \(\alpha\). Lemma 1 transports the valid implication under
+arbitrary label renaming. The conclusion is fixed because its support
+was below \(\alpha\), so the reflected certificate proves \(\eta\).
+
+The support \(F\) concerns the displayed premises and conclusion. The
+logical validity derivation can be renamed globally regardless of the
+labels in its intermediate lines; those intermediate lines need no
+ordinal-pattern conditions. Thus one does not incorrectly demand that
+arbitrary labels inside a validity derivation already lie below the
+original cut.
+
+\section{11. The filtered stage model and background truth before stage
+soundness}\label{the-filtered-stage-model-and-background-truth-before-stage-soundness}
+
+Let \(P=(P_a)_{a\in I}\) be alphabetic raw predicates on closed source
+formulas. Its filtered source model \(F(P)\) uses \[
+F(P)\models K_a\phi[s]
+\iff P_a(\phi^s)\ \land\ F(P)\models\phi[s].
+\] No soundness of \(P_a\) is assumed.
+
+Define the stage model \(M=M(P)\) by standard arithmetic and the
+following recursive modal clauses: \[
+\begin{aligned}
+M\models K_d\eta[s]
+&\iff P_d((\epsilon\eta)^s)\land M\models\eta[s],\\
+M\models K_a^\nu\eta[s]
+&\iff \Gamma_a^{<\nu}\vdash\eta^s\land M\models\eta[s],\\
+M\models Z_e\eta[s]&\iff\text{false}.
+\end{aligned}
+\tag{3}
+\] These clauses apply to arbitrary recorded formulas, not merely
+source-shared lifts.
+
+\subsection{Lemma 10: the stage model is a legitimate base-logical
+structure}\label{lemma-10-the-stage-model-is-a-legitimate-base-logical-structure}
+
+The raw stage predicates are alphabetic. The filtered clauses satisfy
+the modal structure conditions and the numerical-assignment law \[
+M\models\eta[s]\iff M\models\eta^s[t]
+\] for every \(s,t\).
+
+\textbf{Proof.} Erasure takes alphabetic variants to alphabetic
+variants, so live predicates inherit the property from \(P\). Closed
+alphabetic variants are base-logically equivalent by the alphabetic
+axioms; consequence closure therefore makes each cut predicate
+alphabetic. Ghost predicates are empty.
+
+Free-variable invariance, alphabetic invariance, and the legal
+variable-substitution law now follow by formula induction. At a modal
+head the raw test is applied to the numerically closed argument, and the
+relevant closed arguments are identical or alphabetic variants by the
+syntactic substitution laws; the truth conjunct follows from the
+induction hypothesis. Numerical closure obeys the same recursive
+identities and removes every free variable, giving the displayed
+assignment law.
+
+This constructs \(M\) before any stage-cut soundness theorem. Thus
+actual validities are true in \(M\).
+
+\subsection{Lemma 11: contextual collapse is true before stage
+soundness}\label{lemma-11-contextual-collapse-is-true-before-stage-soundness}
+
+For any admitted instance (CC), \(M\) satisfies its two fillings
+equivalently at every assignment.
+
+\textbf{Proof.} Induct on the one-hole context \(C\).
+
+At the hole, global admissibility puts the support of \(\phi\) below
+\(\mu\). Equation (2) equates the two raw proof tests
+\(\Gamma_b^{<\mu}\vdash\phi^s\) and \(\Gamma_b^{<\nu}\vdash\phi^s\).
+Their filtered truth conjunct is the same assertion \(M\models\phi[s]\).
+
+Boolean contexts preserve equivalence, and quantified contexts use the
+induction hypothesis at every updated assignment. At an unindexed outer
+head the two argument erasures are literally equal, so the raw \(P_d\)
+tests coincide; the inner truth conjuncts coincide by induction. At a
+ghost outer head both values are false.
+
+At an indexed outer head \(K_d^\xi D[-]\), both filled argument supports
+lie below \(\xi\). Lemma 7, applied in holder \(d\)'s cut below \(\xi\),
+equates the two raw cut tests. The induction hypothesis equates their
+truth conjuncts. This use of Lemma 7 is syntactic membership of an
+already admitted contextual row, not its assumed truth. Hence the
+induction is noncircular.
+
+Taking all assignments verifies the universal closure in (CC).
+
+\subsection{\texorpdfstring{Lemma 12: every background row is true in
+\(M\)}{Lemma 12: every background row is true in M}}\label{lemma-12-every-background-row-is-true-in-m}
+
+\textbf{Proof.} Arithmetic equations hold in standard arithmetic. For
+induction, the truth set \(\{n:M\models\eta[s[x:=n]]\}\) satisfies
+ordinary induction on \(\mathbb N\). Its base and successor instances
+are the literal schema instances because \(S(\bar n)=\overline{n+1}\)
+and numerical closure commutes with the displayed \(0\)- and
+successor-substitutions. This uses no unrestricted substitutivity of
+extensionally equal arbitrary terms inside modalities.
+
+An assigned validity is true by actual validity in \(M\) and Lemma 10's
+assignment law. For own validity \(K_a^\nu\eta\), the argument is valid
+and hence true. Its numerical closure \(\eta^s\) is an assigned-validity
+row below \(\nu\), since its whole support lies below \(\nu\); this
+supplies the raw proof test.
+
+Same-label deduction follows from modus ponens in \(\Gamma_a^{<\nu}\),
+together with the truth implications in the antecedent filters. For
+introspection, an acceptance of \(K_a^\mu\eta\) gives both
+\(\Gamma_a^{<\mu}\vdash\eta^s\) and truth of that modal atom. Lemma 5,
+with \(\mu<\nu\), gives \(\Gamma_a^{<\nu}\vdash K_a^\mu\eta^s\), the
+needed raw test for the outer head. Its truth conjunct is the accepted
+inner modal atom.
+
+Every truthfulness row follows directly from the filter in (3).
+Contextual collapse follows from Lemma 11.
+
+Each marker is also true before stage soundness: \(\tau\) is true, and
+its empty-support validity is provable in \(\Gamma_a^{<h}\), so
+\(K_a^h\tau\) is true. Therefore a padded main sentence is true
+precisely when its unpadded code sentence is true.
+
+\section{12. Coherent changes of labels and fixed-label
+transport}\label{coherent-changes-of-labels-and-fixed-label-transport}
+
+\subsection{Lemma 13: coherent lifts are interchangeable inside a
+cut}\label{lemma-13-coherent-lifts-are-interchangeable-inside-a-cut}
+
+Let \(t_1\theta,t_2\theta\) be two globally admissible lifts of the same
+source formula, with the same hereditary live/ghost mask. Assume their
+labels lie in a set \(C\) such that \[
+u,v\in C,\ u\leq v\quad\Longrightarrow\quad u\leq_1v,
+\] and both supports lie below \(\delta\). Then, for every active holder
+\(a\) and assignment \(s\), \[
+\Gamma_a^{<\delta}\vdash(t_1\theta)^s
+\quad\Longleftrightarrow\quad
+\Gamma_a^{<\delta}\vdash(t_2\theta)^s.
+\]
+
+\textbf{Proof.} Form the pointwise minimum table
+\(\ell_0=\min(\ell_1,\ell_2)\) on each source owner/shape. It is
+globally admissible: if both original child labels are below their
+corresponding parent labels, choose a coordinate realizing the minimum
+parent; the minimum child is at most the child in that coordinate and is
+therefore strictly below the minimum parent.
+
+Lower \(t_1\theta\) to the minimum lift occurrence by occurrence,
+children before parents. At each step the changed label moves from \(v\)
+to \(u\leq v\), with \(u\leq_1v\) by coherence. Its children have
+already been lowered and lie below \(u\). Every unchanged indexed
+ancestor is still above the old label \(v\), and hence above \(u\). All
+other labels are unchanged. Thus both intermediate contexts are globally
+admissible and stay below \(\delta\). Lemma 7 gives a cut equivalence
+for this one occurrence. Compose finitely many such equivalences.
+
+Do the same independently for \(t_2\theta\), then reverse its
+equivalence to the minimum lift. Temporary intermediate formulas can
+violate source sharing, but this does not violate any
+contextual-collapse admission condition.
+
+\subsection{Lemma 14: guarded fixed-label
+transport}\label{lemma-14-guarded-fixed-label-transport}
+
+Suppose \(a\in A\), \(G_{k+1}(\lambda)\), \(r(\beta)\leq k+1\), and a
+prescribed globally admissible lift \(\beta'=t_{H,\ell}\beta\) keeps
+every external query of \(\beta\) live. Assume \[
+\xi\in\operatorname{supp}(\beta')
+\quad\Longrightarrow\quad \xi<\lambda\ \text{and}\ \xi\leq_1\lambda.
+\] Then for every assignment \(s\), \[
+\Gamma_a^{<\lambda}\vdash(\beta')^s
+\iff S_a\vdash\beta^s.
+\tag{4}
+\]
+
+\textbf{Proof.} Erasure gives the forward implication. For reverse
+transport one may replace \(H\) by \(Q(\beta)\), since the two masks
+agree at every external query of \(\beta\), and thus give the same
+target lift.
+
+Choose a finite source certificate for \(\beta^s\), with premises
+\(K_a^{n_j}\sigma_j\), where each \(\sigma_j\) is a source background or
+code generator. Apply the mask \(Q(\beta)\) uniformly to the entire
+certificate.
+
+Define active depth \(D\) by counting only active modal heads, taking
+maxima at Boolean branches, and passing through quantifiers and
+nonactive heads. An active head over an argument of depth \(d\) will
+receive a canonical label \(c_d\). Let \[
+N=\sum_j D(K_a^{n_j}\sigma_j)+D(\beta)+1.
+\] Every premise and the target have depth below \(N\).
+
+Apply finite room at the guarded top \(\lambda\), above the finite
+prescribed support. Obtain \(N\) separated copies
+\(Y_0,\ldots,Y_{N-1}\), each containing a rank-\(k\) guard, with every
+point below and \(\leq_1\)-below \(\lambda\). Let \(c_d=\min Y_d\).
+Separation gives \(c_d<c_e\) for \(d<e\); connectedness gives
+\(c_d\leq_1c_e\) for \(d\leq e\). Every original goal point and every
+new copy point belong to the same \(\leq_1\)-coherent set below
+\(\lambda\).
+
+The canonical depth table is globally admissible on the whole finite
+certificate. An active descendant query inside an argument of depth
+\(d\) has strictly smaller depth and hence a smaller label. We now
+derive each canonical recorded premise.
+
+\textbf{Background generators.} Modal PA is carried to a literal PA
+instance, because recording commutes with the substitutions in
+induction. An assigned validity is carried to the same assignment of an
+actually valid recorded formula by Lemma 1. Own validity is a listed
+recorded own-validity row. Truthfulness becomes truthfulness of the
+selected indexed, live, or ghost head. Introspection has two successive
+active-depth labels and is its listed recorded instance.
+
+The only correction is deduction. Write \[
+\gamma=c_{D(\phi\to\psi)},\quad
+\mu=c_{D(\phi)},\quad \nu=c_{D(\psi)}.
+\] The canonical image is \[
+\operatorname{ucl}\bigl(
+K_a^\gamma(t\phi\to t\psi)\to
+(K_a^\mu t\phi\to K_a^\nu t\psi)\bigr).
+\] Since \(D(\phi\to\psi)=\max(D\phi,D\psi)\), we have
+\(\mu\leq_1\gamma\) and \(\nu\leq_1\gamma\). Begin with the admitted
+same-label deduction row at \(\gamma\). Change the displayed occurrence
+over \(t\phi\) from \(\gamma\) to \(\mu\), and the displayed occurrence
+over \(t\psi\) from \(\gamma\) to \(\nu\), using two contextual-collapse
+equivalences. Both final and intermediate formulas are admissible: the
+relevant arguments were already below their own smaller depth labels.
+All introduced labels were already in the canonical mixed row, so no
+cutoff increases. The universal-closure binders can be included in the
+contexts; no numerical specialization is needed.
+
+\textbf{Code generators.} Let \(\sigma_j=C_{w,\phi}\). The target \(w\)
+is passive and nonexternal by the side conditions, so the canonical
+image has the correct literal main-code shape and unchanged numeral. A
+live external argument \(\chi\) in this image survives only because its
+owner/shape occurs in \(Q(\beta)\). Thus \[
+r(\chi)<r(\beta)\leq k+1,\qquad r(\chi)\leq k.
+\] An active occurrence at depth \(d\) inside \(\chi\) receives the
+first \(r(\chi)+1\) points of \(Y_d\) as its guard. Every active label
+inside its own argument has smaller depth; connectedness supplies the
+required \(\leq_1\) relation to \(c_d\).
+
+Let \(D_j=D(\sigma_j)\). All guards needed by this main row can be taken
+inside \(\bigcup_{d<D_j}Y_d\). Choose fresh marker tags for these finite
+points. If the source premise has no own prefix, every marker and every
+main label lies below \(\lambda\), so Lemma 6 derives the canonical
+unpadded code below \(\lambda\). If it has at least one own prefix,
+separation puts every point of \(\bigcup_{d<D_j}Y_d\) below \(c_{D_j}\),
+the first own-prefix label; derive the base code already in that smaller
+cut.
+
+\textbf{Own prefixes.} The equality \[
+D(K_a^n\sigma)=D(\sigma)+n
+\] holds because \(a\in A\). Starting from the base proof below
+\(c_{D(\sigma)}\), repeatedly use Lemma 5 at the successive labels \[
+c_{D(\sigma)},c_{D(\sigma)+1},\ldots,
+c_{D(\sigma)+n-1}.
+\] Every body, including the guards and marker proofs used to derive it,
+is in the preceding cut. The final prefix label is below \(\lambda\).
+This derives the full recorded source premise in
+\(\Gamma_a^{<\lambda}\).
+
+The uniformly recorded finite source implication is actually valid by
+Lemma 1. Combining the recorded premise proofs derives the canonical
+recorded target below \(\lambda\). Lemma 13 then identifies it with the
+prescribed target because all their labels lie in the common coherent
+set and both lifts are admissible.
+
+In fact, room placed every canonical label above every prescribed goal
+label, so the final step can use direct child-before-parent lowering
+rather than pointwise minima. This is a simplification, not an extra
+assumption.
+
+The number \(N\), the source certificate, and the reflected or auxiliary
+proof labels may depend on \(s\). The guarded top, target table and
+target shape do not. Formula variants of the same source shape have the
+same rank, support and admissibility conditions, so the argument applies
+separately to every such variant. No uniform numerical proof-depth bound
+has been used.
+
+\section{13. Exact recovery from one finite
+room}\label{exact-recovery-from-one-finite-room}
+
+\subsection{Lemma 15: recovery at room-copy
+heads}\label{lemma-15-recovery-at-room-copy-heads}
+
+Let \(Y_0,\ldots,Y_{N-1}\) be room copies below a top \(\lambda\) with
+guard \(G_{k+1}(\lambda)\), and let \(h_i=\min Y_i\). Suppose a
+ghost-free prescribed lift \(t\beta\) is admissible,
+\(r(\beta)\leq k+1\), and every target label is some \(h_d\) with
+\(d<i<N\). Then \[
+\Gamma_a^{<h_i}\vdash(t\beta)^s
+\iff S_a\vdash\beta^s
+\] for every active holder \(a\) and assignment \(s\).
+
+\textbf{Proof.} Erasure is forward. Lemma 14 proves the target below
+\(\lambda\). Room gives \(h_i\leq_1\lambda\), while separation places
+the target support below \(h_i\). Lemma 9 collapses the finite proof to
+\(h_i\), fixing every target label.
+
+For a given source formula \(\theta\), choose \(k=r(\theta)\),
+\(N=D(\theta)+1\), and one such room using finite tallness and room.
+Record every active head over an argument of depth \(d\) at \(h_d\), and
+keep every external query of \(\theta\) live. Every active query
+\((a,\operatorname{sh}\psi)\in Q(\theta)\) has \(D(\psi)<D(\theta)\),
+and all labels inside its recorded argument have smaller indices. Lemma
+15 gives \[
+\Gamma_a^{<h_{D(\psi)}}\vdash t\psi
+\iff S_a\vdash\psi
+\tag{5}
+\] for every closed formula \(\psi\) of that query shape. On nonclosed
+formulas both predicates are false. Thus (5) covers every term variant
+and every numerical instance in the class, not only the literal
+occurrence in \(\theta\).
+
+If the original active predicates are full source theoremhood, (5),
+literal live erasure, and formula induction give \[
+M(P)\models t\theta[s]\iff F(P)\models\theta[s].
+\tag{6}
+\] Only the finitely many query shapes of this \(\theta\) are required.
+
+\section{14. Reconstruction with full retained
+predicates}\label{reconstruction-with-full-retained-predicates}
+
+The following statement is the precise form needed in the lower-rank
+argument.
+
+Fix a source formula \(\theta\), a hereditary mask \(H\), and an
+admissible recorded lift \(t\theta\). Let
+\(D_0\subseteq I\setminus(A\cup E)\) be the retained set. It can be
+infinite. Assume every nonactive, nonexternal owner appearing in
+\(Q(\theta)\) either belongs to \(D_0\) or has empty old predicate
+\(P_d\).
+
+Define a new original-language raw family \(Q'\) as follows, on closed
+formulas \(\psi\): \[
+Q'_d(\psi)=
+\begin{cases}
+P_d(\psi),&d\in D_0,\\
+\bigl((d,\operatorname{sh}\psi)\in Q(\theta)\bigr)
+\land\bigl(\Gamma_d^{<\ell(d,\operatorname{sh}\psi)}\vdash t\psi\bigr),
+&d\in A,\\
+\bigl((d,\operatorname{sh}\psi)\in Q(\theta)\cap H\bigr)\land P_d(\psi),
+&d\in E,\\
+\text{false},&\text{otherwise}.
+\end{cases}
+\tag{7}
+\] All nonclosed formulas are rejected. Full retained predicates in the
+first branch are not restricted by shape and are not recovered from
+indexed cuts.
+
+\subsection{Lemma 16: reconstruction truth and column
+admissibility}\label{lemma-16-reconstruction-truth-and-column-admissibility}
+
+For every formula \(\psi\) with \(Q(\psi)\subseteq Q(\theta)\) and every
+assignment \(s\), \[
+F(Q')\models\psi[s]\iff M(P)\models t\psi[s].
+\tag{8}
+\] If \(P\) is column admissible, so is \(Q'\).
+
+\textbf{Proof of truth.} At an active modal occurrence the two raw tests
+agree by the second branch of (7) and commutation of recording with
+numerical closure. At a retained passive owner, erasure
+\(t\chi\mapsto\chi\) makes the live raw test exactly \(P_d(\chi^s)\). At
+a live external owner the third branch retains precisely this raw test;
+at a ghost it is false on both sides. At any remaining queried passive
+owner the hypothesis makes its old predicate empty, matching the final
+branch. The truth filters then agree by induction on the argument.
+Boolean connectives preserve equivalence, and quantifiers use the same
+induction hypothesis for every updated assignment.
+
+\textbf{Proof of admissibility.} Alphabetic variation preserves shapes
+and commutes with recording; old predicates are alphabetic, and cut
+predicates are alphabetic by Lemma 10. Every branch in (7) is therefore
+alphabetic.
+
+Fix one owner \(d\), template \(\chi\), variable \(x\), and parameter
+assignment \(s\). All \(\chi^{s[x:=n]}\) have the same shape, so the
+choice among branches of (7) is independent of \(n\). The column is an
+old r.e. column, an empty column, or a column of one fixed recorded cut
+and one fixed finite recorded template \(t\chi\). Lemma 2 supplies the
+last column. Hence every numerical parameter column is r.e. No jointly
+computable choice of \(\ell\), \(D_0\), or program indices has been
+asserted or needed.
+
+\subsection{Lemma 17: full soundness of the new outside
+predicates}\label{lemma-17-full-soundness-of-the-new-outside-predicates}
+
+In addition to the preceding hypotheses, assume:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{S:} For every \((a,q)\in Q(\theta)\) with \(a\in A\), the raw
+  predicate \(\Gamma_a^{<\ell(a,q)}\vdash-\) is sound in \(M(P)\) on
+  every closed recorded formula, including nonadmissible conclusions.
+\item
+  \textbf{E:} Every old \(P_e\), \(e\in E\), is fully sound in \(F(P)\).
+\item
+  \textbf{X:} For every \((e,\operatorname{sh}\chi)\in Q(\theta)\cap H\)
+  with \(e\in E\), every \((a,\operatorname{sh}\beta)\in Q(\chi)\) with
+  \(a\in A\), and every closed source formula \(\psi\) with
+  \(\operatorname{sh}\psi=\operatorname{sh}\beta\), \[
+  \Gamma_a^{<\ell(a,\operatorname{sh}\beta)}\vdash t\psi
+  \quad\Longleftrightarrow\quad P_a(\psi).
+  \] The query set \(Q(\chi)\) depends only on its shape, so any
+  representative \(\chi\) of that shape gives the same condition.
+\end{itemize}
+
+Then every \(Q'_d\) with \(d\notin D_0\) is fully sound in \(F(Q')\).
+
+\textbf{Proof.} A retained active acceptance \(Q'_a(\psi^s)\) gives a
+cut proof of \((t\psi)^s\). The corresponding label occurs in
+\(t\theta\) because the owner/shape class was retained. S gives
+\(M(P)\models t\psi[s]\); (8) gives \(F(Q')\models\psi[s]\). This
+argument applies to every accepted formula of that shape.
+
+For an external acceptance, \((e,\operatorname{sh}\psi)\) lies in both
+\(Q(\theta)\) and \(H\), and \(P_e(\psi^s)\) holds. E gives
+\(F(P)\models\psi[s]\). Heredity makes every external head inside
+\(t\psi\) live. At every nested active query, X identifies the new raw
+test with \(P_a\); at retained passive heads the old predicates are
+literal; at nested external heads the third branch retains the old test;
+every other queried passive predicate is empty on both sides. Thus
+\(Q'\) and \(P\) agree on every query shape of \(\psi\), including all
+variants and numerical instances. Formula induction transfers its old
+truth to \(F(Q')\).
+
+All other outside predicates are empty. This proves full outside
+soundness. No predicate in \(D_0\) was assumed sound.
+
+\subsection{How literal main guards supply
+X}\label{how-literal-main-guards-supply-x}
+
+At a live external occurrence \(K_e\chi\), the main-row guard rule gives
+\(G_{r(\epsilon\chi)}(\nu)\) at every indexed descendant
+\(K_b^\nu\beta\), and puts the entire support of \(\beta\) strictly and
+\(\leq_1\)-below \(\nu\). Its source argument shape has rank strictly
+below \(r(\epsilon\chi)\). The retained external subtree is ghost-free
+by heredity. Apply Lemma 14 at \(\nu\), with \(k+1=r(\epsilon\chi)\), to
+each formula of the descendant's source shape. Erasure supplies the
+reverse direction. If \(P_b=\operatorname{Th}(S_b)\) on active owners,
+this is exactly X.
+
+The hypotheses are shape invariants, so the lemma holds for the full
+infinite class of term variants rather than only the inspected literal
+occurrence.
+
+\section{15. Local main truth and the two independent
+inductions}\label{local-main-truth-and-the-two-independent-inductions}
+
+The following argument supplies the inner induction step used in the
+proof of \(G(J)\) in Section 16. Its only outer induction hypotheses are
+\(G(J')\) for strictly lower frontiers, and the direct core lemma of
+Section 5.
+
+Fix a finite frontier \(J=A\), let \(P\) be column-admissible and retain
+the full core and all source theories in the downward ideal of \(J\),
+and suppose outside predicates are sound, with only the finite \(E\)
+possibly nonempty. Suppose genericity has already been proved for every
+strictly lower nonempty finite frontier, and the direct smaller-core
+genericity lemma is available.
+
+Consider a main row for active holder \(a\) with target \(w=*\) or
+\(wRa\), source argument \(\phi\), and table \(t\). Collect \(w\) when
+original, together with all original passive owners occurring in
+\(\phi\) that lie strictly below \(J\). Take the maximal finite frontier
+\(J'\) of this finite set, and let \[
+D_0=\{*\}\cup\downarrow J'.
+\] Every member of \(J'\) lies strictly below some member of \(J\). If
+\(J'\ne\varnothing\), its maximum well-founded \(R\)-rank is strictly
+below that of \(J\). If the finite set is empty, \(w=*\) and core
+genericity is the appropriate base case.
+
+Every original passive full owner named in \(\phi\), and \(w\) itself,
+lies in \(D_0\). No member of \(D_0\) is active or external, by
+antichainness and the choice of \(E\). An old outside owner outside
+\(E\) is empty. These facts verify exactly the passive-owner condition
+for (7).
+
+Assume all cuts at labels in the main row's support are already sound.
+These are S. Old external soundness is E. Literal guards supply X by the
+preceding paragraph. Lemmas 16--17 construct a column-admissible \(Q'\),
+retain the entire \(D_0\) predicates, and make every outside predicate
+fully sound. Lower-rank genericity, or core genericity when \(J'\) is
+empty, therefore makes \(S_w\) sound in \(F(Q')\).
+
+For each \(n\) with \(S_w\vdash\phi(\bar n)\), equation (8) now gives
+\(M(P)\models t\phi[x:=n]\). The outer live head \(K_w\) has raw
+predicate exactly \(S_w\)'s theoremhood, and the arithmetic side still
+uses the actual source numeral \(p(w,\phi)\). Consequently both sides of
+\[
+\forall x\bigl(K_wt\phi\leftrightarrow
+W(\overline{p(w,\phi)},x)\bigr)
+\] coincide for every \(n\): forward uses its raw proof test and the
+source-column equation; reverse uses that equation and the just-proved
+recorded-body truth. The markers are independently true by Lemma 12.
+This proves the padded main row.
+
+\subsection{Lemma 18: support induction yields soundness of every stage
+cut}\label{lemma-18-support-induction-yields-soundness-of-every-stage-cut}
+
+Every \(\Gamma_a\)-generator is true in \(M(P)\), and every cut
+predicate is fully sound there.
+
+\textbf{Proof.} Prove generator truth simultaneously for all active
+holders by well-founded induction on the maximum of nonempty finite
+supports, with an initial empty-support case.
+
+At empty support, there are no indexed queries or prefix labels.
+Background rows are true by Lemma 12. A main row is covered by the local
+argument above, with S and X vacuous where no indexed labels occur. No
+prefix row has empty support.
+
+For a label \(\nu\), assume every generator whose whole support is
+strictly below \(\nu\) is true. Every cut at a label \(\mu\leq\nu\) is
+then sound: every generator below \(\mu\) has support strictly below
+\(\nu\), and base-logical soundness transfers their truth to all finite
+cut consequences.
+
+Take a generator with maximum support \(\nu\). A background row is
+already true. A main row is true by the local reconstruction argument,
+since cuts at every label in its support are now sound. A prefix
+\(K_a^\mu\sigma\) has \(\mu=\nu\) because its body support lies strictly
+below \(\mu\). The induction hypothesis makes \(\sigma\) true; its
+literal generator membership below \(\mu\) supplies the raw cut test.
+The prefix is therefore true.
+
+This proves every finite-support generator. Base-logical soundness now
+makes every cut fully sound on all its closed consequences, including
+consequences that are not globally admissible. No stage proof was used
+to assume the original family's soundness. The outer original-rank
+induction was used only for the strictly lower \(J'\) selected in the
+main-row argument.
+
+\section{16. Whole-ideal genericity and the actual
+family}\label{whole-ideal-genericity-and-the-actual-family}
+
+We now discharge the outer induction hypotheses used in Section 15.
+
+\subsection{16.1. The outer induction}\label{the-outer-induction}
+
+Since \(R\) is well founded, let \[
+\rho(i)=\sup_{jRi}(\rho(j)+1).
+\] Then \(jR^+i\) implies \(\rho(j)<\rho(i)\). For a nonempty finite
+antichain \(J\), put \[
+r(J)=\max_{j\in J}\rho(j).
+\] This is a metatheoretic ordinal rank. It is never queried by an
+enumerator.
+
+Prove \(G(J)\), as defined in Section 4.3, by induction on \(r(J)\) for
+nonempty \(J\). The empty frontier is the separately proved core lemma
+\(G(\varnothing)\). In particular, no assertion about a maximum of the
+empty set is used.
+
+Fix a nonempty \(J\) and assume \(G(J')\) for every nonempty finite
+frontier of smaller rank.
+
+\subsection{16.2. Reduction to finitely many nonempty outside
+owners}\label{reduction-to-finitely-many-nonempty-outside-owners}
+
+It suffices to prove \(G(J)\) for families whose nonempty original
+outside predicates have their owners in a finite set \(E\).
+
+Indeed, let \(P\) be an arbitrary family satisfying the hypotheses of
+\(G(J)\), and let \(\theta\) be a theorem of a retained source owner.
+Define \(\widehat P\) by retaining the entire core and ideal unchanged
+and setting, for outside owners, \[
+\widehat P_b(\psi)=
+P_b(\psi)\ \land\
+\bigl((b,\operatorname{sh}\psi)\in Q(\theta)\bigr)
+\] on closed \(\psi\). This family is column-admissible by Section 4.2.
+Its nonempty outside owners belong to the finite set of outside names
+occurring in \(Q(\theta)\).
+
+Every retained outside acceptance has an argument shape from
+\(Q(\theta)\). All queries inside an argument of that shape also lie in
+\(Q(\theta)\), by heredity. Thus \(F(P)\) and \(F(\widehat P)\) agree on
+that argument. Old outside raw soundness transfers to \(\widehat P\),
+making every outside predicate raw-sound in \(F(\widehat P)\).
+
+The finite-outside version of \(G(J)\) makes \(\theta\) true in
+\(F(\widehat P)\). Agreement on \(Q(\theta)\) makes it true in \(F(P)\).
+Applying this argument separately to every retained theorem, including
+core theorems, proves the full \(G(J)\). This semantic reduction does
+not change the source family, its theories, or any program numeral.
+
+We may therefore fix a finite \(E\subseteq\mathbb N\setminus D_R(J)\)
+containing all nonempty original outside owners.
+
+\subsection{16.3. Stage soundness at the current
+frontier}\label{stage-soundness-at-the-current-frontier}
+
+Set \(A=J\), and build the extension stages of Sections 7--15. Their
+side conditions hold: the core is passive, \(E\) is external to the
+ideal, and every direct subordinate of an active owner is passive and
+nonexternal.
+
+The local argument of Section 15 selects, from a main source-code
+argument, a finite set of strictly lower owners, including its code
+owner when that owner is original. Every member of its maximal frontier
+\(J'\) lies strictly below some member of \(J\). Therefore, whenever
+\(J'\ne\varnothing\), \[
+r(J')<r(J).
+\] The available outer induction hypothesis is exactly the lower
+genericity required there. When \(J'=\varnothing\), Section 5 is
+available instead. Lemma 18 now proves that every stage cut is raw-sound
+in the stage model \(M(P)\).
+
+The induction order is thus fixed. Syntactic transport, cut collapse,
+and background truth were proved first. Main-row truth uses sound
+smaller stage cuts and genericity of a strictly lower original frontier.
+Neither operation assumes soundness of an active original source theory.
+
+\subsection{16.4. Recovery of the entire original
+ideal}\label{recovery-of-the-entire-original-ideal}
+
+First take an active owner \(a\in J\) and an arbitrary closed theorem
+\(\theta\) of \(T_a\). Choose the finite room for \(\theta\) from Lemma
+15, and let \(t\theta\) be its fully live room lift.
+
+Apply Lemma 14 at the room top \(\lambda\). It gives \[
+\Gamma_a^{<\lambda}\vdash t\theta.
+\] Stage-cut soundness makes \(t\theta\) true in \(M(P)\). Room recovery
+at every active query shape in \(\theta\), together with literal erasure
+at passive heads, identifies that truth with \(F(P)\models\theta\). Thus
+every active source predicate is raw-sound in \(F(P)\).
+
+Now let \(i\in D_R(J)\setminus J\) and take an arbitrary closed
+\(T_i\)-theorem \(\theta\). Choose a fully live room lift \(t\theta\) as
+before. Form the finite set consisting of \(i\) and every original owner
+named in \(\theta\) that lies strictly below \(J\). Let \(J'\) be its
+\(R^+\)-maximal frontier, and retain \[
+D_0=\{*\}\cup D_R(J').
+\] This frontier is nonempty, contains \(i\) in its downward ideal, and
+has smaller rank than \(J\).
+
+Apply the reconstruction of Section 14. Every full passive original
+owner named in \(\theta\) belongs to \(D_0\); any other nonactive,
+nonexternal queried owner has empty old predicate. All used stage cuts
+are now sound, giving S. Old outside soundness gives E. Room recovery
+gives X at all active query shapes of \(\theta\), and hence in
+particular below every retained external argument. Lemmas 16--17 give a
+column-admissible family \(Q'\) that keeps the full source predicates on
+\(D_0\) and has fully sound predicates outside \(D_0\).
+
+By \(G(J')\), the unchanged \(T_i\)-predicate is sound in \(F(Q')\), so
+\(F(Q')\models\theta\). Reconstruction transfers this to
+\(M(P)\models t\theta\), and room agreement transfers it to
+\(F(P)\models\theta\). This proves raw soundness for every passive owner
+in the retained ideal.
+
+These arguments are performed separately for each theorem. The ideal may
+be infinite, and unrelated theorems need not use related rooms or label
+tables.
+
+Every original raw predicate is now sound in \(F(P)\): those inside the
+ideal by the preceding arguments, and those outside by hypothesis. Apply
+the direct core lemma at this point to obtain raw soundness of \(U\).
+This proves the finite-outside version of \(G(J)\), hence its full
+version by Section 16.2. The outer induction is complete.
+
+\subsection{16.5. Soundness of the actual source
+family}\label{soundness-of-the-actual-source-family}
+
+Let \(P^{\mathrm{all}}_a=\operatorname{Th}(S_a)\) for all \(a\in I\). It
+is column-admissible. To prove original raw soundness, fix a closed
+\(T_i\)-theorem \(\theta\).
+
+Take the finite set consisting of \(i\) and every original modal owner
+occurring in \(\theta\), and let \(J\) be its \(R^+\)-maximal frontier.
+Retain the full source core and \(D_R(J)\), and empty every other
+original raw predicate. Call the resulting family \(P^J\).
+
+Empty outside predicates are raw-sound without any assumption about
+\(P^{\mathrm{all}}\). Thus \(G(J)\) gives \(F(P^J)\models\theta\). Every
+query in \(\theta\) has retained owner, so query agreement gives \[
+F(P^{\mathrm{all}})\models\theta.
+\] This proves raw soundness of every original source theory in the
+actual filtered model. Apply core genericity once more to get raw
+soundness of \(U\).
+
+All truth filters can now be removed. We obtain a genuine
+standard-arithmetic structure \(\mathcal M_*\) with \[
+\mathcal M_*\models K_a\varphi[s]
+\quad\Longleftrightarrow\quad
+S_a\vdash\varphi^s,
+\qquad a\in I,
+\tag{A1}
+\] in which every source theorem is true.
+
+\section{17. The required schemas and the effective
+reduct}\label{the-required-schemas-and-the-effective-reduct}
+
+\subsection{17.1. Epistemic Arithmetic and known
+truthfulness}\label{epistemic-arithmetic-and-known-truthfulness}
+
+Every original theory contains its displayed background and all finite
+own prefixes of that background. The source-family soundness theorem
+consequently verifies modal PA, knowledge of its axioms, own validity,
+deduction, introspection, their known versions, and reflection. These
+include all axioms of self-doubting Epistemic Arithmetic.
+
+For every \(i\in\mathbb N\), \(b\in I\), and unrestricted
+enlarged-language formula \(\varphi\), the closed reflection sentence \[
+\sigma=\operatorname{ucl}(K_b\varphi\to\varphi)
+\] belongs to \(T_i\). By (A1), \(\mathcal M_*\models K_i\sigma\). This
+proves full mutual known truthfulness in the enlarged language.
+
+\subsection{17.2. Known particular subordinate
+codes}\label{known-particular-subordinate-codes}
+
+For \(jRi\) and unary \(\varphi\), let \(e=c(q,j,\varphi)\). The exact
+closed sentence \[
+C_{j,\varphi}(e)=
+\forall x\bigl(K_j\varphi\leftrightarrow W(\bar e,x)\bigr)
+\] is a \(T_i\)-generator. Thus \[
+\mathcal M_*\models K_iC_{j,\varphi}(e).
+\] Assigning the fresh variable \(e\) this numerical value witnesses
+(Code). Under (A1), the raw modal test closes that variable to exactly
+the source numeral appearing in the generator. This is an application of
+the numerical-assignment semantics, with no modal term-generalization
+principle.
+
+The same argument gives each original agent a known particular code for
+every unary core column.
+
+\subsection{17.3. Entire-core
+inheritance}\label{entire-core-inheritance}
+
+\textbf{Inheritance lemma.} Every closed \(U\)-theorem is a theorem of
+every \(T_i\).
+
+\textbf{Proof.} Suppose \(U\vdash\sigma\), with \(\sigma\) closed, and
+choose a variable \(x\). Put \[
+\psi(x)=\sigma\land x=x.
+\] This has exactly the one free variable \(x\), and
+\(U\vdash\psi(x\mid\bar0)\). Equation (S4) gives \(0\in W_{d(\psi)}\). A
+finite positive computation trace supplies \[
+\mathrm{PA}\vdash W(\overline{d(\psi)},\bar0),
+\] hence the same theorem in \(T_i\).
+
+The core-code generator in \(T_i\) is \[
+\forall x\bigl(K_*\psi\leftrightarrow
+                   W(\overline{d(\psi)},x)\bigr).
+\] Use the Assigned Validity numerical-instantiation argument of Section
+2.2 to obtain its \(0\)-instance. The positive arithmetic fact gives
+\(T_i\vdash K_*\psi(x\mid\bar0)\). The closed core-reflection instance
+then gives \(T_i\vdash\psi(x\mid\bar0)\), hence \(T_i\vdash\sigma\).
+\(\square\)
+
+This is a proof-theoretic inheritance argument, using the literal
+source-code numeral. It does not replace a code by one for a recorded or
+masked argument.
+
+\subsection{17.4. Known mechanicalness}\label{known-mechanicalness}
+
+For any original \(j\), the sentence \(\operatorname{MC}_j(\varphi;x)\)
+belongs to \(U\). Inheritance puts it in every \(T_i\), so (A1) gives \[
+\mathcal M_*\models K_i\operatorname{MC}_j(\varphi;x).
+\tag{A2}
+\] When \(\operatorname{FV}(\varphi)=\{x\}\), this is precisely
+(Mechanical). When there are other free parameters, (A2) gives the
+stronger parameter schema recorded in Section 18.1.
+
+\subsection{17.5. Removing the auxiliary
+operator}\label{removing-the-auxiliary-operator}
+
+For each original \(i\), define \[
+T_i^0=
+\{\sigma:\sigma\text{ is a closed }\mathcal L\text{-formula and }
+                         T_i\vdash_{\mathcal L_*}\sigma\}.
+\tag{A3}
+\] This is uniformly r.e.: enumerate original source theorems and filter
+by the decidable condition of containing no \(K_*\).
+
+It is consequence-closed in the original base logic. Indeed, a finite
+original-language proof from members of \(T_i^0\) has a validity
+certificate that remains valid in the enlarged language, since every
+enlarged-language structure has an original-language reduct. Its
+premises are \(T_i\)-theorems, so its conclusion is a \(T_i\)-theorem
+and therefore belongs to \(T_i^0\).
+
+For every closed original-language sentence \(\sigma\), \[
+T_i^0\vdash_{\mathcal L}\sigma
+\quad\Longleftrightarrow\quad
+T_i\vdash_{\mathcal L_*}\sigma.
+\tag{A4}
+\] The reverse direction holds by the definition of \(T_i^0\); the
+forward direction was just proved.
+
+Consequently, formula induction identifies the original-language reduct
+of \(\mathcal M_*\) with the actual consequence interpretation of
+\((T_i^0)\). All the required original-language formulas, their modal
+induction instances, and their code sentences survive the reduct. In
+particular, the original source indices still enumerate the exact
+original unary columns by (A4).
+
+Renaming \(T_i^0\) as \(T_i\) proves the theorem of Section 1.
+\(\square\)
+
+\section{18. Additional conclusions and comparison with the earlier
+proof}\label{additional-conclusions-and-comparison-with-the-earlier-proof}
+
+The comparison has three separate aspects: consequences about original
+agents, properties of the specified auxiliary theory, and the strength
+of the intermediate lifting statement.
+
+\subsection{18.1. The revised construction also gives known parameter
+mechanicalness}\label{the-revised-construction-also-gives-known-parameter-mechanicalness}
+
+For every original \(i,j\) and every original-language formula
+\(\varphi(x,\vec z)\), where \(\vec z\) lists its other free variables,
+the construction gives \[
+\mathcal M\models
+K_i\left[
+\forall\vec z\ \exists e\ \forall x
+ \bigl(K_j\varphi(x,\vec z)\leftrightarrow W(e,x)\bigr)
+\right].
+\tag{P1}
+\] The universal parameter quantifiers are inside \(K_i\) and outside
+\(\exists e\). The witness index may depend on the values of \(\vec z\).
+This is a known universally quantified sentence, not merely a separate
+known sentence for each externally fixed numeral tuple.
+
+The proof is direct: (S3) includes that closed core generator, Section
+17.3 transfers the entire sentence, and the reduct preserves it. Both
+the smaller and larger core constructions have these original-owner
+generators.
+
+This is an additional explicit schema beyond the unary formulation of
+the target. No claim of its logical independence from the exact unary
+target plus the surrounding weak-modal arithmetic is needed or made.
+Moving parameter quantifiers through knowledge would require its own
+argument.
+
+\subsection{18.2. Entire-theory inheritance and transitive subordinate
+codes}\label{entire-theory-inheritance-and-transitive-subordinate-codes}
+
+If \(jRi\), the inheritance proof of Section 17.3 works with \(T_j\) in
+place of \(U\), using \(i\)'s particular \(j\)-codes. Hence, first in
+the enlarged language and then in the reduct, \[
+\operatorname{Th}(T_j)\subseteq\operatorname{Th}(T_i).
+\tag{P2}
+\] Iterating along a finite path gives the same inclusion whenever
+\(jR^+i\).
+
+A particular code sentence for a lower agent, proved at one step of a
+path, is therefore inherited by every agent above that step. Thus the
+family has known particular codes for all \(R^+\)-subordinates. The
+theorem does not assert that \(R^+\) is exactly the relation of all
+pairs for which such codes happen to be known; that would require
+additional negative assertions about nonedges.
+
+This inheritance is already a consequence of the usual 3-1-3
+requirements with the standard \(W\)-representation and PA's positive
+computation certificates. In a general solution, own validity and the
+actual consequence semantics already give each theory every Assigned
+Validity instance: validity of \(\eta\) makes \(K_i\eta\) true at every
+assignment, hence \(T_i\vdash\eta^s\). Known truthfulness makes the
+selected known code sentence true; a lower theorem then gives a true
+concrete positive \(W\)-fact, and the same padding and reflection
+argument transfers the theorem. Alexander explicitly discusses the
+propagation to transitive closure in {[}A, §2.6, p.~75{]}. It is not a
+benefit unique to the larger core.
+
+Own prefix closure gives all finite own iterations of known assertions.
+Inheritance also gives appropriate nesting along subordinate chains: if
+\(kR^+jR^+i\), \(\sigma\) is closed, and \(T_k\vdash\sigma\), then \[
+\mathcal M\models K_iK_jK_k\sigma.
+\] These observations do not establish arbitrary mixed-agent common
+knowledge across unrelated agents.
+
+\subsection{18.3. The specified larger core is strictly
+stronger}\label{the-specified-larger-core-is-strictly-stronger}
+
+To compare the cores in the same language, write \(U^-=U\), and define
+\[
+U^+=\operatorname{cl}_*\left(
+ B_*+\{\operatorname{MC}_b(\varphi;x):b\in I,\ \varphi,\ x\}
+\right).
+\tag{P3}
+\] This is the code-free auxiliary theory of the earlier prose approach.
+It adds the core's own mechanicalness instances to the displayed
+generator table.
+
+The inclusion \(U^-\subseteq U^+\) is immediate, but strictness requires
+proof.
+
+\textbf{Strictness proposition.} In the enlarged base logic, \[
+\operatorname{Th}(U^-)\subsetneq\operatorname{Th}(U^+).
+\]
+
+\textbf{Proof.} Define an arithmetic translation \(E\) by \[
+E(K_*\psi)=E(\psi),\qquad
+E(K_j\psi)=\bot\quad(j\in\mathbb N),
+\] and let it commute with arithmetic symbols, Boolean operations, and
+quantifiers. Interpret formulas over standard \(\mathbb N\) by \[
+M_E\models\varphi[s]\quad\Longleftrightarrow\quad
+\mathbb N\models E(\varphi)[s].
+\] The translation respects alphabetic changes and capture-free
+substitution, and its truth depends only on free variables. Thus this is
+an admissible base-logical structure with the numerical-assignment
+property.
+
+All \(B_*\)-generators are true. Modal induction is induction on a
+subset of standard \(\mathbb N\). Core validity, deduction,
+introspection, and core reflection become their transparent classical
+counterparts. Original-owner reflection has a false antecedent. Actual
+validity and Assigned Validity hold as in Section 2.
+
+Every original knowledge column is empty, so a fixed empty-program index
+witnesses every original-owner mechanicalness generator, including its
+parameter version. A core prefix preserves truth because \(K_*\) is
+transparent in this model. Hence \(M_E\models U^-\).
+
+Let \[
+\chi(x)=\neg W(x,x).
+\] Its arithmetic truth set is the diagonal nonhalting set \[
+D=\{n:n\notin W_n\}.
+\] This set is not r.e.: if \(D=W_d\), then \(d\in W_d\) would be
+equivalent to \(d\notin W_d\). In \(M_E\), the column for \(K_*\chi(x)\)
+is exactly \(D\). Therefore \[
+\operatorname{MC}_*(\chi;x)=
+\exists e\,\forall x
+ \bigl(K_*\chi(x)\leftrightarrow W(e,x)\bigr)
+\tag{P4}
+\] is false in \(M_E\).
+
+By base-logical soundness, \(U^-\) does not prove (P4). The theory
+\(U^+\) contains it as a generator. This proves strict inclusion.
+\(\square\)
+
+The separating structure is a base-logical countermodel, not a claim
+that its transparent core is itself an r.e. knowing machine. Arbitrary
+admissible structures are the correct models for this nonprovability
+argument.
+
+There is also an exact statement about the intended source model of the
+revised proof. Since \(U^-\) is r.e., its own actual \(\chi\)-knowledge
+column is r.e., so (P4) is externally true there. But \(U^-\) does not
+prove (P4), so the actual \(U^-\) core does not know this instance of
+its own mechanicalness. The earlier prescribed core would know it.
+
+This comparison concerns the specified core theories. It does not prove
+\(\operatorname{Th}(T_i^-)\subseteq\operatorname{Th}(T_i^+)\) for the
+resulting original-agent constructions. Changing the core changes the
+literal code numerals and the recursion fixed point, so their original
+generator sets are not simply nested.
+
+\subsection{18.4. A self-mechanical common agent already follows from
+3-1-3}\label{a-self-mechanical-common-agent-already-follows-from-3-1-3}
+
+Given \(R\), add a new least agent \(*\), with \[
+*\,R^*\,i\quad\text{for every original }i,
+\] retain all original edges, and put no edges below \(*\). The relation
+\(R^*\) is r.e. and well founded. Code its countable owner set
+effectively by \(\mathbb N\).
+
+Applying the theorem to \(R^*\) produces a distinguished agent \(*\)
+that knows everyone's truthfulness and mechanicalness, including its
+own, and whose particular unary codes are known by every original agent.
+Thus the existence of such an additional common agent is already a
+consequence of unrestricted 3-1-3.
+
+Even a fixed, \(R\)-independent theory for such an agent is available
+from the revised construction. Apply it to \(R^*\), using a second
+temporary auxiliary owner \(\dagger\). The desired \(*\) is now an
+original owner relative to \(\dagger\), so \(U_\dagger\) includes
+mechanicalness for \(*\).
+
+Choose \(U_\dagger\) and its compiler \(d_\dagger\) once, independently
+of \(R\), as in Section 3.2. The least original agent has no
+subordinate-code generators. Its enlarged theory is therefore the fixed
+theory \[
+V_*=
+\operatorname{cl}_*\left(
+ B_*+
+ \left\{\forall x\bigl(
+ K_\dagger\varphi\leftrightarrow
+ W(\overline{d_\dagger(\varphi)},x)\bigr):
+                       \operatorname{FV}(\varphi)=\{x\}\right\}
+\right).
+\tag{P5}
+\] It inherits \(U_\dagger\), including mechanicalness for \(*\). All
+other original agents know its particular codes along their added edges.
+Removing \(\dagger\) by Section 17.5 gives a fixed distinguished theory
+\(V'\) in the desired language.
+
+In fact, \[
+\operatorname{Th}(U^+)\subseteq\operatorname{Th}(V').
+\tag{P5a}
+\] The reduct \(V'\) contains every \(B_*\)-generator, inherits
+mechanicalness for every remaining owner from \(U_\dagger\), and is
+closed under own sentence necessity. It therefore contains every finite
+\(*\)-prefix of every generator of \(U^+\), and consequence closure
+gives (P5a).
+
+The constructed standard knowing-machine model interprets \(K_*\) by
+\(V'\)-theoremhood and makes every \(V'\)-theorem true. It consequently
+satisfies every axiom of \(U^+\). Thus the finite-guard revision already
+proves ordinary consistency of \(U^+\), and more specifically gives a
+standard knowing-machine model of its axiom set.
+
+This does not identify \(V'\) with the exact code-free \(U^+\), or show
+that the same result holds after replacing the raw \(*\)-predicate by
+exact \(U^+\)-theoremhood. In particular, it does not establish the
+earlier genericity theorem for that exact predicate. Formulas can
+contain negative occurrences of knowledge, so changing the theory
+changes their interpretation; subtheory inclusion alone does not justify
+the replacement.
+
+\subsection{18.5. Which proof is more
+general?}\label{which-proof-is-more-general}
+
+There are different directions of strength.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Feature
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Finite-guard revision
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Earlier larger-core approach
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Original 3-1-3 target & All three unrestricted schemas & The same
+target \\
+Primitive auxiliary mechanicalness & Original owners only & Includes the
+auxiliary core itself \\
+Auxiliary genericity & Proved here for the exact \(U^-\) and
+column-admissible outside predicates & Seeks genericity for the
+specified \(U^+\) \\
+Ordinal input for the extension argument & Arbitrarily large finite
+guards and finite rooms in the complete core & The stronger ordinal
+apparatus supporting a global cofinal coherent chain \\
+Recovery statement needed for soundness & A selected finite room table
+for each target, uniformly across its numerical instances & Recovery for
+arbitrary suitable source-shared lifts on the chosen global chain \\
+Fixed self-mechanical common agent & Obtainable by the additional-agent
+construction above & Supplied directly by the prescribed larger core, if
+its stronger theorem is established \\
+\end{longtable}
+}
+
+The revised extension proof has weaker ordinal hypotheses, and its
+column-admissible formulation covers a wider class of temporary semantic
+predicates than a jointly r.e. formulation. The earlier core assertion
+has a stronger specified conclusion about \(U^+\). The earlier global
+lifting statement uses a chain that the complete-core input here does
+not provide. Neither entire argument is uniformly ``more general'' in
+every respect.
+
+For this theorem, the selected-room quantifier order is enough: \[
+\forall\theta\ \exists\mathscr R_\theta\;
+\forall\psi\ \forall s\ \forall\pi\;
+\exists\mathscr D_{\theta,\psi,s,\pi}.
+\tag{P6}
+\] Here \(\mathscr R_\theta\) is one finite target room and its label
+table; \(\psi\) ranges over the target and the formulas in its finitely
+many required query-shape classes, including all term variants; \(s\) is
+a numerical assignment; \(\pi\) is a finite source certificate for the
+required instance; and \(\mathscr D\) is the additional finite proof
+room and reflection data. The target table is fixed before every such
+variant and instance. The additional proof room may depend on the
+certificate.
+
+For the extension stages considered here, the fixed-label lemma also
+recovers the corresponding global-chain lifting corollary if a suitable
+cofinal pairwise-\(\leq_2\) chain is supplied as an additional ordinal
+assumption. A finite prescribed chain-supported lift has a later chain
+point above its support; the subsequent chain points provide a guard of
+any required finite rank there. Lemma 14 proves recovery below that
+point, and erasure gives the reverse implication. Thus the finite-guard
+transport method does not preclude the stronger-input corollary. This
+proof uses the smaller ordinal input and the per-target room statement.
+The separate assertion about exact \(U^+\)-core genericity still
+requires its own argument.
+
+\subsection{18.6. No higher affirmative matrix cell
+follows}\label{no-higher-affirmative-matrix-cell-follows}
+
+In Alexander's matrix, the first and third coordinates of 3-1-3 are
+already maximal: everyone knows everyone's truthfulness and everyone's
+mechanicalness. Increasing the middle coordinate to 2 requires the full
+known-particular-self-code schema while retaining known
+self-truthfulness. Reinhardt's negative theorem excludes this under the
+relevant Epistemic Arithmetic assumptions {[}A, §1.1, pp.~1--2, 5, and
+7{]}. In particular, the stronger ordinal apparatus cannot turn 3-2-3 or
+3-3-3 into affirmative results.
+
+This concerns the entire self-code schema. An agent may know a
+particular code for an individual trivial column without contradiction.
+
+The additional content worth distinguishing is therefore the exact
+auxiliary theory and its extension property, the uniform parameter
+schemas, and the scope of the lifting theorem. The finite-guard revision
+establishes the original 3-1-3 target together with Sections 18.1--18.2
+and the additional-agent constructions above.
+
+\section{References and source
+correspondence}\label{references-and-source-correspondence}
+
+\textbf{{[}A{]}} Samuel A. Alexander, \emph{The Theory of Several
+Knowing Machines}, doctoral dissertation, The Ohio State University,
+2013. The supplied PDF is the source used here. Relevant locations: §1.1
+and Definition 1.1.1 for the matrix and negative boundary; §1.2,
+Definitions 1.2.3, 1.2.9, 1.2.15, 1.2.17, and 1.2.19, Theorem 1.2.6, and
+Example 1.2.13 for the logic and machine semantics; §2.6, p.~75, for
+inheritance along transitive closure.
+\href{https://etd.ohiolink.edu/acprod/odb_etd/etd/r/1501/10?clear=10&p10_accession_num=osu1366362999}{Official
+dissertation record}.
+
+\textbf{{[}W17{]}} Gunnar Wilken, \emph{Tracking chains revisited}, 2017
+version. §5.1 and Corollary 5.8 give the elementary-recursive
+characterization used for the core.
+\href{https://arxiv.org/html/1611.04348v3}{Primary text}.
+
+\textbf{{[}W18{]}} Gunnar Wilken, \emph{Pure patterns of order 2}, 2018
+version. Corollaries 4.8 and 4.10 give the finite-pattern realization
+and core results used in the finite-tallness argument.
+\href{https://arxiv.org/html/1608.08421v5}{Primary text}.
+
+\textbf{{[}W21{]}} Gunnar Wilken, \emph{Pure \(\Sigma_2\)-Elementarity
+beyond the Core}, 2021 version. The supplied PDF is the source used
+here. Printed pp.~5--6 include the pure relations, Lemma 1.7, the core
+identification, and Theorem 1.8. Theorem 4.2 and Corollary 4.6 supply
+the corrected semantic characterization.
+\href{https://arxiv.org/abs/1710.01870}{Preprint record}.
+
+The supplied handoff's recorded-stage development is the source of the
+finite-guard architecture expanded here. Its corresponding components
+are \texttt{Recorded\allowbreak{}Background},
+\texttt{Recorded\allowbreak{}Main},
+\texttt{Full\allowbreak{}Recorded\allowbreak{}Admissions},
+\texttt{Full\allowbreak{}Recorded\allowbreak{}Prefixes},
+\texttt{Recorded\allowbreak{}Stage\allowbreak{}Contexts},
+\texttt{Recorded\allowbreak{}Fixed\allowbreak{}Label\allowbreak{}Transport},
+\texttt{Stage\allowbreak{}Main\allowbreak{}Row},
+\texttt{Stage\allowbreak{}Cut\allowbreak{}Soundness}, and
+\texttt{Ideal\allowbreak{}Genericity\allowbreak{}Induction}, together
+with the source-family and column-genericity modules. The arguments
+above state and prove their mathematical content; source names are
+correspondence aids, not additional mathematical hypotheses.
+
+\end{document}

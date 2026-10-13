@@ -4,11 +4,12 @@ This repository is a research packet for discussion. It is not a journal submiss
 makes no claim to established priority. Each numbered folder holds one self-contained note: Markdown
 source, a PDF, and any scripts with their recorded output.
 
-**Current 3-1-3 proof:** [31-page revised PDF](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf)
+**Current 3-1-3 proof:** [33-page standalone PDF](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf)
 · [manuscript](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.md)
 · [Lean proofs](alexander-dissertation-lean/README.md)
 · [passing public CI](https://github.com/avg-netizen/alexander-open-problems-results/actions/runs/38453360717).
-The earlier 3 October paper is in the [dated archive](17-dissertation-question-3-1-3/archive/2026-10-03/README.md).
+Earlier editions are retained in the [3 October archive](17-dissertation-question-3-1-3/archive/2026-10-03/README.md)
+and the [8 October archive](17-dissertation-question-3-1-3/archive/2026-10-08/README.md).
 
 The notes answer, correct or sharpen questions posed in Alexander's papers on:
 - universal intelligence;
@@ -68,7 +69,7 @@ Nothing here duplicates it.
 | 14 | [Dissertation Question 3-1-1](14-dissertation-question-3-1-1/several-knowing-machines-3-1-1.pdf): machines that know everyone's truthfulness and particular codes of their subordinates exist for every r.e. well-founded hierarchy. | *The Theory of Several Knowing Machines* (dissertation, 2013), Def. 1.1.1, Fig. 1 | hand proof (checked by a second AI system) |
 | 15 | [Dissertation Question 3-1-2](15-dissertation-question-3-1-2/several-knowing-machines-3-1-2.pdf): add known own mechanicalness, still with unrestricted mutual truthfulness. Proposed: transparent stratification, contextual collapse, induction over all external interpretations. | same, Def. 1.1.1; strengthens Thm. 2.5.11 | **proposed** hand proof; long, needs independent review |
 | 16 | [Lemma 2.5.5 counterexample](16-dissertation-lemma-2-5-5/dissertation-lemma-2-5-5.pdf): the dissertation's preservation lemma is false as printed, which leaves a gap in the proof of Thm. 2.5.11 (the theorem itself is not refuted). | same, Lemma 2.5.5, Thm. 2.5.11 | explicit countermodel |
-| 17 | [Dissertation Question 3-1-3 — revised finite-guard proof](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf): knowing machines that know everyone's truthfulness, particular codes of their subordinates, and everyone's mechanicalness exist for every r.e. well-founded hierarchy and unrestricted modal formulas. Current 31-page paper; [earlier paper archived](17-dissertation-question-3-1-3/archive/2026-10-03/README.md). | same, Def. 1.1.1, Question 3-1-3 | revised hand proof; completed comparator targets pass public Lean CI; scope recorded in the comparison |
+| 17 | [Dissertation Question 3-1-3 — standalone finite-guard proof](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf): knowing machines that know everyone's truthfulness, particular codes of their subordinates, and everyone's mechanicalness exist for every r.e. well-founded hierarchy and unrestricted modal formulas. Current 33-page paper with abstract and complete introduction; [earlier editions archived](17-dissertation-question-3-1-3/README.md#earlier-editions-and-construction-history). | same, Def. 1.1.1, Question 3-1-3 | standalone prose proof; completed comparator targets pass public Lean CI; scope recorded in the comparison |
 
 ## Dissertation formalisation and revised proof
 
@@ -89,11 +90,14 @@ source files are unchanged; the copy uses dissertation terminology in its title
 and workflow labels. Existing Lean identifiers and historical repository URLs
 retain their original spelling.
 
-The [31-page revised proof](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf)
+The [33-page standalone proof](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf)
 is available directly in note 17 with its [Markdown source](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.md)
 and [detailed formalisation comparison](alexander-dissertation-lean/paper/LEAN-COMPARISON-2026-10-13.md).
 Reproduction commands are in the embedded project's README. Build dependencies
 and caches are fetched by Lake rather than included in this repository.
+The comparison audits the [archived 8 October parent](17-dissertation-question-3-1-3/archive/2026-10-08/README.md).
+The current paper supplies a standalone abstract, introduction and background
+definitions while preserving the theorem and the main proof's mathematical expressions.
 
 ## Further results
 

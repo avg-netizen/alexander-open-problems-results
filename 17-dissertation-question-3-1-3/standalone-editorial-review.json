@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-10-13T20:19:14.391429+00:00",
+  "scope": "Editorial standalone exposition and document preservation; no new mathematical theorem or Lean verification.",
+  "source": "REVISED-3-1-3-PROOF.md",
+  "source_sha256": "3c88210decad9067d6ec0f17b1c4233bd89888238143cc1a85dee862bbabf02d",
+  "parent_source": "archive/2026-10-08/REVISED-3-1-3-PROOF.md",
+  "parent_sha256": "bc012600043e35b9a415311614b31fbc9e2b61847af044fe1a3452f0a185c16a",
+  "editorial_changes": [
+    "Result/problem/method abstract rendered in an abstract environment",
+    "Introduction defining knowing machines, knowledge columns, hierarchy and quantifier distinction",
+    "Explicit epistemic-arithmetic axioms and owner/holder terminology",
+    "Explanations of the auxiliary theory, stage roles, reconstruction and two inductions",
+    "Self-contained restatement of auxiliary-strength consequences",
+    "Historical construction comparison and module correspondence moved to a companion note"
+  ],
+  "preservation": {
+    "main_theorem_statement_byte_identical": true,
+    "numbered_lemma_statements_byte_identical": 18,
+    "all_displayed_math_byte_identical": 104,
+    "proof_sections_1_to_17_math_preserved_in_order": 888,
+    "all_original_numbered_sections_retained": 18,
+    "archived_original_bundle_files_byte_identical": 7,
+    "embedded_lean_project_changes": 0
+  },
+  "typesetting": {
+    "pages": 33,
+    "section_bookmarks": 68,
+    "source_math_objects": 998,
+    "source_to_generated_tex_math_matches": true,
+    "math_whitespace_normalization": "Trim outer blank lines and line indentation added by the LaTeX writer; formula content otherwise identical.",
+    "font_count": 9,
+    "all_fonts_embedded": true,
+    "abstract_environment": true,
+    "opening_two_pages_visually_inspected": true,
+    "missing_symbols_or_unresolved_references": [],
+    "overfull_boxes": []
+  }
+}

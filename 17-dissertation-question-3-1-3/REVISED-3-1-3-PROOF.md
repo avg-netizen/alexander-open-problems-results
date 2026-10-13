@@ -1,10 +1,24 @@
-# An affirmative 3-1-3 proof using finite guards
+# Knowing machines with mutual truthfulness and mechanicalness
 
-**Revised prose proof — 8 October 2026**
+**13 October 2026**
 
-This proof uses a fixed auxiliary theory whose primitive mechanicalness axioms concern the original agents. Its extension argument uses one finite ordinal room for each formula, inside the complete pure \(\Sigma_2\) core. The genericity hypothesis requires each numerical column to be r.e.; it does not require a computable choice of indices for all temporary semantic predicates.
+## Abstract
 
-The theorem concerns the unrestricted original language. Neither the formula arguments nor the well-founded hierarchy are bounded. Sections 1–17 give the proof; Section 18 identifies additional conclusions and compares the revised auxiliary theory with the larger theory used in the earlier proof. The ordinal results used here are stated precisely in Section 6 and sourced in the references. This is a prose proof, with proof-assistant verification a separate task.
+We construct a uniformly computably enumerable family of knowing machines for every computably enumerable well-founded hierarchy on the natural numbers. Each machine knows that every machine is truthful and mechanical, and knows particular program indices for the knowledge columns of its subordinates. Knowledge is interpreted by consequence in a theory of modal arithmetic, with arithmetic interpreted in the standard natural numbers. The result answers Alexander's Question 3-1-3 affirmatively for unrestricted modal formulas and hierarchies of arbitrary well-founded height. The construction uses a common auxiliary theory and a recursion-theoretic fixed point. Its soundness proof combines induction on the hierarchy with induction on finite ordinal support. Finite patterns of resemblance supply the labelled proof stages and the finite guards needed to recover source theoremhood. The same family also satisfies known mechanicalness with parameters and inherits entire subordinate theories along finite paths.
+
+## Introduction
+
+A knowing machine is an effectively enumerable theory whose theorems are true in the model determined by the theories of all the machines. A modal operator expresses each machine's knowledge: an open formula is known at an assignment when its numerical closure follows from that machine's theory. Such a machine can reason about arithmetic, about another machine's knowledge, and about its own knowledge. The existence problem is to arrange these theories so that their claims about one another remain true despite this self-reference.
+
+For a fixed formula with one free input variable, its **knowledge column** is the set of numbers whose numerical instances the machine knows. There are two distinct ways to describe a machine's computational nature. To know its **mechanicalness** is to know that an index exists for each unary knowledge column. To know a **particular code** is to know the column equation for a specified numerical index. The distinction is the position of the existential quantifier relative to the knowledge operator. This distinction matters when a machine reasons about itself as well as other machines.
+
+Alexander's Question 3-1-3 [A, Definition 1.1.1] asks for machines that all know one another's truthfulness and mechanicalness, with particular codes known along a prescribed hierarchy. The hierarchy is given by a recursively enumerable well-founded relation: a lower agent is subordinate to a higher one. The relation need not be transitive, and its lower ideals need not be decidable. We prove the existence of a uniformly recursively enumerable family for every such relation. Section 1 states the three required schemas precisely; Section 2 specifies the weak modal logic and epistemic arithmetic in which they are interpreted. We use **r.e.** as an abbreviation for recursively enumerable, equivalently computably enumerable.
+
+The construction and its soundness proof have different roles. First, a common auxiliary theory and Kleene's recursion theorem determine all the theories and their literal program indices. This syntactic construction is completed before any theory is assumed sound. Second, temporary models interpret knowledge as raw theorem acceptance together with truth of the accepted formula. These truth filters make reflection available while soundness is still being proved. Once every raw theorem predicate is shown sound, the filters can be removed and knowledge becomes actual source consequence.
+
+The temporary proof stages attach ordinal labels to the modal operators of finitely many agents. A cut at a label uses only generators supported below that label. A **finite guard** is a finite chain of labels related by the order-2 resemblance relation; finite-pattern reflection provides separated copies of such guards in which proofs can be placed. For each target formula, one finite room is fixed before its term variants and numerical instances are considered. Individual proof certificates can then use additional finite rooms. This quantifier order permits formulas and proof depths of arbitrary finite complexity without selecting one infinite chain of labels.
+
+Sections 3–5 construct the source family and establish the auxiliary theory's soundness under a general outside-predicate hypothesis. Section 6 states and derives the exact ordinal input from the cited pattern-of-resemblance results. Sections 7–14 define the labelled stages, prove syntactic transport, and reconstruct source-language models. Sections 15–16 combine induction on ordinal support with well-founded induction on the hierarchy to prove soundness of the entire family. Section 17 derives the required schemas and removes the auxiliary operator. Section 18 gives further consequences and states the scope of the finite-room argument. All notation and intermediate constructions used in this proof are introduced here.
 
 ## 1. The theorem
 
@@ -108,7 +122,15 @@ An r.e. sentence theory has an effective unary-column compiler: given a formula 
 
 These elementary computability facts, together with the \(s\)-\(m\)-\(n\) theorem and Kleene's recursion theorem, are the computability inputs to the source construction.
 
+### 2.4. Knowing machines and self-doubting Epistemic Arithmetic
+
+For each operator \(K_i\), the pre-closure knowledge axioms are universal closures of knowledge of actual base-logical validities, distribution of knowledge over implication, positive introspection, and truthfulness. Self-doubting knowledge adds knowledge of each validity, distribution, and introspection axiom. Self-doubting Epistemic Arithmetic further includes every modal PA axiom and knowledge of that axiom [A, Definitions 1.2.9 and 1.2.19]. The word *self-doubting* describes the background axiom set: knowledge of one's own truthfulness is an additional requirement, rather than a background axiom. The (Truth) schema in Section 1 supplies that additional requirement for the family constructed here.
+
+A family of theories is a family of knowing entities when its standard consequence interpretation satisfies these knowledge axioms; it is a family of knowing machines when each theory is r.e. [A, Definitions 1.2.15 and 1.2.17]. Our conclusion includes joint enumerability of the entire family and truth of every accepted sentence in its actual interpretation. Throughout the proof an **owner** is the agent whose modal operator is being interpreted, and a **holder** is the agent whose theory contains a displayed axiom. They may be different agents.
+
 ## 3. The fixed source theories
+
+We now specify the theories whose soundness must be proved. The **original agents** are the given agents indexed by natural numbers. The additional owner \(*\) is an auxiliary agent used to supply a common theory. The common theory is fixed independently of the hierarchy; each original theory receives codes for its columns and for the columns of its direct subordinates. Every program numeral selected in this construction remains fixed throughout the semantic argument.
 
 Temporarily enlarge the language by one operator \(K_*\). Let
 \[
@@ -152,7 +174,9 @@ The following syntactic fact will be used repeatedly.
 
 **Proof.** Take a finite certificate with prefixed-generator premises \(\eta_1,\ldots,\eta_m\) and valid closed implication \(V=\eta_1\to\cdots\to\eta_m\to\sigma\). The next prefix puts \(K_a\eta_j\) among the axioms. Own validity gives \(K_aV\), and repeated own deduction gives \(K_a\sigma\). This uses no soundness assumption. \(\square\)
 
-### 3.2. The smaller auxiliary core
+### 3.2. The common auxiliary theory
+
+We call the common theory an auxiliary **core** because all original theories will inherit it. This is a theory of modal arithmetic; the ordinal core introduced in Section 6 is the separate structure used to label proof stages.
 
 For a formula \(\varphi\), a chosen input variable \(x\), and a fresh variable \(e\ne x\), put
 \[
@@ -233,7 +257,11 @@ For each source code generator, its \(p(w,\varphi)\) enumerates exactly the corr
 
 ## 4. Filtered models, shape agreement, and genericity
 
+To prove source soundness without assuming it, we first interpret knowledge using a truth filter. We then prove that retaining source theories on a lower ideal preserves their soundness under all sound changes to the remaining predicates. The term **genericity** below names this precise preservation property.
+
 ### 4.1. Filtered truth
+
+Write \(\operatorname{Th}(S)\) for the predicate on closed sentences that holds exactly when \(S\) proves the sentence in the base logic.
 
 A raw predicate family \(P=(P_a)_{a\in I}\) assigns an alphabetically invariant predicate to closed \(\mathcal L_*\)-formulas, and rejects nonclosed formulas. Define a standard-arithmetic filtered structure \(F(P)\) recursively by
 \[
@@ -295,7 +323,7 @@ No effectiveness of \(D_R(J)\) is required. The source predicates retained on it
 
 We will prove \(G(\varnothing)\) directly and the other cases by well-founded induction. The stronger temporary-model class in (F2) is needed when a finite formula is reconstructed while an infinite lower ideal is retained literally.
 
-## 5. Direct genericity of the smaller core
+## 5. Direct genericity of the auxiliary theory
 
 **Core genericity lemma.** Suppose \(P\) is column-admissible, \(P_*=\operatorname{Th}(U)\), and every original \(P_j\) is raw-sound in \(F(P)\). Then \(P_*\) is raw-sound there. Thus \(G(\varnothing)\) holds.
 
@@ -388,6 +416,8 @@ Within the core, finite guards of unbounded rank cannot all lie in one fixed pro
 
 ## 7. Labels, recorded syntax, and recording maps
 
+This section introduces the syntax of a temporary labelled proof stage. The active owners are the finitely many source agents whose soundness is currently being established. External owners are finitely many owners outside the retained lower ideal; their old predicates are already sound. All remaining owners are passive. Active operators receive ordinal labels. An external query can remain **live**, with its old predicate, or become a **ghost**, whose knowledge predicate is empty. The choice depends on the argument's syntactic shape. Recording adds these labels and choices; erasure removes them and returns to the source language.
+
 Let \(L\) be the effective well-ordered label set, with relations \(\leq_1,\leq_2\). We use reflexivity of \(\leq_1\), the implication \(\alpha\leq_1\beta\Rightarrow\alpha\leq\beta\), connectedness of \(\leq_1\), finite-pattern reflection along \(\leq_1\), and the stated finite-room property. Write \(G_r(\nu)\) for a list of \(r+1\) points beginning at \(\nu\), strictly increasing and pairwise \(\leq_2\). No infinite chain is assumed.
 
 Fix finite sets \(A,E\subseteq\mathbb N\), disjoint from one another, with the following extension side conditions:
@@ -444,6 +474,8 @@ The converse is unavailable: validity of \(\epsilon\eta\) says nothing by itself
 **Numerical-substitution distinction.** The fact that a translation commutes with numerical closure does not assert that numerical closure preserves base-logical validity. Assigned-validity rows below supply numerical instances explicitly. None of the subsequent syntactic arguments uses unrestricted term substitution through modal operators.
 
 ## 8. The actual stage generator set
+
+The stage theories are generated by explicit axioms, rather than defined by their intended semantic behavior. Background rows express the logical and arithmetic rules. Main rows translate an original code axiom while retaining its source numeral; arithmetic marker antecedents ensure that every guard point belongs to the row's literal support. Own prefixes then close each holder's axioms under labelled knowledge. The later soundness proof must verify exactly this generator set.
 
 For each active holder \(a\in A\), define a set \(\Gamma_a\) of closed recorded generators by the following rules. Take the recorded modal language to consist of precisely the allowed heads. Thus the cut predicates for active holders suffice to interpret every indexed head, while arbitrary formulas in this language need not be globally admissible.
 
@@ -738,7 +770,7 @@ The canonical depth table is globally admissible on the whole finite certificate
 
 **Background generators.** Modal PA is carried to a literal PA instance, because recording commutes with the substitutions in induction. An assigned validity is carried to the same assignment of an actually valid recorded formula by Lemma 1. Own validity is a listed recorded own-validity row. Truthfulness becomes truthfulness of the selected indexed, live, or ghost head. Introspection has two successive active-depth labels and is its listed recorded instance.
 
-The only correction is deduction. Write
+Deduction requires an additional contextual-collapse step. Write
 \[
 \gamma=c_{D(\phi\to\psi)},\quad
 \mu=c_{D(\phi)},\quad \nu=c_{D(\psi)}.
@@ -806,6 +838,8 @@ Only the finitely many query shapes of this \(\theta\) are required.
 
 ## 14. Reconstruction with full retained predicates
 
+The stage language is a temporary instrument. To apply a lower-ideal genericity hypothesis, we need a source-language model in which the full lower theories are still present. The following reconstruction retains those predicates in full, uses stage cuts only for the active query classes of the target, and keeps the required external queries. Its soundness conclusion covers every accepted sentence of these predicates.
+
 The following statement is the precise form needed in the lower-rank argument.
 
 Fix a source formula \(\theta\), a hereditary mask \(H\), and an admissible recorded lift \(t\theta\). Let \(D_0\subseteq I\setminus(A\cup E)\) be the retained set. It can be infinite. Assume every nonactive, nonexternal owner appearing in \(Q(\theta)\) either belongs to \(D_0\) or has empty old predicate \(P_d\).
@@ -870,15 +904,17 @@ The hypotheses are shape invariants, so the lemma holds for the full infinite cl
 
 ## 15. Local main truth and the two independent inductions
 
+The induction on the given hierarchy supplies soundness for strictly lower source agents. Inside one step of that induction, a second induction on ordinal support proves truth of the stage generators. Main-row truth uses the already sound smaller cuts together with a strictly lower hierarchy frontier. This section establishes that inner step under the stated outer hypotheses; Section 16 then discharges the outer hypotheses for every frontier.
+
 The following argument supplies the inner induction step used in the proof of \(G(J)\) in Section 16. Its only outer induction hypotheses are \(G(J')\) for strictly lower frontiers, and the direct core lemma of Section 5.
 
-Fix a finite frontier \(J=A\), let \(P\) be column-admissible and retain the full core and all source theories in the downward ideal of \(J\), and suppose outside predicates are sound, with only the finite \(E\) possibly nonempty. Suppose genericity has already been proved for every strictly lower nonempty finite frontier, and the direct smaller-core genericity lemma is available.
+Fix a finite frontier \(J=A\), let \(P\) be column-admissible and retain the full core and all source theories in the downward ideal of \(J\), and suppose outside predicates are sound, with only the finite \(E\) possibly nonempty. Suppose genericity has already been proved for every strictly lower nonempty finite frontier, and the direct auxiliary-core genericity lemma is available.
 
 Consider a main row for active holder \(a\) with target \(w=*\) or \(wRa\), source argument \(\phi\), and table \(t\). Collect \(w\) when original, together with all original passive owners occurring in \(\phi\) that lie strictly below \(J\). Take the maximal finite frontier \(J'\) of this finite set, and let
 \[
 D_0=\{*\}\cup\downarrow J'.
 \]
-Every member of \(J'\) lies strictly below some member of \(J\). If \(J'\ne\varnothing\), its maximum well-founded \(R\)-rank is strictly below that of \(J\). If the finite set is empty, \(w=*\) and core genericity is the appropriate base case.
+Here \(\downarrow J'=D_R(J')\) denotes the entire lower ideal, including the frontier itself. Every member of \(J'\) lies strictly below some member of \(J\). If \(J'\ne\varnothing\), its maximum well-founded \(R\)-rank is strictly below that of \(J\). If the finite set is empty, \(w=*\) and core genericity is the appropriate base case.
 
 Every original passive full owner named in \(\phi\), and \(w\) itself, lies in \(D_0\). No member of \(D_0\) is active or external, by antichainness and the choice of \(E\). An old outside owner outside \(E\) is empty. These facts verify exactly the passive-owner condition for (7).
 
@@ -1086,11 +1122,11 @@ Consequently, formula induction identifies the original-language reduct of \(\ma
 
 Renaming \(T_i^0\) as \(T_i\) proves the theorem of Section 1. \(\square\)
 
-## 18. Additional conclusions and comparison with the earlier proof
+## 18. Further consequences and scope
 
-The comparison has three separate aspects: consequences about original agents, properties of the specified auxiliary theory, and the strength of the intermediate lifting statement.
+The same source family yields parameter mechanicalness and entire-theory inheritance. We then examine a self-mechanical extension of the auxiliary theory, construct a distinguished common agent, and specify the quantifier order and the self-code boundary of the result.
 
-### 18.1. The revised construction also gives known parameter mechanicalness
+### 18.1. Known mechanicalness with parameters
 
 For every original \(i,j\) and every original-language formula \(\varphi(x,\vec z)\), where \(\vec z\) lists its other free variables, the construction gives
 \[
@@ -1103,7 +1139,7 @@ K_i\left[
 \]
 The universal parameter quantifiers are inside \(K_i\) and outside \(\exists e\). The witness index may depend on the values of \(\vec z\). This is a known universally quantified sentence, not merely a separate known sentence for each externally fixed numeral tuple.
 
-The proof is direct: (S3) includes that closed core generator, Section 17.3 transfers the entire sentence, and the reduct preserves it. Both the smaller and larger core constructions have these original-owner generators.
+The proof is direct: (S3) includes that closed core generator, Section 17.3 transfers the entire sentence, and the reduct preserves it.
 
 This is an additional explicit schema beyond the unary formulation of the target. No claim of its logical independence from the exact unary target plus the surrounding weak-modal arithmetic is needed or made. Moving parameter quantifiers through knowledge would require its own argument.
 
@@ -1118,7 +1154,7 @@ Iterating along a finite path gives the same inclusion whenever \(jR^+i\).
 
 A particular code sentence for a lower agent, proved at one step of a path, is therefore inherited by every agent above that step. Thus the family has known particular codes for all \(R^+\)-subordinates. The theorem does not assert that \(R^+\) is exactly the relation of all pairs for which such codes happen to be known; that would require additional negative assertions about nonedges.
 
-This inheritance is already a consequence of the usual 3-1-3 requirements with the standard \(W\)-representation and PA's positive computation certificates. In a general solution, own validity and the actual consequence semantics already give each theory every Assigned Validity instance: validity of \(\eta\) makes \(K_i\eta\) true at every assignment, hence \(T_i\vdash\eta^s\). Known truthfulness makes the selected known code sentence true; a lower theorem then gives a true concrete positive \(W\)-fact, and the same padding and reflection argument transfers the theorem. Alexander explicitly discusses the propagation to transitive closure in [A, §2.6, p. 75]. It is not a benefit unique to the larger core.
+This inheritance is a consequence of the 3-1-3 requirements with the standard \(W\)-representation and PA's positive computation certificates. In a general solution, own validity and the actual consequence semantics give each theory every Assigned Validity instance: validity of \(\eta\) makes \(K_i\eta\) true at every assignment, hence \(T_i\vdash\eta^s\). Known truthfulness makes the selected known code sentence true; a lower theorem then gives a true concrete positive \(W\)-fact, and the same padding and reflection argument transfers the theorem. Alexander explicitly discusses the propagation to transitive closure in [A, §2.6, p. 75].
 
 Own prefix closure gives all finite own iterations of known assertions. Inheritance also gives appropriate nesting along subordinate chains: if \(kR^+jR^+i\), \(\sigma\) is closed, and \(T_k\vdash\sigma\), then
 \[
@@ -1126,16 +1162,16 @@ Own prefix closure gives all finite own iterations of known assertions. Inherita
 \]
 These observations do not establish arbitrary mixed-agent common knowledge across unrelated agents.
 
-### 18.3. The specified larger core is strictly stronger
+### 18.3. A strict self-mechanical extension of the auxiliary theory
 
-To compare the cores in the same language, write \(U^-=U\), and define
+The auxiliary theory's generator set omits its own mechanicalness. To measure the effect of adding those generators, write \(U^-=U\), and define in the same enlarged language
 \[
 U^+=\operatorname{cl}_*\left(
  B_*+\{\operatorname{MC}_b(\varphi;x):b\in I,\ \varphi,\ x\}
 \right).
 \tag{P3}
 \]
-This is the code-free auxiliary theory of the earlier prose approach. It adds the core's own mechanicalness instances to the displayed generator table.
+This theory adds the core's own mechanicalness instances to the generator table of Section 3.2.
 
 The inclusion \(U^-\subseteq U^+\) is immediate, but strictness requires proof.
 
@@ -1181,12 +1217,12 @@ By base-logical soundness, \(U^-\) does not prove (P4). The theory \(U^+\) conta
 
 The separating structure is a base-logical countermodel, not a claim that its transparent core is itself an r.e. knowing machine. Arbitrary admissible structures are the correct models for this nonprovability argument.
 
-There is also an exact statement about the intended source model of the revised proof. Since \(U^-\) is r.e., its own actual \(\chi\)-knowledge column is r.e., so (P4) is externally true there. But \(U^-\) does not prove (P4), so the actual \(U^-\) core does not know this instance of its own mechanicalness. The earlier prescribed core would know it.
+In the source model constructed in Section 16.5, since \(U^-\) is r.e., its own actual \(\chi\)-knowledge column is r.e., so (P4) is externally true there. But \(U^-\) does not prove (P4), so the actual \(U^-\) core does not know this instance of its own mechanicalness. The sentence is a generator of \(U^+\).
 
-This comparison concerns the specified core theories. It does not prove
-\(\operatorname{Th}(T_i^-)\subseteq\operatorname{Th}(T_i^+)\) for the resulting original-agent constructions. Changing the core changes the literal code numerals and the recursion fixed point, so their original generator sets are not simply nested.
+If the source construction is carried out with \(U^-\) or \(U^+\) as its auxiliary theory, denote the resulting original-agent theories by \(T_i^-\) and \(T_i^+\), respectively. The strictness result concerns the auxiliary theories; it does not prove
+\(\operatorname{Th}(T_i^-)\subseteq\operatorname{Th}(T_i^+)\). Changing the core changes the literal code numerals and the recursion fixed point, so the original generator sets are not simply nested.
 
-### 18.4. A self-mechanical common agent already follows from 3-1-3
+### 18.4. A distinguished self-mechanical common agent
 
 Given \(R\), add a new least agent \(*\), with
 \[
@@ -1194,9 +1230,9 @@ Given \(R\), add a new least agent \(*\), with
 \]
 retain all original edges, and put no edges below \(*\). The relation \(R^*\) is r.e. and well founded. Code its countable owner set effectively by \(\mathbb N\).
 
-Applying the theorem to \(R^*\) produces a distinguished agent \(*\) that knows everyone's truthfulness and mechanicalness, including its own, and whose particular unary codes are known by every original agent. Thus the existence of such an additional common agent is already a consequence of unrestricted 3-1-3.
+Applying the theorem to \(R^*\) produces a distinguished agent \(*\) that knows everyone's truthfulness and mechanicalness, including its own, and whose particular unary codes are known by every original agent. Thus such an additional common agent exists for every hierarchy in the theorem.
 
-Even a fixed, \(R\)-independent theory for such an agent is available from the revised construction. Apply it to \(R^*\), using a second temporary auxiliary owner \(\dagger\). The desired \(*\) is now an original owner relative to \(\dagger\), so \(U_\dagger\) includes mechanicalness for \(*\).
+A fixed, \(R\)-independent theory for such an agent can be obtained from the source construction. Apply it to \(R^*\), using a second temporary auxiliary owner \(\dagger\). The desired \(*\) is now an original owner relative to \(\dagger\), so \(U_\dagger\) includes mechanicalness for \(*\).
 
 Choose \(U_\dagger\) and its compiler \(d_\dagger\) once, independently of \(R\), as in Section 3.2. The least original agent has no subordinate-code generators. Its enlarged theory is therefore the fixed theory
 \[
@@ -1219,26 +1255,13 @@ In fact,
 \]
 The reduct \(V'\) contains every \(B_*\)-generator, inherits mechanicalness for every remaining owner from \(U_\dagger\), and is closed under own sentence necessity. It therefore contains every finite \(*\)-prefix of every generator of \(U^+\), and consequence closure gives (P5a).
 
-The constructed standard knowing-machine model interprets \(K_*\) by \(V'\)-theoremhood and makes every \(V'\)-theorem true. It consequently satisfies every axiom of \(U^+\). Thus the finite-guard revision already proves ordinary consistency of \(U^+\), and more specifically gives a standard knowing-machine model of its axiom set.
+The constructed standard knowing-machine model interprets \(K_*\) by \(V'\)-theoremhood and makes every \(V'\)-theorem true. It consequently satisfies every axiom of \(U^+\). This proves ordinary consistency of \(U^+\) and gives a standard knowing-machine model of its axiom set.
 
-This does not identify \(V'\) with the exact code-free \(U^+\), or show that the same result holds after replacing the raw \(*\)-predicate by exact \(U^+\)-theoremhood. In particular, it does not establish the earlier genericity theorem for that exact predicate. Formulas can contain negative occurrences of knowledge, so changing the theory changes their interpretation; subtheory inclusion alone does not justify the replacement.
+The distinguished theory \(V'\) need not equal \(U^+\). Replacing its raw \(*\)-predicate by exact \(U^+\)-theoremhood would require a separate soundness and genericity argument for that predicate. Formulas can contain negative occurrences of knowledge, so changing the theory changes their interpretation; subtheory inclusion alone does not justify the replacement.
 
-### 18.5. Which proof is more general?
+### 18.5. Quantifier order in the finite-room argument
 
-There are different directions of strength.
-
-| Feature | Finite-guard revision | Earlier larger-core approach |
-|---|---|---|
-| Original 3-1-3 target | All three unrestricted schemas | The same target |
-| Primitive auxiliary mechanicalness | Original owners only | Includes the auxiliary core itself |
-| Auxiliary genericity | Proved here for the exact \(U^-\) and column-admissible outside predicates | Seeks genericity for the specified \(U^+\) |
-| Ordinal input for the extension argument | Arbitrarily large finite guards and finite rooms in the complete core | The stronger ordinal apparatus supporting a global cofinal coherent chain |
-| Recovery statement needed for soundness | A selected finite room table for each target, uniformly across its numerical instances | Recovery for arbitrary suitable source-shared lifts on the chosen global chain |
-| Fixed self-mechanical common agent | Obtainable by the additional-agent construction above | Supplied directly by the prescribed larger core, if its stronger theorem is established |
-
-The revised extension proof has weaker ordinal hypotheses, and its column-admissible formulation covers a wider class of temporary semantic predicates than a jointly r.e. formulation. The earlier core assertion has a stronger specified conclusion about \(U^+\). The earlier global lifting statement uses a chain that the complete-core input here does not provide. Neither entire argument is uniformly “more general” in every respect.
-
-For this theorem, the selected-room quantifier order is enough:
+The selected-room statement proved in Sections 12–13 has the following quantifier order:
 \[
 \forall\theta\ \exists\mathscr R_\theta\;
 \forall\psi\ \forall s\ \forall\pi\;
@@ -1247,24 +1270,20 @@ For this theorem, the selected-room quantifier order is enough:
 \]
 Here \(\mathscr R_\theta\) is one finite target room and its label table; \(\psi\) ranges over the target and the formulas in its finitely many required query-shape classes, including all term variants; \(s\) is a numerical assignment; \(\pi\) is a finite source certificate for the required instance; and \(\mathscr D\) is the additional finite proof room and reflection data. The target table is fixed before every such variant and instance. The additional proof room may depend on the certificate.
 
-For the extension stages considered here, the fixed-label lemma also recovers the corresponding global-chain lifting corollary if a suitable cofinal pairwise-\(\leq_2\) chain is supplied as an additional ordinal assumption. A finite prescribed chain-supported lift has a later chain point above its support; the subsequent chain points provide a guard of any required finite rank there. Lemma 14 proves recovery below that point, and erasure gives the reverse implication. Thus the finite-guard transport method does not preclude the stronger-input corollary. This proof uses the smaller ordinal input and the per-target room statement. The separate assertion about exact \(U^+\)-core genericity still requires its own argument.
+This is the recovery statement used in the soundness argument: one target room handles every required query-shape class, while additional proof rooms may vary with numerical assignments and certificates. No bound on all certificate depths is needed. The temporary predicates reconstructed in Section 14 have r.e. numerical columns; a joint computable selector for their column indices is unnecessary. The original source family itself remains uniformly r.e. by Section 3.
 
-### 18.6. No higher affirmative matrix cell follows
+### 18.6. The boundary for known particular self-codes
 
-In Alexander's matrix, the first and third coordinates of 3-1-3 are already maximal: everyone knows everyone's truthfulness and everyone's mechanicalness. Increasing the middle coordinate to 2 requires the full known-particular-self-code schema while retaining known self-truthfulness. Reinhardt's negative theorem excludes this under the relevant Epistemic Arithmetic assumptions [A, §1.1, pp. 1–2, 5, and 7]. In particular, the stronger ordinal apparatus cannot turn 3-2-3 or 3-3-3 into affirmative results.
+The theorem gives each agent knowledge of everyone's truthfulness and mechanicalness, including its own. A stronger particular-code requirement would give every agent a known particular self-code for every unary knowledge column while retaining known self-truthfulness. Reinhardt's negative theorem excludes that full combination under the relevant Epistemic Arithmetic assumptions [A, §1.1, pp. 1–2, 5, and 7]. In Alexander's classification, these excluded strengthenings include Questions 3-2-3 and 3-3-3.
 
 This concerns the entire self-code schema. An agent may know a particular code for an individual trivial column without contradiction.
 
-The additional content worth distinguishing is therefore the exact auxiliary theory and its extension property, the uniform parameter schemas, and the scope of the lifting theorem. The finite-guard revision establishes the original 3-1-3 target together with Sections 18.1–18.2 and the additional-agent constructions above.
+## References
 
-## References and source correspondence
-
-**[A]** Samuel A. Alexander, *The Theory of Several Knowing Machines*, doctoral dissertation, The Ohio State University, 2013. The supplied PDF is the source used here. Relevant locations: §1.1 and Definition 1.1.1 for the matrix and negative boundary; §1.2, Definitions 1.2.3, 1.2.9, 1.2.15, 1.2.17, and 1.2.19, Theorem 1.2.6, and Example 1.2.13 for the logic and machine semantics; §2.6, p. 75, for inheritance along transitive closure. [Official dissertation record](https://etd.ohiolink.edu/acprod/odb_etd/etd/r/1501/10?clear=10&p10_accession_num=osu1366362999).
+**[A]** Samuel A. Alexander, *The Theory of Several Knowing Machines*, doctoral dissertation, The Ohio State University, 2013. Relevant locations: §1.1 and Definition 1.1.1 for the classification and negative boundary; §1.2, Definitions 1.2.3, 1.2.9, 1.2.15, 1.2.17, and 1.2.19, Theorem 1.2.6, and Example 1.2.13 for the logic and machine semantics; §2.6, p. 75, for inheritance along transitive closure. [Official dissertation record](https://etd.ohiolink.edu/acprod/odb_etd/etd/r/1501/10?clear=10&p10_accession_num=osu1366362999).
 
 **[W17]** Gunnar Wilken, *Tracking chains revisited*, 2017 version. §5.1 and Corollary 5.8 give the elementary-recursive characterization used for the core. [Primary text](https://arxiv.org/html/1611.04348v3).
 
 **[W18]** Gunnar Wilken, *Pure patterns of order 2*, 2018 version. Corollaries 4.8 and 4.10 give the finite-pattern realization and core results used in the finite-tallness argument. [Primary text](https://arxiv.org/html/1608.08421v5).
 
-**[W21]** Gunnar Wilken, *Pure \(\Sigma_2\)-Elementarity beyond the Core*, 2021 version. The supplied PDF is the source used here. Printed pp. 5–6 include the pure relations, Lemma 1.7, the core identification, and Theorem 1.8. Theorem 4.2 and Corollary 4.6 supply the corrected semantic characterization. [Preprint record](https://arxiv.org/abs/1710.01870).
-
-The supplied handoff's recorded-stage development is the source of the finite-guard architecture expanded here. Its corresponding components are `RecordedBackground`, `RecordedMain`, `FullRecordedAdmissions`, `FullRecordedPrefixes`, `RecordedStageContexts`, `RecordedFixedLabelTransport`, `StageMainRow`, `StageCutSoundness`, and `IdealGenericityInduction`, together with the source-family and column-genericity modules. The arguments above state and prove their mathematical content; source names are correspondence aids, not additional mathematical hypotheses.
+**[W21]** Gunnar Wilken, *Pure \(\Sigma_2\)-Elementarity beyond the Core*, 2021 version. Printed pp. 5–6 include the pure relations, Lemma 1.7, the core identification, and Theorem 1.8. Theorem 4.2 and Corollary 4.6 supply the corrected semantic characterization. [Preprint record](https://arxiv.org/abs/1710.01870).

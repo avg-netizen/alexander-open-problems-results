@@ -111,10 +111,29 @@ its build records under `17-dissertation-question-3-1-3/archive/2026-10-03/`.
 The manuscript and PDF are unchanged. Relative references in the archived
 documentation and source map were rebased for that location.
 
-The current [31-page revised paper](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf)
+The [31-page revised paper](17-dissertation-question-3-1-3/archive/2026-10-08/REVISED-3-1-3-PROOF.pdf)
 and its source and typesetting files are now directly in note 17, with links
 at the top of the repository index and in the results table. They were copied
 byte for byte from the embedded Lean project's existing paper bundle, which
 remains intact. The [placement provenance](17-dissertation-question-3-1-3/PROVENANCE.md)
 and source map record their identity and the archive location. No Lean proof
 or mathematical text was edited in this reorganization.
+
+## 13 October 2026: standalone exposition of the finite-guard proof
+
+The owner clarified that the current paper must not assume familiarity with
+the earlier proof. Codex read the complete manuscript and added a conventional
+abstract, contextual introduction, explicit epistemic-arithmetic definitions,
+and explanations of the auxiliary theory, stage roles and two inductions.
+The mathematical auxiliary-strength consequences now stand on their own;
+the historical comparison and handoff/module correspondence are in a companion note.
+
+The current [33-page paper](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf)
+is titled *Knowing machines with mutual truthfulness and mechanicalness*.
+The main theorem, all 18 numbered lemma statements, all 104 displayed formulas
+and all 888 mathematical expressions in Sections 1–17 are preserved.
+The original 8 October edition and seven-file build bundle are archived
+byte for byte. The embedded Lean project remains unchanged. The
+[editorial review record](17-dissertation-question-3-1-3/standalone-editorial-review.json)
+and [provenance](17-dissertation-question-3-1-3/PROVENANCE.md) state the precise
+editorial and document-check scope. This is no new mathematical audit.
