@@ -1,0 +1,97 @@
+name: Compile Carlson unconditional tallness
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Alexander313/Carlson/FiniteTypeClosure.lean'
+      - 'Alexander313/Carlson/OmegaOneClosure.lean'
+      - 'Alexander313/Carlson/ClosureSemantics.lean'
+      - 'Alexander313/Carlson/Tallness*.lean'
+      - 'CompileCarlsonTallness.lean'
+      - '.github/workflows/compile-carlson-tallness.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  pull_request:
+    paths:
+      - 'Alexander313/Carlson/FiniteTypeClosure.lean'
+      - 'Alexander313/Carlson/OmegaOneClosure.lean'
+      - 'Alexander313/Carlson/ClosureSemantics.lean'
+      - 'Alexander313/Carlson/Tallness*.lean'
+      - 'CompileCarlsonTallness.lean'
+      - '.github/workflows/compile-carlson-tallness.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: carlson-tallness-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tallness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reserve disk space for Lean and mathlib
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet
+          df -h .
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Fetch pinned mathlib build artifacts
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          lake exe cache get 2>&1 | tee logs/dependencies.log
+          test -f .lake/packages/mathlib/.lake/build/lib/lean/Mathlib/SetTheory/Cardinal/Regular.olean
+      - name: Restore project build products
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: carlson-tallness-build-${{ github.sha }}
+          restore-keys: |
+            carlson-tallness-build-
+            gates-build-
+      - name: Build the unconditional closure and tallness proofs
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          timeout --kill-after=10s 10m lake build +Alexander313.Carlson.Tallness 2>&1 | tee logs/build.log
+      - name: Build boundary cases and the order-violating negative control
+        run: |
+          set -o pipefail
+          timeout --kill-after=10s 5m lake build +Alexander313.Carlson.TallnessExamples 2>&1 | tee logs/regressions.log
+      - name: Check the independent statements and audit all new theorem axioms
+        run: |
+          set -o pipefail
+          lake env lean CompileCarlsonTallness.lean 2>&1 | tee logs/axioms.log
+          python3 scripts/check_axioms.py logs/axioms.log | tee logs/axiom-audit.log
+      - name: Save project build products
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: carlson-tallness-build-${{ github.sha }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: carlson-tallness-logs
+          path: logs/
+          if-no-files-found: warn

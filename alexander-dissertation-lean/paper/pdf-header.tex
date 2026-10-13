@@ -1,0 +1,9 @@
+\usepackage{microtype}
+\usepackage{needspace}
+\usepackage{etoolbox}
+\pretocmd{\section}{\Needspace{5\baselineskip}}{}{}
+\pretocmd{\subsection}{\Needspace{4\baselineskip}}{}{}
+\setlength{\emergencystretch}{3em}
+\allowdisplaybreaks[1]
+% Latin Modern Math supplies the standard small set-difference glyph.
+\AtBeginDocument{\let\setminus\smallsetminus}

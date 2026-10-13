@@ -1,0 +1,59 @@
+name: Compile Wilken library
+
+# Manual only since 2026-10-09: compile-gates.yml is the routine workflow.
+# Re-enable the push trigger on ci/wilken-inputs.sha256 if this target should run on export.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compile-wilken:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'true'
+      - name: Build every Wilken module and its program modules
+        id: build
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          lake build $(sed 's/^/+/' ci/wilken-targets.txt) 2>&1 | tee logs/build.log
+      - name: Print axioms for the Wilken declarations
+        id: compile
+        run: |
+          set -o pipefail
+          lake env lean AuditWilken.lean 2>&1 | tee logs/audit-wilken.log
+      - name: Axiom audit
+        id: axioms
+        run: |
+          set -o pipefail
+          python3 scripts/check_axioms.py logs/audit-wilken.log 2>&1 | tee logs/axioms-check.log
+      - name: Summarise diagnostics
+        if: always()
+        run: |
+          mkdir -p logs
+          {
+            echo "commit: $GITHUB_SHA"
+            echo "run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "build: ${{ steps.build.outcome }}"
+            echo "audit_wilken: ${{ steps.compile.outcome }}"
+            echo "axioms: ${{ steps.axioms.outcome }}"
+            echo "lean: $(lean --version 2>/dev/null || echo unavailable)"
+          } | tee logs/summary.txt
+          grep -nE '^error|: error' logs/*.log > logs/errors.txt || true
+          grep -n "declaration uses 'sorry'" logs/*.log > logs/sorry.txt || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compile-wilken-logs
+          path: logs/
+          if-no-files-found: warn

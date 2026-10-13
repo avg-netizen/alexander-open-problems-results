@@ -1,0 +1,188 @@
+{
+  "repository": "avg-netizen/alexander-thesis-3-1-1-lean",
+  "pr": 31,
+  "head": "587fad01dfd9c3404c72278f6c2d71f249b37f8c",
+  "merged_commit": "b95d340194b9d47dfb5224e3e6259e9f0b728280",
+  "checked_merged_tree": "ec25efaf5c04bc5fe095bcaa598056821da0fa02",
+  "workflows": [
+    {
+      "id": 38432007893,
+      "name": "Compile Carlson recursive certificate codecs",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "587fad01dfd9c3404c72278f6c2d71f249b37f8c",
+      "url": "https://github.com/avg-netizen/alexander-thesis-3-1-1-lean/actions/runs/38432007893"
+    },
+    {
+      "id": 38432007932,
+      "name": "Compile Carlson classical core",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "587fad01dfd9c3404c72278f6c2d71f249b37f8c",
+      "url": "https://github.com/avg-netizen/alexander-thesis-3-1-1-lean/actions/runs/38432007932"
+    },
+    {
+      "id": 38432007766,
+      "name": "Compile Carlson exactness and isominimal cuts",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "587fad01dfd9c3404c72278f6c2d71f249b37f8c",
+      "url": "https://github.com/avg-netizen/alexander-thesis-3-1-1-lean/actions/runs/38432007766"
+    },
+    {
+      "id": 38432007706,
+      "name": "Compile Carlson generation and pointed comparison",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "587fad01dfd9c3404c72278f6c2d71f249b37f8c",
+      "url": "https://github.com/avg-netizen/alexander-thesis-3-1-1-lean/actions/runs/38432007706"
+    },
+    {
+      "id": 38432007943,
+      "name": "Compile Carlson reflection constructors",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "587fad01dfd9c3404c72278f6c2d71f249b37f8c",
+      "url": "https://github.com/avg-netizen/alexander-thesis-3-1-1-lean/actions/runs/38432007943"
+    },
+    {
+      "id": 38432007973,
+      "name": "Compile Carlson exactness and effective comparison",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "587fad01dfd9c3404c72278f6c2d71f249b37f8c",
+      "url": "https://github.com/avg-netizen/alexander-thesis-3-1-1-lean/actions/runs/38432007973"
+    },
+    {
+      "id": 38432008534,
+      "name": "Compile Carlson effective core presentation",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "587fad01dfd9c3404c72278f6c2d71f249b37f8c",
+      "url": "https://github.com/avg-netizen/alexander-thesis-3-1-1-lean/actions/runs/38432008534"
+    },
+    {
+      "id": 38432007746,
+      "name": "Compile Carlson finite checks",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "587fad01dfd9c3404c72278f6c2d71f249b37f8c",
+      "url": "https://github.com/avg-netizen/alexander-thesis-3-1-1-lean/actions/runs/38432007746"
+    },
+    {
+      "id": 38432007900,
+      "name": "Compile Carlson derivation checks and least copies",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "587fad01dfd9c3404c72278f6c2d71f249b37f8c",
+      "url": "https://github.com/avg-netizen/alexander-thesis-3-1-1-lean/actions/runs/38432007900"
+    }
+  ],
+  "focused_jobs": [
+    {
+      "id": 115416308928,
+      "name": "core-presentation",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 38432008534,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Record exact validation inputs",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Reserve disk space for Lean and mathlib",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run leanprover/lean-action@v1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Fetch pinned mathlib build artifacts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Restore project build products",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Build the package, unconditional theorem and controls",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Check the effective core gate and axiom whitelist",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Check unconditional comparator targets and their axioms",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Save project build products",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25
+        }
+      ]
+    }
+  ],
+  "log_evidence": [
+    "2026-10-13T16:37:31.9004162Z \u001b[36;1mtest \"$(git hash-object Alexander313/ComparatorChallenge.lean)\" = a7e8fbd6eadd102465a8244a9ade9a3f06d5265e\u001b[0m",
+    "2026-10-13T16:42:11.8418035Z Build completed successfully (1461 jobs).",
+    "2026-10-13T16:42:13.4054818Z 'Alexander313.Carlson.EffectiveCorePackage.package_exists' depends on axioms: [propext, Classical.choice, Quot.sound]",
+    "2026-10-13T16:42:13.5044329Z Checked 94 reports against ordinary logical foundations. This does not discharge explicit theorem parameters.",
+    "2026-10-13T16:42:15.1076810Z 'Alexander313.Carlson.EffectiveCorePackage.package_exists' depends on axioms: [propext, Classical.choice, Quot.sound]",
+    "2026-10-13T16:42:15.1078141Z 'Alexander313.thesis313' depends on axioms: [propext, Classical.choice, Quot.sound]",
+    "2026-10-13T16:42:15.1079211Z 'Alexander313.thesis312' depends on axioms: [propext, Classical.choice, Quot.sound]",
+    "2026-10-13T16:42:15.1942542Z Checked 3 reports against ordinary logical foundations. This does not discharge explicit theorem parameters."
+  ],
+  "scope": "Online focused CI verified package construction, thesis313 and thesis312 against unchanged comparator, plus core controls. The incoming Completion.lean does not check thesis311. Local strengthening is recorded separately."
+}

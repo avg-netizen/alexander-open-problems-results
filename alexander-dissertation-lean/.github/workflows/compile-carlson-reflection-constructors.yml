@@ -1,0 +1,97 @@
+name: Compile Carlson reflection constructors
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Alexander313/Carlson/**'
+      - 'CompileCarlsonReflectionConstructors.lean'
+      - '.github/workflows/compile-carlson-reflection-constructors.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.lean'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  pull_request:
+    paths:
+      - 'Alexander313/Carlson/**'
+      - 'CompileCarlsonReflectionConstructors.lean'
+      - '.github/workflows/compile-carlson-reflection-constructors.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.lean'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: carlson-reflection-constructors-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reflection-constructors:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reserve disk space for Lean and mathlib
+        run: |
+          # Remove only unused preinstalled SDKs on this disposable runner.
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet
+          df -h .
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Fetch pinned mathlib build artifacts
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          # Downstream project names are not roots in mathlib's cache graph.
+          # Use the standard pinned fetch, without a duplicate whole-.lake archive.
+          lake exe cache get 2>&1 | tee logs/dependencies.log
+          test -f .lake/packages/mathlib/.lake/build/lib/lean/Mathlib/Computability/Primrec/Basic.olean
+          df -h .
+      - name: Restore project build products
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: reflection-constructors-build-${{ github.sha }}
+          restore-keys: |
+            reflection-constructors-build-
+            gates-build-
+      - name: Build reflection construction and derived-code recursion proofs
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          timeout --kill-after=10s 10m lake build +Alexander313.Carlson.PrimitiveSExpression +Alexander313.Carlson.PrimitiveReflectionConstructors 2>&1 | tee logs/build.log
+      - name: Build the kernel regressions
+        run: |
+          set -o pipefail
+          timeout --kill-after=10s 5m lake build +Alexander313.Carlson.PrimitiveReflectionConstructorsExamples 2>&1 | tee logs/regressions.log
+      - name: Check the focused gate and audit its axioms
+        run: |
+          set -o pipefail
+          lake env lean CompileCarlsonReflectionConstructors.lean 2>&1 | tee logs/axioms.log
+          python3 scripts/check_axioms.py logs/axioms.log | tee logs/axiom-audit.log
+      - name: Save project build products
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: reflection-constructors-build-${{ github.sha }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: carlson-reflection-constructors-logs
+          path: logs/
+          if-no-files-found: warn

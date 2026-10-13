@@ -1,0 +1,59 @@
+name: Compile dissertation 3-1-1
+
+# Manual only since 2026-10-09: compile-gates.yml is the routine workflow.
+# Re-enable the push trigger on ci/311-inputs.sha256 if this target should run on export.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compile-311:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'true'
+      - name: Build the 3-1-1 import closure
+        id: build
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          lake build +Alexander313.Thesis311Complete 2>&1 | tee logs/build.log
+      - name: Check against Comparator.challenge311 and print axioms
+        id: compile
+        run: |
+          set -o pipefail
+          lake env lean Compile311.lean 2>&1 | tee logs/compile311.log
+      - name: Axiom audit
+        id: axioms
+        run: |
+          set -o pipefail
+          python3 scripts/check_axioms.py logs/compile311.log 2>&1 | tee logs/axioms-check.log
+      - name: Summarise diagnostics
+        if: always()
+        run: |
+          mkdir -p logs
+          {
+            echo "commit: $GITHUB_SHA"
+            echo "run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "build: ${{ steps.build.outcome }}"
+            echo "compile311: ${{ steps.compile.outcome }}"
+            echo "axioms: ${{ steps.axioms.outcome }}"
+            echo "lean: $(lean --version 2>/dev/null || echo unavailable)"
+          } | tee logs/summary.txt
+          grep -nE '^error|: error' logs/*.log > logs/errors.txt || true
+          grep -n "declaration uses 'sorry'" logs/*.log > logs/sorry.txt || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compile-311-logs
+          path: logs/
+          if-no-files-found: warn

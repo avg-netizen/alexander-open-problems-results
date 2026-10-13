@@ -1,7 +1,7 @@
 # Results on open problems from the papers of Samuel Allen Alexander
 
 This repository is a research packet for discussion. It is not a journal submission, and it
-makes no claim to established priority. Each folder holds one self-contained note: Markdown
+makes no claim to established priority. Each numbered folder holds one self-contained note: Markdown
 source, a PDF, and any scripts with their recorded output.
 
 The notes answer, correct or sharpen questions posed in Alexander's papers on:
@@ -26,6 +26,13 @@ The notes answer, correct or sharpen questions posed in Alexander's papers on:
 > corollaries. It has had recorded AI hand checks but no independent human review, and its Lean
 > formalisation is incomplete.
 
+> **13 October 2026:** the [Lean formalisation](alexander-dissertation-lean/README.md)
+> is included here, with unconditional proofs of the independent comparator targets
+> for Questions 3-1-1, 3-1-2 and 3-1-3. The [revised finite-guard proof PDF](alexander-dissertation-lean/paper/REVISED-3-1-3-PROOF.pdf)
+> and [paper-to-Lean comparison](alexander-dissertation-lean/paper/LEAN-COMPARISON-2026-10-13.md)
+> accompany it. The comparison records the construction differences and formal scope.
+> The dated entries above and the earlier papers retain their historical status.
+
 A companion packet on *Biologically unavoidable sequences* is published separately:
 [biological-unavoidability-results](https://github.com/avg-netizen/biological-unavoidability-results).
 Nothing here duplicates it.
@@ -46,10 +53,35 @@ Nothing here duplicates it.
 | 11 | [Bounded founders](11-bounded-founders/bounded-founders.pdf): a fixed founder budget gives coverage and admits late founders. | *Specieslike Clusters*, after Thm. 13 | hand proof (audit) |
 | 12 | [Pseudo-visibility, private information](12-pseudovisibility-private-information/pseudovisibility-private-information.pdf): exact value formula; counterexamples to unconditional P1a; restricted P1b convergence theorem. | *Pseudo-visibility* (2022), better-performance conjecture | hand proof (audit) |
 | 13 | [Signed quitting](13-signed-quitting/signed-quitting.pdf): for every r, a symmetric universal machine with a Question 26 counterexample under expected-value normalisation. | *Intelligence via Ultrafilters*, Q. 26; *Reward-Punishment Symmetric Universal Intelligence* | hand proof + finite checks (audit) |
-| 14 | [Thesis Question 3-1-1](14-thesis-question-3-1-1/several-knowing-machines-3-1-1.pdf): machines that know everyone's truthfulness and particular codes of their subordinates exist for every r.e. well-founded hierarchy. | *The Theory of Several Knowing Machines* (dissertation, 2013), Def. 1.1.1, Fig. 1 | hand proof (checked by a second AI system) |
-| 15 | [Thesis Question 3-1-2](15-thesis-question-3-1-2/several-knowing-machines-3-1-2.pdf): add known own mechanicalness, still with unrestricted mutual truthfulness. Proposed: transparent stratification, contextual collapse, induction over all external interpretations. | same, Def. 1.1.1; strengthens Thm. 2.5.11 | **proposed** hand proof; long, needs independent review |
-| 16 | [Lemma 2.5.5 counterexample](16-thesis-lemma-2-5-5/thesis-lemma-2-5-5.pdf): the dissertation's preservation lemma is false as printed, which leaves a gap in the proof of Thm. 2.5.11 (the theorem itself is not refuted). | same, Lemma 2.5.5, Thm. 2.5.11 | explicit countermodel |
-| 17 | [Thesis Question 3-1-3](17-thesis-question-3-1-3/paper.pdf): knowing machines that know everyone's truthfulness, particular codes of their subordinates, and everyone's mechanicalness exist for every r.e. well-founded hierarchy and unrestricted modal formulas. A 20-page paper. | same, Def. 1.1.1, Question 3-1-3 | **proposed** hand proof; AI modal audit + typed ordinal check; Lean formalisation incomplete |
+| 14 | [Dissertation Question 3-1-1](14-dissertation-question-3-1-1/several-knowing-machines-3-1-1.pdf): machines that know everyone's truthfulness and particular codes of their subordinates exist for every r.e. well-founded hierarchy. | *The Theory of Several Knowing Machines* (dissertation, 2013), Def. 1.1.1, Fig. 1 | hand proof (checked by a second AI system) |
+| 15 | [Dissertation Question 3-1-2](15-dissertation-question-3-1-2/several-knowing-machines-3-1-2.pdf): add known own mechanicalness, still with unrestricted mutual truthfulness. Proposed: transparent stratification, contextual collapse, induction over all external interpretations. | same, Def. 1.1.1; strengthens Thm. 2.5.11 | **proposed** hand proof; long, needs independent review |
+| 16 | [Lemma 2.5.5 counterexample](16-dissertation-lemma-2-5-5/dissertation-lemma-2-5-5.pdf): the dissertation's preservation lemma is false as printed, which leaves a gap in the proof of Thm. 2.5.11 (the theorem itself is not refuted). | same, Lemma 2.5.5, Thm. 2.5.11 | explicit countermodel |
+| 17 | [Dissertation Question 3-1-3](17-dissertation-question-3-1-3/paper.pdf): knowing machines that know everyone's truthfulness, particular codes of their subordinates, and everyone's mechanicalness exist for every r.e. well-founded hierarchy and unrestricted modal formulas. The earlier 20-page paper. | same, Def. 1.1.1, Question 3-1-3 | **proposed** earlier hand proof; current revised paper and checked formalisation linked below |
+
+## Dissertation formalisation and revised proof
+
+[![Dissertation proof CI](https://github.com/avg-netizen/alexander-open-problems-results/actions/workflows/compile-dissertation-lean.yml/badge.svg?branch=codex%2Fdissertation-documents-and-lean&event=pull_request)](https://github.com/avg-netizen/alexander-open-problems-results/actions/workflows/compile-dissertation-lean.yml)
+
+The public [proof-compilation workflow](.github/workflows/compile-dissertation-lean.yml)
+builds the completed proof dependencies and checks all three unconditional
+comparator targets, the effective ordinal core and the added paper conclusions.
+Every gate audits its axioms against `propext`, `Classical.choice` and `Quot.sound`.
+The run publishes logs and exact source hashes. The retained unfinished Wilken
+aggregate is outside this build.
+
+[alexander-dissertation-lean/](alexander-dissertation-lean/README.md) contains
+the full tracked Lean project, including the earlier Wilken development and the
+completed Carlson route. Its [import record](alexander-dissertation-lean/IMPORT-PROVENANCE.json)
+pins source commit `b06b50a` and records every copied file's hash. All 1,294 Lean
+source files are unchanged; the copy uses dissertation terminology in its title
+and workflow labels. Existing Lean identifiers and historical repository URLs
+retain their original spelling.
+
+The [31-page revised proof](alexander-dissertation-lean/paper/REVISED-3-1-3-PROOF.pdf)
+is available with its [Markdown source](alexander-dissertation-lean/paper/REVISED-3-1-3-PROOF.md)
+and [detailed formalisation comparison](alexander-dissertation-lean/paper/LEAN-COMPARISON-2026-10-13.md).
+Reproduction commands are in the embedded project's README. Build dependencies
+and caches are fetched by Lake rather than included in this repository.
 
 ## Further results
 
@@ -73,7 +105,7 @@ The audit checks are in `audit-2026-09-27/controls.py`.
 
 To rebuild the PDFs: `python3 build_documents.py --allow-downloads`. This needs pandoc ≥ 3,
 tectonic and the DejaVu fonts. Note 17 is maintained directly in LaTeX and has its own
-build script; see [its README](17-thesis-question-3-1-3/README.md).
+build script; see [its README](17-dissertation-question-3-1-3/README.md).
 `SHA256SUMS` lists checksums of the committed files.
 
 ## Provenance

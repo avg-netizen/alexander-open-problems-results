@@ -1,0 +1,94 @@
+name: Compile Carlson classical core
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Alexander313/Carlson/UnconditionalRealization.lean'
+      - 'Alexander313/Carlson/Core*.lean'
+      - 'CompileCarlsonCore.lean'
+      - '.github/workflows/compile-carlson-core.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  pull_request:
+    paths:
+      - 'Alexander313/Carlson/UnconditionalRealization.lean'
+      - 'Alexander313/Carlson/Core*.lean'
+      - 'CompileCarlsonCore.lean'
+      - '.github/workflows/compile-carlson-core.yml'
+      - 'scripts/check_axioms.py'
+      - 'lean-toolchain'
+      - 'lakefile.toml'
+      - 'lake-manifest.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: carlson-core-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reserve disk space for Lean and mathlib
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet
+          df -h .
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Fetch pinned mathlib build artifacts
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          lake exe cache get 2>&1 | tee logs/dependencies.log
+          test -f .lake/packages/mathlib/.lake/build/lib/lean/Mathlib/SetTheory/Cardinal/Regular.olean
+      - name: Restore project build products
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: carlson-core-build-${{ github.sha }}
+          restore-keys: |
+            carlson-core-build-
+            carlson-tallness-build-
+            gates-build-
+      - name: Build unconditional realizations, the core and package tallness
+        run: |
+          set -o pipefail
+          mkdir -p logs
+          timeout --kill-after=10s 10m lake build +Alexander313.Carlson.CoreIsominimal +Alexander313.Carlson.CorePackageInputs 2>&1 | tee logs/build.log
+      - name: Build empty-seed and core-boundary controls
+        run: |
+          set -o pipefail
+          timeout --kill-after=10s 5m lake build +Alexander313.Carlson.CoreExamples 2>&1 | tee logs/regressions.log
+      - name: Check the independent statements and audit the new theorem axioms
+        run: |
+          set -o pipefail
+          lake env lean CompileCarlsonCore.lean 2>&1 | tee logs/axioms.log
+          python3 scripts/check_axioms.py logs/axioms.log | tee logs/axiom-audit.log
+      - name: Save project build products
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: carlson-core-build-${{ github.sha }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: carlson-core-logs
+          path: logs/
+          if-no-files-found: warn
