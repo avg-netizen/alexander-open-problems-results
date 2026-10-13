@@ -1,0 +1,12 @@
+{
+  "built_at_utc": "2026-10-13T18:01:01.981701+00:00",
+  "source_sha256": "bc012600043e35b9a415311614b31fbc9e2b61847af044fe1a3452f0a185c16a",
+  "pdf_sha256": "3cf586d0dfe1ae36d41dc3e77a9f1d91ac8e38ba01a7ad6237057c22cd3efabf",
+  "pages": 31,
+  "source_math_delimiters": "Pandoc markdown+tex_math_single_backslash",
+  "pandoc": "pandoc 3.11",
+  "tectonic": "Tectonic 0.17.0",
+  "overfull_boxes": [],
+  "missing_glyphs_or_unresolved_references": [],
+  "scope": "Typesetting of the supplied prose proof; source text unchanged."
+}

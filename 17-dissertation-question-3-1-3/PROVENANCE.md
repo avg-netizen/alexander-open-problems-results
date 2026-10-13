@@ -1,67 +1,31 @@
-# Provenance and statement correspondence
+# Revised paper provenance and placement
 
-Created 3 October 2026, at the user's request for a new standalone 3-1-3 paper
-under `samuel-allen-alexander`, in the explanatory LaTeX style of the
-biologically unavoidable sequences paper. No author identity is assigned in
-the manuscript. Codex wrote this editorial expansion in one thread, without
-spawning agents, publishing, or running Lean compilation.
+The current manuscript is *An affirmative 3-1-3 proof using finite guards*,
+dated 8 October 2026. Its source is the supplied revision retained in the
+[embedded Lean project's paper bundle](../alexander-dissertation-lean/paper/README.md),
+imported from standalone commit `b06b50a9bdc61f6c620985bf322ad5edbd2e98d0`.
+The import record identifies the original repository and every copied file.
 
-## Mathematical sources actually read
+On 13 October 2026, at the owner's request, OpenAI Codex placed the revised
+paper directly in note 17 and archived the earlier paper under
+[archive/2026-10-03/](archive/2026-10-03/README.md). The revision's Markdown,
+PDF, generated LaTeX, build record and three typesetting files are byte-identical
+to the embedded bundle. The old LaTeX manuscript, PDF and build records are
+also unchanged; only relative references in the archive's documentation and
+source map were adjusted for their new location.
 
-The construction and proof are drawn from these existing local hand notes:
+The revised manuscript SHA-256 is
+`bc012600043e35b9a415311614b31fbc9e2b61847af044fe1a3452f0a185c16a`.
+The PDF SHA-256 is
+`3cf586d0dfe1ae36d41dc3e77a9f1d91ac8e38ba01a7ad6237057c22cd3efabf`.
+[source-map.json](source-map.json) records the current artifact paths and hashes.
 
-- [13 — common core and code extensions](../../samuel-allen-alexander/continuation-3-1-3-codex-2026-09-30/13-common-core-and-code-extensions.md),
-  for the fixed source theories, compilers and effective core inheritance.
-  Its original incomplete checkpoint is historical, not the present proof status.
-- [24 — expanded transport and core genericity](../../samuel-allen-alexander/continuation-3-1-3-codex-2026-09-30/24-expanded-transport-and-core-genericity.md),
-  for recorded syntax, validity maps, generator admission, erasure, collapse,
-  prefixes, fixed-label transport, reconstruction and core genericity.
-- [25 — ordinal effectiveness](../../samuel-allen-alexander/continuation-3-1-3-codex-2026-09-30/25-ordinal-effectiveness-audit.md),
-  for the recursive label domain, relation algorithms and structural input.
-- [26 — full proposed proof](../../samuel-allen-alexander/continuation-3-1-3-codex-2026-09-30/26-full-3-1-3-proposed-proof.md),
-  for the exact unrestricted theorem, whole-ideal induction, actual-family
-  recovery, schemas and reduct.
-- [27 — uniform typed ordinal closure](../../samuel-allen-alexander/continuation-3-1-3-codex-2026-09-30/27-uniform-typed-ordinal-closure.md),
-  for public/native representations, conversion caller bounds, parameter
-  resolution, principal/general procedure scheduling and termination.
-- [Astra's full-proof audit](../../samuel-allen-alexander/audit-full-3-1-3-2026-10-02.md),
-  for the reviewed interfaces and the boundary subsequently closed by note 27.
-- [Exact joint-room review](../../samuel-allen-alexander/wf-3-1-3-2026-10-02/ordinal-package/REVIEW-JOINT-ROOM.md),
-  for whole-copy separation, coherent guard support and the restriction `k ≥ 1`.
-
-These source files were preserved. The paper expands and reorganizes their
-argument rather than reproducing the sequence of historical research attempts.
-It does not rely on the refuted earlier side-swap or computable-rank proposals.
-
-The target, weak semantics, modal PA and completeness were checked against
-the local text of [Alexander's dissertation](../../samuel-allen-alexander/text/2013-the-theory-of-several-knowing-machines.txt).
-The source-based ordinal arguments retain explicit numbered references to
-Wilken's *Pure Σ₂-Elementarity beyond the Core*, arXiv:1710.01870v5,
-as recorded in the hand extraction and audit; the archived primary text is
-[here](../../samuel-allen-alexander/audit-3-1-x-claude-2026-09-30/sources/w2.txt).
-The writing pass read the extraction, closure verification and audit, and did
-not independently reprove every published ordinal theorem they use. The
-manuscript's references link to the original dissertation and Wilken publication.
-Copyrighted primary PDFs have not been copied into this paper folder.
-
-## Style and scope
-
-The presentation reference actually read was
-[biological-unavoidability-submission/paper.tex](../../biological-unavoidability-submission/paper.tex),
-with the corresponding Markdown and the explanatory
-[author packet](../../biological-unavoidability-author/results.tex).
-The paper uses their readable article layout and construction–explanation–proof
-organization. Its LaTeX source is maintained directly, rather than generated
-from a different project's preamble.
-
-The complete proposed hand proof is a different artifact from the unfinished
-Lean translation. [source-map.json](source-map.json) records that distinction,
-including the existing comparator target and formalization metadata locations.
-Subject correspondence does not establish statement equivalence or certify
-any Lean declaration. Existing Lean sources and metadata were not edited.
-
-The document build checks syntax, references and rendering. The source map
-records SHA-256 fingerprints for the manuscript, proof sources, audit and style
-reference so their exact correspondence can be inspected later. A future
-mathematical defect would require revising the proof; successful PDF rendering
-does not rule one out.
+This placement adds no mathematical argument or Lean source change. The
+[comparison](../alexander-dissertation-lean/paper/LEAN-COMPARISON-2026-10-13.md)
+states the formal result's scope. The
+[public CI result](https://github.com/avg-netizen/alexander-open-problems-results/actions/runs/38453360717)
+checks the completed proof closure and paper extensions, with all 107 axiom
+reports passing. The earlier source notes and historical verification record
+remain described in the [archived provenance](archive/2026-10-03/PROVENANCE.md).
+No independent human mathematical review has been recorded, and nothing has
+been sent to the source authors.

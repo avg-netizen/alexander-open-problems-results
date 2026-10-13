@@ -1,78 +1,45 @@
-# Full 3-1-3 — explanatory proof paper
+# Dissertation Question 3-1-3 — revised proof
 
-> **Placement, 3 October 2026.** This paper was moved here from the owner's working directory.
-> The manuscript (`paper.tex`, `paper.pdf`) is unchanged; only relative paths in this README,
-> `PROVENANCE.md` and `source-map.json` were updated for the new location.
-> Links that begin with `../../` (the hand notes, audits, dissertation text, style source and
-> historical Lean metadata) point into that local working tree. They are not part of this
-> repository and will not resolve on GitHub.
+Read the **[31-page revised proof PDF](REVISED-3-1-3-PROOF.pdf)**:
+*An affirmative 3-1-3 proof using finite guards*, dated 8 October 2026.
+The [Markdown manuscript](REVISED-3-1-3-PROOF.md) is the supplied revised paper,
+preserved without editing. This is the current paper for note 17.
 
-> **13 October 2026:** this folder retains the earlier 3 October paper. The
-> [revised finite-guard proof PDF](../alexander-dissertation-lean/paper/REVISED-3-1-3-PROOF.pdf),
-> [current Lean project](../alexander-dissertation-lean/README.md) and
-> [detailed comparison](../alexander-dissertation-lean/paper/LEAN-COMPARISON-2026-10-13.md)
-> are now included in this repository.
+The [Lean project](../alexander-dissertation-lean/README.md) includes the completed
+unconditional 3-1-1, 3-1-2 and 3-1-3 comparator proofs and the additional paper
+conclusions. [Public CI passed](https://github.com/avg-netizen/alexander-open-problems-results/actions/runs/38453360717)
+compilation and all 107 axiom reports. The
+[paper-to-Lean comparison](../alexander-dissertation-lean/paper/LEAN-COMPARISON-2026-10-13.md)
+records the precise correspondence, construction differences and remaining
+scope qualifications; the Lean proof uses the completed Carlson ordinal package.
 
-Read **[paper.pdf](paper.pdf)**. The editable, canonical manuscript is
-[paper.tex](paper.tex).
+## Earlier paper
 
-This is a standalone 20-page presentation of the complete proposed affirmative
-hand proof for Alexander's Question 3-1-3, for every recursively enumerable
-well-founded hierarchy and unrestricted modal formulas. Questions 3-1-1 and
-3-1-2 follow as corollaries. The paper includes the fixed common theory,
-recorded auxiliary syntax, the complete generator rules, finite-support
-collapse, fixed-label transport, fully sound reconstruction, core and
-whole-ideal genericity, actual-family soundness, known schemas, the original
-language reduct, and the uniform typed ordinal extraction from Wilken.
-
-The layout and explanatory approach follow
-[the biological-unavoidability submission paper](../../biological-unavoidability-submission/paper.tex):
-11-point Latin Modern, one-inch margins, spaced paragraphs, a theorem near the
-beginning, displayed constructions, and prose explanations followed by proofs.
-The manuscript is newly written here; it does not use this repository's
-`preamble.tex` or its document template.
-
-## Proof and verification status
-
-The source hand proof and its recorded modal and ordinal checks are complete
-at the **proposed hand-proof** level. The paper incorporates the final typed
-ordinal-closure verification, rather than leaving the ordinal package as an
-additional hypothesis. No external peer review or literature priority is claimed.
-
-The [current Lean formalization](../alexander-dissertation-lean/README.md) has
-unconditional proofs of the three independent comparator targets. It follows
-the revised finite-guard construction with a Carlson ordinal package; the
-[comparison](../alexander-dissertation-lean/paper/LEAN-COMPARISON-2026-10-13.md)
-records its scope and differences from the prose. This earlier paper's
-[source map](source-map.json) retains its original draft correspondence as a
-historical snapshot and adds links to the current embedded formalization.
+The 3 October 2026 paper is retained in
+[archive/2026-10-03/](archive/2026-10-03/README.md), with its
+[20-page PDF](archive/2026-10-03/paper.pdf), LaTeX manuscript, source map,
+provenance and build records. Its manuscript and PDF are unchanged. The archive's
+proof-status statements describe that earlier snapshot.
 
 ## Files and reproduction
 
-- `paper.tex`, `paper.pdf`: canonical source and compiled manuscript.
-- [PROVENANCE.md](PROVENANCE.md): mathematical sources, style source and contribution scope.
-- [source-map.json](source-map.json): manuscript claims and sections mapped to
-  the original hand notes, primary sources and separate formalization metadata.
-- [build_documents.py](build_documents.py): reproducible document build using
-  cached Tectonic resources by default.
-- `paper.log`, `build-output.txt`, [build-report.json](build-report.json):
-  final build diagnostics, PDF/source hashes and cross-reference checks.
+- [REVISED-3-1-3-PROOF.md](REVISED-3-1-3-PROOF.md): current manuscript.
+- [REVISED-3-1-3-PROOF.pdf](REVISED-3-1-3-PROOF.pdf): 31-page typeset version with 66 section bookmarks.
+- [REVISED-3-1-3-PROOF.tex](REVISED-3-1-3-PROOF.tex): generated LaTeX.
+- [build_pdf.py](build_pdf.py), [pdf-format.lua](pdf-format.lua) and
+  [pdf-header.tex](pdf-header.tex): reproducible typesetting files.
+- [pdf-build-report.json](pdf-build-report.json): recorded PDF checks and hashes.
+- [PROVENANCE.md](PROVENANCE.md) and [source-map.json](source-map.json): source identity and placement records.
 
-From this directory, with Tectonic and Poppler's `pdfinfo`, `pdftotext` and
-`pdffonts` installed:
+From this directory, with Pandoc, Tectonic and Poppler installed:
 
 ```sh
-python3 build_documents.py
+python3 build_pdf.py
 ```
 
-Use `--allow-downloads` only if Tectonic resources are missing and downloads
-are wanted. The recorded build used only cached resources. Standard XeLaTeX
-or PDFLaTeX can also compile `paper.tex` with its listed packages; those engines
-were not separately tested here.
-
-The final build resolved every reference and citation, had no overfull boxes
-or missing glyphs, and embedded all PDF fonts. Representative rendered pages
-(opening, theory construction, generator table and conclusion) were visually
-inspected. These are document checks, not a new mathematical audit or Lean
-certification. One minor underfull paragraph in the bibliography is reported
-in the build metadata.
+The default uses cached TeX resources; `--allow-downloads` permits missing
+resources to be downloaded. All seven manuscript and typesetting files were
+copied byte for byte from the
+[paper bundle inside the Lean project](../alexander-dissertation-lean/paper/README.md).
+That copy remains alongside the proofs so the imported project is self-contained.
+No independent human mathematical review has been recorded.
