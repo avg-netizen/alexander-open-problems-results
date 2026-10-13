@@ -1,0 +1,133 @@
+name: Compile dissertation knowing-machine proofs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'alexander-dissertation-lean/**'
+      - '.github/workflows/compile-dissertation-lean.yml'
+  pull_request:
+    paths:
+      - 'alexander-dissertation-lean/**'
+      - '.github/workflows/compile-dissertation-lean.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dissertation-lean-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  knowing-machine-proofs:
+    name: Unconditional 3-1-1, 3-1-2, 3-1-3 and paper conclusions
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+        working-directory: alexander-dissertation-lean
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check repository checksums
+        working-directory: .
+        run: sha256sum --check --quiet SHA256SUMS
+      - name: Record exact proof inputs
+        run: |
+          mkdir -p logs
+          git rev-parse HEAD | tee logs/commit.txt
+          git ls-files '*.lean' | xargs sha256sum > logs/lean-sources.sha256
+          sha256sum lean-toolchain lakefile.toml lake-manifest.json > logs/dependency-pins.sha256
+          cp README.md logs/README.snapshot.md
+          sha256sum paper/REVISED-3-1-3-PROOF.md > logs/paper.sha256
+          cp paper/LEAN-COMPARISON-2026-10-13.md logs/paper-comparison.snapshot.md
+          test "$(git hash-object Alexander313/ComparatorChallenge.lean)" = a7e8fbd6eadd102465a8244a9ade9a3f06d5265e
+      - name: Reserve disk space for Lean and mathlib
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet
+          df -h .
+      - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: alexander-dissertation-lean
+          auto-config: 'false'
+          build: 'false'
+          test: 'false'
+          lint: 'false'
+          use-mathlib-cache: 'false'
+          use-github-cache: 'false'
+      - name: Fetch pinned mathlib build artifacts
+        run: |
+          set -o pipefail
+          lake exe cache get 2>&1 | tee logs/dependencies.log
+          test -f .lake/packages/mathlib/.lake/build/lib/lean/Mathlib/Computability/Primrec/Basic.olean
+      - name: Restore project build products
+        uses: actions/cache/restore@v4
+        with:
+          path: alexander-dissertation-lean/.lake/build
+          key: dissertation-lean-${{ runner.os }}-${{ hashFiles('alexander-dissertation-lean/lean-toolchain', 'alexander-dissertation-lean/lake-manifest.json') }}-${{ github.sha }}
+          restore-keys: |
+            dissertation-lean-${{ runner.os }}-${{ hashFiles('alexander-dissertation-lean/lean-toolchain', 'alexander-dissertation-lean/lake-manifest.json') }}-
+      - name: Compile unconditional proofs, paper conclusions and core controls
+        id: build
+        run: |
+          set -o pipefail
+          timeout --kill-after=10s 30m lake build +Alexander313.Thesis313Unconditional +Alexander313.PaperComparison +Alexander313.Carlson.CorePresentationExamples 2>&1 | tee logs/build.log
+      - name: Check the effective ordinal core and its axioms
+        id: core
+        run: |
+          set -o pipefail
+          lake env lean CompileCarlsonCorePresentation.lean 2>&1 | tee logs/core.log
+          python3 scripts/check_axioms.py logs/core.log | tee logs/core-audit.log
+      - name: Check all three unconditional comparator targets and their axioms
+        id: completion
+        run: |
+          set -o pipefail
+          lake env lean Completion.lean 2>&1 | tee logs/completion.log
+          python3 scripts/check_axioms.py logs/completion.log | tee logs/completion-audit.log
+      - name: Check revised-paper schemas, inheritance and their axioms
+        id: paper
+        run: |
+          set -o pipefail
+          lake env lean CompileRevisedPaper.lean 2>&1 | tee logs/revised-paper.log
+          python3 scripts/check_axioms.py logs/revised-paper.log | tee logs/revised-paper-audit.log
+      - name: Publish verification summary
+        if: always()
+        env:
+          CHECKED_COMMIT: ${{ github.sha }}
+          BUILD_RESULT: ${{ steps.build.outcome }}
+          CORE_RESULT: ${{ steps.core.outcome }}
+          COMPLETION_RESULT: ${{ steps.completion.outcome }}
+          PAPER_RESULT: ${{ steps.paper.outcome }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          rows = [('Compilation', 'BUILD_RESULT'), ('Effective ordinal core', 'CORE_RESULT'),
+                  ('Unconditional 3-1-1 / 3-1-2 / 3-1-3', 'COMPLETION_RESULT'),
+                  ('Literal codes, parameter mechanicalness and inheritance', 'PAPER_RESULT')]
+          summary = '# Dissertation proof verification\n\n'
+          summary += 'Checked commit: `' + os.environ['CHECKED_COMMIT'] + '`\n\n'
+          summary += '| Check | Result |\n|---|---|\n'
+          summary += ''.join('| ' + label + ' | ' + os.environ.get(key, '') + ' |\n'
+                             for label, key in rows)
+          summary += '\nAllowed axioms: `propext`, `Classical.choice`, `Quot.sound`.\n'
+          summary += '\nScope: the completed proof dependency closure and its gates. '
+          summary += 'The retained unfinished Wilken aggregate is outside this build.\n'
+          Path(os.environ['GITHUB_STEP_SUMMARY']).write_text(summary)
+          PY
+      - name: Save successful project build products
+        if: success()
+        uses: actions/cache/save@v4
+        with:
+          path: alexander-dissertation-lean/.lake/build
+          key: dissertation-lean-${{ runner.os }}-${{ hashFiles('alexander-dissertation-lean/lean-toolchain', 'alexander-dissertation-lean/lake-manifest.json') }}-${{ github.sha }}
+      - name: Publish proof logs and input hashes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dissertation-proof-verification
+          path: alexander-dissertation-lean/logs/
+          if-no-files-found: warn

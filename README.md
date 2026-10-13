@@ -60,6 +60,15 @@ Nothing here duplicates it.
 
 ## Dissertation formalisation and revised proof
 
+[![Dissertation proof CI](https://github.com/avg-netizen/alexander-open-problems-results/actions/workflows/compile-dissertation-lean.yml/badge.svg?branch=codex%2Fdissertation-documents-and-lean&event=pull_request)](https://github.com/avg-netizen/alexander-open-problems-results/actions/workflows/compile-dissertation-lean.yml)
+
+The public [proof-compilation workflow](.github/workflows/compile-dissertation-lean.yml)
+builds the completed proof dependencies and checks all three unconditional
+comparator targets, the effective ordinal core and the added paper conclusions.
+Every gate audits its axioms against `propext`, `Classical.choice` and `Quot.sound`.
+The run publishes logs and exact source hashes. The retained unfinished Wilken
+aggregate is outside this build.
+
 [alexander-dissertation-lean/](alexander-dissertation-lean/README.md) contains
 the full tracked Lean project, including the earlier Wilken development and the
 completed Carlson route. Its [import record](alexander-dissertation-lean/IMPORT-PROVENANCE.json)

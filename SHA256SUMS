@@ -1,3 +1,4 @@
+31e4ed42d98ef4b15f891b1116a2ebe94985b04c27c457e62a1fb55deebefd58  ./.github/workflows/compile-dissertation-lean.yml
 5754fdf31bdb7e1873b3ed1b35bd34de5db336ea44dd55591f9ba86a60fd8dd5  ./.gitignore
 1e72e79790ab3f6dbd96b5303c9c12f48457c12088249fd5f96628de6efd58a0  ./01-quitters-and-question-26/quitters.md
 e3a8b3b30597626147967c7373149e06841eb5adca730a18a642f4309e848868  ./01-quitters-and-question-26/quitters.pdf
@@ -60,7 +61,7 @@ fd5fca2ee8406ea55471cc189f278a4d912fd56ad4756d6cfc393ecade52940f  ./17-dissertat
 24e973cf8544e663fcb768212229a28d0ee69bbbc57d9eeeb80a757a9d715494  ./17-dissertation-question-3-1-3/source-map.json
 b6b2964592f5bfcc143ea836d5794d8cfa89de26a89d37a819e44458d4e42c57  ./CORRECTIONS.md
 6b6d32ccf3727edcbd927f4c856579998fb1e805df5267220cd7aea39c3b8942  ./PROVENANCE.md
-8f05e31bbc8b0de9b22e29698b1f847b0f4276c3a68039173bdfbbecf9be6945  ./README.md
+f38444f67d96fc8c5f8dd1a0bd605061014bcd6413091e42a59be3a2e4b2995f  ./README.md
 6aaed04783f9f7a527e72c4ba1a51c40ed489ff32414a7ac6eb67776e2f8a33b  ./alexander-dissertation-lean/.github/workflows/compile-311.yml
 1f2467470166c1e1c899e97a24154e97c8b267f71a4f6488293984e80dc5e927  ./alexander-dissertation-lean/.github/workflows/compile-313-package.yml
 696adee02a805030e5939487920877c027dc86ea28edee26002b1c99da56c47b  ./alexander-dissertation-lean/.github/workflows/compile-carlson-core-presentation.yml
