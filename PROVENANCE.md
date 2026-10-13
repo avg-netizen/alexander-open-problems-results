@@ -75,7 +75,7 @@ author.
 
 OpenAI Codex wrote the paper in note 17, at the owner's request. It expands the proposed hand
 proof assembled over 30 September – 2 October 2026 in working notes that are not published
-here. Its own [PROVENANCE.md](17-dissertation-question-3-1-3/PROVENANCE.md) lists those sources and
+here. Its own [PROVENANCE.md](17-dissertation-question-3-1-3/archive/2026-10-03/PROVENANCE.md) lists those sources and
 the checks recorded on them: a hand audit of the modal argument, conditional on its ordinal
 input, and a follow-up verification of the uniform typed ordinal closure that condition required.
 
@@ -103,3 +103,18 @@ The preceding proof checkpoint `02be37a` passed its focused
 Local validation of that development covered 321 project modules and 107 axiom
 reports. This placement and naming change adds no new mathematical audit;
 the embedded comparison and receipts state the formal result's scope.
+
+## 13 October 2026: revised paper as the main note 17
+
+At the owner's request, OpenAI Codex archived the earlier 3 October paper and
+its build records under `17-dissertation-question-3-1-3/archive/2026-10-03/`.
+The manuscript and PDF are unchanged. Relative references in the archived
+documentation and source map were rebased for that location.
+
+The current [31-page revised paper](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf)
+and its source and typesetting files are now directly in note 17, with links
+at the top of the repository index and in the results table. They were copied
+byte for byte from the embedded Lean project's existing paper bundle, which
+remains intact. The [placement provenance](17-dissertation-question-3-1-3/PROVENANCE.md)
+and source map record their identity and the archive location. No Lean proof
+or mathematical text was edited in this reorganization.
