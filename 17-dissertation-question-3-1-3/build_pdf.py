@@ -1,4 +1,4 @@
-"""Typeset the unchanged revised proof using Pandoc and Tectonic."""
+"""Typeset the standalone proof manuscript using Pandoc and Tectonic."""
 
 import argparse
 from datetime import datetime, timezone
@@ -61,7 +61,7 @@ def main():
             "tectonic": run(["tectonic", "--version"]).strip(),
             "overfull_boxes": re.findall(r"^Overfull.*$", log, re.M),
             "missing_glyphs_or_unresolved_references": errors,
-            "scope": "Typesetting of the supplied prose proof; source text unchanged.",
+            "scope": "Typesetting of the standalone manuscript; no mathematical verification.",
         }
         (ROOT / "pdf-build-report.json").write_text(json.dumps(report, indent=2) + "\n")
         print(json.dumps(report, indent=2))

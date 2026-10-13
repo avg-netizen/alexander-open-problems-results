@@ -1,40 +1,40 @@
 {
   "schema_version": 1,
   "project_id": "alexander-dissertation-3-1-3-revised-paper",
-  "paper_date": "2026-10-08",
+  "paper_date": "2026-10-13",
   "placed_at": "2026-10-13",
-  "title": "An affirmative 3-1-3 proof using finite guards",
+  "title": "Knowing machines with mutual truthfulness and mechanicalness",
   "path_base": "this_directory",
   "canonical_manuscript": "REVISED-3-1-3-PROOF.md",
   "pdf": "REVISED-3-1-3-PROOF.pdf",
-  "pdf_pages": 31,
-  "source_bundle": "../alexander-dissertation-lean/paper/README.md",
+  "pdf_pages": 33,
+  "source_bundle": "archive/2026-10-08/README.md",
   "source_commit": "b06b50a9bdc61f6c620985bf322ad5edbd2e98d0",
-  "copy_scope": "All seven paper and typesetting files copied without editing from the embedded Lean bundle.",
+  "copy_scope": "Standalone editorial revision of the 8 October source; parent seven-file bundle retained unchanged in a dated archive and the embedded Lean project.",
   "artifacts": {
     "REVISED-3-1-3-PROOF.md": {
-      "sha256": "bc012600043e35b9a415311614b31fbc9e2b61847af044fe1a3452f0a185c16a",
-      "bytes": 93123
+      "sha256": "3c88210decad9067d6ec0f17b1c4233bd89888238143cc1a85dee862bbabf02d",
+      "bytes": 98956
     },
     "REVISED-3-1-3-PROOF.pdf": {
-      "sha256": "3cf586d0dfe1ae36d41dc3e77a9f1d91ac8e38ba01a7ad6237057c22cd3efabf",
-      "bytes": 192149
+      "sha256": "e185cc8456f29f8bec3d6584818be9d25b875c813b4c05eaaf83e112fc420b28",
+      "bytes": 194288
     },
     "REVISED-3-1-3-PROOF.tex": {
-      "sha256": "3fa352325e74622c20036820b5421f7a6efd30fbd6e703989fe0286b4f6de088",
-      "bytes": 101815
+      "sha256": "de0fdba7e092c7fe60d50a7cf9c3decf338cc83247f59ac4b2412dd812b841a4",
+      "bytes": 106496
     },
     "build_pdf.py": {
-      "sha256": "fa519743419eb832e58438449487e52c21f11241157337494747c34c36b19a46",
-      "bytes": 3029
+      "sha256": "d7221aefca7ba0422078bc0c71588ece34b4aa22866922a88117b210837de849",
+      "bytes": 3041
     },
     "pdf-build-report.json": {
-      "sha256": "a50ea7e781ec93814917b7d492178b0d167c56b85c47faba4d2ccc81473c90af",
-      "bytes": 527
+      "sha256": "15d4c8882983dc12cdffde95fe0723bd9803a0a56fec6754850209a62b2447c0",
+      "bytes": 535
     },
     "pdf-format.lua": {
-      "sha256": "2fd0a391b1da569d4df8f0355a53dc817d35b1c33282a526401ba6bb8b2e665b",
-      "bytes": 1060
+      "sha256": "0c732f1e699a0892d43ffb5f762997eb525ecb865b9697510c9e3bff7235df1a",
+      "bytes": 1359
     },
     "pdf-header.tex": {
       "sha256": "12b978504d8fdb251b3ecfebd073d0be1ad1cf172f3064419312bf5ee90780dd",
@@ -61,5 +61,28 @@
     "axiom_reports": 107,
     "scope": "Completed unconditional comparator targets and added paper conclusions using the constructed Carlson package; the linked comparison owns construction differences and remaining limitations."
   },
-  "placement_validation_scope": "Navigation, exact copied/archived artifact hashes and source identity; no new mathematical audit."
+  "placement_validation_scope": "Standalone exposition, preservation of the main theorem/lemma statements and mathematical expressions, document checks and navigation; no new mathematical or Lean certification.",
+  "original_imported_bundle": "../alexander-dissertation-lean/paper/README.md",
+  "parent_edition": {
+    "date": "2026-10-08",
+    "archive": "archive/2026-10-08/README.md",
+    "manuscript": "archive/2026-10-08/REVISED-3-1-3-PROOF.md",
+    "pdf": "archive/2026-10-08/REVISED-3-1-3-PROOF.pdf",
+    "manuscript_sha256": "bc012600043e35b9a415311614b31fbc9e2b61847af044fe1a3452f0a185c16a",
+    "pdf_sha256": "3cf586d0dfe1ae36d41dc3e77a9f1d91ac8e38ba01a7ad6237057c22cd3efabf"
+  },
+  "editorial_revision": {
+    "base_commit": "e6ba6bc5058fb252cd34e099b2818ae3cf82dd35",
+    "review_record": "standalone-editorial-review.json",
+    "construction_comparison": "CONSTRUCTION-COMPARISON.md",
+    "preservation": {
+      "main_theorem_statement_byte_identical": true,
+      "numbered_lemma_statements_byte_identical": 18,
+      "all_displayed_math_byte_identical": 104,
+      "proof_sections_1_to_17_math_preserved_in_order": 888,
+      "all_original_numbered_sections_retained": 18,
+      "archived_original_bundle_files_byte_identical": 7,
+      "embedded_lean_project_changes": 0
+    }
+  }
 }
