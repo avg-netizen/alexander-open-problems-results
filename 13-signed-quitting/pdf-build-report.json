@@ -1,0 +1,22 @@
+{
+  "built_at_utc": "2026-10-21T04:08:30.302237+00:00",
+  "source": "signed-quitting.md",
+  "source_sha256": "137278314e7257885403c328a50e499d3ed1aa1d11efeb566a7462837017c77e",
+  "tex_sha256": "d9020f8350964d3a06027856528eff77630c4a3d621c91e31c06c80f67b63ef7",
+  "pdf_sha256": "f9e704529bdd5a9f2ddab8a9408285f4d4e634aa9e33603bd66dba65e9a55fe8",
+  "pages": 1,
+  "proof_endings_source": 0,
+  "proof_endings_pdf": 0,
+  "embedded_fonts": [
+    "CMR17",
+    "CMR12",
+    "CMBX12",
+    "CMR10",
+    "CMTI10"
+  ],
+  "diagnostics": [],
+  "network_resources_allowed": false,
+  "pandoc": "pandoc 3.11",
+  "tectonic": "Tectonic 0.17.0",
+  "scope": "Document checks; no independent mathematical verification."
+}

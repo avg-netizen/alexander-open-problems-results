@@ -1,0 +1,31 @@
+{
+  "built_at_utc": "2026-10-21T04:11:38.437122+00:00",
+  "source": "pseudovisibility-private-information.md",
+  "source_sha256": "2ec9e152f066484cf8515539f75aa43a534fc51f6ae9c28664bc16f14634e212",
+  "tex_sha256": "528c284b11a6ed9bb4cdcc1b3d6a0c9679e7b9661d41d425015351c8bf059c06",
+  "pdf_sha256": "c471199f0a0f5dbd4f3809a339f152a583cca49124236d6441957b84dbaf93ef",
+  "pages": 6,
+  "proof_endings_source": 4,
+  "proof_endings_pdf": 4,
+  "embedded_fonts": [
+    "CMR17",
+    "CMR12",
+    "CMBX10",
+    "CMR10",
+    "CMBX12",
+    "CMTI10",
+    "CMMI10",
+    "CMSY10",
+    "MSAM10",
+    "CMMI8",
+    "CMR8",
+    "CMEX10",
+    "CMSY8",
+    "Cmr10"
+  ],
+  "diagnostics": [],
+  "network_resources_allowed": false,
+  "pandoc": "pandoc 3.11",
+  "tectonic": "Tectonic 0.17.0",
+  "scope": "Document checks; no independent mathematical verification."
+}

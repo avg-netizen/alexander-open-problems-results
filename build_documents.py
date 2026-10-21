@@ -7,7 +7,7 @@ DejaVu Math TeX Gyre), which cover the Unicode mathematics used in the notes;
 Usage:  python3 build_documents.py [--allow-downloads] [folder ...]
 By default tectonic runs with --only-cached; pass --allow-downloads on a first run so it can
 fetch the LaTeX packages it needs.
-Entries 06, 08, 10 and 11 delegate to build_explanatory.py and use Computer Modern.
+Entries 01, 06, 08–13 delegate to build_explanatory.py and use Computer Modern.
 """
 import argparse
 import subprocess
@@ -45,8 +45,10 @@ parser.add_argument("folders", nargs="*", default=list(DOCUMENTS))
 args = parser.parse_args()
 
 for folder in args.folders:
-    if folder in {"06-founding-cohort-species", "08-internodon-order-robustness",
-                  "10-species-equivalence-and-iap-completeness", "11-bounded-founders"}:
+    if folder in {"01-quitters-and-question-26", "06-founding-cohort-species",
+                  "08-internodon-order-robustness", "09-further-results",
+                  "10-species-equivalence-and-iap-completeness", "11-bounded-founders",
+                  "12-pseudovisibility-private-information", "13-signed-quitting"}:
         command = [sys.executable, str(ROOT / "build_explanatory.py")]
         if args.allow_downloads:
             command.append("--allow-downloads")

@@ -1,0 +1,30 @@
+{
+  "built_at_utc": "2026-10-21T04:08:26.962234+00:00",
+  "source": "further-results.md",
+  "source_sha256": "7257b68dfb659fc82aa230ea81175ac8b3626bafbcd031893501f4a05b7043ea",
+  "tex_sha256": "9ceadb1e2fd1bb16946c6f9986886c6b7e578534c702039239afb33b68ad19e2",
+  "pdf_sha256": "a176790bdd13affc19dfb97f4a9a4435ca6c288052db689030574aeb7e624ccc",
+  "pages": 4,
+  "proof_endings_source": 1,
+  "proof_endings_pdf": 1,
+  "embedded_fonts": [
+    "CMR17",
+    "CMR12",
+    "CMBX10",
+    "CMR10",
+    "CMBX12",
+    "CMTI10",
+    "CMSY10",
+    "CMMI10",
+    "CMMI8",
+    "CMEX10",
+    "CMSY8",
+    "MSAM10",
+    "CMR8"
+  ],
+  "diagnostics": [],
+  "network_resources_allowed": false,
+  "pandoc": "pandoc 3.11",
+  "tectonic": "Tectonic 0.17.0",
+  "scope": "Document checks; no independent mathematical verification."
+}

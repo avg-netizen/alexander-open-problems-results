@@ -179,3 +179,27 @@ formula-preservation claim or an independent mathematical audit.
 It adds no human review, proof-assistant certificate or priority
 finding. The [revision record](REVISIONS.md) and the two source maps
 state the exact editorial and computational scope.
+
+## 21 October 2026: tiers 3–4 explanatory editions
+
+OpenAI Codex, at the owner's request, rewrote pseudo-visibility
+(09 Section 1 with 12) and quitting (01 with 13), and replaced the
+old 09 collection with a clean current research companion.
+The papers use Computer Modern, worked examples, explicit assumptions,
+vector figures and repository-contained source/build guides.
+Historical draft corrections are kept outside the current papers.
+
+The assembling agent checked the source definitions and the actual
+saved experiment protocols. The quitting proof now includes fixed
+encoding-cost bookkeeping and a full special-program parsing argument;
+the learning theorem states the noise law used by its sample averages.
+These explanatory changes are substantive and are not presented as
+verbatim preservation or independent verification.
+
+Earlier MD/PDF pairs and existing computational programs/outputs
+retain their hashes. The [revision record](REVISIONS.md) and
+[verification record](editorial-verification-tiers3-4-2026-10-21.json)
+state the checks. No new training run, independent human review,
+proof-assistant certification, author contact or priority result
+was added. The private literature-checkpoint intake is separate
+and is not included in the public paper changes.
