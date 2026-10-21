@@ -20,3 +20,10 @@ __pycache__/
 !18-dissertation-problem-3-2-1/supplemental/additional-results.tex
 !18-dissertation-problem-3-2-1/pdf-header.tex
 !18-dissertation-problem-3-2-1/pdf-fonts.tex
+# Current explanatory editions retain their generated TeX and shared headers.
+!explanatory-fonts.tex
+!explanatory-header.tex
+!06-founding-cohort-species/founding-cohort-species.tex
+!08-internodon-order-robustness/internodon-order-robustness.tex
+!10-species-equivalence-and-iap-completeness/species-equivalence-and-iap-completeness.tex
+!11-bounded-founders/bounded-founders.tex

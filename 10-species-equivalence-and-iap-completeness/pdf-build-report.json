@@ -1,0 +1,22 @@
+{
+  "built_at_utc": "2026-10-21T02:31:01.509000+00:00",
+  "source": "species-equivalence-and-iap-completeness.md",
+  "source_sha256": "23cc5a1a1c1d0a9e08f09f3db9587f768bcaa66bf846852057047c85e34edb5a",
+  "tex_sha256": "ea2d6086f5639b0a88954c5b118948d61ebae7c4baca04be42397cb5f83433cb",
+  "pdf_sha256": "e5f728d8ddff76941f85871d5ed418e226d95c3ccb6674ae718321592183e1b0",
+  "pages": 1,
+  "proof_endings_source": 0,
+  "proof_endings_pdf": 0,
+  "embedded_fonts": [
+    "CMR17",
+    "CMR12",
+    "CMBX12",
+    "CMR10",
+    "CMTI10"
+  ],
+  "diagnostics": [],
+  "network_resources_allowed": false,
+  "pandoc": "pandoc 3.11",
+  "tectonic": "Tectonic 0.17.0",
+  "scope": "Document checks; no independent mathematical verification."
+}

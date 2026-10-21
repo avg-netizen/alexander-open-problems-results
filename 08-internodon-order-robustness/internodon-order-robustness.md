@@ -1,227 +1,468 @@
 ---
-title: "Does the undirforest depend drastically on the birth order?"
-subtitle: "On the concluding conjecture of S. A. Alexander, A. de Bruin and D. J. Kornet, *An Alternative Construction of Internodons: The Emergence of a Multi-level Tree of Life* (2015)"
-date: "25 September 2026"
+title: "Birth-order sensitivity of undirforests and internodons"
+subtitle: "An exact swap theorem and finite genealogical measurements"
+date: "21 October 2026"
+abstract: |
+  The undirforest construction turns a birth-ordered genealogy into a
+  forest on the same organisms. We identify its finite version with
+  the augmented merge tree of the graph's superlevel components.
+  An adjacent swap of incomparable births leaves the forest unchanged
+  precisely when no younger component meets both organisms; otherwise
+  it replaces exactly one clade. This gives a clade-distance bound along
+  any sequence of valid swaps. The usual interleaving stability theorem
+  supplies a separate bound in birth-height units. Neither bound
+  controls the internodon membership of fixed organisms. Saved
+  simulations illustrate the distinction: within-generation reorderings
+  can change most parent pointers, while separating 18--31 percent of
+  pairs that originally shared an internodon in a dedicated comparison
+  sample. We define the denominators, finite-window conventions and
+  sampling protocol explicitly. The results give precise partial
+  answers to the robustness question, rather than a general biological
+  robustness theorem.
 ---
 
-> **Correction (27 September 2026).** An external audit found that the empirical conclusion of
-> §§3 and 5 is overstated, and the statistic I used is to blame. The two proved results (§1, §2)
-> are unaffected.
->
-> 1. **The all-pairs statistic hides lost co-membership.**
->    - The reported 4–14% is the share of *all* organism pairs whose same/different status changes.
->      Most pairs were never co-members, so that figure is small almost by construction.
->    - Measured on originally co-clustered pairs, reordering within generations separated
->      **18–32%** of them. The Jaccard overlap of co-member pairs was 0.48–0.73.
->    - Single comparisons lost up to 52–61% of original co-memberships. Two independent
->      re-computations with fresh draws agree: `../audit-2026-09-27/controls.json` (the audit's) and
->      `comembership_check.py` → `comembership-check.json` (this folder).
->    - So "species membership almost intact" is **not** warranted. The partition is moderately
->      robust at best.
-> 2. **The "arbitrary order" sampler is not uniform.** `order_robustness_any.py` picks uniformly
->    among the currently available vertices, not uniformly over linear extensions. For a→c plus an
->    isolated b, it gives abc 1/4, acb 1/4 and bac 1/2.
-> 3. **One label is a code convention, not the source definition.** An organism that is not SD and
->    has no SD ancestor gets a synthetic singleton label; under Definition 9 it lies in no
->    internodon. In the audited draws, restricting to covered organisms left the co-membership
->    metrics unchanged.
->
-> Also, merge-tree interleaving stability does not by itself preserve the internodon labels of fixed
-> organisms. The labelled-pair persistence conjecture (note 09, §5.2) remains open.
+# 1. One construction, several meanings of change
 
-**Status.**
-- The merge-tree identification (§1) and the adjacent-swap locality lemma (§2) are hand proofs,
-  each also checked exhaustively on random genealogies.
-- §§3 and 5 are finite measurements on one genealogy model.
-- No independent review. Whether the merge-tree identification already appears in the
-  phylogenetics literature was not checked.
+Alexander, de Bruin and Kornet [A] construct a forest from a
+genealogical directed acyclic graph with distinct birthdates. In
+their concluding discussion they ask whether biological undirforests
+depend drastically on the topological order chosen for the births.
+The question deliberately leaves the meaning of "drastically" open.
 
-**Source.** S. A. Alexander, A. de Bruin and D. J. Kornet, *An alternative construction of
-internodons: the emergence of a multi-level tree of life*, Bulletin of Mathematical Biology, 2015.
-[doi:10.1007/s11538-014-0048-2](https://doi.org/10.1007/s11538-014-0048-2). The concluding
-conjecture (printed pp. 43–44) reads: the construction takes "a DAG along with distinct
-birthdates and produced a forest… We suspect that in some sense, biological undirforests do not
-depend drastically on which topological order is used."
+A forest on named organisms contains several kinds of information.
+It gives each organism a parent in the derived forest. It gives a
+hierarchy of clades. With an additional SD classification, it yields
+internodons. A change can be small in one of these descriptions
+and large in another.
 
-**Scripts in this folder.** All are Python 3, using numpy.
-- `undirforest.py`: the construction (Definitions 4–5), the join-tree sweep, and a check that the
-  two agree.
-- `swap_locality.py` → `swap-locality.json`: the check of the §2 lemma.
-- `order_robustness.py` → `order-robustness.json`. Its buffered mode (`python3 order_robustness.py
-  buffered`) → `order-robustness-buffered.json`.
-- `order_robustness_any.py` → `order-robustness-any.json`: arbitrary topological orders.
-- `comembership_check.py` → `comembership-check.json`: lost co-membership (added with the
-  correction).
+The simplest example has two parents \(u,v\) and their child \(z\):
+\[
+                         u\longrightarrow z\longleftarrow v.
+\]
+Both birth orders \(u,v,z\) and \(v,u,z\) are legitimate. Their
+undirforests are respectively the chains \(u\to v\to z\) and
+\(v\to u\to z\). Every parent pointer changes, but the clade
+families differ by just one replacement:
+\(\{v,z\}\) becomes \(\{u,z\}\). The full three-organism clade
+and the singleton \(\{z\}\) remain.
 
-**Answer in short.**
-1. The undirforest **is a merge tree** (the augmented join tree of the genealogy graph, with birth
-   order as height). This imports an established stability theory.
-2. **Swapping two consecutive, unrelated births changes at most one clade.** It changes nothing
-   when no younger component touches both. This is proved below and checked on 4,302 swaps.
-3. Under realistic birth-order uncertainty (reordering within generations), the forest changes a
-   great deal **at the organism level** (51–87% of undirparents change), but the **internodon
-   partition barely moves** (4–10% of organism pairs change status). **[Corrected 27 Sep 2026; see the correction box above.]**
+![The same genealogy under two valid birth orders. Left: both parents precede their child. The two derived chains replace just their inner clade.](figures/adjacent-swap.pdf){width=90%}
 
-So the conjecture is true "in some sense": for clades counted one swap at a time, and for species
-partitions. It is false for parent pointers and for the *size* of the one clade that changes.
+We first prove a general version of this local calculation. We
+then distinguish its clade bound from an imported stability bound
+for height-decorated merge trees. Finally we explain the
+internodon measurements using a statistic that counts losses
+among originally co-classified pairs. That statistic and the
+all-pairs disagreement rate answer different questions.
 
-# 1. The undirforest is a merge tree
+The structural theorems concern finite birth-ordered graphs.
+The experiments are finite-window approximations to the infinite
+biological setting of [A]. We keep those two scopes explicit.
 
-By Definition 4, x is an undirancestor of y iff an undirected path from x to y avoids x's elders:
-**y lies in x's connected component of G restricted to organisms born no earlier than x.** By
-Corollary 6, y's undirparent is its youngest undirancestor.
+# 2. The undirforest as a component sweep
 
-Now sweep through the organisms from youngest to oldest, adding each to a union-find of the
-undirected genealogy. When x is added, every current component adjacent to x merges with it. The
-*oldest vertex so far* of each such component receives x as parent. Then:
-- that vertex lies in x's component of G[born ≥ x];
-- no younger x′ has it in its component, since x′ would have merged it earlier.
+Let \(G=(V,E)\) be a finite genealogy and let
+\(r:V\to\{0,\ldots,n-1\}\) be a topological ranking: parents have
+smaller ranks than children. Write \(H\) for the underlying
+undirected graph.
 
-So the parent assigned is the youngest undirancestor. This is exactly the **augmented join tree**
-(merge tree) of the genealogy graph with height = birth rank, in the sense of Carr–Snoeyink–Axen.
+For distinct \(x,y\), the source defines \(x\) to be an
+**undirancestor** of \(y\) when an undirected path from \(x\)
+to \(y\) avoids every organism older than \(x\)
+[A, Definition 4]. Equivalently,
+\[
+ y\text{ is in the component of }x
+       \text{ in }H[\{v:r(v)\geq r(x)\}].
+\]
+An **undirparent** is an immediate undirancestor. By the source's
+Corollary 6 it is the youngest undirancestor when one exists.
+A vertex with no undirancestor is a root of the derived forest.
 
-*Check:* the brute-force Definition-4/5 construction and the join-tree sweep agree on 300 random
-genealogies with the default order and on 400 under random topological orders
-([`undirforest.py`](undirforest.py)).
+For a forest \(F\), let \(D_F[x]\) be the set containing \(x\)
+and all its descendants in \(F\). Its clade family is
+\[
+                    \mathcal K(F)=\{D_F[x]:x\in V\}.
+\]
+Clades here retain organism labels. Every vertex supplies a
+distinct clade, so this family has \(n\) members.
 
-*Consequence (established literature, not new):* merge trees are stable in the **interleaving
-distance**, which is bounded by the sup-norm change of the height function (Morozov, Beketayev and
-Weber, "Interleaving distance between merge trees", TopoInVis 2013). Changing the topological
-order changes each organism's rank by at most its displacement. The undirforests of two orders
-are therefore within interleaving distance **max displacement** of each other, in rank units.
-That is a precise, already-proved "does not depend drastically" statement, *for a metric that
-measures merge heights*. Combinatorial (edit-type) distances are a different matter. A 2025
-preprint, [arXiv 2508.02352](https://arxiv.org/pdf/2508.02352), classifies merge-tree edit
-distances by their stability under vertex perturbation; only its title was seen here. §2 and §3
-measure what happens combinatorially in this setting.
+## Theorem 1. The component-sweep description
 
-# 2. Locality of one adjacent swap
+Process vertices from youngest to oldest. On adding \(x\), merge
+the current components adjacent to \(x\). Make \(x\) the parent
+of the oldest vertex of each merged component. The resulting
+forest is exactly the source's undirforest.
 
-**Lemma.** Let u and v be consecutive in the birth order (u older), with no parent–child edge
-between them, so swapping them keeps a topological order. Let Y be the set of organisms younger
-than both, and classify the connected components of G[Y] as:
-- S: those adjacent to both u and v;
-- A: adjacent to u only;
-- B: adjacent to v only.
+**Proof.** Immediately before adding \(x\), the processed graph
+is the graph induced by vertices younger than \(x\). Each of
+its components is represented in the constructed forest by its
+oldest vertex; all its other vertices already lie below that
+representative. Adding \(x\) joins precisely the components
+touching \(x\).
 
-Then:
-1. **If S is empty, the undirforest is unchanged.**
-2. **If S is non-empty,** exactly these parent pointers change: the oldest vertex of each
-   component in S (v → u); v (u → w); and u (w → v). Here w is u's former parent. In the clade
-   family, **exactly one clade is replaced**: the inner clade {v} ∪ S ∪ B becomes {u} ∪ S ∪ A.
-   The outer clade {u, v} ∪ S ∪ A ∪ B, and every other clade, are unchanged.
+Let \(y\) be the oldest vertex in one such component. The new
+connection makes \(x\) an undirancestor of \(y\). If a younger
+undirancestor \(x'\), older than \(y\), existed, its witnessing
+path would already lie in the processed graph. Then \(x'\)
+would belong to the component containing \(y\), contrary to
+\(y\) being its oldest vertex. Thus \(x\) is the youngest
+undirancestor of \(y\) and is its undirparent.
 
-*Proof.* In the sweep, v is added immediately before u.
-- *When S is empty*, u's merges and v's merges involve disjoint sets of components. u and v are
-  not adjacent, and their merged components do not touch. Both orders therefore assign the same
-  parents and leave the same union-find partition with the same oldest vertices. The rest of the
-  sweep is identical.
-- *When S is non-empty*, the original order assigns:
-  - parent v to the oldest vertices of S and B;
-  - then parent u to those of A;
-  - and parent u to v, since the merged component touches u.
+Each non-root representative receives its parent on its first
+connection to an older vertex. The resulting relation therefore
+agrees with the source relation at every vertex. The merged
+component has oldest representative \(x\), preserving the
+invariant for the next step.
+\(\square\)
 
-  The swapped order assigns:
-  - u to the oldest vertices of S and A;
-  - v to those of B;
-  - v to u.
+This is the standard component-merging sweep, retaining a vertex
+for every organism rather than suppressing vertices of degree
+two. In this augmented sense the undirforest is a merge tree
+on each connected component. The identification is useful
+because it makes the construction's dependence on the ranking
+visible: change the ranking and the same graph is swept in a
+different order.
 
-  In both orders the partition after the pair is the same; only its oldest vertex differs (u
-  originally, v after the swap). So the vertex w that later receives it as a child is the same.
-  All other assignments coincide. The subtrees of all other vertices contain both of u, v or
-  neither, so their clades are unchanged. ∎
+# 3. Exactly what one adjacent swap changes
 
-*Check:* on 4,302 valid adjacent swaps in random genealogies, the forest changed exactly when S
-was non-empty (4,302 of 4,302), and every change replaced exactly one clade (1,637 of 1,637)
-([`swap-locality.json`](swap-locality.json)).
+Let \(u,v\) be consecutive in the ranking, with \(u\) older.
+Assume they have no parent-child edge. Consecutiveness then
+makes them incomparable in the genealogical order, so their
+ranks can be swapped.
 
-**Corollary.** Any two topological orders are joined by a sequence of adjacent swaps of
-incomparable consecutive organisms. Bubble sort does it, swapping only differently-ordered pairs,
-which are incomparable. The number of swaps is the number of differently-ordered pairs. So the
-clade families of the two undirforests differ by at most **2 × (number of swaps whose S is
-non-empty)** clades, in the Robinson–Foulds sense.
+Let \(Y\) be the vertices younger than both. Partition the
+components of \(H[Y]\) that touch the pair into three groups:
+those meeting both \(u,v\), those meeting \(u\) only, and those
+meeting \(v\) only. Write \(S,A,B\) for the respective unions
+of their vertex sets.
 
-**What stays drastic.** The replaced clade can be large: A and B may contain whole descendant
-subtrees. In the random test genealogies, the changed clade averaged 58% of the population.
-One swap moves at most one clade, but possibly a big one.
+## Theorem 2. Adjacent-swap locality
 
-# 3. Measured on genealogies with a permanent split
+If \(S\) is empty, the undirforest is unchanged. If \(S\) is
+nonempty, the clade family undergoes exactly one replacement:
+\[
+           \{v\}\cup S\cup B
+                 \quad\longmapsto\quad
+           \{u\}\cup S\cup A.
+\]
+The outer clade \(\{u,v\}\cup S\cup A\cup B\) and every other
+clade stay unchanged.
 
-These are sexual Wright–Fisher-type generations. One ancestral deme of size N splits permanently
-into two demes at generation 6, with 14 generations in all. Each child has two parents with
-probability "sex", otherwise one. Organisms of the same generation are mutually incomparable, so
-*every within-generation reordering is a valid topological order*: this is the realistic birth-order
-uncertainty. For each setting: 6 genealogies × 12 random reorderings, compared with a reference
-order ([`order-robustness.json`](order-robustness.json)).
+More precisely, the oldest vertex of each shared component
+changes parent from \(v\) to \(u\). If \(w\) was the original
+parent of \(u\), then \(v\) changes parent from \(u\) to \(w\)
+and \(u\) changes parent from \(w\) to \(v\). If \(w\) is
+absent, the corresponding vertex is a root.
 
-| N | sex | organisms | undirparents changed | clades not shared | internodon pairs changed | internodons (ref / alt) |
-|---:|---:|---:|---:|---:|---:|---|
-| 6 | 0.3 | 132 | 51% | 32% | 8.0% | 12.8 / 13.5 |
-| 6 | 1.0 | 132 | 78% | 58% | 6.3% | 9.5 / 9.8 |
-| 12 | 0.3 | 264 | 56% | 44% | 6.1% | 32.0 / 32.7 |
-| 12 | 1.0 | 264 | 83% | 70% | 6.2% | 20.7 / 19.4 |
-| 24 | 0.3 | 528 | 59% | 49% | 4.4% | 63.0 / 63.5 |
-| 24 | 1.0 | 528 | 85% | 74% | 6.0% | 39.8 / 42.1 |
+**Proof.** In the original reverse sweep, \(v\) is processed
+just before \(u\). If no component meets both, their merges
+are disjoint. They are not directly adjacent either. The
+component partition and its oldest representatives are the
+same after the pair in both orders; all parent assignments
+are the same.
 
-(The full table, including sex = 0.7, is in the JSON.)
+If a shared component exists, adding \(v\) first makes it
+parent of the representatives of the shared components and
+the \(v\)-only components. Adding \(u\) makes it parent of the
+\(u\)-only representatives and of \(v\). Its clade is the outer
+set, and \(v\)'s clade is \(\{v\}\cup S\cup B\).
 
-**With a buffer.** The finite-window SD property counts lineages that would die out later, and
-the paper's permanent splits need the infinite future. So the buffered variant evaluates only the
-first 10 generations and simulates 4–12 further generations after them.
+In the swapped order, \(u\) is processed first. It becomes
+parent of the shared and \(u\)-only representatives. Then
+\(v\) becomes parent of \(u\) and the \(v\)-only representatives.
+The outer set is unchanged, and the inner clade is
+\(\{u\}\cup S\cup A\).
 
-Internodons in the evaluated part fall from 11–21 to about 5–15. The pair-change rate stays at
-**4–10%**, while 70–87% of undirparents change
-([`order-robustness-buffered.json`](order-robustness-buffered.json)).
+After processing the pair, the same vertex set forms one
+component; its oldest representative is \(u\) in the first
+order and \(v\) in the second. Its eventual older parent \(w\)
+is therefore the same. All younger internal clades are
+unchanged, and every later merge attaches the same whole
+component. This proves the parent description and excludes
+any other clade change. The two inner clades differ because
+one contains \(v\) but not \(u\), and the other contains
+\(u\) but not \(v\).
+\(\square\)
 
-**Reading.** Birth-order uncertainty *within* a generation rewires most organism-level
-undirparents. That is expected: the forest's chains through a generation follow birth order. Yet
-it leaves species membership (internodon partition) almost intact. **[Corrected 27 Sep 2026; see the correction box above.]** That is the paper's "in some
-sense": robust where biology looks (the partition into internodons), not where the construction
-does its bookkeeping (who is whose undirparent).
+The theorem bounds the **number** of changed clades, not their
+sizes. Appending a long descendant chain to the shared child
+in the introductory example makes both replaced clades large.
+Using many separate shared components makes many individual
+parent pointers change. Neither observation contradicts the
+single-clade statement.
 
-# 4. An observation about the definitions
+## Corollary 3. A bound between any two topological orders
 
-Checking whether internodons respect a permanent deme split turned up a feature of Definitions 7–9,
-not a code error.
-- **How it happens.** The pre-split ancestral segment can continue unbranched into one daughter
-  deme. A childless (hence non-SD) organism of the *other* daughter then joins the internodon of its
-  youngest SD ancestor, which lies on that ancestral segment.
-- **The result.** An internodon can contain organisms from both sides of a permanent split, through
-  non-SD attachment. Whether Kornet's internodons (equivalent by Theorem 20) should allow this is a
-  question about the intended treatment of non-SD organisms. It is recorded here and not resolved.
-- **The finite window adds noise.** Organisms that die childless inside it are non-SD.
+Let \(K\) be the number of organism pairs ordered differently
+by two topological rankings. Their undirforest clade families
+have symmetric difference at most \(2K\). More precisely, along
+any valid adjacent-swap route with \(m\) swaps having a shared
+younger component, the bound is \(2m\).
 
-# Status and limits
+**Proof.** Transform one order into the other by successively
+moving the next required vertex leftwards. Each crossed pair
+is reversed in the two orders and is therefore incomparable
+in the genealogical order. This gives a valid route using
+exactly \(K\) swaps. Theorem 2 changes zero clades at a swap
+without a shared component and removes one and adds one
+otherwise. The triangle inequality for symmetric difference
+gives both bounds.
+\(\square\)
 
-- **Proved here:** the identification with the join tree, and the adjacent-swap locality lemma
-  with its corollary. Both are hand proofs, each also checked exhaustively on random genealogies.
-  Whether the merge-tree identification appears in the phylogenetics literature was not checked.
-- **Imported, established:** stability of merge trees in the interleaving distance (Morozov et al.
-  2013). It was not re-proved here, and its exact hypotheses (vertex-valued height on a graph) should
-  be confirmed before the corollary is quoted.
-- **Measured, finite:** internodon robustness on one genealogy model. The paper's infinite
-  biosphere and permanent-split data are approximated by a finite window with a buffer.
-- **Not done:**
-  - reorderings *across* generations (for example overlapping generations with continuous
-    birthdates);
-  - the paper's second suggestion, extending the construction down to gene trees.
+The sharper count depends on the route's intermediate graphs.
+It is an exact combinatorial statement, without an assumption
+about a probability distribution on birth orders.
 
-# 5. Arbitrary topological orders
+# 4. A separate stability statement in height units
 
-[`order_robustness_any.py`](order_robustness_any.py) → `order-robustness-any.json`. Same genealogy
-model; the alternative orders are random topological orders of the whole parent DAG (not uniform over linear extensions; see the correction box)
-(the continuous-birthdate case, where uncertainty spans generations). 5 genealogies × 10 orders.
+For a connected \(H\), extend \(-r\) linearly over its edges.
+Its sublevel components encode the superlevel component sweep
+above; partial edges attach to an existing endpoint and do not
+create additional connections. Retain the standard infinite
+root ray in the associated continuous merge tree.
 
-| N | sex | undirparents changed | clades not shared | internodon pairs changed | mean rank displacement (share of n) |
-|---:|---:|---:|---:|---:|---:|
-| 6 | 0.3 | 57% | 50% | 14.5% | 9.0% |
-| 6 | 1.0 | 83% | 76% | 10.7% | 5.5% |
-| 12 | 0.3 | 62% | 55% | 10.4% | 9.7% |
-| 12 | 1.0 | 87% | 79% | 11.9% | 5.8% |
+Morozov, Beketayev and Weber [MBW, Theorem 2] prove stability:
+for two scalar functions on the same domain, their merge trees
+satisfy \(d_I(T_f,T_g)\leq\|f-g\|_\infty\).
+Applying it to two rankings on this same graph gives
+\[
+                       d_I(T_{-r},T_{-r'})
+                              \leq\max_{v\in V}|r(v)-r'(v)|.
+\]
+The edgewise difference is bounded by the maximum at endpoints.
+For disconnected graphs apply the statement componentwise.
 
-Internodon co-membership moves about twice as much as under within-generation reorderings (10–14%
-of pairs against 4–8%), but most of it still survives. The conjecture's "in some sense" therefore
-depends on how much birth-order uncertainty is admitted:
-- **within generations:** robust;
-- **across generations:** moderately robust.
-Neither case is robust at the level of parent pointers.
+This compares height-decorated trees, not fixed organism labels.
+The interleaving maps may move points along the trees. They
+need not preserve an organism's parent or internodon. A valid
+adjacent swap therefore has height distance at most one while
+still changing many parent pointers. Rank displacement is
+measured in birth positions, not elapsed biological time.
+
+# 5. From the forest to internodons
+
+The source's additional construction uses the **sexual
+descendant property**, abbreviated SD: an organism is SD if it
+has a strict genealogical descendant with at least two parents
+[A, Definition 7]. This property uses the original directed
+genealogy, not the derived forest.
+
+Restrict the undirforest to SD vertices. Its maximal
+non-branching segments are the pre-internodons. A branching
+vertex ends its own segment; each of its children begins a new
+one. Equivalently, an SD child inherits its parent's segment
+exactly when that parent has only one SD child. Each non-SD
+organism with an SD ancestor joins the segment of its youngest
+SD ancestor, its test organism. These are the source's
+Definitions 8--9.
+
+Non-SD organisms without an SD ancestor have no internodon
+under that definition. The experiment code assigns each such
+organism a distinct singleton label to obtain a partition of
+all observed vertices. These singleton labels are a reporting
+convention. They never create a positive co-member pair.
+The set of uncovered vertices is fixed across rankings of the
+same finite genealogy. Removing it therefore leaves co-member
+loss and positive-pair Jaccard unchanged, although it changes
+the denominator of the all-pairs rate.
+
+A finite window can miss later sexual descendants and later
+paths connecting older vertices. The source's infinite-future
+internodons consequently need not equal the restriction of a
+finite-window computation. Additional simulated generations
+help examine this effect, but cannot certify the infinite
+future.
+
+# 6. What the measured percentages mean
+
+Fix one finite genealogy and compare a reference ranking with
+an alternative. Let \(P_0\) and \(P_1\) be the sets of unordered
+pairs sharing an internodon label under the two rankings.
+We use three distinct quantities:
+\[
+ \text{all-pairs disagreement}
+       =\frac{|P_0\mathbin{\triangle}P_1|}{\binom n2},
+ \qquad
+ \text{reference co-member loss}
+       =\frac{|P_0\setminus P_1|}{|P_0|},
+\]
+\[
+ \text{positive-pair Jaccard}
+       =\frac{|P_0\cap P_1|}{|P_0\cup P_1|}.
+\]
+The first asks how many of all possible pair decisions change.
+The second asks how often a previous positive classification
+is lost. The third compares the two positive-pair sets
+symmetrically. The first two are disagreement rates; a larger
+Jaccard value means greater agreement. None is a percentage
+of individual organisms retaining a species identity.
+
+An all-pairs rate can be small when most pairs are separated
+under both rankings. For example, among \(100\) organisms,
+suppose \(P_0\) has \(100\) pairs, \(30\) are lost, and \(20\)
+new pairs appear. Only \(50/4950\), about one percent, of all
+pair decisions change, but thirty percent of the original
+co-memberships are lost. This is why both denominators matter.
+
+## The within-generation comparison sample
+
+The saved co-membership experiment uses four genealogies and
+six alternative rankings per genealogy in each configuration,
+with random seed 7. There are 14 generations. One ancestral
+deme has \(N\) organisms per generation; from generation 6
+there are two permanently isolated demes of size \(N\) each.
+Each child has two distinct parents with probability \(p\)
+and otherwise one. Parent choices are from the preceding
+generation in the same deme, or from the ancestral deme at
+the split. Alternative rankings independently permute births
+within each generation.
+
+The following are means of the 24 comparisons in each row,
+not pooled-pair estimates or confidence intervals. They come
+directly from the retained co-membership record.
+
+| \(N\) | \(p\) | All-pairs disagreement | Reference co-member loss | Jaccard |
+|---:|---:|---:|---:|---:|
+| 6 | 0.3 | 6.70% | 22.41% | 0.6009 |
+| 6 | 1.0 | 8.71% | 18.06% | 0.6750 |
+| 12 | 1.0 | 6.99% | 22.16% | 0.6405 |
+| 24 | 1.0 | 7.36% | 30.83% | 0.5171 |
+
+![Both disagreement rates use the same saved comparisons. The larger rate conditions on a reference co-membership; the smaller rate averages over all organism pairs.](figures/co-membership-metrics.pdf){width=90%}
+
+The largest co-member loss in an individual comparison was
+60.67 percent. These measurements show appreciable
+reclassification in this finite model. They do not support
+a general claim that internodon membership is nearly
+unchanged.
+
+## Parent pointers and clades
+
+A separate retained experiment uses six genealogies and twelve
+alternative rankings per genealogy. Its random seed is 15.
+The generation and split parameters are the same, but the draws
+differ from those in the preceding table.
+
+| \(N\) | \(p\) | Parent pointers changed | Normalized clade difference | All-pairs disagreement |
+|---:|---:|---:|---:|---:|
+| 6 | 0.3 | 51.00% | 32.26% | 7.96% |
+| 6 | 1.0 | 77.54% | 58.19% | 6.27% |
+| 12 | 0.3 | 56.43% | 44.06% | 6.07% |
+| 12 | 1.0 | 82.63% | 70.30% | 6.16% |
+| 24 | 0.3 | 58.69% | 48.76% | 4.44% |
+| 24 | 1.0 | 84.62% | 73.86% | 6.00% |
+
+The full record also contains \(p=0.7\). Normalized clade
+difference is
+\[
+ \frac{|\mathcal K(F_0)\mathbin{\triangle}\mathcal K(F_1)|}
+      {|\mathcal K(F_0)|+|\mathcal K(F_1)|}.
+\]
+The parent-pointer column compares organism-labelled parents,
+including the root marker. The three columns measure different
+features. The small all-pairs numbers in this table cannot be
+used as substitutes for the co-member-loss numbers in the
+other sample.
+
+# 7. Window length and the distribution on orders
+
+## Additional future generations
+
+A buffered experiment evaluates only organisms from the first
+10 generations and adds 0, 4, 8 or 12 later generations before
+constructing the forest and labels. Its split is at generation
+4, its seed is 16, and each configuration has five genealogies
+and eight alternative rankings per genealogy.
+
+For \(N=6,p=1\), the mean number of labels on the evaluated
+vertices falls from \(11.0\) with no buffer to \(5.0\) with four
+extra generations, and is \(5.4\) with twelve. For
+\(N=12,p=1\), the corresponding values are \(20.6,7.6,11.0\).
+The label counts include the singleton convention of Section 5.
+
+This is evidence that a short observation window affects
+classification. It is not a monotone convergence result:
+different configurations use different random draws. The
+buffered record contains all-pairs disagreement but no
+reference co-member-loss statistic. No conclusion about that
+conditional loss is inferred from it.
+
+## Orders spanning generations
+
+Another retained sample chooses each next vertex uniformly
+from the currently available vertices in Kahn's topological
+sorting algorithm. This gives valid topological orders.
+It does **not** sample linear extensions uniformly.
+
+For a graph with \(a\to c\) and an isolated \(b\), the possible
+orders \(abc,acb,bac\) have probabilities \(1/4,1/4,1/2\).
+The first choice is uniform between \(a,b\), but after choosing
+\(b\) the rest is forced. Thus even this small graph produces
+unequal extension probabilities.
+
+With five genealogies and ten alternative orders per
+configuration, seed 21, the saved all-pairs disagreement
+ranges from 10.39 to 14.47 percent across the four
+configurations. Parent-pointer changes range from 56.62 to
+86.73 percent. These are measurements under this particular
+sampling rule. They are not estimates under a uniform
+distribution on all admissible birth orders or under a
+biologically justified distribution of birthdate uncertainty.
+
+# 8. What is settled, and what remains
+
+The component sweep identifies the exact finite construction.
+The swap theorem gives a sharp local clade statement, and
+Corollary 3 gives a bound for an arbitrary pair of topological
+orders. The established merge-tree stability theorem gives
+a different bound in height units.
+
+These are precise partial answers to the source question.
+They do not yield a population-independent bound on the
+internodon co-membership of fixed organisms. The finite
+measurements exhibit substantial changes, with the size
+depending on the statistic, observation window and order
+sampler. They neither establish a general biological
+robustness claim nor refute every possible formal version
+of that claim.
+
+A stronger result about internodon membership would have to
+state its birthdate-error model, identify a metric on labelled
+classifications, and control the finite-window approximation
+to the future. Extending the construction to historical gene
+trees is a separate question from [A] and is not treated here.
+
+# Appendix. Computational records
+
+The calculations and saved records are included with the paper.
+
+- The direct source-definition and sweep implementations are in
+  the accompanying undirforest program.
+- The adjacent-swap record contains 4,302 valid swaps, of which
+  1,637 have a shared younger component. All cases satisfy
+  Theorem 2's tested parent-change condition, and all 1,637
+  cases replace exactly one clade. The recorded mean replaced
+  clade size is 58.03 percent of the observed population.
+- The co-membership table and plot use the retained
+  co-membership-check record, with 24 comparisons per row.
+- The other tables and ranges use the separate main,
+  buffered and Kahn-order records described above.
+
+These finite checks support the implementations and the
+reported finite data. The universal statements rest on the
+proofs and the explicitly cited published stability theorem.
+No new biological data, independent human proof review, or
+historical priority assessment is claimed.
+
+# References
+
+**[A]** S. A. Alexander, A. de Bruin and D. J. Kornet. *An alternative construction of internodons:
+the emergence of a multi-level tree of life*. Bulletin of
+Mathematical Biology (2015).
+[DOI: 10.1007/s11538-014-0048-2](https://doi.org/10.1007/s11538-014-0048-2).
+Definitions 4--9, Corollary 6, and Section 8.
+
+**[MBW]** Dmitriy Morozov, Kenes Beketayev and Gunther H. Weber.
+*Interleaving Distance between Merge Trees*. Manuscript
+presented at TopoInVis 2013. Theorem 2, pp. 6--7.
+[Author manuscript](https://www.mrzv.org/publications/interleaving-distance-merge-trees/manuscript/).
