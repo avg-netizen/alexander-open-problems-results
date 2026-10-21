@@ -8,8 +8,9 @@ below was then checked independently by Anthropic Claude against:
 - a fresh re-computation, for the internodon metrics.
 
 At the September checkpoint, affected notes kept their original text with dated
-correction boxes and inline markers. The current editions of 06 and 08 now
-present their operative results directly, and 10–11 are incorporated into 06.
+correction boxes and inline markers. The current editions of 01, 06, 08, 09 and 12 now
+present operative results directly. Entries 10–11 are incorporated into 06,
+and 13 is incorporated into 01.
 Their earlier Markdown and PDFs are preserved in dated archives. See
 [REVISIONS.md](REVISIONS.md). The table below remains the historical audit record;
 its aggregate numerical ranges should not be substituted for a specific

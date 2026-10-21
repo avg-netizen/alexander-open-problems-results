@@ -9,6 +9,12 @@ paper sources, a PDF or a pointer to a consolidated paper, and any scripts with 
 combines entries 06, 10 and 11 into one paper.
 [Birth-order sensitivity of undirforests and internodons](08-internodon-order-robustness/internodon-order-robustness.pdf)
 presents the structural results and the measurements with explicit metric denominators.
+[Information and learning in pseudo-visibility environments](12-pseudovisibility-private-information/pseudovisibility-private-information.pdf)
+combines 09 Section 1 and 12.
+[Quitting thresholds and reward normalization](01-quitters-and-question-26/quitters.pdf)
+combines 01 and 13.
+The [research companion](09-further-results/further-results.pdf) now distinguishes
+current results from the remaining exploratory cards.
 The current papers state corrected results directly; earlier editions and
 [revision history](REVISIONS.md) are kept separately.
 
@@ -68,7 +74,7 @@ Nothing here duplicates it.
 
 | # | Result | Source question | Status |
 |---|---|---|---|
-| 01 | [Quitters](01-quitters-and-question-26/quitters.pdf): Proposition 20 is false as printed for r ≤ 0 (true for r > 0). Question 26 under Legg–Hutter normalisation: yes iff r ≥ 0. | *Intelligence via Ultrafilters* (2019), Prop. 20, Q. 26 | hand proof + exact check |
+| 01 | [Quitting thresholds and reward normalization](01-quitters-and-question-26/quitters.pdf): exact ultrafilter boundary; Question 26 under nonnegative pathwise totals; signed expected-value counterexamples with a chosen symmetric prior. | *Intelligence via Ultrafilters* (2019), Prop. 20, Q. 26; signed variant uses Alexander–Hutter (2021) | unified explanatory hand-proof paper (01 + 13) |
 | 02 | [Selector counterexample](02-selector-counterexample/selector-counterexample.pdf): an explicit universal machine for which observation-based selection reverses universal-intelligence rankings. | *Intelligence via Ultrafilters*, Q. 23–25 | hand proof + exact check |
 | 03 | [Temporal knower joint model](03-temporal-knower-joint-model/temporal-knower-joint-model.pdf): a factive model of the surprise-examination theory extended by self-referential sentences L_i, with later knowledge of their falsehood. | Aldini–Alexander–Graziani (2023), concluding conjecture | proposed resolution, hand proof + finite controls |
 | 04 | [Formula-language classification](04-formula-language-classification/formula-classification.pdf): the 2006 language describes exactly the partial functions with arithmetical graphs. | *Formulas for Computable and Noncomputable Functions* (2006), after Cor. 9 | hand proof |
@@ -78,8 +84,8 @@ Nothing here duplicates it.
 | 08 | [Birth-order sensitivity of undirforests and internodons](08-internodon-order-robustness/internodon-order-robustness.pdf): exact adjacent-swap and clade-distance theorems; separate height stability and co-membership measurements. The dedicated saved sample loses 18–31% of reference co-member pairs on average. | *Alternative Construction of Internodons* (2015), concluding question | explanatory hand proofs + finite measurements; general robustness remains open |
 | 10 | [Species equivalence and IAP complexity](10-species-equivalence-and-iap-completeness/README.md): global IAP is Borel Π⁰₃-complete on connected rooted binary trees; infinite-class comparison. | Conjectures S1 and 2b of this repository | incorporated into 06, Sections 5–7 and Appendix A |
 | 11 | [Bounded founders](11-bounded-founders/README.md): a fixed founder budget gives coverage and admits late founders. | *Specieslike Clusters*, after Thm. 13 | incorporated into 06, Sections 2–5 |
-| 12 | [Pseudo-visibility, private information](12-pseudovisibility-private-information/pseudovisibility-private-information.pdf): exact value formula; counterexamples to unconditional P1a; restricted P1b convergence theorem. | *Pseudo-visibility* (2022), better-performance conjecture | hand proof (audit) |
-| 13 | [Signed quitting](13-signed-quitting/signed-quitting.pdf): for every r, a symmetric universal machine with a Question 26 counterexample under expected-value normalisation. | *Intelligence via Ultrafilters*, Q. 26; *Reward-Punishment Symmetric Universal Intelligence* | hand proof + finite checks (audit) |
+| 12 | [Information and learning in pseudo-visibility environments](12-pseudovisibility-private-information/pseudovisibility-private-information.pdf): exact private-query values, shared-randomness distinction, and restricted tabular convergence with a joint-optimum gap. | *Pseudo-visibility* (2022), informal better-performance question | explanatory hand proofs + retained finite experiments (09 Section 1 + 12) |
+| 13 | [Signed quitting](13-signed-quitting/README.md): for each real threshold, some symmetric universal prior and computable agents violate the expected-value implication. | Question 26 variant combining the 2019 and 2021 conventions | incorporated into 01, Sections 5–7 and Appendix A |
 | 14 | [Dissertation Question 3-1-1](14-dissertation-question-3-1-1/several-knowing-machines-3-1-1.pdf): machines that know everyone's truthfulness and particular codes of their subordinates exist for every r.e. well-founded hierarchy. | *The Theory of Several Knowing Machines* (dissertation, 2013), Def. 1.1.1, Fig. 1 | hand proof (checked by a second AI system) |
 | 15 | [Dissertation Question 3-1-2](15-dissertation-question-3-1-2/several-knowing-machines-3-1-2.pdf): add known own mechanicalness, still with unrestricted mutual truthfulness. Proposed: transparent stratification, contextual collapse, induction over all external interpretations. | same, Def. 1.1.1; strengthens Thm. 2.5.11 | **proposed** hand proof; long, needs independent review |
 | 16 | [Lemma 2.5.5 counterexample](16-dissertation-lemma-2-5-5/dissertation-lemma-2-5-5.pdf): the dissertation's preservation lemma is false as printed, which leaves a gap in the proof of Thm. 2.5.11 (the theorem itself is not refuted). | same, Lemma 2.5.5, Thm. 2.5.11 | explicit countermodel |
@@ -114,17 +120,15 @@ The comparison audits the [archived 8 October parent](17-dissertation-question-3
 The current paper supplies a standalone abstract, introduction and background
 definitions while preserving the theorem and the main proof's mathematical expressions.
 
-## Further results
+## Research companion
 
-[further-results.pdf](09-further-results/further-results.pdf) collects:
-- **Pseudo-visibility.** A formalisation of the "better-performance" conjecture, with an
-  experiment. The stochastic-policy case (P1a) was **wrong as stated**; see note 12.
-- **Species identity.** A theorem that it is not learnable in the limit: no observer of births
-  converges on whether IAP holds, or on whether a split is permanent.
-- **Universality.** The same limit-learning impossibility for universality of the companion
-  packet's avoiding populations.
-- **Problem statements** for pattern algorithms (ε, φ) and variadic Apply.
-- **Seven conjectures,** each with a proof route or test. Two are now resolved (notes 10 and 13).
+The [research notes and remaining questions](09-further-results/further-results.pdf)
+give a finite-observation obstruction and its conditional population application.
+They direct readers to the full pseudo-visibility, species and quitting papers,
+then explain the remaining gates for pattern arithmetic, variadic Apply,
+internodon persistence, fixed-prior intelligence sign, introspection and learning.
+The cards distinguish source questions from exploratory specifications and
+do not certify present-day openness.
 
 ## Reproducing
 
@@ -135,7 +139,7 @@ runs (`08/order_robustness.py`, `09/pseudovisibility/selfrefl_exp.py`) take a fe
 The audit checks are in `audit-2026-09-27/controls.py`.
 
 To rebuild the PDFs: `python3 build_documents.py --allow-downloads`. This needs pandoc ≥ 3,
-tectonic. The current editions of 06, 08, 10 and 11 use Computer Modern
+tectonic. The current editions of 01, 06 and 08–13 use Computer Modern
 through [build_explanatory.py](build_explanatory.py), with Poppler for document checks;
 the other notes built by the root command retain DejaVu.
 Note 17 has its own Markdown-to-PDF build script;

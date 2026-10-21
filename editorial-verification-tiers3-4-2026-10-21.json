@@ -1,0 +1,188 @@
+{
+  "date": "2026-10-21",
+  "scope": "Assembling-agent source-scope/editorial/document checks and bounded controls; no independent proof audit, formal certificate or novelty claim.",
+  "previous_published_base": "b6bb6b4ec83569c8d3562372993a0c9bfe05ea4b",
+  "archived_original_sha256": {
+    "01-quitters-and-question-26/archive/2026-09-27/quitters.md": "1e72e79790ab3f6dbd96b5303c9c12f48457c12088249fd5f96628de6efd58a0",
+    "01-quitters-and-question-26/archive/2026-09-27/quitters.pdf": "e3a8b3b30597626147967c7373149e06841eb5adca730a18a642f4309e848868",
+    "09-further-results/archive/2026-09-27/further-results.md": "bb84b4e7e2d0941532df06d27a17165bf17dbcd365e8e4e19e904f8fc7b5ff94",
+    "09-further-results/archive/2026-09-27/further-results.pdf": "7c9f788073faa65299f188b847b16c734bd377f23d23f481e41c33c1fabdae93",
+    "12-pseudovisibility-private-information/archive/2026-09-27/pseudovisibility-private-information.md": "bbcde0573721667b28eb35ccbb187f491955f0d6c6914cbadcb21c8fd795e24f",
+    "12-pseudovisibility-private-information/archive/2026-09-27/pseudovisibility-private-information.pdf": "d26626a2fb21063d323b846a377da6d167e3d41d64a1de4d3256915192754fbf",
+    "13-signed-quitting/archive/2026-09-27/signed-quitting.md": "3e0cce76731862e86d1d5a6ea2493056ee225f927826b691bfbd4e2d7259a695",
+    "13-signed-quitting/archive/2026-09-27/signed-quitting.pdf": "bed0253ab37e3ea977fe5c1906492a23225a5895fb8b6719fda2defc4ec929c6"
+  },
+  "unchanged_computational_sha256": {
+    "01-quitters-and-question-26/quitters_check.py": "47d808d456b12ff3d0cdd78374075c32d4da49d5d1c3a76b6884face48af81d1",
+    "01-quitters-and-question-26/quitters_check.json": "f853df0c8424a827942a1aec5c8ae243335900d734f3e7cc59173a57a73a14f7",
+    "09-further-results/pseudovisibility/selfrefl_exp.py": "89e7cb4c2cbb31735b44277b7f87a8b4547ea1d1424dc7a974013d4cffb3b375",
+    "09-further-results/pseudovisibility/selfrefl_exp.json": "f310eed80038e465954aaacbc52e79e0c1dad8f767e9adf4a0df5c75ee737963",
+    "audit-2026-09-27/controls.py": "726e46ae7590738b551afd8017506b707a56c0d81d501ada2ff794dc612bb4da",
+    "audit-2026-09-27/controls.json": "75f1aa1ba2483003341dbb4b96c1ee3dcedfb071cf17dcbd2fbc66e520497afc"
+  },
+  "finite_replay": {
+    "quitters_check_byte_identical": true,
+    "quitters_check_sha256": "f853df0c8424a827942a1aec5c8ae243335900d734f3e7cc59173a57a73a14f7",
+    "information_controls_match": true,
+    "signed_margin_and_tape_controls_match": true,
+    "signed_tape_checks": 8748,
+    "training_experiments_rerun": false
+  },
+  "table_values_match_saved_record": true,
+  "current_local_links_checked": 129,
+  "parsed_mathematics": {
+    "01-quitters-and-question-26": {
+      "InlineMath": 201,
+      "DisplayMath": 13
+    },
+    "09-further-results": {
+      "InlineMath": 15,
+      "DisplayMath": 2
+    },
+    "12-pseudovisibility-private-information": {
+      "InlineMath": 91,
+      "DisplayMath": 8
+    },
+    "13-signed-quitting": {
+      "InlineMath": 0,
+      "DisplayMath": 0
+    }
+  },
+  "pdf_reports": {
+    "01-quitters-and-question-26": {
+      "built_at_utc": "2026-10-21T04:08:25.263899+00:00",
+      "source": "quitters.md",
+      "source_sha256": "bfee089ce0269c5d22eab2acf63135ac6bd07050288a2efff05ce850073172b7",
+      "tex_sha256": "d59aa1037cb3ec5c5db62166c461511dda6801925cb442a64b1f496b1c9f9b15",
+      "pdf_sha256": "d00635e242a37c851f617c0d461e09be2d85aaee93e954e53a47d4faad6389a9",
+      "pages": 8,
+      "proof_endings_source": 6,
+      "proof_endings_pdf": 6,
+      "embedded_fonts": [
+        "CMR17",
+        "CMR12",
+        "CMBX10",
+        "CMR10",
+        "CMBX12",
+        "CMTI10",
+        "CMMI10",
+        "CMR8",
+        "CMMI8",
+        "CMEX10",
+        "CMSY10",
+        "MSBM10",
+        "CMMI6",
+        "CMSY8",
+        "MSAM10",
+        "CMMI12",
+        "CMR6",
+        "Cmr10",
+        "Cmsy10"
+      ],
+      "diagnostics": [],
+      "network_resources_allowed": false,
+      "pandoc": "pandoc 3.11",
+      "tectonic": "Tectonic 0.17.0",
+      "scope": "Document checks; no independent mathematical verification."
+    },
+    "09-further-results": {
+      "built_at_utc": "2026-10-21T04:08:26.962234+00:00",
+      "source": "further-results.md",
+      "source_sha256": "7257b68dfb659fc82aa230ea81175ac8b3626bafbcd031893501f4a05b7043ea",
+      "tex_sha256": "9ceadb1e2fd1bb16946c6f9986886c6b7e578534c702039239afb33b68ad19e2",
+      "pdf_sha256": "a176790bdd13affc19dfb97f4a9a4435ca6c288052db689030574aeb7e624ccc",
+      "pages": 4,
+      "proof_endings_source": 1,
+      "proof_endings_pdf": 1,
+      "embedded_fonts": [
+        "CMR17",
+        "CMR12",
+        "CMBX10",
+        "CMR10",
+        "CMBX12",
+        "CMTI10",
+        "CMSY10",
+        "CMMI10",
+        "CMMI8",
+        "CMEX10",
+        "CMSY8",
+        "MSAM10",
+        "CMR8"
+      ],
+      "diagnostics": [],
+      "network_resources_allowed": false,
+      "pandoc": "pandoc 3.11",
+      "tectonic": "Tectonic 0.17.0",
+      "scope": "Document checks; no independent mathematical verification."
+    },
+    "12-pseudovisibility-private-information": {
+      "built_at_utc": "2026-10-21T04:11:38.437122+00:00",
+      "source": "pseudovisibility-private-information.md",
+      "source_sha256": "2ec9e152f066484cf8515539f75aa43a534fc51f6ae9c28664bc16f14634e212",
+      "tex_sha256": "528c284b11a6ed9bb4cdcc1b3d6a0c9679e7b9661d41d425015351c8bf059c06",
+      "pdf_sha256": "c471199f0a0f5dbd4f3809a339f152a583cca49124236d6441957b84dbaf93ef",
+      "pages": 6,
+      "proof_endings_source": 4,
+      "proof_endings_pdf": 4,
+      "embedded_fonts": [
+        "CMR17",
+        "CMR12",
+        "CMBX10",
+        "CMR10",
+        "CMBX12",
+        "CMTI10",
+        "CMMI10",
+        "CMSY10",
+        "MSAM10",
+        "CMMI8",
+        "CMR8",
+        "CMEX10",
+        "CMSY8",
+        "Cmr10"
+      ],
+      "diagnostics": [],
+      "network_resources_allowed": false,
+      "pandoc": "pandoc 3.11",
+      "tectonic": "Tectonic 0.17.0",
+      "scope": "Document checks; no independent mathematical verification."
+    },
+    "13-signed-quitting": {
+      "built_at_utc": "2026-10-21T04:08:30.302237+00:00",
+      "source": "signed-quitting.md",
+      "source_sha256": "137278314e7257885403c328a50e499d3ed1aa1d11efeb566a7462837017c77e",
+      "tex_sha256": "d9020f8350964d3a06027856528eff77630c4a3d621c91e31c06c80f67b63ef7",
+      "pdf_sha256": "f9e704529bdd5a9f2ddab8a9408285f4d4e634aa9e33603bd66dba65e9a55fe8",
+      "pages": 1,
+      "proof_endings_source": 0,
+      "proof_endings_pdf": 0,
+      "embedded_fonts": [
+        "CMR17",
+        "CMR12",
+        "CMBX12",
+        "CMR10",
+        "CMTI10"
+      ],
+      "diagnostics": [],
+      "network_resources_allowed": false,
+      "pandoc": "pandoc 3.11",
+      "tectonic": "Tectonic 0.17.0",
+      "scope": "Document checks; no independent mathematical verification."
+    }
+  },
+  "visual_inspection": "Representative title, theorem/proof, normalization, encoding, example/table, companion-proof and figure pages inspected; all fonts embedded and proof endings visible.",
+  "substantive_scope_clarifications": [
+    "Conditional-mean noise and independent episode sampling in the tabular convergence theorem.",
+    "Rational equality witness at negative pathwise thresholds.",
+    "Explicit fixed-input Kraft factor and suffix-free special-program parsing.",
+    "Fixed versus chosen prior quantifiers; no universal fixed-prior conclusion.",
+    "Remaining companion cards distinguished from verified current open problems."
+  ],
+  "private_literature_intake_included_in_public_changes": false,
+  "isolated_offline_build": {
+    "documents": 4,
+    "source_sha256_match": true,
+    "generated_tex_sha256_match": true,
+    "page_counts_fonts_proof_endings_diagnostics_match": true,
+    "scope": "Explicit edition files plus shared published typesetting headers copied into a temporary directory; no vault proof or typesetting dependencies."
+  }
+}

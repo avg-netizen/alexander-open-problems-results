@@ -1,4 +1,4 @@
-"""Build the current species and internodon papers and their navigation entries."""
+"""Build the current explanatory editions and their navigation entries."""
 
 import argparse
 from datetime import datetime, timezone
@@ -12,10 +12,14 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parent
 DOCUMENTS = {
+    "01-quitters-and-question-26": "quitters",
     "06-founding-cohort-species": "founding-cohort-species",
     "08-internodon-order-robustness": "internodon-order-robustness",
+    "09-further-results": "further-results",
     "10-species-equivalence-and-iap-completeness": "species-equivalence-and-iap-completeness",
     "11-bounded-founders": "bounded-founders",
+    "12-pseudovisibility-private-information": "pseudovisibility-private-information",
+    "13-signed-quitting": "signed-quitting",
 }
 
 
