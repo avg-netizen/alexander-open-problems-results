@@ -11,6 +11,12 @@ source, a PDF, and any scripts with their recorded output.
 Earlier editions are retained in the [3 October archive](17-dissertation-question-3-1-3/archive/2026-10-03/README.md)
 and the [8 October archive](17-dissertation-question-3-1-3/archive/2026-10-08/README.md).
 
+**New, 20 October 2026:** [Open Problem 3.2.1 — successor chains without ordinal knowledge](18-dissertation-problem-3-2-1/README.md).
+The [full paper](18-dissertation-problem-3-2-1/successor-knowers-3-2-1.pdf)
+gives a negative answer by reduction to Pakhomov–Walsh, with
+[supplemental proved consequences](18-dissertation-problem-3-2-1/supplemental/README.md).
+This is a self-contained hand-proof entry, separate from the 3-1-x Lean development.
+
 The notes answer, correct or sharpen questions posed in Alexander's papers on:
 - universal intelligence;
 - self-referential logic;
@@ -70,6 +76,7 @@ Nothing here duplicates it.
 | 15 | [Dissertation Question 3-1-2](15-dissertation-question-3-1-2/several-knowing-machines-3-1-2.pdf): add known own mechanicalness, still with unrestricted mutual truthfulness. Proposed: transparent stratification, contextual collapse, induction over all external interpretations. | same, Def. 1.1.1; strengthens Thm. 2.5.11 | **proposed** hand proof; long, needs independent review |
 | 16 | [Lemma 2.5.5 counterexample](16-dissertation-lemma-2-5-5/dissertation-lemma-2-5-5.pdf): the dissertation's preservation lemma is false as printed, which leaves a gap in the proof of Thm. 2.5.11 (the theorem itself is not refuted). | same, Lemma 2.5.5, Thm. 2.5.11 | explicit countermodel |
 | 17 | [Dissertation Question 3-1-3 — standalone finite-guard proof](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf): knowing machines that know everyone's truthfulness, particular codes of their subordinates, and everyone's mechanicalness exist for every r.e. well-founded hierarchy and unrestricted modal formulas. Current 33-page paper with abstract and complete introduction; [earlier editions archived](17-dissertation-question-3-1-3/README.md#earlier-editions-and-construction-history). | same, Def. 1.1.1, Question 3-1-3 | standalone prose proof; completed comparator targets pass public Lean CI; scope recorded in the comparison |
+| 18 | [Dissertation Open Problem 3.2.1](18-dissertation-problem-3-2-1/successor-knowers-3-2-1.pdf): no infinite successor chain with full particular-code knowledge and known successor truthfulness in the standard canonical semantics, even without ordinal knowledge. [Supplement](18-dissertation-problem-3-2-1/supplemental/README.md) includes uniform enumeration, computable-path and arithmetic separation consequences. | same, §3.2, Open Problem 3.2.1, printed p. 89 | full hand proof using Pakhomov–Walsh; no independent human review or formal certificate |
 
 ## Dissertation formalisation and revised proof
 
@@ -123,6 +130,8 @@ To rebuild the PDFs: `python3 build_documents.py --allow-downloads`. This needs 
 tectonic and the DejaVu fonts. Note 17 has its own Markdown-to-PDF build script;
 see [its README](17-dissertation-question-3-1-3/README.md). The archived 3 October
 LaTeX paper retains its original build script in its archive.
+Note 18 has a separate [offline build](18-dissertation-problem-3-2-1/README.md#rebuild)
+for its main paper and supplement; the Markdown files are their canonical sources.
 `SHA256SUMS` lists checksums of the committed files.
 
 ## Provenance

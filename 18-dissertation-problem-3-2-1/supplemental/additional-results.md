@@ -1,0 +1,200 @@
+# Further consequences of particular-code knowledge
+
+20 October 2026
+
+## Abstract
+
+We record consequences of the argument for Alexander's Open Problem 3.2.1 that are useful separately from the final impossibility theorem. Full particular-code knowledge propagates effective enumerability from one machine to all machines at finite successor distance. The impossibility theorem excludes computable infinite endorsement paths, and therefore finite endorsement cycles, under its arithmetic and truthfulness hypotheses. A single endorsed arithmetic truth column yields an explicit arithmetic sentence separating two adjacent theories. Finally, a true arithmetical condition of complexity at most \(\Sigma_3\) cannot support a conditional code in the presence of a specified inclusion of arithmetic consequences. All statements below have proofs. References to the companion paper are to files within this repository; no other research notes are needed.
+
+## 1. Setting and relation to the main paper
+
+The companion paper is [*Successor truthfulness and particular-code knowledge*](../successor-knowers-3-2-1.md), referred to below as **[Main]**. It defines Alexander's standard canonical semantics, the code formula, the partial truth predicate and the witnessed arithmetic theories. Here we repeat the conventions needed to state the additional results.
+
+Work in a recursively presented language with arithmetic and modal operators \(K_i\). In a common standard canonical interpretation \(M\),
+\[
+M\models K_i\varphi[s]
+\quad\Longleftrightarrow\quad
+T_i\vdash\varphi^s.
+\tag{S1}
+\]
+All consequences of each theory under consideration are assumed true in \(M\). Define
+\[
+\operatorname{Code}_{i,\varphi}(e)
+:=\forall x\bigl(K_i\varphi(x)\leftrightarrow x\in W_e\bigr),
+\tag{S2}
+\]
+with effective renaming of bound and free variables as needed. A *particular-code endorsement* by \(T\) is an actual theorem \(T\vdash\operatorname{Code}_{i,\varphi}(\bar e)\) for a standard numeral \(\bar e\). Merely proving an existential assertion that some index exists is a different condition.
+
+For the arithmetic results, \(\mathcal P_3\) is the recursive class of designated prenex \(\Pi_3\) sentences, and \(\tau\) is its \(\Pi_3\) partial truth predicate, false on other codes. The arithmetic theory
+\[
+U_e=\mathsf I\Sigma_1+
+\{\sigma\in\mathcal P_3:\ulcorner\sigma\urcorner\in W_e\}
+\tag{S3}
+\]
+uses enumeration witnesses in its proof predicate. The designated \(\Pi_3\) sentence \(R_e\) is a fixed normalization of \(\operatorname{RFN}_3(U_e)\). In particular,
+\[
+\mathsf{PA}\vdash
+\forall z(z\in W_e\rightarrow\tau(z))\rightarrow R_e.
+\tag{S4}
+\]
+The construction and proof of (S4) are [Main, Sections 4 and 5]. This is a reflection statement for a fixed \(\Pi_3\) column over \(\mathsf I\Sigma_1\), rather than reflection for an unrestricted arithmetic theory.
+
+The results are consequences of the same reduction, or standard arithmetic arguments applied to it. Their inclusion does not assert that they are new in the literature. In particular, the arithmetic obstruction in Section 5 uses the usual second incompleteness theorem.
+
+## 2. Enumerating all later consequences from one root
+
+### Proposition S1. Uniform enumeration of the full consequence sets
+
+Assume (S1), standard soundness, and particular-code endorsements
+\[
+\forall j\geq1\ \forall\varphi(x)\ \exists e\quad
+T_{j-1}\vdash\operatorname{Code}_{j,\varphi}(\bar e)
+\tag{S5}
+\]
+for all unary modal formulas. If the consequences of \(T_0\) are recursively enumerable, then the relation
+\[
+\{(j,\ulcorner\theta\urcorner):j\in\mathbb N,
+\ \theta\text{ a sentence},\ T_j\vdash\theta\}
+\tag{S6}
+\]
+is recursively enumerable, uniformly from an enumeration of the root consequences.
+
+It is enough that the underlying consequence relation supports ordinary logical conjunction and reflexivity of equality. The proposition does not require arithmetic induction or known successor truthfulness.
+
+**Proof.** The selection procedure \(B\) of [Main, Lemma 2] uses only (S1), soundness, (S5) and the supplied root enumeration. Its proof does not use \(\mathsf{PA}\) or successor truthfulness. It returns, for every \(j\geq1\) and every unary formula \(\varphi\), an index \(e\) such that
+\[
+W_e=\{m:T_j\vdash\varphi(\bar m)\}.
+\]
+For a sentence \(\theta\), take \(\delta_\theta(x)=\theta\wedge x=x\). This has exactly the one free variable \(x\), and ordinary logical deductions give
+\[
+T_j\vdash\theta
+\quad\Longleftrightarrow\quad
+T_j\vdash\delta_\theta(0).
+\tag{S7}
+\]
+To semidecide the pair \((j,\ulcorner\theta\urcorner)\) for \(j\geq1\), compute \(e=B(j,\ulcorner\delta_\theta\urcorner)\), enumerate \(W_e\), and accept when 0 appears. The computation of \(B\) terminates by its external induction. Acceptance is equivalent to the right side of (S7). For \(j=0\), use the supplied root enumeration directly. Dovetail these computations over all pairs to obtain an enumeration of (S6). \(\square\)
+
+This gives consequence sets, not the original axiom sets. It also does not give the root a proof that the joint enumeration is total, or a proof that it enumerates all the later machines correctly. Those internal assertions were unnecessary in the main argument.
+
+## 3. Computable paths and finite cycles
+
+### Proposition S2. No computable infinite endorsement path
+
+Let \(\{T_i:i\in\mathbb N\}\) be a family in the common recursive modal language, satisfying (S1), standard soundness and ordinary arithmetic \(\mathsf{PA}\). Let \(p:\mathbb N\to\mathbb N\) be total computable. Suppose the consequences of \(T_{p(0)}\) are recursively enumerable. There cannot be, at every \(n\), both
+\[
+\forall\varphi(x)\ \exists e\quad
+T_{p(n)}\vdash
+\operatorname{Code}_{p(n+1),\varphi}(\bar e)
+\tag{S8}
+\]
+and
+\[
+T_{p(n)}\vdash
+\forall x(K_{p(n+1)}\tau(x)\rightarrow\tau(x)).
+\tag{S9}
+\]
+The function \(p\) need not be injective.
+
+**Proof.** Adapt [Main, Lemma 2] with the natural number \(n\) denoting position on the path. At the base, search the enumeration of \(T_{p(0)}\) for a particular code of the \(K_{p(1)}\) column. At the step, replace the literal operator name \(K_{j+1}\) in that lemma by \(K_{p(n+1)}\). Since \(p\) is total computable, each required literal name and each nested code formula can be computed. The same simultaneous induction proves termination and retains the endorsement by the actual preceding theory.
+
+The wrapper programs of [Main, Section 5] now first compute the required values of \(p\) and execute this adapted procedure. Their indices are still obtainable uniformly by parameter compilation; no computation of \(p\) has to be completed in order to compile a wrapper. At each fixed position, its finite terminating computation is verified in \(\mathsf I\Sigma_1\), just as in [Main, Lemma 6].
+
+Apply (S9) and (S4) to the endorsed \(\tau\)-column at each edge. The proof in [Main, Section 7] gives a uniformly recursively enumerable sequence of sound arithmetic extensions of \(\mathsf I\Sigma_1\), each proving \(\Pi_3\) reflection for the next. This contradicts [Main, Theorem 7], the Pakhomov--Walsh non-descent theorem. Repetitions in \(p\) affect neither the algorithm nor the contradiction. \(\square\)
+
+### Corollary S3. No finite cycle
+
+In such a sound arithmetic family, make a directed edge \(i\to j\) mean that \(T_i\) has all the particular-code endorsements for \(K_j\) and proves its \(\tau\)-truthfulness. If every vertex's consequence set is recursively enumerable, the directed graph has no finite cycle, including a loop.
+
+**Proof.** A finite cycle can be repeated periodically to give a total computable function \(p\) satisfying (S8) and (S9). Proposition S2 excludes it. \(\square\)
+
+A graph without computable infinite paths can still have a noncomputable infinite path. Consequently neither statement proves that every such endorsement relation is well-founded. This is the precise limitation relevant to Alexander's ill-founded examples in *Self-referential theories*, Theorem 79; see [Main, Section 8.2].
+
+## 4. A sentence separating two adjacent theories
+
+### Proposition S4. An endorsed edge gives explicit \(\Pi_3\) separation
+
+Let \(S,T\) be sound theories containing ordinary \(\mathsf{PA}\), with a canonical operator \(K_T\) for the consequences of \(T\). Suppose that for a standard number \(e\),
+\[
+S\vdash\forall x(K_T\tau(x)\leftrightarrow x\in W_{\bar e}),
+\qquad
+S\vdash\forall x(K_T\tau(x)\rightarrow\tau(x)).
+\tag{S10}
+\]
+Then the designated \(\Pi_3\) sentence \(R_e\) satisfies
+\[
+S\vdash R_e,
+\qquad
+T\nvdash R_e.
+\tag{S11}
+\]
+In particular, the designated \(\Pi_3\) consequences of \(S\) are not a subset of those of \(T\).
+
+**Proof.** Soundness of \(S\), the first theorem of (S10), and canonical semantics give
+\[
+W_e=\{m:T\vdash\tau(\bar m)\}.
+\tag{S12}
+\]
+Thus [Main, Lemma 5] applies: \(U_e\) is sound and has exactly the designated \(\Pi_3\) consequences of \(T\). Inside \(S\), the two theorems of (S10) give \(\forall x(x\in W_e\rightarrow\tau(x))\). Equation (S4) gives \(S\vdash R_e\).
+
+Suppose \(T\vdash R_e\). Because \(R_e\) is a designated \(\Pi_3\) sentence, equality of the \(\Pi_3\) consequence sets gives \(U_e\vdash R_e\). The fixed base proves that uniform \(\Pi_3\) reflection implies consistency: apply reflection to a fixed false arithmetic sentence, whose falsehood the base proves. Consequently \(U_e\) proves its own consistency for its specified witnessed proof predicate. This contradicts the second incompleteness theorem, since \(U_e\) is a consistent recursively enumerable extension of \(\mathsf I\Sigma_1\) with the ordinary witnessed derivability conditions. Therefore \(T\nvdash R_e\). \(\square\)
+
+This gives a specific separating sentence once an endorsed code is supplied. It does not prove the reverse inclusion of \(\Pi_3\) consequence sets, assign an ordinal rank, or show that all arithmetic consequences of one theory extend those of the other. The recursive enumerability needed for incompleteness is that of \(U_e\); the original modal theory \(T\) need not itself be supplied effectively.
+
+## 5. The obstruction to true \(\Sigma_3\) conditional codes
+
+The final observation concerns a weaker-looking code assertion. Instead of endorsing a particular code outright, a theory might prove that it is correct under a true arithmetic condition. A low-complexity condition does not evade the obstruction below when the two theories have the specified inclusion of \(\Pi_3\) consequences.
+
+### Lemma S5. A true \(\Sigma_3\) guard cannot imply own reflection
+
+Let \(V\) be a sound recursively enumerable extension of \(\mathsf I\Sigma_1\), with an ordinary witnessed proof predicate and its designated uniform \(\Pi_3\) reflection sentence \(R_V\). If \(\sigma\) is a true arithmetical \(\Sigma_3\) sentence, then
+\[
+V\nvdash\sigma\rightarrow R_V.
+\tag{S13}
+\]
+
+**Proof.** Suppose the indicated implication were a theorem. Put \(V'=V+\sigma\). This is a sound, recursively enumerable extension of \(\mathsf I\Sigma_1\), and it proves \(R_V\). Let \(\nu\) be a fixed designated \(\Pi_3\) normalization of \(\neg\sigma\); the base proves their equivalence.
+
+The proof transformation for the deduction theorem, applied to the one additional axiom \(\sigma\), is verified in \(\mathsf I\Sigma_1\). It gives
+\[
+\operatorname{Pr}_{V'}(\ulcorner\bot\urcorner)
+\rightarrow
+\operatorname{Pr}_V(\ulcorner\nu\urcorner).
+\tag{S14}
+\]
+In \(V'\), reflection \(R_V\), the truth biconditional for the fixed sentence \(\nu\), and (S14) imply
+\(\operatorname{Pr}_{V'}(\ulcorner\bot\urcorner)\rightarrow\nu\).
+But \(V'\) also proves \(\sigma\), hence \(\neg\nu\). Thus \(V'\) proves \(\operatorname{Con}(V')\), contradicting the second incompleteness theorem. \(\square\)
+
+Truth of \(\sigma\) ensures the consistency of \(V'\); the use of \(\Sigma_3\) ensures that its negation is within the reflection class. These roles should not be conflated. The statement does not extend to arbitrary true \(\Pi_3\) guards: take \(\sigma=R_V\), which is true, and the implication is a tautology.
+
+### Proposition S6. No true \(\Sigma_3\)-guarded code under \(\Pi_3\) inclusion
+
+Let \(S,T\) be sound modal theories containing \(\mathsf{PA}\), with a canonical operator \(K_T\). Suppose
+\[
+\operatorname{Th}_{\mathcal P_3}(S)
+\subseteq\operatorname{Th}_{\mathcal P_3}(T)
+\tag{S15}
+\]
+and \(S\vdash\forall x(K_T\tau(x)\rightarrow\tau(x))\). There are no standard number \(e\) and true arithmetical \(\Sigma_3\) sentence \(\sigma\) such that
+\[
+S\vdash\sigma\rightarrow
+\forall x(K_T\tau(x)\leftrightarrow x\in W_{\bar e}).
+\tag{S16}
+\]
+
+**Proof.** If (S16) holds, its truth in the common standard interpretation, together with the truth of \(\sigma\), gives the exact equality (S12). Therefore \(U_e\) is sound and has precisely the designated \(\Pi_3\) consequences of \(T\).
+
+In \(S\), combine (S16) with its unconditional successor-truthfulness theorem. Equation (S4) yields
+\[
+S\vdash\sigma\rightarrow R_e.
+\tag{S17}
+\]
+Since \(\sigma\) is \(\Sigma_3\) and \(R_e\) is \(\Pi_3\), the implication has a \(\Pi_3\) normalization provably equivalent in the fixed base: write it as \(\neg\sigma\vee R_e\), and use closure of \(\Pi_3\) under finite disjunction. Let \(\rho\in\mathcal P_3\) be that normalization. By (S15), \(T\vdash\rho\). By equality of the designated \(\Pi_3\) consequence sets, \(U_e\vdash\rho\), hence \(U_e\vdash\sigma\rightarrow R_e\). This contradicts Lemma S5 for \(V=U_e\). \(\square\)
+
+This is a single-edge obstruction with an explicit inclusion hypothesis. It assumes unconditional knowledge of the \(\tau\)-truthfulness clause; it does not establish a corresponding result for conditional truthfulness. It also does not rule out every conditional code, every higher-complexity arithmetic guard, or an externally nonempty set of code candidates without an endorsed numeral.
+
+## 6. Dependencies and status
+
+Proposition S1 uses only the effective selection argument of [Main, Lemma 2]. Proposition S2 uses the full arithmetic reduction and its published Pakhomov--Walsh input. Corollary S3 is a finite combinatorial consequence of S2. Proposition S4 uses the column conversion and ordinary second incompleteness. Lemma S5 is a direct finite-extension argument using second incompleteness. Proposition S6 combines that lemma with the column conversion and the explicitly assumed inclusion (S15).
+
+These are hand proofs, with their assumptions displayed. They are not part of the separate Lean formalization of the dissertation's Questions 3-1-1 through 3-1-3. No independent human review or priority claim is asserted. The main paper contains the source locations, complete arithmetic conventions and bibliography. For convenience, the two principal external sources are Alexander's dissertation [OhioLINK record](https://rave.ohiolink.edu/etdc/view?acc_num=osu1366362999) and Pakhomov--Walsh, *Reflection ranks and ordinal analysis*, [arXiv:1805.02095v2](https://arxiv.org/abs/1805.02095v2), Theorem 3.4.

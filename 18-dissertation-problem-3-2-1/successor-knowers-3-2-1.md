@@ -1,0 +1,423 @@
+# Successor truthfulness and particular-code knowledge
+
+20 October 2026
+
+## Abstract
+
+Alexander's Open Problem 3.2.1 asks whether there can be an infinite sequence of knowing machines, each knowing the truthfulness and a code of its successor, without the ordinal knowledge assumed in his preceding impossibility theorem. We give a negative answer in his recursively named language and standard canonical semantics. The key observation is effective: particular-code knowledge for every unary modal formula makes a single enumeration of the first machine's consequences sufficient to enumerate the consequences of every later machine, uniformly. The selected indices retain their predecessors' proofs of correctness. Applying this observation to a fixed partial truth predicate produces a uniformly enumerable sequence of sound arithmetic theories, each proving uniform reflection for its successor. A theorem of Pakhomov and Walsh excludes that sequence. We give the arithmetic conversion and the comparison of proof presentations explicitly. The argument requires neither an ordinal predicate nor an internally proved totality assertion for the index-selection procedure.
+
+## 1. The question and the argument
+
+In his 2013 dissertation *The Theory of Several Knowing Machines*, Alexander studies machines that can reason about the knowledge of other machines. A machine may know that another machine is truthful, that its knowledge is recursively enumerable, or that a particular program enumerates its knowledge. These are different requirements.
+
+Chapter 3 proves that an infinite sequence of machines cannot each know its successor's truthfulness and code when the machines also know rudimentary facts about recursive ordinals. Section 3.2 asks whether the ordinal hypothesis can be removed. The precise question is **Open Problem 3.2.1, printed page 89**; the definitions of successor truthfulness and code knowledge are in Definition 3.1.5, printed page 86 [A13]. The question occurs on page 99 of the 103-page OhioLINK PDF. It is different from the dissertation's Questions 3-1-1, 3-1-2 and 3-1-3 about well-founded hierarchies.
+
+We answer the question by passing from modal code knowledge to arithmetic reflection. The proof has three steps.
+
+First, a code for a machine's answers can also be requested for formulas saying that the machine endorses a code of its successor. Iterating this request allows us to reach any finite distance from the first machine. Only the first machine's enumeration is supplied to the procedure.
+
+Second, we retain the arithmetic information needed for a reflection theorem. For each machine we form a theory consisting of a fixed weak arithmetic base and all of that machine's designated arithmetical \(\Pi_3\) consequences. Known successor truthfulness and a known particular code imply that the preceding machine proves reflection for this theory.
+
+Third, we arrange the theories into one recursively enumerable presentation and verify that the reflection statements refer to that very presentation. The resulting sequence contradicts Pakhomov--Walsh's arithmetic non-descent theorem [PW, Theorem 3.4].
+
+The distinction between an index that happens to be correct and an index whose correctness is proved by the predecessor is essential in the second step. The distinction between equal theorem sets and provably interchangeable proof presentations is essential in the third.
+
+### Theorem 1. No infinite successor chain
+
+There is no family answering Alexander's Open Problem 3.2.1 affirmatively.
+
+More explicitly, the following weaker collection of requirements is already impossible. Let \(L\) be the recursive language of arithmetic with effectively named operators \(K_0,K_1,\ldots\). Let \(T_0,T_1,\ldots\) be sets of \(L\)-sentences with a common standard canonical interpretation \(M\). Assume:
+
+1. Every consequence of every \(T_j\) is true in \(M\).
+2. Every \(T_j\) proves ordinary arithmetic \(\mathsf{PA}\), and the consequence set of \(T_0\) is recursively enumerable.
+3. For every \(j\geq 1\) and every \(L\)-formula \(\varphi(x)\) with exactly the free variable \(x\), there is a standard number \(e\) such that
+   \[
+   T_{j-1}\vdash
+   \forall x\bigl(K_j\varphi(x)\leftrightarrow x\in W_{\bar e}\bigr).
+   \tag{1}
+   \]
+4. For one fixed arithmetical \(\Pi_3\) partial truth predicate \(\tau(x)\), specified in Section 4, every \(T_j\) proves
+   \[
+   \forall x\bigl(K_{j+1}\tau(x)\rightarrow\tau(x)\bigr).
+   \tag{2}
+   \]
+
+Here and below \(\bar e\) is the numeral for \(e\), and \(W_e\) is the \(e\)-th recursively enumerable set in a fixed effective enumeration.
+
+The theorem does not assume a uniform enumeration of the family. It does not even need the later consequence sets to be supplied as recursively enumerable sets: their uniform enumerability will follow from the code hypothesis. Ordinary arithmetic induction is enough; the source question assumes the stronger Peano axioms for the full modal language.
+
+## 2. Canonical knowledge and particular codes
+
+### 2.1. The consequence relation
+
+We use Alexander's consequence relation for his modal language, not a stronger modal proof calculus. Write \(T\vdash\theta\) when \(\theta\) follows from \(T\) in that relation. Alexander defines it semantically and proves compactness and effective enumerability of validities [A13, Theorem 1.2.6]. Thus the consequences of a recursively enumerable set of axioms are recursively enumerable. Ordinary first-order arithmetic deductions remain valid deductions in this logic.
+
+The canonical interpretation on standard arithmetic is
+\[
+M\models K_j\varphi[s]
+\quad\Longleftrightarrow\quad
+T_j\vdash\varphi^s,
+\tag{3}
+\]
+where \(\varphi^s\) replaces the free variables by the numerals given by \(s\). This is the interpretation in Alexander's Definitions 1.2.15 and 3.1.4. His Lemma 1.2.12 makes numerical substitution commute with modal formation in the required way.
+
+Self-doubting knowledge still includes truthfulness: \(K_j\theta\rightarrow\theta\) holds in the intended structure. Consequently a \(T_j\)-consequence is true in that structure, by (3). The adjective *self-doubting* means that the machine need not know its own truthfulness. Our proof never adds that stronger requirement. This setting follows Alexander's modification of the earlier knowing-machine framework of Carlson, Reinhardt and Shapiro; Carlson's construction is a predecessor, not a theorem proved here [C00; A13, Sections 1.2 and 1.4].
+
+### 2.2. The order of the quantifiers
+
+For a unary formula \(\varphi(x)\), introduce the unary formula
+\[
+\operatorname{Code}_{j,\varphi}(z)
+:=\forall x\bigl(K_j\varphi(x)\leftrightarrow x\in W_z\bigr),
+\tag{4}
+\]
+with \(z\) fresh. Bound variables are renamed effectively. When this formula is itself used as the input of another code request, its free variable is renamed to the designated input variable.
+
+Alexander's code condition is the truth in \(M\) of
+\[
+\exists e\;K_{j-1}\operatorname{Code}_{j,\varphi}(e).
+\tag{5}
+\]
+Because arithmetic is standard, (5) supplies an actual natural number \(e\); clause (3) then gives precisely (1). It is not the condition
+\[
+K_{j-1}\exists e\;\operatorname{Code}_{j,\varphi}(e).
+\tag{6}
+\]
+There is no general rule extracting a particular numeral theorem from (6). The proof uses (5), which is the condition printed in Definition 3.1.5.
+
+The free variable in (4) is \(z\), even though \(j\) names a modal operator and \(\varphi\) may be modal. Thus (4), after variable renaming, is another allowed input to the full unary-formula code schema. This simple closure property drives the argument.
+
+## 3. Obtaining all required indices from the first machine
+
+Before the general construction, consider reaching \(T_2\). To find a \(T_1\)-endorsed index for \(T_2\)'s \(\varphi\)-answers, first ask the root enumeration for a particular code of the following \(T_1\)-column:
+\[
+\{e:T_1\vdash\operatorname{Code}_{2,\varphi}(\bar e)\}.
+\tag{7}
+\]
+This column is nonempty by (1). Enumerate it and take one output. That output is not just an externally correct index: it occurs because \(T_1\) proves its correctness. Repeating the operation reaches \(T_3\), and then every later machine.
+
+### Lemma 2. Uniform selection with predecessor endorsement
+
+Fix an enumeration index \(r\) for the consequences of \(T_0\). Under (1), (3) and soundness, there is a partial recursive procedure \(B\), obtained effectively from \(r\), such that for every \(j\geq1\) and every unary modal \(\varphi\), \(B(j,\ulcorner\varphi\urcorner)\) halts with an output \(e\) satisfying both
+\[
+T_{j-1}\vdash\operatorname{Code}_{j,\varphi}(\bar e)
+\tag{8}
+\]
+and
+\[
+W_e=\{m:T_j\vdash\varphi(\bar m)\}.
+\tag{9}
+\]
+
+**Proof.** Use deterministic enumerations and a fixed first-output convention. Define the procedure by recursion on the positive integer \(j\).
+
+For \(j=1\), enumerate the consequences of \(T_0\) using \(r\). Search for a sentence of the exact canonical form \(\operatorname{Code}_{1,\varphi}(\bar e)\), decode its numeral, and return \(e\).
+
+For the step from \(j\) to \(j+1\), form
+\[
+\chi(z)=\operatorname{Code}_{j+1,\varphi}(z).
+\]
+Compute \(d=B(j,\ulcorner\chi\urcorner)\). Enumerate \(W_d\), and return its first output \(e\). The recursion decreases the machine index, although the formula grows.
+
+We prove termination, (8) and (9) together by induction on \(j\), simultaneously for every unary modal formula. At the base, (1) promises a sentence for which the root search succeeds. That sentence is a root theorem, giving (8). Its truth in \(M\), together with standard arithmetic and (3), gives (9).
+
+For the induction step, \(\chi\) is unary, so the induction hypothesis gives a terminating computation of \(d\) and
+\[
+W_d=\{e:T_j\vdash\operatorname{Code}_{j+1,\varphi}(\bar e)\}.
+\tag{10}
+\]
+Condition (1) says that this set is nonempty. Its enumeration therefore produces an \(e\). Equation (10) gives (8) for that very output. Soundness of \(T_j\) then turns the selected theorem into (9), using (3).
+
+All formula construction, bound-variable renaming, parsing and numeral decoding are effective. A canonical spelling can be used because the permitted renamings preserve the relevant formulas. No enumeration of a later \(T_j\) is supplied to the procedure: later enumerations are obtained from indices selected by the procedure itself. This proves the lemma. \(\square\)
+
+The lemma asserts external termination on the promised inputs. It does not assert
+\[
+T_0\vdash\forall j\;B(j,\ulcorner\varphi\urcorner)\mathord\downarrow,
+\]
+or any corresponding assertion in \(\mathsf{PA}\). No such theorem will be required. Notice also that the predecessor endorsement (8) was proved separately from the extensional equality (9).
+
+## 4. Arithmetic theories with fixed proof presentations
+
+The next step converts one endorsed arithmetic column into reflection. We give the details because changing an enumeration or a proof predicate without justification would leave a gap in the final application of non-descent.
+
+### 4.1. Arithmetic syntax and partial truth
+
+Initially work in the arithmetic language \(L_0=\{0,S,+,\cdot,=\}\). Designate a recursive class \(\mathcal P_3\) of closed prenex \(\Pi_3\) formulas with bounded matrices; empty blocks and effective padding are allowed. A typical member has the form
+\[
+\forall\vec u\;\exists\vec v\;\forall\vec w\;
+\delta(\vec u,\vec v,\vec w),
+\]
+where \(\delta\) is bounded. Finite tuples and syntax are coded arithmetically. Primitive recursive operations used to describe the coding are abbreviations with their usual arithmetic representations, not new unproved axioms.
+
+Fix a \(\Pi_3\) partial truth predicate \(\tau(z)\) for this class, taking the value false on codes outside \(\mathcal P_3\). In particular, for each fixed \(\sigma\in\mathcal P_3\),
+\[
+\mathsf I\Sigma_1\vdash
+\sigma\leftrightarrow\tau(\overline{\ulcorner\sigma\urcorner}).
+\tag{11}
+\]
+For each fixed formula this disquotation is verified already in \(\mathsf I\Sigma_1\): check its bounded matrix and then its three fixed quantifier blocks. The stronger uniform assertion about truth of all base axioms below uses \(\mathsf{PA}\). The construction of the predicate and those uniform equations are recalled in Lemma 3. The basic use of partial truth and witnessed proofs follows the conventions of [PW, Section 2.1].
+
+Present \(\mathsf I\Sigma_1\) by a fixed recursive set of axioms, each normalized to a member of \(\mathcal P_3\). For a \(\Sigma_1\) formula code \(c\), let \(J(c)\) be the normalization of its universally closed induction axiom. Include these \(J(c)\) and normalizations of the fixed elementary arithmetic axioms. Denote the resulting recursive axiom predicate by \(\operatorname{Base}(z)\). The normalization comes with effective logical derivations in both directions, so this is an ordinary presentation of \(\mathsf I\Sigma_1\).
+
+Let \(E(e,z,t)\) be a primitive recursive computation-witness relation for the fixed enumeration, so \(z\in W_e\) abbreviates \(\exists t\,E(e,z,t)\). Define
+\[
+U_e=\mathsf I\Sigma_1+
+\{\sigma\in\mathcal P_3:\ulcorner\sigma\urcorner\in W_e\}.
+\tag{12}
+\]
+An extra-axiom line in a proof carries its accepting enumeration computation; a base-axiom line carries its base certificate. Write \(\operatorname{Prf}_e(p,z)\) for the resulting primitive recursive proof-checking relation. Its existential provability predicate is \(\Sigma_1\). This is a witnessed, or smooth, presentation. It also satisfies the usual derivability conditions over \(\mathsf I\Sigma_1\).
+
+Write \(\operatorname{RFN}_3(U_e)\) for
+\[
+\forall z\forall p\,
+\bigl((z\in\mathcal P_3\wedge\operatorname{Prf}_e(p,z))
+\rightarrow\tau(z)\bigr).
+\tag{13}
+\]
+It expresses uniform reflection for the designated \(\Pi_3\) sentences, not merely consistency. Choose a fixed-template prenex normalization \(R_e\in\mathcal P_3\) of (13). The normalization is provably equivalent in \(\mathsf I\Sigma_1\). A \(\Sigma_1\) presentation of the proof predicate, negated in the antecedent, adds no alternation beyond \(\Pi_3\).
+
+The source theorem [PW] uses a language with exponentiation. Appendix A verifies the conservative, complexity-preserving translation between that convention and this one. We do not identify the two signatures literally.
+
+### Lemma 3. Uniform truth of the fixed base
+
+The partial truth predicate can be chosen so that
+\[
+\mathsf{PA}\vdash
+\forall z\bigl(\operatorname{Base}(z)\rightarrow\tau(z)\bigr).
+\tag{14}
+\]
+Moreover, \(\mathsf{PA}\) proves the compositional and substitution equations for bounded-level satisfaction on subformulas of prenex \(\Sigma_3\) and \(\Pi_3\) formulas.
+
+**Proof.** Uniform evaluation of terms and bounded formulas has matching existential and universal arithmetical descriptions. Arithmetic proves their equivalence and totality. One obtains the fixed-level satisfaction predicates by quantifying over the values of each of the at most three unbounded blocks. The existential or universal description of bounded satisfaction is chosen to match the last block. This gives the required \(\Sigma_k\) and \(\Pi_k\) predicates, \(1\leq k\leq3\), without an extra alternation. Arithmetic induction on the finite syntax proves the term-substitution and compositional equations. The predicates may be combined into a single tagged satisfaction formula for the union of these classes; that combined formula need not itself be \(\Pi_3\).
+
+Let \(S(c,n,a)=\operatorname{Sat}_{\Sigma_1}(c,n,a)\) express satisfaction of the \(\Sigma_1\) formula coded by \(c\), with induction variable \(n\) and remaining assignment \(a\). One instance of full \(\mathsf{PA}\) induction, retaining \(c,a\) as parameters, proves
+\[
+\forall c\forall a\Bigl(
+\bigl[S(c,0,a)\wedge\forall n(S(c,n,a)\rightarrow S(c,Sn,a))\bigr]
+\rightarrow\forall n S(c,n,a)\Bigr).
+\tag{15}
+\]
+The formula is guarded by the recursive condition that \(c\) codes a suitable \(\Sigma_1\) formula. The uniform truth equations identify (15), on such codes, with truth of \(J(c)\).
+
+For completeness, the required complexity bound on \(J(c)\) follows directly from writing an induction axiom for \(\phi\in\Sigma_1\) as
+\[
+\neg\phi(0)\ \vee\
+\exists n\bigl(\phi(n)\wedge\neg\phi(Sn)\bigr)
+\ \vee\ \forall n\phi(n).
+\tag{16}
+\]
+The three disjuncts are respectively in \(\Pi_1\), \(\Sigma_2\) and \(\Pi_2\). They admit a uniform \(\Pi_3\) prenex normalization, including universal closure of the parameters. This normalizes a fixed induction template, not an arbitrary formula into a falsely bounded complexity class. The truth equivalence is verified with the same fixed-level satisfaction equations. The remaining base axioms are fixed arithmetic theorems. This proves (14) and the lemma. \(\square\)
+
+### Lemma 4. From column truth to reflection
+
+Uniformly in \(e\),
+\[
+\mathsf{PA}\vdash
+\left[\forall z(z\in W_e\rightarrow\tau(z))
+\rightarrow\operatorname{RFN}_3(U_e)\right].
+\tag{17}
+\]
+
+**Proof.** Work in \(\mathsf{PA}\), assuming the antecedent. Let \(p\) be a witnessed \(U_e\)-proof of a designated \(\Pi_3\) sentence \(\sigma\). Collect the finite list \(\gamma_1,\ldots,\gamma_m\) of nonlogical axioms used by \(p\), retaining their enumeration or base certificates. Every \(\gamma_i\) is in \(\mathcal P_3\).
+
+The effective deduction transformation yields a purely logical sequent derivation of
+\[
+\neg\gamma_1,\ldots,\neg\gamma_m,\sigma.
+\tag{18}
+\]
+Ordinary first-order cut elimination is formalizable in \(\mathsf{EA}^+\), arithmetic with total superexponentiation [PW, Section 2.1]. Therefore \(\mathsf{PA}\) verifies the transformation to a cut-free derivation. This eliminates logical cuts; the induction axioms were retained as nonlogical premises, not eliminated by a claim about arithmetic proof strength.
+
+The subformula property puts the formulas of the resulting derivation among term instances of subformulas of the displayed \(\Sigma_3\) and \(\Pi_3\) formulas. Use the tagged partial satisfaction predicate of Lemma 3. Arithmetic induction on a cut-free proof verifies soundness of its sequents: an atomic initial sequent is true, propositional rules preserve the disjunction, existential rules use the value of their witness term, and universal rules use arbitrary values for the fresh eigenvariable. Equality rules are justified by arithmetic equality and the substitution equations. The induction can be carried out uniformly over the proof code and assignments, because the satisfaction formula has fixed finite complexity.
+
+Under the antecedent of (17), every extra \(\gamma_i\) is true by its enumeration certificate; every base \(\gamma_i\) is true by Lemma 3. Thus (18) yields \(\tau(\ulcorner\sigma\urcorner)\). The choices of \(p\) and \(\sigma\) were arbitrary, giving (13).
+
+Keeping the negative premises as separate sequent entries is important. We have not called an arbitrary Boolean closure of all the axioms a \(\Pi_3\) formula. The proof verifies a fixed bounded-complexity base plus the specified column, and does not assert reflection for unrestricted \(\mathsf{PA}\). \(\square\)
+
+### Lemma 5. The arithmetic information retained by a column
+
+Suppose \(T\) contains \(\mathsf{PA}\), is sound in the standard canonical structure, and
+\[
+W_e=\{m:T\vdash\tau(\bar m)\}.
+\tag{19}
+\]
+Then \(U_e\) is standard-sound and has exactly the same designated \(\Pi_3\) consequences as \(T\).
+
+**Proof.** For a fixed designated \(\Pi_3\) sentence \(\sigma\), (11) gives
+\[
+T\vdash\sigma
+\quad\Longleftrightarrow\quad
+T\vdash\tau(\overline{\ulcorner\sigma\urcorner})
+\quad\Longleftrightarrow\quad
+\ulcorner\sigma\urcorner\in W_e.
+\tag{20}
+\]
+Thus every such \(T\)-consequence is literally an extra axiom of \(U_e\), with an actual enumeration witness. Conversely each extra axiom of \(U_e\) is a \(T\)-consequence; so are its \(\mathsf I\Sigma_1\) base axioms. An ordinary arithmetic deduction from them is a valid deduction in the original consequence relation. Hence every arithmetic \(U_e\)-consequence is a \(T\)-consequence. Its axioms are true by soundness of \(T\), so \(U_e\) is standard-sound.
+
+This comparison is an external assertion about actual sentences and proofs. It does not assert that \(U_e\) knows an index for \(T\), or that either theory proves the displayed equality of consequence sets. \(\square\)
+
+## 5. The uniform presentation and its reflection sentences
+
+Apply Lemma 2 to the fixed formula \(\tau\), and write
+\[
+e_j=B(j,\ulcorner\tau\urcorner),\qquad j\geq1.
+\tag{21}
+\]
+The map \(j\mapsto e_j\) is recursive under the hypothesized chain, but no arithmetic proof of its totality has been obtained. We therefore use a program whose code can be compiled without waiting for this computation to finish.
+
+Let \(w(j)\) be the index of the following program:
+
+> Compute \(B(j,\ulcorner\tau\urcorner)\). If it returns \(e\), enumerate \(W_e\).
+
+The fixed root index \(r\) and \(j\) are data in the program. Standard parameter compilation makes \(j\mapsto w(j)\) primitive recursive independently of whether the program runs to completion. Define
+\[
+V_j=U_{w(j)}.
+\tag{22}
+\]
+These theories have a uniformly recursively enumerable axiom presentation. Extensionally, \(V_j\) and \(U_{e_j}\) have the same axioms, but that fact alone is not our justification for exchanging their reflection sentences.
+
+### Lemma 6. Pointwise provable comparison of the two presentations
+
+For each fixed standard \(j\geq1\), \(\mathsf I\Sigma_1\) proves equivalence of the witnessed provability predicates of \(V_j\) and \(U_{e_j}\), preserving conclusion codes. Consequently it proves
+\[
+\operatorname{RFN}_3(V_j)
+\leftrightarrow\operatorname{RFN}_3(U_{e_j}).
+\tag{23}
+\]
+
+**Proof.** Lemma 2 gives an actual finite terminating computation of \(B(j,\ulcorner\tau\urcorner)\) with output \(e_j\). For this fixed \(j\), arithmetic verifies that computation. Determinism proves uniqueness of its output.
+
+An accepting computation of the wrapper program consists of that initial computation followed by an accepting computation for \(W_{e_j}\). Conversely an accepting computation for \(W_{e_j}\) can be prefixed by the verified initial computation to obtain one for the wrapper. These are effective transformations of finite computation witnesses, verified in \(\mathsf I\Sigma_1\). They prove
+\[
+\forall z\bigl(z\in W_{w(j)}\leftrightarrow z\in W_{e_j}\bigr)
+\tag{24}
+\]
+there, together with the explicit witness transformations.
+
+Apply these transformations to the extra-axiom certificates on every line of a finite proof, leaving its arithmetic formulas, logical inferences and base certificates unchanged. Induction on the proof verifies both translations and preserves the conclusion. This proves equivalence of the provability predicates. Reflection for either presentation says that all its provable designated \(\Pi_3\) sentences satisfy the same predicate \(\tau\). The provability equivalence therefore gives (23).
+
+The verification is pointwise: a different fixed finite computation may be used for each \(j\). It does not presuppose that \(\mathsf I\Sigma_1\) or \(\mathsf{PA}\) proves the uniform termination of \(B\). \(\square\)
+
+## 6. The published arithmetic obstruction
+
+### Theorem 7. Pakhomov--Walsh non-descent
+
+There is no recursively enumerable sequence \((S_n)_{n<\omega}\) of recursively enumerable extensions of \(\mathsf{EA}\) such that \(S_0\) is \(\Pi_3\)-sound and
+\[
+S_n\vdash\operatorname{RFN}_{\Pi_3}(S_{n+1})
+\qquad\text{for every }n.
+\tag{25}
+\]
+
+This is [PW, Theorem 3.4], with that paper's arithmetized proof conventions. We invoke the theorem, rather than claiming a new arithmetic non-descent result. Its hypotheses do not require \(\mathsf{EA}\) to prove that the sequence descends, or require the theories themselves to prove a total index-selection function.
+
+We shall use the special case of uniformly recursively enumerable, standard-sound extensions of \(\mathsf I\Sigma_1\). Appendix A explains the arithmetic language translation and the agreement of the reflection presentations needed to place our theories within this special case. The stronger base also avoids a hidden collection assumption when witnessing a finite proof's recursively enumerable axioms.
+
+## 7. Proof of Theorem 1 and the dissertation corollary
+
+**Proof of Theorem 1.** Suppose a family satisfying the theorem exists. Construct the indices \(e_j\), the primitive recursive wrapper indices \(w(j)\), and the theories \(V_j\) as above. Lemmas 2 and 5 show that all \(V_j\) are standard-sound and extend the normalized \(\mathsf I\Sigma_1\) base.
+
+Fix \(j\geq1\). The predecessor endorsement in Lemma 2, applied to \(j+1\), gives an actual theorem
+\[
+T_j\vdash\forall x\bigl(K_{j+1}\tau(x)
+\leftrightarrow x\in W_{\bar e_{j+1}}\bigr).
+\tag{26}
+\]
+Together with the known successor truthfulness (2), arithmetic deduction inside \(T_j\) yields
+\[
+T_j\vdash\forall x\bigl(x\in W_{\bar e_{j+1}}
+\rightarrow\tau(x)\bigr).
+\tag{27}
+\]
+Since \(T_j\) contains \(\mathsf{PA}\), Lemma 4 gives
+\[
+T_j\vdash\operatorname{RFN}_3(U_{e_{j+1}}).
+\tag{28}
+\]
+Lemma 6, used at the particular index \(j+1\), now gives
+\[
+T_j\vdash\operatorname{RFN}_3(V_{j+1}).
+\tag{29}
+\]
+
+The remaining issue is where this reflection is proved. Equation (29) is so far a theorem of the modal theory \(T_j\), whereas Theorem 7 requires a proof in the arithmetic theory \(V_j\).
+
+Let \(R_{w(j+1)}\) be the designated \(\Pi_3\) normalization of the reflection sentence in (29). The normalization equivalence is provable in the base, so
+\[
+T_j\vdash R_{w(j+1)}.
+\]
+By (11), \(T_j\) therefore proves
+\(\tau(\overline{\ulcorner R_{w(j+1)}\urcorner})\). By Lemma 2 this means
+\[
+\ulcorner R_{w(j+1)}\urcorner\in W_{e_j}=W_{w(j)}.
+\tag{30}
+\]
+Thus \(R_{w(j+1)}\) is an **actual added axiom** of \(V_j\), with a finite enumeration witness. Appending the base proof of its equivalence with the reflection sentence gives an actual finite proof
+\[
+V_j\vdash\operatorname{RFN}_3(V_{j+1}).
+\tag{31}
+\]
+This argument uses the external column comparison to identify a particular axiom. It does not put an unproved assertion about the whole modal theory into \(V_j\).
+
+The tail \(V_1,V_2,\ldots\) is uniformly recursively enumerable by its compiled presentation (22). Its theories are standard-sound and satisfy (31). With the convention verified in Appendix A, it contradicts Theorem 7. This proves Theorem 1. \(\square\)
+
+### Corollary 8. Negative answer to Open Problem 3.2.1
+
+In Alexander's language and standard canonical semantics, there is no family of knowing machines in which each \(K_i\) knows the truthfulness and a particular code of \(K_{i+1}\), as well as the Peano axioms for the full language.
+
+**Proof.** The language has effective operator names. By Definition 1.2.17 and Theorem 1.2.6 of [A13], the root's consequences are recursively enumerable. The canonical clause is (3), and the Truth axiom of self-doubting knowledge makes all consequences true in the same standard structure. Knowing the Peano axioms for the full modal language includes knowing ordinary arithmetic \(\mathsf{PA}\). Definition 3.1.5 gives (1), as explained in Section 2.2. Knowing successor truthfulness for all formulas supplies, in particular, (2) for \(\tau\). All the hypotheses of Theorem 1 hold, which is impossible. \(\square\)
+
+## 8. Scope and nearby questions
+
+### 8.1. How much of the code schema was used?
+
+For the contradiction, Lemma 2 only needs to select the \(\tau\)-column indices. Its recursive calls use a concrete family of formulas. At the request for the \(i\)-th machine on the way to machine \(j\), the formula is
+\[
+\operatorname{Code}_{i+1,
+\operatorname{Code}_{i+2,\ldots,
+\operatorname{Code}_{j,\tau}}},
+\qquad 1\leq i<j,
+\tag{32}
+\]
+with the indicated finite nesting and the canonical free-variable renamings. At \(i=j\) the formula is \(\tau\). Each expression is finite; its modal depth grows with \(j\). Code knowledge on this recursive family of templates suffices. We do not claim that this family is minimal.
+
+In particular, the proof cannot be transferred merely by assertion to a code schema restricted to arithmetic formulas or to a fixed finite modal depth. No construction or impossibility result for those variants is supplied here.
+
+### 8.2. An effectively named sequence is a real hypothesis
+
+The algorithm computes the literal operator name needed at every recursive call. An arbitrary infinite path in a recursively enumerable relation need not be computable. Therefore a family over an ill-founded relation does not automatically provide the computably specified successor sequence required here.
+
+This distinction is relevant to [A20, Theorem 79], which gives true self-referential families for some ill-founded recursively enumerable partial orders when the ordinal requirement is removed. Its existence statement does not supply a computable descending path satisfying the present hypotheses. Relabelling a noncomputable path as \(0,1,\ldots\) is not an effective change of syntax and need not preserve recursive enumerability of the root. Our conclusion is not a well-foundedness theorem for every ordinal-free endorsement relation.
+
+### 8.3. What is imported and what is proved here?
+
+The arithmetic non-descent theorem is Pakhomov--Walsh's. Alexander supplies the question, modal consequence framework and canonical semantics. The local reduction consists of the root-based selection procedure with its retained endorsements, the specified arithmetic-column conversion, and the proof-presentation comparison needed to apply non-descent. These are written out rather than hidden behind references to earlier research notes.
+
+The proof uses ordinary published facts about arithmetized syntax, partial truth, logical cut elimination and incompleteness. It is a hand proof; it does not inherit a formal certificate from the separate repository developments concerning Questions 3-1-1 through 3-1-3. No independent human mathematical review or determination of novelty is asserted. The supplemental note records further consequences, with their proofs and exact assumptions, in the same repository.
+
+## Appendix A. Arithmetic language and reflection conventions
+
+This appendix supplies the convention check used in Sections 4 and 6. It is not a new hypothesis on the machines.
+
+### Lemma A.1. Conservative language extension for the application of non-descent
+
+The special case of Theorem 7 used here applies to the uniformly presented theories \(U_e\) in the language \(L_0\), with reflection as in (13).
+
+**Proof.** The language of \(\mathsf{EA}\) in [PW] includes exponentiation. The theory \(\mathsf I\Sigma_1\) in \(L_0\) proves totality and uniqueness of its usual \(\Sigma_1\) graph, so it admits a conservative definitional extension by that function and the elementary notational symbols in the source language. The definitions and their proof translations are fixed once for every \(U_e\).
+
+The complexity of the translated reflection class must also be checked. Over \(\mathsf I\Sigma_1\), a bounded formula in the extended language has equivalent \(\Sigma_1\) and \(\Pi_1\) translations into \(L_0\). To construct them, give graph values to the added-function terms; use uniqueness to obtain the universal alternative; and compose the descriptions under bounded quantification. Finite collections of evaluation witnesses are available in \(\mathsf I\Sigma_1\). The constructions and their equivalences are uniform in bounded formula codes. These are the usual \(\Delta_1\) definitional translations.
+
+For a prenex extended-language \(\Pi_3\) sentence, choose the \(\Pi_1\) version of its translated bounded matrix. Its final universal block merges with the last universal block of the given sentence. The translated sentence therefore remains \(\Pi_3\). In the dual \(\Sigma_3\) case, use the \(\Sigma_1\) matrix translation. These fixed-class translations preserve the corresponding partial truth predicates, by induction through their three unbounded blocks. The reverse embedding of \(L_0\) into the extended language is immediate.
+
+Translate proofs using the graph definitions and their totality and uniqueness proofs. An induction axiom for an extended-language \(\Sigma_1\) formula translates to an induction instance for its equivalent \(L_0\) \(\Sigma_1\) formula. Extra axioms are the same \(\mathcal P_3\) sentences and retain their enumeration witnesses. Thus the proof transformations are uniform in \(e\), preserve conclusions up to the stated translations, and are verified in the fixed base. Together with the partial-truth comparison, they transfer uniform \(\Pi_3\) reflection between the two presentations. Ordinary proof predicates and witnessed proof predicates likewise agree in this base: witnesses for the finite list of enumerated axioms can be collected there. We never use an arbitrary extensionally equivalent proof predicate.
+
+Consequently a uniformly enumerable, sound sequence of \(L_0\) theories as in (31) would yield one of sound extensions of \(\mathsf{EA}\) with the reflection relation of Theorem 7. The published obstruction applies. \(\square\)
+
+## References
+
+**[A13]** Samuel Allen Alexander. *The Theory of Several Knowing Machines*. PhD dissertation, The Ohio State University, 2013. OhioLINK accession **osu1366362999**. [Institutional record](https://rave.ohiolink.edu/etdc/view?acc_num=osu1366362999). Main source locations: Theorem 1.2.6, printed pp. 9–10; Lemma 1.2.12 and Definitions 1.2.15–1.2.19, pp. 12–16; Definitions 3.1.4–3.1.5, p. 86; Theorem 3.1.6, pp. 87–88; Open Problem 3.2.1, p. 89.
+
+**[A20]** Samuel Allen Alexander. Self-referential theories. *Journal of Symbolic Logic* **85**(4) (2020), 1687–1716. [arXiv:2008.11535v1](https://arxiv.org/abs/2008.11535v1), 11 August 2020. The comparison in Section 8 uses Corollary 78 and Theorem 79, author-version pp. 23–25.
+
+**[C00]** Timothy J. Carlson. Knowledge, machines, and the consistency of Reinhardt's strong mechanistic thesis. *Annals of Pure and Applied Logic* **105** (2000), 51–82. Cited as a predecessor of the modal framework, not as the source of the answer to Open Problem 3.2.1.
+
+**[PW]** Fedor Pakhomov and James Walsh. Reflection ranks and ordinal analysis. *Journal of Symbolic Logic* **86** (2021), 1350–1384. [DOI:10.1017/jsl.2020.9](https://doi.org/10.1017/jsl.2020.9). Inspected version: [arXiv:1805.02095v2](https://arxiv.org/abs/1805.02095v2), 19 October 2019. The proof uses Section 2.1 for arithmetic/proof conventions and Theorem 3.4, author-version pp. 10–11, for arithmetic non-descent.

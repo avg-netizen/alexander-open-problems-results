@@ -1,0 +1,32 @@
+{
+  "built_at_utc": "2026-10-20T23:59:44.490702+00:00",
+  "source_math_delimiters": "Pandoc markdown+tex_math_single_backslash",
+  "pandoc": "pandoc 3.11",
+  "tectonic": "Tectonic 0.17.0",
+  "network_resources_allowed": false,
+  "papers": [
+    {
+      "source": "successor-knowers-3-2-1.md",
+      "source_sha256": "0a204f55fd22eafe1f805f3a39f9776dc0aae25cace4e6ac7438344e673fccba",
+      "tex_sha256": "54b7474161ac0d5219b6da64fdbd9dff2190a19483ed82269128109aa2fdf452",
+      "pdf_sha256": "d3c06c7e4dd40aadce7089b4fcde21a0579462bb4a3d7d78e6f244ab79e2d257",
+      "pages": 13,
+      "proof_endings_source": 8,
+      "proof_endings_pdf": 8,
+      "overfull_boxes": [],
+      "missing_glyphs_or_unresolved_references": []
+    },
+    {
+      "source": "supplemental/additional-results.md",
+      "source_sha256": "bf1f24b72dcaf98bdc09eb84a907f0614937eeda1e1f2149b210d2b759e0b9d9",
+      "tex_sha256": "982307dce9a8ba2a13aa62928eb02c49e2275cd02d8bc4a9cce64584b9bb527c",
+      "pdf_sha256": "aae50d41c4e8aeafb6431a8a68ad3a4c2a696bf6276df7a2db25339c24007d09",
+      "pages": 6,
+      "proof_endings_source": 6,
+      "proof_endings_pdf": 6,
+      "overfull_boxes": [],
+      "missing_glyphs_or_unresolved_references": []
+    }
+  ],
+  "scope": "Document generation and visible proof endings; no formal mathematical verification."
+}
