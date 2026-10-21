@@ -6,7 +6,7 @@ The question was posed in Samuel Allen Alexander's 2013 Ohio State dissertation,
 
 ## Read the entry
 
-- [Full paper, 13-page PDF](successor-knowers-3-2-1.pdf), with definitions, all local proofs, arithmetic presentation conventions and bibliography.
+- [Full paper, 12-page PDF](successor-knowers-3-2-1.pdf), with definitions, all local proofs, arithmetic presentation conventions and bibliography.
 - [Canonical Markdown manuscript](successor-knowers-3-2-1.md) and [generated LaTeX](successor-knowers-3-2-1.tex).
 - [Supplemental results](supplemental/README.md): uniform enumeration of later consequence sets; no computable infinite endorsement path or finite cycle; an explicit separating arithmetic sentence; and an obstruction to true \(\Sigma_3\)-guarded codes under a specified inclusion of consequences.
 - [Proof guide and assumption checks](PROOF-GUIDE.md).
@@ -28,6 +28,6 @@ From this directory:
 python3 build_pdf.py
 ```
 
-This builds both papers from their Markdown sources using Pandoc, Tectonic, the DejaVu fonts and the installed TeX cache. It needs Python 3 and Poppler's `pdfinfo` and `pdftotext`. Add `--allow-downloads` only if TeX resources are missing and downloads are wanted. The default build is offline. Generated TeX and PDFs are retained; [pdf-build-report.json](pdf-build-report.json) records source/output hashes, tool versions, page counts and diagnostics.
+This builds both papers from their Markdown sources using Pandoc, Tectonic, Computer Modern and the installed TeX cache. It needs Python 3 and Poppler's `pdfinfo`, `pdffonts` and `pdftotext`. Add `--allow-downloads` only if TeX resources are missing and downloads are wanted. The default build is offline. The local `pdf-fonts.tex` replaces Pandoc's default font selection; it needs no system-font installation. Generated TeX and PDFs are retained; [pdf-build-report.json](pdf-build-report.json) records source/output hashes, embedded fonts, tool versions, page counts and diagnostics.
 
 Edit the Markdown sources, then rebuild. Do not edit the generated LaTeX or PDF separately. This first edition is a fresh expansion of the argument, dated 20 October 2026; it does not claim text or formula preservation from an earlier sketch. The dependency guide and visible proof endings address the exposition issues encountered in the repository's earlier dissertation paper.

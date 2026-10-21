@@ -1,6 +1,6 @@
 # Additional proved consequences
 
-Read [the 6-page supplemental PDF](additional-results.pdf), its [canonical Markdown](additional-results.md), or the [generated LaTeX](additional-results.tex).
+Read [the 5-page supplemental PDF](additional-results.pdf), its [canonical Markdown](additional-results.md), or the [generated LaTeX](additional-results.tex).
 
 | Result | Content | Main input |
 |---|---|---|

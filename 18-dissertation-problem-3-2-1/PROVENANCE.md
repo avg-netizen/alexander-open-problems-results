@@ -16,3 +16,12 @@ The arithmetic non-descent theorem is Pakhomov–Walsh's. Alexander supplies the
 - `pdf-build-report.json` records hashes and document checks.
 
 The exposition uses an introductory dependency narrative, a concrete example before the general selection algorithm, definitions near their use, point-of-use source credit and explicit proof endings. These choices respond to the earlier dissertation-paper rewrite review. No mathematical-expression preservation claim is made relative to previous research sketches. Future substantive changes should update this record and the proof guide, then rebuild both formats from the canonical sources.
+
+## 21 October 2026: Computer Modern typesetting
+
+At the owner's request, the main paper and supplement now use Computer Modern
+instead of the original DejaVu font selection. The canonical Markdown sources
+are byte-for-byte unchanged, and the generated TeX from `\begin{document}`
+onward is identical to the previous edition. The changed font metrics produce
+12 main-paper pages and 5 supplemental pages. Both PDFs retain every proof
+ending; the build report records embedded fonts and document diagnostics.

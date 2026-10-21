@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "scope": "Repository links, source/output identity and document checks; no formal mathematical verification.",
   "all_local_links_inside_repository": true,
   "local_links_checked": 17,
@@ -80,9 +80,13 @@
     "supplement": 6
   },
   "visual_review": [
-    "main title page",
+    "Computer Modern main title page",
     "main arithmetic definitions page 5",
     "supplement separation/guard page 4"
   ],
-  "mathematical_review": "Assembling-agent source/dependency check, described in PROOF-GUIDE.md; not independent review."
+  "mathematical_review": "Assembling-agent source/dependency check, described in PROOF-GUIDE.md; not independent review.",
+  "font_family": "Computer Modern",
+  "canonical_markdown_unchanged": true,
+  "generated_document_bodies_unchanged": true,
+  "offline_rebuild_passed": true
 }
