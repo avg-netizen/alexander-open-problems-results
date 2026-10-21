@@ -157,3 +157,25 @@ certificate or established priority. The existing 3-1-x Lean proofs do not
 certify note 18. The owner subsequently authorized publication to this GitHub
 repository; no journal submission or author communication was made.
 See the entry's [provenance](18-dissertation-problem-3-2-1/PROVENANCE.md).
+
+## 21 October 2026: explanatory species and internodon editions
+
+At the owner's request, OpenAI Codex combined entries 06, 10 and 11
+into one explanatory species paper at entry 06 and rewrote entry 08
+as a clean current edition. Source passages, the saved experiment
+protocols and the invoked merge-tree stability theorem were checked
+for the stated scopes. The species exposition uses a common
+finite-founder union lemma; the internodon exposition separates
+clade changes, birth-height stability and co-membership measurements.
+
+The four earlier Markdown/PDF pairs are archived byte for byte.
+Existing simulation scripts and records are unchanged. New vector
+figures, Computer Modern typesetting sources, build reports and a
+[verification record](editorial-verification-2026-10-21.json) accompany
+the current editions. The old 10 and 11 paths are navigation entries.
+
+This rewrite clarifies statements and proofs; it is not a
+formula-preservation claim or an independent mathematical audit.
+It adds no human review, proof-assistant certificate or priority
+finding. The [revision record](REVISIONS.md) and the two source maps
+state the exact editorial and computational scope.

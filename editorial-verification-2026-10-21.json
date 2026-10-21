@@ -1,0 +1,176 @@
+{
+  "date": "2026-10-21",
+  "scope": "Source-scope, editorial, archive, finite replay and document checks by the assembling agent. No independent mathematical review, formal certificate or priority claim.",
+  "current_papers": {
+    "species": "06-founding-cohort-species/founding-cohort-species.pdf",
+    "internodons": "08-internodon-order-robustness/internodon-order-robustness.pdf"
+  },
+  "archived_original_sha256": {
+    "06-founding-cohort-species/archive/2026-09-27/founding-cohort-species.md": "fe4ada934f16286f69e7bb0a62f860068f6f0dcc965c58602ea0f12d971b2e88",
+    "06-founding-cohort-species/archive/2026-09-27/founding-cohort-species.pdf": "398704a1e93495b7a5f20c724feeebc0fb48dfc3ec64bc567e70cdc6099fee8b",
+    "08-internodon-order-robustness/archive/2026-09-27/internodon-order-robustness.md": "763e2ed6171c7d5aec3f76bc1a527e9c3fbdfd7351f1e0bc69a0856963447b88",
+    "08-internodon-order-robustness/archive/2026-09-27/internodon-order-robustness.pdf": "c55d4e024fa89e69dbf1873d701e6e67e4d350193882d3bb06c7fa8b5cb389b2",
+    "10-species-equivalence-and-iap-completeness/archive/2026-09-27/species-equivalence-and-iap-completeness.md": "9de955ca6d944ebee7e3ad934a3bcf84caeffab005581bbb208cd4b6e37cd546",
+    "10-species-equivalence-and-iap-completeness/archive/2026-09-27/species-equivalence-and-iap-completeness.pdf": "09ba8a0740622004a5229ee1072f740ebf20d30c85358feb3fdd5a03eb0d11d9",
+    "11-bounded-founders/archive/2026-09-27/bounded-founders.md": "fa723c08ed05548e5cd27b9b2fd0de900d6c149db387a4877db87b2644dabbf2",
+    "11-bounded-founders/archive/2026-09-27/bounded-founders.pdf": "124a0e91b19ed850aabf949650f167bc8a1cb2e2d4ed67ac7189e28ebb0864e6"
+  },
+  "unchanged_simulation_sha256": {
+    "08-internodon-order-robustness/undirforest.py": "00698fc60dd57bdcd61733d0d989d4927806c05f747e9d3bb99f1362b860af6f",
+    "08-internodon-order-robustness/swap_locality.py": "4435d4fc9b5d4c02d03cb29467c0b1090dd7db6d44d9c242c434304e90676ee5",
+    "08-internodon-order-robustness/order_robustness.py": "292c2bf26719688a259ed2534517aa6544954e174d51e12231d79f1faa84e061",
+    "08-internodon-order-robustness/order_robustness_any.py": "f14bd1fc9cdb9a28e7a1a7616f01148c9cf8ccae122757c3561785afacdf53e0",
+    "08-internodon-order-robustness/order-robustness-any.json": "4dde911e1406f822ef958a00313ac59031ee488c38f0e69707592f2bf3e6b006",
+    "08-internodon-order-robustness/order-robustness-buffered.json": "f7aa6d08d97df49e84fa6d620494cb082411d29d844141a1354e573e5153ee37",
+    "08-internodon-order-robustness/order-robustness.json": "cee845537272baf340f857ab778e944b081faa68d2a5b91352b7309f4ac13e1f",
+    "08-internodon-order-robustness/swap-locality.json": "8135e78a9dd766355d9c8e15b2043a6ab0d0613cb97f415a92eccd297bfef76b",
+    "08-internodon-order-robustness/comembership_check.py": "0ac42d5761d1795e10847d8d77f13d4f619ccf9a9ab3e8eca384b252397b5e79",
+    "08-internodon-order-robustness/comembership-check.json": "d3d849e65a541825cbe6251add11c9cdab20a9583672e2a5895ce1b4e7651bfa"
+  },
+  "finite_replay": {
+    "program": "swap_locality.py",
+    "record": "swap-locality.json",
+    "byte_identical": true,
+    "sha256": "8135e78a9dd766355d9c8e15b2043a6ab0d0613cb97f415a92eccd297bfef76b"
+  },
+  "co_membership_table_matches_saved_record": true,
+  "current_local_links_checked": 120,
+  "parsed_mathematics": {
+    "06-founding-cohort-species": {
+      "InlineMath": 236,
+      "DisplayMath": 17
+    },
+    "08-internodon-order-robustness": {
+      "InlineMath": 124,
+      "DisplayMath": 8
+    }
+  },
+  "pdf_reports": {
+    "06-founding-cohort-species": {
+      "built_at_utc": "2026-10-21T02:33:13.174827+00:00",
+      "source": "founding-cohort-species.md",
+      "source_sha256": "665a197406d82f5e3f0e630f9bc7a207155ab9fdd8e7f84f6243f60e7da49dba",
+      "tex_sha256": "24ff18c23d47b8498601c05b81b780252db42cc78e717227a2c90b74a0e55fbc",
+      "pdf_sha256": "9b8e5d86e86da1e8ca756c70bbb34f7728c4836d5038404e3aaeca5ba23c1d44",
+      "pages": 9,
+      "proof_endings_source": 7,
+      "proof_endings_pdf": 7,
+      "embedded_fonts": [
+        "CMR17",
+        "CMR12",
+        "CMBX10",
+        "CMR10",
+        "CMBX12",
+        "CMTI10",
+        "CMMI10",
+        "CMR8",
+        "CMSY10",
+        "SFRM1095",
+        "Cmmi10",
+        "Cmr10",
+        "CMMI8",
+        "MSAM10",
+        "MSBM10",
+        "CMSY8",
+        "CMEX10"
+      ],
+      "diagnostics": [],
+      "network_resources_allowed": false,
+      "pandoc": "pandoc 3.11",
+      "tectonic": "Tectonic 0.17.0",
+      "scope": "Document checks; no independent mathematical verification."
+    },
+    "08-internodon-order-robustness": {
+      "built_at_utc": "2026-10-21T02:31:00.020749+00:00",
+      "source": "internodon-order-robustness.md",
+      "source_sha256": "b618cb7439e50b5acdb1374306a7366585706340a26d9ecf2fd2f280a3747091",
+      "tex_sha256": "735e4bf14c9ee0b93be31777c32fd6561893ec9aeb2822ff393a21a4eb9bc87e",
+      "pdf_sha256": "cce1d0079861f7c7b7aeddf0651300737a82fc9274f87ac521edbc5edf0444f1",
+      "pages": 8,
+      "proof_endings_source": 3,
+      "proof_endings_pdf": 3,
+      "embedded_fonts": [
+        "CMR17",
+        "CMR12",
+        "CMBX10",
+        "CMR10",
+        "CMBX12",
+        "CMMI10",
+        "CMSY10",
+        "CMMI8",
+        "CMSY8",
+        "MSAM10",
+        "Cmmi10",
+        "Cmr10",
+        "CMSY6",
+        "CMR8",
+        "CMEX10",
+        "Cmr10",
+        "SFRM1095",
+        "CMTI10"
+      ],
+      "diagnostics": [],
+      "network_resources_allowed": false,
+      "pandoc": "pandoc 3.11",
+      "tectonic": "Tectonic 0.17.0",
+      "scope": "Document checks; no independent mathematical verification."
+    },
+    "10-species-equivalence-and-iap-completeness": {
+      "built_at_utc": "2026-10-21T02:31:01.509000+00:00",
+      "source": "species-equivalence-and-iap-completeness.md",
+      "source_sha256": "23cc5a1a1c1d0a9e08f09f3db9587f768bcaa66bf846852057047c85e34edb5a",
+      "tex_sha256": "ea2d6086f5639b0a88954c5b118948d61ebae7c4baca04be42397cb5f83433cb",
+      "pdf_sha256": "e5f728d8ddff76941f85871d5ed418e226d95c3ccb6674ae718321592183e1b0",
+      "pages": 1,
+      "proof_endings_source": 0,
+      "proof_endings_pdf": 0,
+      "embedded_fonts": [
+        "CMR17",
+        "CMR12",
+        "CMBX12",
+        "CMR10",
+        "CMTI10"
+      ],
+      "diagnostics": [],
+      "network_resources_allowed": false,
+      "pandoc": "pandoc 3.11",
+      "tectonic": "Tectonic 0.17.0",
+      "scope": "Document checks; no independent mathematical verification."
+    },
+    "11-bounded-founders": {
+      "built_at_utc": "2026-10-21T02:31:03.003150+00:00",
+      "source": "bounded-founders.md",
+      "source_sha256": "aef1836cdface5507567448c08693b75757d023fad43434fd8c5c6c1bbaa79d6",
+      "tex_sha256": "a6c7b513bf7043dbe6cee22985851fbf226896588c0a3b979128a4261bfbd7c5",
+      "pdf_sha256": "a4d084774e3c1100fd7dcb383e6963f3f54a69c534e30e5cb00a796379c55ed3",
+      "pages": 1,
+      "proof_endings_source": 0,
+      "proof_endings_pdf": 0,
+      "embedded_fonts": [
+        "CMR17",
+        "CMR12",
+        "CMBX12",
+        "CMR10",
+        "CMTI10"
+      ],
+      "diagnostics": [],
+      "network_resources_allowed": false,
+      "pandoc": "pandoc 3.11",
+      "tectonic": "Tectonic 0.17.0",
+      "scope": "Document checks; no independent mathematical verification."
+    }
+  },
+  "visual_inspection": "Title, figure, proof, reduction, metric and table pages inspected; seven representative pages. All proof endings visible and all fonts embedded.",
+  "source_maps": [
+    "06-founding-cohort-species/SOURCES.md",
+    "08-internodon-order-robustness/SOURCES.md"
+  ],
+  "isolated_offline_build": {
+    "documents": 4,
+    "source_sha256_match": true,
+    "generated_tex_sha256_match": true,
+    "page_counts_proof_endings_fonts_diagnostics_match": true,
+    "scope": "Only the explicitly selected edition files were copied to a temporary directory; no vault files were available as local proof or typesetting inputs."
+  },
+  "archives_match_previous_published_commit": "2e8a9806103084b740ef77d1f040096c78dfe893"
+}

@@ -1,0 +1,22 @@
+{
+  "built_at_utc": "2026-10-21T02:31:03.003150+00:00",
+  "source": "bounded-founders.md",
+  "source_sha256": "aef1836cdface5507567448c08693b75757d023fad43434fd8c5c6c1bbaa79d6",
+  "tex_sha256": "a6c7b513bf7043dbe6cee22985851fbf226896588c0a3b979128a4261bfbd7c5",
+  "pdf_sha256": "a4d084774e3c1100fd7dcb383e6963f3f54a69c534e30e5cb00a796379c55ed3",
+  "pages": 1,
+  "proof_endings_source": 0,
+  "proof_endings_pdf": 0,
+  "embedded_fonts": [
+    "CMR17",
+    "CMR12",
+    "CMBX12",
+    "CMR10",
+    "CMTI10"
+  ],
+  "diagnostics": [],
+  "network_resources_allowed": false,
+  "pandoc": "pandoc 3.11",
+  "tectonic": "Tectonic 0.17.0",
+  "scope": "Document checks; no independent mathematical verification."
+}

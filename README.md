@@ -1,8 +1,16 @@
 # Results on open problems from the papers of Samuel Allen Alexander
 
 This repository is a research packet for discussion. It is not a journal submission, and it
-makes no claim to established priority. Each numbered folder holds one self-contained note: Markdown
-source, a PDF, and any scripts with their recorded output.
+makes no claim to established priority. Each numbered folder is a research entry with
+paper sources, a PDF or a pointer to a consolidated paper, and any scripts with their recorded output.
+
+**Explanatory editions, 21 October 2026:**
+[Specieslike clusters with several founders](06-founding-cohort-species/founding-cohort-species.pdf)
+combines entries 06, 10 and 11 into one paper.
+[Birth-order sensitivity of undirforests and internodons](08-internodon-order-robustness/internodon-order-robustness.pdf)
+presents the structural results and the measurements with explicit metric denominators.
+The current papers state corrected results directly; earlier editions and
+[revision history](REVISIONS.md) are kept separately.
 
 **Current 3-1-3 proof:** [33-page standalone PDF](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf)
 · [manuscript](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.md)
@@ -65,11 +73,11 @@ Nothing here duplicates it.
 | 03 | [Temporal knower joint model](03-temporal-knower-joint-model/temporal-knower-joint-model.pdf): a factive model of the surprise-examination theory extended by self-referential sentences L_i, with later knowledge of their falsehood. | Aldini–Alexander–Graziani (2023), concluding conjecture | proposed resolution, hand proof + finite controls |
 | 04 | [Formula-language classification](04-formula-language-classification/formula-classification.pdf): the 2006 language describes exactly the partial functions with arithmetical graphs. | *Formulas for Computable and Noncomputable Functions* (2006), after Cor. 9 | hand proof |
 | 05 | [RL transformation counterexample](05-rl-transformation-counterexample/rl-transformation-counterexample.pdf): maps satisfying the printed Definition 2 that contradict Theorem 3. | *Representation and Invariance in RL*, arXiv v5 (2026) | explicit counterexample |
-| 06 | [Founding-cohort species](06-founding-cohort-species/founding-cohort-species.pdf): a CA-free axiom set that is upward generic and covers every organism; maximal species may have several founders. | *Specieslike Clusters* (2026), after Thm. 13 | hand proof; one necessity sentence corrected |
+| 06 | [Specieslike clusters with several founders](06-founding-cohort-species/founding-cohort-species.pdf): founding cohorts and fixed finite founder bounds give CA-free coverage; their infinite generator-equivalence classes agree with the common-ancestor family. Includes the IAP complexity result from 10. | *Specieslike Clusters* (2026), after Thm. 13; derived questions from this repository | unified explanatory hand-proof paper (06 + 10 + 11) |
 | 07 | [Minimal introspection bundle](07-minimal-introspection-bundle/minimal-introspection-bundle.pdf): i-Validity is redundant in Lemma 19; {Assigned Validity, i-Deduction} is the unique minimal bundle. | *Self-referential Theories* (2020), after Cor. 23 | hand proof + countermodels |
-| 08 | [Internodon order robustness](08-internodon-order-robustness/internodon-order-robustness.pdf): the undirforest is a merge tree; one adjacent swap changes at most one clade. Measurements: 18–32% of co-member pairs are separated by reordering within generations. | *Alternative Construction of Internodons* (2015), concluding conjecture | two lemmas + measurements; robustness claim corrected |
-| 10 | [Species equivalence and IAP complexity](10-species-equivalence-and-iap-completeness/species-equivalence-and-iap-completeness.pdf): founding-cohort and common-ancestor species give the same infinite ∼-classes; global IAP is Π⁰₃-complete. | Conjectures S1 and 2b of this repository | hand proof (audit) |
-| 11 | [Bounded founders](11-bounded-founders/bounded-founders.pdf): a fixed founder budget gives coverage and admits late founders. | *Specieslike Clusters*, after Thm. 13 | hand proof (audit) |
+| 08 | [Birth-order sensitivity of undirforests and internodons](08-internodon-order-robustness/internodon-order-robustness.pdf): exact adjacent-swap and clade-distance theorems; separate height stability and co-membership measurements. The dedicated saved sample loses 18–31% of reference co-member pairs on average. | *Alternative Construction of Internodons* (2015), concluding question | explanatory hand proofs + finite measurements; general robustness remains open |
+| 10 | [Species equivalence and IAP complexity](10-species-equivalence-and-iap-completeness/README.md): global IAP is Borel Π⁰₃-complete on connected rooted binary trees; infinite-class comparison. | Conjectures S1 and 2b of this repository | incorporated into 06, Sections 5–7 and Appendix A |
+| 11 | [Bounded founders](11-bounded-founders/README.md): a fixed founder budget gives coverage and admits late founders. | *Specieslike Clusters*, after Thm. 13 | incorporated into 06, Sections 2–5 |
 | 12 | [Pseudo-visibility, private information](12-pseudovisibility-private-information/pseudovisibility-private-information.pdf): exact value formula; counterexamples to unconditional P1a; restricted P1b convergence theorem. | *Pseudo-visibility* (2022), better-performance conjecture | hand proof (audit) |
 | 13 | [Signed quitting](13-signed-quitting/signed-quitting.pdf): for every r, a symmetric universal machine with a Question 26 counterexample under expected-value normalisation. | *Intelligence via Ultrafilters*, Q. 26; *Reward-Punishment Symmetric Universal Intelligence* | hand proof + finite checks (audit) |
 | 14 | [Dissertation Question 3-1-1](14-dissertation-question-3-1-1/several-knowing-machines-3-1-1.pdf): machines that know everyone's truthfulness and particular codes of their subordinates exist for every r.e. well-founded hierarchy. | *The Theory of Several Knowing Machines* (dissertation, 2013), Def. 1.1.1, Fig. 1 | hand proof (checked by a second AI system) |
@@ -127,7 +135,10 @@ runs (`08/order_robustness.py`, `09/pseudovisibility/selfrefl_exp.py`) take a fe
 The audit checks are in `audit-2026-09-27/controls.py`.
 
 To rebuild the PDFs: `python3 build_documents.py --allow-downloads`. This needs pandoc ≥ 3,
-tectonic and the DejaVu fonts. Note 17 has its own Markdown-to-PDF build script;
+tectonic. The current editions of 06, 08, 10 and 11 use Computer Modern
+through [build_explanatory.py](build_explanatory.py), with Poppler for document checks;
+the other notes built by the root command retain DejaVu.
+Note 17 has its own Markdown-to-PDF build script;
 see [its README](17-dissertation-question-3-1-3/README.md). The archived 3 October
 LaTeX paper retains its original build script in its archive.
 Note 18 has a separate [offline build](18-dissertation-problem-3-2-1/README.md#rebuild)
