@@ -137,3 +137,23 @@ byte for byte. The embedded Lean project remains unchanged. The
 [editorial review record](17-dissertation-question-3-1-3/standalone-editorial-review.json)
 and [provenance](17-dissertation-question-3-1-3/PROVENANCE.md) state the precise
 editorial and document-check scope. This is no new mathematical audit.
+
+## 20 October 2026: Open Problem 3.2.1 and additional consequences (note 18)
+
+At the owner's request, OpenAI Codex wrote a complete self-contained
+[paper](18-dissertation-problem-3-2-1/successor-knowers-3-2-1.md) giving a negative
+answer to the dissertation's Open Problem 3.2.1, and a
+[supplement](18-dissertation-problem-3-2-1/supplemental/additional-results.md)
+with further proved consequences. The entry contains every local proof
+dependency, exact primary-source locations, an assumption guide and an offline
+Markdown-to-TeX/PDF build. It has no dependency on the wider research workspace.
+
+The reduction to arithmetic reflection is written out; the published
+non-descent theorem is credited to Pakhomov and Walsh. The modal framework and
+question are credited to Alexander, with Carlson's preceding work distinguished.
+The assembling agent checked the source passages and the local dependency
+chain. This is a hand proof, without an independent human review, formal
+certificate or established priority. The existing 3-1-x Lean proofs do not
+certify note 18. The owner subsequently authorized publication to this GitHub
+repository; no journal submission or author communication was made.
+See the entry's [provenance](18-dissertation-problem-3-2-1/PROVENANCE.md).

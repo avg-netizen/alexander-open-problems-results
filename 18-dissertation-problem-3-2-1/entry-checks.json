@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-20",
+  "scope": "Repository links, source/output identity and document checks; no formal mathematical verification.",
+  "all_local_links_inside_repository": true,
+  "local_links_checked": 17,
+  "links": [
+    {
+      "from": "PROOF-GUIDE.md",
+      "target": "successor-knowers-3-2-1.md"
+    },
+    {
+      "from": "PROOF-GUIDE.md",
+      "target": "SOURCE-CHECKS.md"
+    },
+    {
+      "from": "PROVENANCE.md",
+      "target": "SOURCE-CHECKS.md"
+    },
+    {
+      "from": "PROVENANCE.md",
+      "target": "PROOF-GUIDE.md"
+    },
+    {
+      "from": "README.md",
+      "target": "successor-knowers-3-2-1.pdf"
+    },
+    {
+      "from": "README.md",
+      "target": "successor-knowers-3-2-1.md"
+    },
+    {
+      "from": "README.md",
+      "target": "successor-knowers-3-2-1.tex"
+    },
+    {
+      "from": "README.md",
+      "target": "supplemental/README.md"
+    },
+    {
+      "from": "README.md",
+      "target": "PROOF-GUIDE.md"
+    },
+    {
+      "from": "README.md",
+      "target": "SOURCE-CHECKS.md"
+    },
+    {
+      "from": "README.md",
+      "target": "PROVENANCE.md"
+    },
+    {
+      "from": "README.md",
+      "target": "pdf-build-report.json"
+    },
+    {
+      "from": "supplemental/README.md",
+      "target": "additional-results.pdf"
+    },
+    {
+      "from": "supplemental/README.md",
+      "target": "additional-results.md"
+    },
+    {
+      "from": "supplemental/README.md",
+      "target": "additional-results.tex"
+    },
+    {
+      "from": "supplemental/README.md",
+      "target": "../successor-knowers-3-2-1.md"
+    },
+    {
+      "from": "supplemental/additional-results.md",
+      "target": "../successor-knowers-3-2-1.md"
+    }
+  ],
+  "no_external_working_paths": true,
+  "build_report_hashes_match": true,
+  "visible_proof_endings": {
+    "main": 8,
+    "supplement": 6
+  },
+  "visual_review": [
+    "main title page",
+    "main arithmetic definitions page 5",
+    "supplement separation/guard page 4"
+  ],
+  "mathematical_review": "Assembling-agent source/dependency check, described in PROOF-GUIDE.md; not independent review."
+}
