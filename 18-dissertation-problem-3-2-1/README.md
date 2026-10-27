@@ -9,6 +9,7 @@ The question was posed in Samuel Allen Alexander's 2013 Ohio State dissertation,
 - [Full paper, 12-page PDF](successor-knowers-3-2-1.pdf), with definitions, all local proofs, arithmetic presentation conventions and bibliography.
 - [Canonical Markdown manuscript](successor-knowers-3-2-1.md) and [generated LaTeX](successor-knowers-3-2-1.tex).
 - [Supplemental results](supplemental/README.md): uniform enumeration of later consequence sets; no computable infinite endorsement path or finite cycle; an explicit separating arithmetic sentence; and an obstruction to true \(\Sigma_3\)-guarded codes under a specified inclusion of consequences.
+- [Explicit ill-founded witness, 27 October 2026](supplemental/explicit-ill-founded-witness.md): a separate new hand construction of an order and true r.e. hierarchy satisfying Alexander's Theorem 79(1), including its relation to paper 07. This Markdown note is not part of the existing PDFs.
 - [Proof guide and assumption checks](PROOF-GUIDE.md).
 - [Published-source locations](SOURCE-CHECKS.md) and [provenance](PROVENANCE.md).
 

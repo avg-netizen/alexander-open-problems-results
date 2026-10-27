@@ -31,3 +31,5 @@ __pycache__/
 !09-further-results/further-results.tex
 !12-pseudovisibility-private-information/pseudovisibility-private-information.tex
 !13-signed-quitting/signed-quitting.tex
+# Note 19 retains its canonical standalone manuscript source.
+!19-explicit-ill-founded-hierarchy/ill-founded-hierarchy.tex

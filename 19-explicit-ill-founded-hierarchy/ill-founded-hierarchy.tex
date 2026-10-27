@@ -1,0 +1,857 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[OT1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage[unicode,colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\renewcommand{\rmdefault}{cmr}
+\renewcommand{\sfdefault}{cmss}
+\renewcommand{\ttdefault}{cmtt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\emergencystretch}{3em}
+\allowdisplaybreaks[1]
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\renewcommand{\qedsymbol}{\ensuremath{\square}}
+\newcommand{\N}{\mathbb N}
+\newcommand{\PA}{\mathsf{PA}}
+\newcommand{\Tr}{\mathsf{Tr}}
+\newcommand{\FV}{\operatorname{FV}}
+\newcommand{\ucl}{\operatorname{ucl}}
+\newcommand{\code}[1]{\ulcorner #1\urcorner}
+\newcommand{\num}[1]{\overline{#1}}
+\newcommand{\seqcode}[1]{\operatorname{code}(#1)}
+
+\title{An explicit ill-founded hierarchy\protect\\of self-referential theories}
+\author{}
+\date{27 October 2026}
+\hypersetup{pdftitle={An explicit ill-founded hierarchy of self-referential theories}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Alexander proved that some ill-founded recursively enumerable partial order
+supports a true family of self-referential theories in which every member
+expresses a particular code of every member and the truth of its subordinates.
+His proof establishes existence without specifying a witnessing order. We give
+a recursive order and an effective construction of such a family. The order is
+the reverse-extension relation on a tree of finite arithmetic truth tables,
+existential witnesses and diagonal values. The tree has infinite branches,
+but none computable from arithmetic truth. For Alexander's fixed-point family,
+unsound members can be enumerated using arithmetic truth; any unsound member
+would therefore generate a forbidden descending path. This replaces the
+well-founded induction in his constructive theorem. The same order works
+uniformly for every closed-r.e.-generic background, including arithmetic for
+the full modal language. We explain its compatibility with the obstruction to
+computable successor hierarchies and its relation to the minimal introspection
+bundle.
+\end{abstract}
+
+\section{The question and the construction}\label{sec:introduction}
+
+A theory can describe a program that enumerates another theory's conclusions.
+It can also assert that those conclusions are true. These are different kinds
+of information: a program tells us what the other theory says, while a
+truthfulness assertion licenses accepting what it says.
+
+Alexander studies families of recursively enumerable theories that can express
+both kinds of information about one another. In \emph{Self-referential
+theories}~\cite{alexander}, Theorem~24 constructs true families on every
+recursively enumerable well-founded partial order. Every member expresses a
+particular code of every member, and it expresses the truth of the members
+below it. Well-founded induction proves the constructed family true.
+
+Theorem~79(1) of the same paper establishes that some ill-founded r.e. orders
+also support this construction. Its proof compares the complexity of
+well-foundedness with the expressive power of arithmetic truth. It does not
+identify an order on which the construction succeeds. The present paper gives
+one by a direct finite membership test.
+
+We use \emph{recursive} and \emph{computable} interchangeably. An r.e. set is
+a set that an ordinary program can enumerate, also called a computably
+enumerable set. A family $(T_i)_{i\in\N}$ is uniformly r.e. when a single
+program enumerates all pairs $(i,\sigma)$ with $\sigma\in T_i$. A strict
+partial order is an irreflexive, transitive relation. We write $j\prec i$ when
+$j$ is subordinate to $i$, so a descending path has the form
+\[
+ i_0\succ i_1\succ i_2\succ\cdots.
+\]
+
+Our language is ordinary arithmetic with effectively named operators
+$K_0,K_1,\ldots$. The canonical interpretation reads $K_j\phi$ as an assertion
+that $T_j$ entails the corresponding sentence. Section~\ref{sec:framework}
+gives the precise convention. A family is \emph{true} if every one of its
+axioms is true in this common standard interpretation.
+
+\begin{theorem}[Explicit witnessing hierarchy]\label{thm:main}
+There is an algorithmically specified recursive strict partial order
+$\prec_*$ on $\N$ with the following properties.
+\begin{enumerate}
+\item The order is ill-founded, but it has no infinite descending path
+computable from the set of true arithmetic sentences.
+\item An effective fixed-point construction gives a true, uniformly r.e.
+family $(T_i)_{i\in\N}$ in which every $T_i$ contains the Peano axioms for the
+full modal language, a particular-code schema for every $T_j$, and the full
+truth schema for every $T_j$ with $j\prec_*i$.
+\item The same order works for every closed-r.e.-generic background in
+Alexander's sense. From an index of that background, a total computable
+compiler returns a successful fixed-point index.
+\end{enumerate}
+\end{theorem}
+
+Here ``a particular code'' means a schema containing an actual numeral index,
+rather than an assertion that some index exists. In Alexander's common-index
+presentation, every $T_i$ contains, for the same natural number $n$,
+\begin{equation}\label{eq:code-schema}
+ \forall x\bigl(K_j\phi\ \leftrightarrow\
+ \langle\num{\code{\phi}},\num j,x\rangle\in W_{\num n}\bigr),
+ \qquad \FV(\phi)\subseteq\{x\}.
+\end{equation}
+The finite tuple notation in this arithmetic formula denotes a fixed
+computable coding. The truth schema for a subordinate is
+\begin{equation}\label{eq:truth-schema}
+ \ucl(K_j\phi\to\phi),\qquad j\prec_*i,
+\end{equation}
+where $\ucl$ means universal closure. The numeral $\num n$ in
+\eqref{eq:code-schema} is produced effectively; it is not selected by an
+oracle that tests truth.
+
+The construction separates two questions about a hierarchy. Its relation can
+be computable even though no program can follow an infinite descending path
+through it. Ill-foundedness asserts that some such path exists. Computable
+ill-foundedness would additionally provide an algorithm for choosing its
+successive members. Theorem~\ref{thm:main} uses the first possibility while
+excluding the second, and even excludes descent computable from arithmetic
+truth.
+
+There are two main steps. First we show that the absence of a path computable
+from arithmetic truth is sufficient for Alexander's fixed-point family to be
+true. Second we specify a recursive tree with exactly the required path
+obstruction. The subordination order is reverse proper extension of its
+finite nodes. Sections~\ref{sec:order}--\ref{sec:assembly} assemble the two
+steps, and Section~\ref{sec:comparison} explains the relation to the
+successor-chain problem and the introspection result.
+
+The argument below is a hand proof. It does not claim independent
+mathematical review, formal verification or a determination of literature
+priority. It establishes an explicit witness for the construction in
+Theorem~79(1); it does not assert the corresponding result for the different
+stratified construction in part~(2).
+
+\section{Canonical theories and effective code knowledge}\label{sec:framework}
+
+\subsection{The consequence relation and the standard interpretation}
+
+Write $L=L_{\mathrm{PA}}(\omega)$ for Alexander's arithmetic language with operators
+$K_i$. We use his base logic, in which interpretations of the operators
+respect free variables, alphabetic variants and substitution of variables
+\cite[Definition~2]{alexander}. Write $U\vdash\sigma$ for consequence in
+that logic. The published logical input is its completeness and compactness
+theorem: consequences of an r.e. theory can be enumerated effectively,
+uniformly from an enumeration index of its axioms
+\cite[Theorem~3]{alexander}. We use this actual consequence relation
+throughout.
+
+For an assignment $\eta$ of natural numbers to the free variables of $\phi$,
+let $\phi^\eta$ be the sentence obtained by substituting the corresponding
+numerals, renaming bound variables where necessary. For a family $U=(U_i)$,
+its canonical structure $M_U$ has standard arithmetic as its first-order
+part and satisfies
+\begin{equation}\label{eq:canonical}
+ M_U\models K_i\phi[\eta]
+ \quad\Longleftrightarrow\quad U_i\vdash\phi^\eta.
+\end{equation}
+Alexander's substitution lemma verifies that
+\begin{equation}\label{eq:substitution}
+ M_U\models\phi[\eta]
+ \quad\Longleftrightarrow\quad M_U\models\phi^\eta
+\end{equation}
+for every formula~\cite[Lemma~8]{alexander}. A true family means
+$M_U\models U_i$ for every $i$. In that event every consequence of every
+$U_i$ is also true in the same structure.
+
+\subsection{Closure and admissible background axioms}
+
+\begin{definition}[Closure and generic background]\label{def:generic}
+A family $U$ is \emph{closed} if $\sigma\in U_i$ implies
+$K_i\sigma\in U_i$ for all $i$. A uniformly r.e. background family $B$ is
+\emph{closed-r.e.-generic} if $M_U\models B$ for every closed uniformly r.e.
+family $U\supseteq B$.
+\end{definition}
+
+Closure here refers to the addition of knowledge assertions to the axiom
+sets. It is distinct from closing an axiom set under all logical
+consequences. The latter are already accounted for by $\vdash$.
+
+Genericity gives a convenient way to include ordinary reasoning principles
+without settling the desired hierarchy in advance. Once a closed r.e.
+family extending $B$ has been constructed, its canonical interpretation
+automatically satisfies $B$. The uniform family consisting of the Peano
+axioms for $L$, including induction for its modal formulas, is one example
+\cite[Lemmas~10 and~20]{alexander}. Section~\ref{subsec:introspection}
+discusses a further example using the smaller introspection bundle.
+
+\subsection{The effective fixed point}\label{subsec:fixed-point}
+
+Fix an r.e. relation $\prec$ and an enumeration index $b$ of a background
+family $B$. At this stage the relation need not be well-founded. For each
+number $n$, let $G_i(n)$ consist of the background $B_i$, all instances of
+\eqref{eq:code-schema}, and all instances of \eqref{eq:truth-schema} for
+$j\prec i$. Put
+\begin{equation}\label{eq:finite-closure}
+ T_i(n)=\{K_i^k\sigma:\sigma\in G_i(n),\ k\in\N\},
+ \qquad K_i^0\sigma=\sigma.
+\end{equation}
+This is precisely the smallest closed family containing those generators.
+The definition is effective. Enumerate the background, dovetail the code
+schemas over $j$ and $\phi$, enumerate subordinate truth schemas as pairs
+appear in $\prec$, and enumerate all finite iterates $K_i^k$ of each
+generator. No search for a true theory occurs in this enumeration.
+
+Uniform consequence enumeration now gives a total computable function
+$f_b$ on indices such that
+\begin{equation}\label{eq:index-map}
+ W_{f_b(n)}=
+ \bigl\{\langle\code{\phi},j,m\rangle:
+ \FV(\phi)\subseteq\{x\},\quad
+ T_j(n)\vdash\phi(x\mid\num m)\bigr\}.
+\end{equation}
+Totality here means that the compiler always returns a program index. The
+program it returns enumerates a set and can run forever, as an enumerator
+normally does.
+
+The effective recursion theorem supplies an index $n$ satisfying
+\begin{equation}\label{eq:fixed-point}
+ W_n=W_{f_b(n)}.
+\end{equation}
+Fix this $n$ and abbreviate $T=T(n)$ and $M=M_T$. Equation
+\eqref{eq:fixed-point}, together with \eqref{eq:canonical}, makes every
+code schema \eqref{eq:code-schema} true in $M$. This conclusion is
+independent of well-foundedness. The remaining issue is the truth of the
+subordinate truth schemas.
+
+For later use, it is helpful to make the effectiveness of the index choice
+explicit. Fix a numbering $(\varphi_x)$ of ordinary partial computable
+functions. Let $\delta(x)$ be the effectively compiled index of the
+enumerator that first computes $\varphi_x(x)$ and, if this returns $r$,
+enumerates $W_r$. Parameter compilation makes $\delta$ a total computable
+function. Compile an ordinary program $q$ for the total function
+\[
+ x\longmapsto f_b(\delta(x)),
+\]
+and output $n=\delta(q)$. Then
+\begin{equation}\label{eq:explicit-compiler}
+ W_n=W_{\varphi_q(q)}
+     =W_{f_b(\delta(q))}=W_{f_b(n)}.
+\end{equation}
+All these operations are ordinary index compilation. The numerical output
+depends on the chosen acceptable program numbering, just as any program's
+index does. The procedure for obtaining it is fixed and requires no
+uncomputable choice.
+
+\section{How an unsound family would yield a path}\label{sec:soundness}
+
+Let $A$ be the set of true arithmetic sentences in any fixed effective
+coding. An $A$-computable procedure is an ordinary oracle computation that
+may ask whether a specified arithmetic sentence is true. This oracle is an
+external device in the proof. It is not added to the machines' language or
+used by their enumerators.
+
+The next lemma identifies why this particular oracle suffices.
+
+\begin{lemma}[Canonical truth reduces to arithmetic truth]\label{lem:translation}
+From an enumeration index of any uniformly r.e. family $U$, and from an
+$L$-sentence $\sigma$, one can effectively produce an arithmetic sentence
+$F_U(\sigma)$ such that
+\begin{equation}\label{eq:arithmetic-translation}
+ M_U\models\sigma
+ \quad\Longleftrightarrow\quad\N\models F_U(\sigma).
+\end{equation}
+In particular, $A$ decides the truth of each individual canonical sentence,
+uniformly in $U$ and $\sigma$.
+\end{lemma}
+
+\begin{proof}
+Uniform consequence enumeration gives an arithmetic predicate
+$\operatorname{Pr}_U(j,z)$ saying that $U_j$ entails the sentence with code
+$z$. For example, it can assert the existence of a finite computation
+witness in that enumeration.
+
+Translate arithmetic atoms identically, and commute the translation with
+Boolean operations and quantifiers. For a modal formula $K_j\psi$ with
+free variables among $\vec x$, use the arithmetic formula saying that
+$U_j$ entails the result of substituting the $\vec x$ numerals into
+$\psi$. More explicitly, if
+$\operatorname{Sub}_\psi(\vec x,z)$ is an arithmetic representation of
+this computable substitution operation, set
+\[
+ F_U(K_j\psi)(\vec x)=
+ \exists z\bigl(\operatorname{Sub}_\psi(\vec x,z)
+                 \wedge\operatorname{Pr}_U(j,z)\bigr).
+\]
+This is an arithmetic formula. Induction on the outer construction of a
+formula, using \eqref{eq:canonical} in the modal case, proves the claimed
+equivalence. This is the translation used in Alexander's proof of
+Theorem~79~\cite{alexander}.
+\end{proof}
+
+The modal case does not ask a truth oracle to evaluate the formula inside
+the operator. It refers to a proof of that formula as a syntactic object.
+For example, $K_iK_j(0=1)$ becomes an arithmetic assertion that $U_i$
+entails the literal modal sentence $K_j(0=1)$. This is why arbitrary modal
+nesting still gives an arithmetic translation.
+
+\begin{lemma}[Downward propagation of unsoundness]\label{lem:local-step}
+For the fixed-point family of Section~\ref{subsec:fixed-point}, assume $B$
+is closed-r.e.-generic. Then
+\begin{equation}\label{eq:local-step}
+ \bigl(\forall j\prec i\;M\models T_j\bigr)
+ \quad\Longrightarrow\quad M\models T_i.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The background generators are true because $T$ is a closed r.e. extension
+of $B$. The code generators are true by the fixed-point equation.
+
+Suppose all subordinate theories are true. If
+$M\models K_j\phi[\eta]$ for a subordinate $j$, then
+$T_j\vdash\phi^\eta$. Since $M\models T_j$, it follows that
+$M\models\phi^\eta$, and hence $M\models\phi[\eta]$ by the
+substitution property. This verifies every subordinate truth generator.
+
+Finally, every closure-generated axiom $K_i\rho$ is true in $M$: the
+sentence $\rho$ belongs to $T_i$, so $T_i\vdash\rho$. This argument does
+not assume that $\rho$ is true. It deals with every positive iterate in
+\eqref{eq:finite-closure}. Thus all axioms of $T_i$ are true.
+\end{proof}
+
+This is the local induction step in the published well-founded argument.
+We will use its contrapositive: if a member is unsound, at least one of its
+subordinates is unsound. To turn that observation into a contradiction on
+an ill-founded order, we need an effective way to find such a subordinate.
+
+\begin{proposition}[Soundness criterion]\label{prop:criterion}
+Let $\prec$ be an r.e. strict partial order with no $A$-computable infinite
+descending path. For every closed-r.e.-generic background $B$, the
+effectively compiled fixed-point family $T$ is true.
+\end{proposition}
+
+\begin{proof}
+Let
+\begin{equation}\label{eq:bad-set}
+ D=\{i:(\exists\sigma\in T_i)\ M\not\models\sigma\}.
+\end{equation}
+This set is c.e. relative to $A$. Enumerate all axioms of all $T_i$, apply
+Lemma~\ref{lem:translation} to each one, and use $A$ to check its truth.
+Whenever a false axiom of $T_i$ appears, enumerate $i$ into $D$.
+
+By Lemma~\ref{lem:local-step}, every $i\in D$ has a $j\in D$ with
+$j\prec i$. Suppose $D$ is nonempty, and fix one $i_0\in D$. Given
+$i_k$, dovetail the $A$-enumeration of $D$ with the enumeration of the
+relation until a pair $(j,i_k)$ has appeared and $j$ has appeared in $D$.
+Choose the first such discovery and put $i_{k+1}=j$. The local step
+guarantees that this finite search terminates at every stage. Iterating it
+computes an infinite descending path from $A$, contrary to the hypothesis.
+Therefore $D$ is empty, so $T$ is true.
+\end{proof}
+
+Two effectiveness details matter here. First, the procedure only enumerates
+unsound indices. It does not decide whether an entire r.e. theory is sound;
+that would ask a stronger question than checking each of its individual
+axioms. Consequently no jump of the truth oracle is being used in this
+search. Second, the starting index $i_0$ can be a fixed numerical parameter
+in the oracle program. The contradiction needs the existence of such a
+program if $D$ is nonempty; it does not need a uniform method of finding
+the first unsound theory in an arbitrary family.
+
+The mechanism can be summarized as
+\[
+ \begin{aligned}
+ &\text{one unsound member}\\
+ &\quad\Longrightarrow\text{an $A$-enumerable set of unsound members}\\
+ &\quad\Longrightarrow\text{an $A$-computable descending path}.
+ \end{aligned}
+\]
+We next construct a recursive order where the last line is impossible,
+although infinite descending paths exist.
+
+\section{A recursive tree with inaccessible infinite branches}\label{sec:tree}
+
+The tree will be built from finite records that propose answers to arithmetic
+questions. Every infinite branch must eventually answer all those questions
+correctly. A further coordinate makes it impossible for arithmetic truth
+itself to compute an entire branch.
+
+\subsection{The three coordinates}
+
+Fix a recursive list $\theta_0,\theta_1,\ldots$, without repetitions, of all
+closed arithmetic formulas written using atomic formulas, negation,
+conjunction and existential quantification. One specific procedure is to list
+finite strings in length and lexicographic order and retain the closed
+well-formed formulas. The index of any given closed formula is computable by
+searching this list. Other connectives are effective abbreviations.
+
+For this section let $A(m)=1$ exactly when $\theta_m$ is true. This coding of
+arithmetic truth is computably equivalent to the coding in the preceding
+section. In particular, changing between them does not change which functions
+are computable from arithmetic truth.
+
+Fix a standard effective enumeration $(\Phi_e^X)$ of oracle programs, with
+natural number inputs and outputs, together with a step-by-step universal
+simulation. A candidate node of length $N$ is
+\begin{equation}\label{eq:record}
+ s=\bigl((b_0,w_0,d_0),\ldots,(b_{N-1},w_{N-1},d_{N-1})\bigr),
+ \qquad b_m\in\{0,1\},\quad w_m,d_m\in\N.
+\end{equation}
+The entries have the following roles.
+
+\begin{center}
+\begin{tabular}{p{0.12\textwidth}p{0.35\textwidth}p{0.42\textwidth}}
+\hline
+Entry & Proposed information & What the finite checks enforce\\
+\hline
+$b_m$ & The truth value of $\theta_m$. & Arithmetic truth conditions whenever
+the required entries are available.\\[3pt]
+$w_m$ & A witness if $\theta_m$ is declared to be a true existential. & The
+selected instance must be declared true once its index is available.\\[3pt]
+$d_m$ & A value chosen against oracle program $m$. & It differs from the
+output of $\Phi_m^b(m)$ whenever its halting computation is available.\\
+\hline
+\end{tabular}
+\end{center}
+
+The witness entry matters because a true existential sentence requires some
+particular natural number witnessing it. Putting that number into the node
+makes verification finite once the corresponding truth-table entry becomes
+available. The diagonal entry serves a different purpose: after the entire
+truth table has become correct, it prevents that truth table from computing
+the rest of the branch.
+
+\subsection{The complete finite membership test}\label{subsec:membership}
+
+Reject a decoded record if any $b_m$ lies outside $\{0,1\}$. Otherwise apply
+the following checks for every $m<N$.
+
+\begin{enumerate}
+\item If $\theta_m$ is atomic, require that $b_m$ is its actual truth value
+in $\N$. Truth of a closed atomic arithmetic formula is directly computable.
+\item If $\theta_m=\neg\theta_r$ and $r<N$, require $b_m=1-b_r$.
+\item If $\theta_m=\theta_r\wedge\theta_t$ and $r,t<N$, require
+$b_m=b_rb_t$.
+\item If $\theta_m=\exists v\,\psi(v)$ and $b_m=1$, compute the index $r$
+of the closed formula $\psi(\num{w_m})$. If $r<N$, require $b_r=1$.
+\item If $\theta_m=\exists v\,\psi(v)$ and $b_m=0$, then for every $k<N$
+compute the index $r$ of $\psi(\num k)$. Whenever $r<N$, require $b_r=0$.
+\end{enumerate}
+
+Substitution is capture-free, with the chosen bound variable replaced by a
+numeral. The body of a closed existential has no other free variables, so
+every substituted formula used in these tests is closed. Consequently each
+inverse-index search terminates.
+
+There is one further group of tests. For every $e<N$, simulate
+$\Phi_e^b(e)$ for at most $N$ steps, using $b_0,\ldots,b_{N-1}$ to answer
+its oracle queries. If a query has number at least $N$, defer that simulation:
+there is no available answer. If the program halts within the allowed steps,
+all its queries having been answered from the finite table, and its output
+is $y$, require
+\begin{equation}\label{eq:finite-diagonal}
+ d_e\ne y.
+\end{equation}
+
+Let $P$ be the set of accepted finite records. Its membership test uses only
+finite syntax calculations, evaluation of closed atomic formulas and bounded
+program simulations. It never asks whether an arbitrary arithmetic sentence
+is actually true. The proposed answers are input data to be checked for
+finite consistency.
+
+\begin{example}[An existential check]\label{ex:existential}
+Let $a$ be the index of $0=0$, and let $c$ be the index of
+$\exists v\,(v=0)$. These need not be the first entries of the fixed list.
+Once a prefix contains both positions, the atomic test forces $b_a=1$.
+
+If the prefix declares $b_c=1$ and chooses $w_c=0$, its positive existential
+test agrees with $b_a=1$. If it instead chooses $w_c=1$, then at a sufficiently
+long prefix it must declare $1=0$ true, contradicting an atomic test. If it
+declares $b_c=0$, the negative test with $k=0$ eventually requires $b_a=0$,
+which also contradicts the atomic test.
+
+Thus the tests rule out both an incorrect positive witness and a false
+negative answer. This second check is essential; merely checking witnesses
+for declared true existentials would leave false negative answers unchecked.
+\end{example}
+
+\begin{example}[An unavailable oracle answer]
+Suppose a simulated program asks for $b_q$ with $q\geq N$. Answering zero
+would manufacture a computation that need not be the computation of any
+eventual branch. The test therefore waits for a longer prefix. By contrast,
+if the program has already halted using only entries below $N$, every
+extension repeats that same finite computation. Its inequality
+\eqref{eq:finite-diagonal} can be enforced permanently.
+\end{example}
+
+\subsection{Why the accepted records form a tree}
+
+\begin{lemma}\label{lem:recursive-tree}
+The set $P$ is recursive and closed under taking prefixes.
+\end{lemma}
+
+\begin{proof}
+The membership algorithm has finitely many checks. All syntax operations
+and inverse-index searches terminate, and each program simulation has a
+specified finite step bound. Hence membership is decidable.
+
+If a prefix fails a truth-table check, every extension fails that same
+check: the relevant entries and the selected witness have not changed.
+The negative existential checks include every smaller witness already
+tested. If a prefix fails a diagonal check, the offending computation has
+already halted using available oracle answers; every extension supplies
+the same answers to those queries and has a larger simulation budget.
+Thus failure at a prefix persists in every extension. Equivalently, every
+prefix of an accepted record is accepted.
+\end{proof}
+
+The tree is a tree of finite sequences of natural number triples. There is
+no finite or computable bound imposed on the witness and diagonal
+coordinates. We will prove that it has a branch by specifying one
+mathematically, rather than inferring that conclusion solely from the
+existence of arbitrarily long finite nodes.
+
+\subsection{Existence of a branch and the diagonal obstruction}
+
+\begin{lemma}\label{lem:branches}
+The tree $P$ has an infinite branch, but none of its infinite branches is
+computable from $A$.
+\end{lemma}
+
+\begin{proof}
+For existence, take the true arithmetic table $b_m=A(m)$. If $\theta_m$ is
+a true existential sentence, let $w_m$ be its least true witness; otherwise
+put $w_m=0$. Define
+\begin{equation}\label{eq:branch-diagonal}
+ d_e=\begin{cases}
+ \Phi_e^A(e)+1,&\text{if }\Phi_e^A(e)\text{ halts},\\
+ 0,&\text{if it does not halt}.
+ \end{cases}
+\end{equation}
+Every finite prefix of $(b,w,d)$ passes the truth-table tests. Whenever a
+finite simulation halts using that prefix, it is the actual computation
+with oracle $A$, so its output differs from $d_e$ by
+\eqref{eq:branch-diagonal}. Thus every prefix belongs to $P$.
+
+Now take any infinite branch $(b,w,d)$. We first show $b_m=A(m)$ for every
+$m$. Induct on the number of logical connectives and quantifiers in the
+closed formula $\theta_m$. Atomic truth is enforced directly. Negation
+and conjunction have their usual truth values once the finitely many
+required indices appear in a sufficiently long prefix.
+
+For an existential $\theta_m=\exists v\,\psi(v)$, if $b_m=1$ the
+selected witness $w_m$ has a substituted instance eventually checked to
+have value $1$. By induction that instance is true, so the existential is
+true. If $b_m=0$, each individual $k$ and the index of
+$\psi(\num k)$ eventually appear within the tested bounds, forcing that
+instance to have value $0$. By induction every instance is false, so the
+existential is false. Substitution of a numeral can lengthen terms but
+does not add logical connectives or quantifiers, so these applications of
+the induction hypothesis are legitimate.
+
+Suppose the branch were $A$-computable. Its third coordinate $e\mapsto d_e$
+would then be a total $A$-computable function. Choose $q$ with
+$\Phi_q^A=d$. The halting computation $\Phi_q^A(q)$ has a finite running
+time and asks only finitely many oracle questions. At a sufficiently long
+prefix all these questions, the position $q$ and the required running time
+are available. Since $b=A$, the simulation in the membership test follows
+this very computation and requires
+\[
+ d_q\ne\Phi_q^A(q)=d_q,
+\]
+a contradiction.
+\end{proof}
+
+Each of the three coordinates has now been used. The truth bits identify
+the oracle against which diagonalization is to work. The witnesses make
+the existential truth conditions enforceable on finite records. The
+diagonal values forbid an $A$-computable completion. Without the last
+coordinate the true truth table together with its least witnesses would
+itself be $A$-computable.
+
+There is a useful bound on the complexity of the particular branch in
+\eqref{eq:branch-diagonal}. Let $A'$ be the halting problem relative to
+$A$. This oracle can determine whether $\Phi_e^A(e)$ halts and, in the
+positive case, compute its value. It also computes $A$ and the least
+existential witnesses. Therefore the displayed branch is computable from
+$A'$. We have given a concrete description of an infinite branch using a
+stronger oracle, while proving that no branch is computable from $A$.
+This does not classify the degrees of all branches.
+
+\section{The order on natural numbers}\label{sec:order}
+
+The subordination relation is now simple: a longer node extending a shorter
+one lies below it. To make the domain literally $\N$, fix Cantor pairing
+\[
+ \langle a,b\rangle=\frac{(a+b)(a+b+1)}{2}+b.
+\]
+Encode a triple by $\langle b,\langle w,d\rangle\rangle$, and encode
+finite lists recursively by
+\begin{equation}\label{eq:list-code}
+ \seqcode{[\,]}=0,\qquad
+ \seqcode{h::s}=1+\langle h,\seqcode{s}\rangle.
+\end{equation}
+Decoding a nonzero list code produces a tail with a strictly smaller
+code, so repeated decoding terminates. These formulas give a computable
+bijection between finite lists of natural numbers and $\N$; pairing then
+decodes each list entry as a triple.
+
+Let $s_i$ be the finite record decoded from $i$. Define
+\begin{equation}\label{eq:order}
+ j\prec_*i
+ \quad\Longleftrightarrow\quad
+ s_i,s_j\in P\ \text{ and }\ s_j\text{ properly extends }s_i.
+\end{equation}
+If a decoded record fails the membership test, its natural number is an
+isolated vertex. This permits use of every natural number as an operator
+name without altering the tree's extension relation.
+
+The direction in \eqref{eq:order} is important. The empty record, whose
+code is $0$, lies above every nonempty accepted node. As records acquire
+more coordinates along a branch, their codes form a descending path in
+the subordination order. Their numerical magnitudes play no role in that
+order.
+
+\begin{proposition}\label{prop:order}
+The relation $\prec_*$ is a recursive strict partial order. It is
+ill-founded and has no $A$-computable infinite descending path.
+\end{proposition}
+
+\begin{proof}
+Both node membership and proper extension of finite records are decidable.
+Proper extension is irreflexive and transitive, so \eqref{eq:order} is a
+recursive strict partial order.
+
+Take the branch from Lemma~\ref{lem:branches}. The codes of its successive
+prefixes, starting with the empty prefix, give an infinite descending
+path. Thus the order is ill-founded.
+
+Conversely, suppose $i_0\succ_*i_1\succ_*\cdots$ were an $A$-computable
+descending path. The corresponding nodes properly extend one another,
+and their lengths strictly increase. To compute the $m$th record of
+their union, search along this sequence until a node of length greater
+than $m$ appears and read its $m$th record. This search always terminates
+and is computable from $A$. The union is consequently an $A$-computable
+branch of $P$, contradicting Lemma~\ref{lem:branches}. If the sequence
+starts at a nonempty node, that node simply supplies its initial records.
+\end{proof}
+
+This proposition gives the required order by an algorithm for each pair
+$(j,i)$. It does not select an order from the class of all r.e. orders by
+testing an uncomputable property. Nor does enumerating all of its edges
+select an infinite path: such a selection would contradict the proposition.
+
+\section{Assembling the hierarchy}\label{sec:assembly}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Use the relation \eqref{eq:order}. Proposition~\ref{prop:order} establishes
+its stated order and path properties. For any index $b$ of a
+closed-r.e.-generic background $B$, use the compiler of
+Section~\ref{subsec:fixed-point} to produce $n$ and the family $T(n)$.
+Proposition~\ref{prop:criterion} shows that this family is true. Its
+generators include the particular-code schemas for every $j$ and the
+truth schemas for all $j\prec_*i$, as required.
+
+For the concrete arithmetic example, take $B_i=\PA^L$ for every $i$,
+where $\PA^L$ includes induction for all formulas of the full modal
+language. This family is closed-r.e.-generic by the cited arithmetic
+lemmas. It is uniformly r.e., so the same compiler applies and every
+$T_i$ contains this arithmetic background.
+
+The input $b$ enters only the effective axiom and consequence enumerations
+and the ensuing index compiler. The tree $P$ and order $\prec_*$ remain
+fixed. Thus the successful index is obtained uniformly from $b$ for every
+generic input background.
+\end{proof}
+
+The effective ingredients of the witness can be read in construction order:
+\begin{enumerate}
+\item Fix the arithmetic syntax list and oracle-program numbering, and
+apply the finite test of Section~\ref{subsec:membership} to define $P$.
+\item Decode natural numbers by \eqref{eq:list-code} and decide $j\prec_*i$
+using \eqref{eq:order}.
+\item Enumerate the generators for a chosen background and a proposed
+index $n$, and take the finite operator closure \eqref{eq:finite-closure}.
+\item Compile their consequences into the index map $f_b$ and compute
+the fixed point by \eqref{eq:explicit-compiler}.
+\end{enumerate}
+All four are ordinary computable operations. The arithmetic truth oracle
+appears in proving that a branch exists and in showing that an unsound
+family would give a forbidden path. It is absent from these four algorithms.
+
+In particular, the result specifies the entire uniformly r.e. hierarchy
+at once. It does not begin by choosing a noncomputable descending path and
+then try to enumerate the theories located along that path. The theories
+at all natural-number labels are supplied by the common construction.
+
+\subsection{What the members know}
+
+Every $T_i$ contains its own particular-code schema, as well as that of
+every other member. This follows because \eqref{eq:code-schema} has no
+restriction relating $i$ and $j$. Truth assertions have a different
+scope: \eqref{eq:truth-schema} is included only when $j\prec_*i$. In
+particular, irreflexivity supplies no own-truth schema at $i$.
+
+All code assertions refer to the consequences in the same canonical
+structure in which all subordinate truth assertions are verified. No
+change of interpretation along a path is used. Standard soundness of
+every member follows from truth of the constructed family and the
+semantic consequence relation.
+
+This distinction between knowing a code and knowing truth is also why
+the common index is harmless. It enables enumeration of what the
+members conclude. It does not decide all arithmetic questions or tell a
+member which downward choices can continue indefinitely.
+
+\section{Successor chains and introspection}\label{sec:comparison}
+
+\subsection{Why this does not give the chain in Problem 3.2.1}
+
+Alexander's dissertation Problem~3.2.1 asks for a sequence in which
+$K_i$ knows the truth and a particular code of $K_{i+1}$, together with
+the Peano axioms for the full language. The companion
+paper~\cite{successor} gives a negative answer in the recursively named
+language and standard canonical semantics. Its supplement excludes any
+computable infinite path of the corresponding endorsements.
+
+An ill-founded relation supplies a descending sequence in the ordinary
+set-theoretic sense. It need not supply an algorithm naming its
+successive members. Our order demonstrates that distinction directly:
+its descending paths are all noncomputable, and none can even be
+computed from arithmetic truth. Relabelling one such path
+$K_0,K_1,K_2,\ldots$ is therefore not a computable renaming of the
+language. Uniform recursive enumerability of the full labelled family
+does not make the sequence obtained by a noncomputable selection
+uniformly r.e.
+
+The proof of Theorem~\ref{thm:main} is independent of that negative
+result. The absence of computable paths is proved inside the tree
+construction, rather than inferred from the successor-chain obstruction.
+The two papers describe compatible sides of the distinction.
+
+\subsection{Including the minimal introspection bundle}\label{subsec:introspection}
+
+The minimality question addressed in paper~07~\cite{minimal} concerns
+background reasoning principles for the same canonical construction.
+For a fixed operator $K_i$, write
+\[
+ \begin{aligned}
+ \operatorname{AV}&=\{\phi^\eta:\phi\text{ is valid}\},\\
+ i\text{-Deduction}&=
+ \{\ucl(K_i(\phi\to\psi)\to(K_i\phi\to K_i\psi))\},\\
+ i\text{-Introspection}&=
+ \{\ucl(K_i\phi\to K_iK_i\phi)\}.
+ \end{aligned}
+\]
+The notation $[S]_i$ places schema $S$ in the $i$th background theory and
+places nothing in the other theories. The positive result from paper~07
+says that, for all $i,j$,
+\begin{equation}\label{eq:minimal-bundle}
+ [\operatorname{AV}]_i\ \cup\
+ [i\text{-Deduction}]_i\ \cup\
+ [i\text{-Introspection}]_j
+\end{equation}
+is closed-r.e.-generic. A separate $i$-Validity supporting schema is
+unnecessary for this conclusion.
+
+The reason for the positive result is short. Let $U$ be a closed r.e.
+extension of \eqref{eq:minimal-bundle}. If $U_i\vdash\rho$, compactness
+gives a valid sentence
+$\sigma_1\to\cdots\to\sigma_k\to\rho$ with $\sigma_\ell\in U_i$.
+Assigned validity puts this valid sentence into $U_i$. Closure then
+puts its $K_i$-prefix into $U_i$, and also puts each $K_i\sigma_\ell$
+there. Repeated $i$-Deduction gives $U_i\vdash K_i\rho$. By the
+canonical interpretation and substitution, every $i$-Introspection
+instance is therefore true in $M_U$. Assigned validity and deduction
+themselves are true in the canonical structure by the corresponding
+source genericity facts~\cite[Lemmas~17--18]{alexander}.
+
+The uniform union of \eqref{eq:minimal-bundle} over all pairs $(i,j)$ is
+r.e. Unions of generic families are generic when the union is r.e.
+\cite[Lemma~15]{alexander}. Hence that union may be added to the
+arithmetic background in Theorem~\ref{thm:main}. The same tree, order
+and index compiler work with the enlarged input background.
+
+This identifies the precise role of paper~07: it permits a smaller
+supporting bundle for introspection within this explicit hierarchy.
+The basic witnessing hierarchy already works with the published
+arithmetic background alone. The minimality assertion in paper~07 is
+relative to its three named candidate supporting schemas; it does not
+establish a minimal background for Theorem~\ref{thm:main}.
+
+\section{Scope of the explicit construction}\label{sec:scope}
+
+The order-membership test is a finite decision procedure. The index compiler
+is effective and produces the r.e. theory family without consulting truth.
+Existence of a descending path and soundness of the family are mathematical
+theorems about those algorithms. Neither theorem requires an executable
+arithmetic truth oracle to be available.
+
+The construction retains the full quantifiers of Alexander's
+Theorem~79(1): a single order works for every closed-r.e.-generic
+background. Its particular-code assertions concern all members and all
+formulas with free variables contained in one designated variable, as in
+the source. Its subordinate truth assertions concern unrestricted modal
+formulas. Full modal-language arithmetic can be included. The proof
+does not restrict code assertions to arithmetic formulas or to a fixed
+finite modal depth.
+
+The language is nevertheless arithmetic with the given operators. If a
+nonarithmetical predicate for computable ordinals is added, the translation
+in Lemma~\ref{lem:translation} is no longer a translation into ordinary
+arithmetic in the same way. The argument does not extend unchanged to
+that setting. This is consistent with the separate ordinal-knowledge
+well-foundedness result in Alexander's paper.
+
+The data of the witness are a recursive order and a uniformly r.e. family.
+They include no computable infinite descending sequence. A complete software
+implementation of Alexander's modal consequence enumerator, and a formal
+proof-assistant verification of the construction, are separate tasks. The
+proof here specifies the required operations and establishes their
+properties using the published logical framework.
+
+\begin{thebibliography}{9}
+
+\bibitem{alexander}
+Samuel Allen Alexander.
+\emph{Self-referential theories}.
+Journal of Symbolic Logic \textbf{85}(4) (2020), 1687--1716.
+\href{https://doi.org/10.1017/jsl.2020.54}{doi:10.1017/jsl.2020.54}.
+Author version:
+\href{https://arxiv.org/abs/2008.11535v1}{arXiv:2008.11535v1}.
+Definitions 2, 7 and 12--14; Theorem 3; Lemmas 8, 10, 15, 17--18 and 20;
+Theorem 24; and the arithmetic translation in the proof of Theorem 79.
+
+\bibitem{minimal}
+\emph{Minimal building blocks for introspection in self-referential theories}.
+Research entry 07 in this repository.
+\href{../07-minimal-introspection-bundle/minimal-introspection-bundle.pdf}
+{Companion paper}.
+Only its positive genericity result is used for the optional enrichment in
+Section~\ref{subsec:introspection}.
+
+\bibitem{successor}
+\emph{Successor truthfulness and particular-code knowledge}.
+Research entry 18 in this repository, with
+\emph{Further consequences of particular-code knowledge}, Proposition S2.
+\href{../18-dissertation-problem-3-2-1/successor-knowers-3-2-1.pdf}
+{Companion paper}.
+Used for comparison in Section~\ref{sec:comparison}, not in the construction
+or proof of Theorem~\ref{thm:main}.
+
+\end{thebibliography}
+\end{document}

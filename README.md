@@ -31,6 +31,13 @@ gives a negative answer by reduction to Pakhomov–Walsh, with
 [supplemental proved consequences](18-dissertation-problem-3-2-1/supplemental/README.md).
 This is a self-contained hand-proof entry, separate from the 3-1-x Lean development.
 
+**New, 27 October 2026:**
+[An explicit ill-founded hierarchy of self-referential theories](19-explicit-ill-founded-hierarchy/README.md)
+is a 13-page explanatory paper giving a specified recursive witness for
+Alexander's Theorem 79(1). It includes the tree's finite tests and worked
+examples, the soundness proof and the connection to paper 07's introspection
+bundle. The construction is a local hand proof without independent review.
+
 The notes answer, correct or sharpen questions posed in Alexander's papers on:
 - universal intelligence;
 - self-referential logic;
@@ -91,6 +98,7 @@ Nothing here duplicates it.
 | 16 | [Lemma 2.5.5 counterexample](16-dissertation-lemma-2-5-5/dissertation-lemma-2-5-5.pdf): the dissertation's preservation lemma is false as printed, which leaves a gap in the proof of Thm. 2.5.11 (the theorem itself is not refuted). | same, Lemma 2.5.5, Thm. 2.5.11 | explicit countermodel |
 | 17 | [Dissertation Question 3-1-3 — standalone finite-guard proof](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf): knowing machines that know everyone's truthfulness, particular codes of their subordinates, and everyone's mechanicalness exist for every r.e. well-founded hierarchy and unrestricted modal formulas. Current 33-page paper with abstract and complete introduction; [earlier editions archived](17-dissertation-question-3-1-3/README.md#earlier-editions-and-construction-history). | same, Def. 1.1.1, Question 3-1-3 | standalone prose proof; completed comparator targets pass public Lean CI; scope recorded in the comparison |
 | 18 | [Dissertation Open Problem 3.2.1](18-dissertation-problem-3-2-1/successor-knowers-3-2-1.pdf): no infinite successor chain with full particular-code knowledge and known successor truthfulness in the standard canonical semantics, even without ordinal knowledge. [Supplement](18-dissertation-problem-3-2-1/supplemental/README.md) includes uniform enumeration, computable-path and arithmetic separation consequences. | same, §3.2, Open Problem 3.2.1, printed p. 89 | full hand proof using Pakhomov–Walsh; no independent human review or formal certificate |
+| 19 | [Explicit ill-founded hierarchy](19-explicit-ill-founded-hierarchy/ill-founded-hierarchy.pdf): a recursive order with no arithmetic-truth-computable descending path, and effective construction of a true uniformly r.e. family with particular codes of everyone and truthfulness of subordinates. | *Self-referential theories*, Theorem 79(1): explicit witness for the published existence result | 13-page explanatory hand proof; Computer Modern; no independent review or formal verification |
 
 ## Dissertation formalisation and revised proof
 

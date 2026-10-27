@@ -2,6 +2,19 @@
 
 Read [the 5-page supplemental PDF](additional-results.pdf), its [canonical Markdown](additional-results.md), or the [generated LaTeX](additional-results.tex).
 
+**Separate new note, 27 October 2026:**
+[An explicit ill-founded witnessing hierarchy](explicit-ill-founded-witness.md)
+specifies a recursive order and effective fixed-point construction satisfying
+Alexander's Theorem 79(1). An oracle for arithmetic truth could enumerate any
+unsound indices and descend through them; an explicit diagonal tree prevents
+such a path. The proof does not depend on the negative 3.2.1 result, and paper
+07's generic introspection bundle can optionally be added. This is a local
+hand proof without independent review or a novelty determination, and is not
+included in the existing supplemental PDF.
+The expanded [13-page explanatory paper](../../19-explicit-ill-founded-hierarchy/ill-founded-hierarchy.pdf)
+has its own [source and build record](../../19-explicit-ill-founded-hierarchy/README.md)
+in entry 19 and contains the entire argument.
+
 | Result | Content | Main input |
 |---|---|---|
 | S1 | A single root enumeration uniformly enumerates every later full consequence set. Arithmetic induction and known truthfulness of successors are unnecessary for this conclusion. | Main paper, Lemma 2 |
