@@ -203,3 +203,23 @@ state the checks. No new training run, independent human review,
 proof-assistant certification, author contact or priority result
 was added. The private literature-checkpoint intake is separate
 and is not included in the public paper changes.
+
+
+## 17 November 2026: zero universal intelligence (note 20)
+
+At the owner's request, OpenAI Codex wrote the full explanatory paper
+[A symmetric universal machine with identically zero universal intelligence](20-symmetric-zero-intelligence/paper.pdf).
+It addresses the sign question in Alexander–Hutter's Section 5 with an
+ordinary symmetric prefix-free universal machine. Its score is zero for
+every policy using the original full-kernel class and shortest-description
+weights. The nonzero/discriminating strengthening is explicitly separate.
+
+The manuscript contains every local proof dependency, conventional references,
+the full program-framing and shortest-weight arguments, and a standalone
+LaTeX build. All 21 pages were rendered and inspected. Source metadata were
+checked against the primary publications, including the chapter's 2022
+publication year. The accompanying source guide and verification record state
+the exact scope. These are AI-assisted hand proofs and document checks,
+without independent human review, proof-assistant verification or an
+established historical priority finding. The dissertation formalization
+does not certify this result.

@@ -164,8 +164,8 @@ b3c34c6debeae0f614930294275ebd03a30e1d13edbb24642187b1e334623e86  ./19-explicit-
 8d1c17647c4155ce58fdaa773bc73b8d8116b23680f76ab12949ff09b662b6e0  ./19-explicit-ill-founded-hierarchy/ill-founded-hierarchy.tex
 4193a9cccf7312cffb61d5f634d1dbeb4b2d7ad03f9d7a70e2c7a925b72d89fb  ./19-explicit-ill-founded-hierarchy/pdf-build-report.json
 30e1351b6830bacafc6b720fcecb14d9d439f030c823aab009e49f70a60ad021  ./CORRECTIONS.md
-aeb3699aa37966a318cfd77f00859f1bd2350c55a1a3b0d20d18ba03bbe50c21  ./PROVENANCE.md
-a9fdd87ec2c172d0bc497e21b8ca1d0f7d24cf75c1ae6dc5fd83239be379f1a9  ./README.md
+0aea4df86f1fdd20362764e207b7263753453da92785a976002264094f997e36  ./PROVENANCE.md
+f5732e23812a74323981ca2943857a2b86d7ff67972b0d795adbc701a068c4ec  ./README.md
 c75a17bcb2fbe74806387729b1238b0d4bc78f5df12cc9885320f0a0607e654b  ./REVISIONS.md
 6aaed04783f9f7a527e72c4ba1a51c40ed489ff32414a7ac6eb67776e2f8a33b  ./alexander-dissertation-lean/.github/workflows/compile-311.yml
 1f2467470166c1e1c899e97a24154e97c8b267f71a4f6488293984e80dc5e927  ./alexander-dissertation-lean/.github/workflows/compile-313-package.yml
@@ -1522,3 +1522,10 @@ a50ea7e781ec93814917b7d492178b0d167c56b85c47faba4d2ccc81473c90af  ./alexander-di
 2093d75b883c2967671a280b9d17eb91212134438d635672f625930d7eb7fdac  ./explanatory-format.lua
 389cc3911d34df255fcceef8a9757b0ad9f6b67fa291d81436f8bf1cc0739d76  ./explanatory-header.tex
 511d7ee596f2d1511bc2ab54388d7e117891f8d8056613f781b1e692bc977eca  ./preamble.tex
+9417169cdef4b3db18e0984613cf2b69f5e8b393a8ae8ebe875386f08acd68f8  ./20-symmetric-zero-intelligence/README.md
+e2f4ed437c94376176803b8f8797c6a83726e2e830952edb33b4cbec70618499  ./20-symmetric-zero-intelligence/SHA256SUMS
+69afd117282a86bfa023d32e0f63358031fb9d4960014e1aa7b601c88d582d7b  ./20-symmetric-zero-intelligence/SOURCES.md
+90b28d5815ca21e54e2c4fa226cdad33f69fce2895b45913e4ee6c6d9404dbea  ./20-symmetric-zero-intelligence/VERIFICATION.json
+60178e1437de5bf611b2985919e495fe48a5161977a71cce144c92ec940ce77f  ./20-symmetric-zero-intelligence/build_pdf.py
+fc8cf6ec4c7d166a181fc796b718a30a85d80088bc7d25d3a6fe904a2bd2635b  ./20-symmetric-zero-intelligence/paper.pdf
+b210e3130b0dbc8cc4e0a5ef66fba5f80c9d16c8b0c091990507af394aab27ee  ./20-symmetric-zero-intelligence/paper.tex

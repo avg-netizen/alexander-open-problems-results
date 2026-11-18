@@ -1,0 +1,1696 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\V}{\mathcal V}
+\newcommand{\W}{\mathcal W}
+\newcommand{\Hist}{\mathcal H}
+\newcommand{\Dist}{\Delta_{\Q}}
+\newcommand{\enc}{\operatorname{enc}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\tagword}{\operatorname{tag}}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\Exp}{\mathbb E}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\TV}{\mathrm{TV}}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\title{A symmetric universal machine with\texorpdfstring{\\}{ }identically zero universal intelligence}
+\author{}
+\date{17 November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Alexander and Hutter ask whether a reward--punishment symmetric universal
+machine can make the sign of universal intelligence computable.  For every
+fixed suffix-free reinforcement-learning encoding, we construct an ordinary
+prefix-free universal Turing machine for which the original intelligence
+sum is identically zero.  Symmetry holds for every computable environment,
+and the zero identity holds for every policy, whether computable or not.
+The environment class is unchanged: only the limits of finite expected
+reward totals must exist in the prescribed bounded interval for every
+policy.  Neither absolute convergence of rewards nor a uniform bound on
+intermediate totals is assumed.
+
+The construction has two parts.  A computable injective transformation of
+full environment kernels reverses every policy's value and reflects
+convergence.  A zero-value probe preserves even the entries at histories
+that the original environment cannot reach.  Finite inverse tests and a
+contracting triangular structure leave one zero-valued kernel in the
+infinite backward core.  Two partial program branches then implement the
+two parities of finite backward depth.  Equal-length tags pair every
+complete description, including competing universal descriptions, and
+therefore pair actual shortest-description weights.  The resulting
+constant-zero sign algorithm answers the stated existence question.  A
+requirement that the intelligence functional distinguish policies would
+be an additional condition.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+
+Universal intelligence evaluates a policy by its performance across a
+class of computable environments, with simpler environments receiving
+larger weights.  In the formulation of Legg and Hutter
+\cite{LeggHutter2007}, these weights are determined by shortest programs
+in a fixed universal language.  Alexander and Hutter
+\cite{AlexanderHutter2021} extend the setting to rewards of either sign.
+An environment may reward or punish a policy, and the limiting expected
+total reward may be positive, zero, or negative.
+
+This extension introduces a natural symmetry.  Reverse the signs of all
+rewards in both the history and the next output of an environment.  A
+universal language is symmetric when this operation preserves the
+shortest description length of every computable environment.  Such
+languages make the intelligence score change sign when a policy's
+interpretation of rewards is reversed.  The question in
+\cite[Section~5]{AlexanderHutter2021} is whether a symmetric universal
+language can make the sign of the score computable from a computable
+policy.  The strong version asks for the sign at zero as well as at
+nonzero values; the weak version permits arbitrary behavior when the
+score is zero.
+
+The answer proved here is affirmative for the strong version.  For any
+fixed suffix-free encoding of histories and rational probability
+distributions, there is a symmetric ordinary universal machine whose
+intelligence score is zero for every policy.  The same machine still
+simulates every prefix-free partial computable binary function.  Every
+well-behaved computable environment still appears in the score with a
+strictly positive shortest-description weight.  The zero result comes
+from an exact pairing of their contributions.
+
+The conclusion concerns the existence question as stated.  An identically
+zero score does not rank policies or measure differences in their
+performance.  It shows that symmetry and universality alone do not
+exclude this outcome.  Asking for a nonzero or policy-discriminating
+score with computable sign imposes a further condition, which the present
+construction does not settle.
+
+\subsection*{Why cancellation needs a construction}
+
+Ordinary reward reversal is insufficient.  If $D$ denotes reward duality,
+the basic identity is
+\[
+  V_{D\mu}^{\pi}=-V_{\mu}^{D\pi}.
+\]
+The policy on the right has changed.  A policy may react to its observed
+rewards, so this identity does not pair opposite values for one fixed
+policy.  Cancellation for every fixed policy requires a different
+operation on environments.
+
+The limiting-value convention also matters.  An allowed environment
+need only have convergent \emph{finite expected reward totals}.  Its
+intermediate totals may make arbitrarily large excursions, and the sum
+of absolute rewards need not be integrable.  A construction that assumes
+an absolute tail bound would address a smaller class.  We instead use
+a random cutoff, refund the finite visible prefix, and make a long
+negative payment based on one privately sampled reward.  A specific
+geometric identity proves that the transformed totals converge exactly
+when the original totals do.
+
+The sum is over full kernels.  Two environments count as different when
+they disagree at a history that neither can reach from the initial
+state.  A transformation based only on reachable behavior can lose this
+distinction, preventing a pairing of the original summands.  Our
+construction includes a separate experiment that reaches every finite
+history with positive probability, queries the original kernel there,
+and refunds all rewards from that experiment.  It has value zero but
+makes the combined transformation injective on full kernels.
+
+Finally, an exhibited pair of equal-length programs does not establish
+equality of \emph{shortest} description lengths.  A shorter universal
+program might describe one partner.  The machine below handles every
+complete description, including those entering through its unrestricted
+universal branch.  It also excludes descriptions so short that part of
+their apparent instruction tag is supplied by the encoded input history.
+
+\subsection*{The proof in three steps}
+
+First we construct an effective injection $F$ on all computable full
+kernels.  It commutes with reward duality, preserves and reflects the
+well-behaved class, and satisfies
+\[
+  V_{F\mu}^{\pi}=-V_{\mu}^{\pi}
+\]
+whenever either value exists.  Membership in each finite iterate
+$F^j[\V]$ is characterized by uniformly computable finite tests.  The
+intersection of all these images is one computable kernel $H$, which
+has value zero for every policy.
+
+Second, every other kernel has a finite number of inverse steps under
+$F$.  Pair even depths with the next odd depths.  This defines a
+set-theoretic involution $T$ reversing every policy's value.  There is no
+need to decide the parity.  Two ordinary partial programs are arranged
+so that the forward program is total precisely at even depths and the
+inverse program is total precisely at odd depths.  The programs enforce
+their promises by waiting for finitely many witnesses before answering
+each requested history.
+
+Third, six equal-length instruction tags provide the identity, reward
+duality, and the two partial programs, each with either reward-duality
+flag.  An input guard preserves prefix-freeness and ensures that a
+complete transformed description has a complete original kernel.
+Changing tags gives equal shortest lengths under both $D$ and $T$.
+Absolute convergence then permits reindexing the original intelligence
+sum by $T$, proving that it equals its own negative.
+
+Sections~\ref{sec:framework}--\ref{sec:anti} set up the definitions and
+the convergence argument.  Sections~\ref{sec:embedding} and
+\ref{sec:core} establish the full-kernel injection and its inverse tests.
+Sections~\ref{sec:parity}--\ref{sec:cancellation} construct the universal
+machine and prove cancellation.
+
+\section{Policies, kernels, and shortest descriptions}
+\label{sec:framework}
+
+Fix finite nonempty sets $A$ and $O$, and a finite nonempty set
+$R\subseteq\Q\cap[-1,1]$ such that $r\in R$ implies $-r\in R$.
+Symbols may be given disjoint type labels.  Write $E=O\times R$ for the
+percept alphabet, $M=|E|$, and
+\[
+  \Hist=(EA)^*.
+\]
+An element
+$h=(e_0,a_0,\ldots,e_{t-1},a_{t-1})\in\Hist$ has depth $|h|_E=t$.
+The empty history is denoted by $\varnothing$.  If $e_i=(o_i,r_i)$,
+the next action is chosen after $e_i$ is observed.  All time indices
+start at zero.
+
+\begin{definition}[Policies and full kernels]
+\label{def:kernels}
+A policy is a function $\pi:\Hist E\to\Dist(A)$, and an environment
+kernel is a function $\mu:\Hist\to\Dist(E)$, where $\Dist(X)$ is the
+set of rational probability vectors on the finite set $X$.  These
+functions are defined at every history in their domains.  Let $\V$ be
+the set of all total computable environment kernels.  Policies need not
+be computable unless stated otherwise.
+\end{definition}
+
+The word ``full'' emphasizes that equality of kernels is equality at
+every history.  An output at a history of probability zero remains part
+of the function and of its description.  This convention agrees with
+the source definitions in \cite{AlexanderHutter2021}.
+
+The usual alternating sampling procedure gives finite interaction laws
+for any $\mu$ and $\pi$.  Let
+\begin{equation}
+  Y_\mu^\pi(T)=\Exp_{\mu,\pi}\!\left[\sum_{n=0}^{T-1}r_n\right],
+  \qquad T\in\N,
+  \label{eq:finite-value}
+\end{equation}
+with $Y_\mu^\pi(0)=0$.  Every such expectation is a finite sum.  When
+the limit exists as a real number, put
+$V_\mu^\pi=\lim_{T\to\infty}Y_\mu^\pi(T)$.
+
+\begin{definition}[Well-behaved environments]
+\label{def:well-behaved}
+Let
+\[
+  \W=\left\{\mu\in\V:
+       \text{for every policy }\pi,
+       \ V_\mu^\pi\text{ exists and belongs to }[-1,1]\right\}.
+\]
+The quantifier includes all rational-output policies, whether computable
+or not.  No condition is imposed on the convergence of the realized
+infinite reward series or on the expectations of its absolute values.
+\end{definition}
+
+For example, independent rewards from a symmetric distribution have
+zero finite expected totals, even when their realized partial sums do
+not converge.  Such a tail is permitted.  It will let the construction
+continue forever without needing $0\in R$.
+
+\begin{definition}[Reward duality]
+\label{def:duality}
+For a history or percept string $h$, let $Dh$ replace each reward $r$
+by $-r$ and leave observations and actions unchanged.  Define
+\[
+  (D\mu)(o,r\mid h)=\mu(o,-r\mid Dh),
+  \qquad
+  (D\pi)(a\mid he)=\pi(a\mid D(he)).
+\]
+\end{definition}
+
+\begin{lemma}[Duality]
+\label{lem:duality}
+The operation $D$ is an effective involution on $\V$, preserves $\W$,
+and satisfies
+\begin{equation}
+  Y_{D\mu}^{\pi}(T)=-Y_\mu^{D\pi}(T)
+  \label{eq:duality-values}
+\end{equation}
+for every finite horizon.  Consequently the two corresponding limiting
+values exist simultaneously and are negatives.
+\end{lemma}
+
+\begin{proof}
+Induct on the length of a finite interaction string.  Its probability
+under $(D\mu,\pi)$ equals the probability of its reward-reversed string
+under $(\mu,D\pi)$: the environment factors agree by definition, and
+the action factors agree by the definition of $D\pi$.  Reward sums on
+the paired strings have opposite signs.  This proves
+\eqref{eq:duality-values}.  Applying $D$ twice restores each argument
+and reward.  Computability is preserved, and $\pi\mapsto D\pi$ is a
+bijection of all policies, so the definition of $\W$ is preserved.
+\end{proof}
+
+We use the precise program convention of
+\cite[Definitions~8--10]{AlexanderHutter2021}.  Binary strings are
+concatenated without an additional delimiter.
+
+\begin{definition}[Universal machine]
+\label{def:universal}
+A prefix-free machine is a partial computable function
+$U:\{0,1\}^*\rightharpoonup\{0,1\}^*$ whose halting domain is
+prefix-free.  It is universal if, for every prefix-free partial
+computable function $f$, there is a binary string $p$ such that
+$U(px)=f(x)$ for every binary string $x$, including agreement on
+undefinedness.
+\end{definition}
+
+\begin{definition}[Encoding, complexity, and symmetry]
+\label{def:complexity}
+An RL encoding is a computable injective map
+\[
+  \enc:\Hist\sqcup\Dist(E)\longrightarrow\{0,1\}^*
+\]
+whose range is prefix-free.  It is suffix-free if no distinct code is a
+suffix of another code.  Fix such an encoding.  For $\mu\in\V$, let
+\begin{equation}
+  K_U(\mu)=\min\left\{|p|:
+     U(p\enc(h))=\enc(\mu(\cdot\mid h))
+     \text{ for every }h\in\Hist\right\}.
+  \label{eq:complexity}
+\end{equation}
+A universal machine is symmetric for this encoding if
+$K_U(D\mu)=K_U(\mu)$ for every $\mu\in\V$.
+\end{definition}
+
+The minimum exists for every computable kernel.  Indeed, the function
+that maps $\enc(h)$ to $\enc(\mu(\cdot\mid h))$ and diverges on all
+other strings is partial computable with prefix-free domain.  To
+recognize an encoded history it suffices to enumerate histories until
+its code is found.  Universality supplies a program for this function.
+No decidability assumption about the encoding's range is needed.
+
+\begin{definition}[Universal intelligence and its sign]
+\label{def:intelligence}
+For a fixed encoding and universal machine, the intelligence of a policy
+is
+\begin{equation}
+  \Upsilon_U(\pi)=
+       \sum_{\mu\in\W}2^{-K_U(\mu)}V_\mu^\pi.
+  \label{eq:intelligence}
+\end{equation}
+Its strong sign is $\sgn(\Upsilon_U(\pi))\in\{-1,0,1\}$, with
+$\sgn(0)=0$.  A weak sign procedure is required to halt and give the
+correct sign when the score is nonzero; its behavior at zero is unrestricted.
+\end{definition}
+
+The summation in \eqref{eq:intelligence} is over distinct full kernels,
+not over programs and not over behavioral equivalence classes.  We
+will give an explicit absolute-convergence bound for this exact program
+convention in Lemma~\ref{lem:kraft}.
+
+\begin{theorem}[Zero universal intelligence]
+\label{thm:main}
+For every choice of finite alphabets above and every fixed suffix-free
+RL encoding, there exists an ordinary prefix-free universal Turing
+machine $U$ satisfying
+\[
+  K_U(D\mu)=K_U(\mu)\quad(\mu\in\V),
+  \qquad
+  \Upsilon_U(\pi)=0\quad\text{for every policy }\pi.
+\]
+Consequently its strong sign, and hence its weak sign, is computable
+on programs promised to define total rational-output policies: the
+algorithm always returns zero.
+\end{theorem}
+
+The proof occupies the following sections.  All algorithms used in the
+construction are ordinary partial computations.  In particular, the
+machine has no oracle for totality, for membership in $\W$, or for
+equality of environment kernels.
+
+\section{A cutoff-and-refund transformation}
+\label{sec:anti}
+
+We first construct an environment $Q\mu$ whose limiting value, when
+defined, is $-2V_\mu^\pi$ for each fixed policy $\pi$.  The factor two
+will be removed by a fair mixture with a zero-valued environment.
+
+Let $u$ be the uniform law on $E$, and let $u_R$ be the uniform law on
+$R$.  Both have mean reward zero.  Fix $o_*\in O$ and put
+$\tau=\delta_{o_*}\otimes u_R$.  The laws $u$ and $\tau$ are invariant
+under reward reversal.  Set $\eps=1/4$, and independently choose a
+cutoff $N$ with
+\begin{equation}
+  p_0=\Prob(N=0)=\frac34,
+  \qquad p_n=\Prob(N=n)=2^{-n-2}\quad(n\ge1).
+  \label{eq:cutoff}
+\end{equation}
+Thus
+\begin{equation}
+  \Prob(N>t)=2^{-t-2},\qquad \Exp N=\frac12.
+  \label{eq:cutoff-tail}
+\end{equation}
+For $n\ge1$ let $\ell_n=2^{n+2}$.  At $n=0$, independently choose
+$\ell_0=1$ with probability $2/3$ and $\ell_0=2$ with probability
+$1/3$.  These choices ensure
+\begin{equation}
+  p_n\ell_n=1\quad(n\ge1),
+  \qquad p_0\Exp\ell_0=1.
+  \label{eq:importance-normalization}
+\end{equation}
+
+\subsection{The physical experiment}
+
+Conditional on $N=n$, $Q\mu$ follows this schedule.
+\begin{enumerate}[label=\arabic*.,leftmargin=*]
+\item At times $0,\ldots,n-1$, it produces percepts according to $\mu$
+      on the actual history.  The policy's actual actions are supplied
+      to $\mu$.
+\item It privately samples the next source percept at that history.
+      Denote its reward by $r_n$.  The percept is not shown to the
+      policy, and its observation is discarded.
+\item At times $n,\ldots,2n-1$, it emits observation $o_*$ and the
+      rewards $-r_0,\ldots,-r_{n-1}$ in order.  This refunds the visible
+      source prefix.  The interval is empty when $n=0$.
+\item At times $2n,\ldots,2n+2\ell_n-1$, it emits $o_*$ and reward
+      $-r_n$.
+\item Thereafter it emits independent percepts with law $\tau$.
+\end{enumerate}
+Actions from time $n$ onward are ignored by this branch.  In particular,
+the private source query occurs before an action at time $n$ could be
+needed.  Up to that query the policy has seen its original source
+history, so the sampled $r_n$ has its original distribution under
+$(\mu,\pi)$.
+
+Every reward emitted by the experiment belongs to $R$.  The construction
+uses sign reversal and repetition, rather than a larger reward alphabet.
+The payment length may have infinite expectation, which is permitted.
+Each finite horizon still contains only finitely many bounded rewards.
+
+\begin{example}[One cutoff branch]
+If $N=1$, the experiment shows the first source reward $r_0$, privately
+samples $r_1$, refunds $r_0$ at time $1$, and then pays $-r_1$ for
+$2\ell_1=16$ steps.  The probability of this cutoff is $p_1=1/8$.
+After the refund its contribution to the limiting expected total is
+therefore $-2\Exp r_1$.  Every cutoff index has the same expected
+coefficient $-2$.  The proof below justifies their combined limiting
+effect when the original expected series is merely convergent.
+\end{example}
+
+\subsection{An ordinary rational kernel}
+
+A latent experiment must be converted into a total rational-output
+kernel before it can enter $\V$.  The following finite filtering
+description also fixes its values at null histories.
+
+\begin{lemma}[Finite filtering for $Q$]
+\label{lem:q-computable}
+There is a uniform ordinary index transformation $\mu\mapsto Q\mu$
+which is extensional and total on $\V$.  Its finite interaction laws
+are those of the preceding experiment for every policy.
+\end{lemma}
+
+\begin{proof}
+At an input history $h$ of depth $t$, enumerate the alternatives
+$N=0,\ldots,t$ and the single alternative $N>t$, whose probability is
+given by \eqref{eq:cutoff-tail}.  For a cut branch enumerate the finitely
+many possible privately sampled percepts, and for $N=0$ the two possible
+values of $\ell_0$.
+
+If $N>t$, all the observed percepts come from $\mu$, and the next
+percept also has law $\mu(\cdot\mid h)$.  If $N=t>0$, the next
+percept is the first refund.  If $N=t=0$, it is the first importance
+payment.  If $N<t$, the branch is in a refund, payment, or terminal
+phase determined by $N$, $\ell_N$, and the physical time.
+
+For each alternative compute the likelihood of the percepts in $h$
+when its listed actions are supplied externally.  The source part is
+a product of outputs of $\mu$ at literal initial segments of $h$.
+The refund and payment parts are checked against their prescribed
+values.  The terminal part is a finite product of $\tau$ probabilities.
+Hidden percept probabilities are included and summed over.  These
+calculations use only finitely many rational operations and source
+queries.  Normalize the likelihoods and take the corresponding mixture
+of next-percept laws.  If the total likelihood is zero, return $\tau$.
+
+On a total computable source all queries terminate and the output is a
+legal rational probability vector.  The computation depends only on the
+source values, so it is extensional.  It does not inspect the syntax or
+running times of a source program to decide its validity.
+
+For any fixed policy, each compatible latent alternative for $h$ has
+the same action-probability factor
+$\prod_{i<t}\pi(a_i\mid h_i e_i)$, where $h_i$ is the prefix before
+$e_i$.  These factors cancel in a conditional next-percept law whenever
+the history has positive probability.  Equivalently, induction on
+finite histories verifies that the returned kernel has the latent
+experiment's finite laws.  The stipulated values at zero-likelihood
+histories cannot change those laws.  This induction does not require a
+computable policy.
+\end{proof}
+
+\subsection{Exact finite-horizon coefficients}
+
+Fix an arbitrary policy and write
+\begin{equation}
+  b_n=\Exp_{\mu,\pi}r_n,\qquad |b_n|\le1,
+  \qquad S_m=\sum_{n=0}^m b_n.
+  \label{eq:source-sequence}
+\end{equation}
+Let $B_T$ be the copied-prefix balance, including its refunds, after
+the first $T$ physical rewards in the experiment.  Conditional on
+$N=n$, it is zero once $T\ge2n$, and $|B_T|\le n$ at every horizon.
+Since $\Exp N=1/2$, dominated convergence gives
+\begin{equation}
+  \Exp B_T\longrightarrow0.
+  \label{eq:refund-vanishes}
+\end{equation}
+Every terminal reward has conditional mean zero, so the terminal part
+has expected contribution zero at each finite horizon.
+
+The importance payments therefore give the exact identity
+\begin{equation}
+  Y_{Q\mu}^{\pi}(T)=\Exp B_T-\sum_{n\ge0}a_{T,n}b_n,
+  \label{eq:q-decomposition}
+\end{equation}
+where
+\begin{align}
+  a_{T,n}&=\min\{2,\,2^{-n-2}(T-2n)_+\}, &&n\ge1,
+     \label{eq:q-coefficients}\\
+  a_{T,0}&=p_0\Exp\min\{2\ell_0,T\}. &&
+     \label{eq:q-coefficient-zero}
+\end{align}
+Here $x_+=\max\{x,0\}$.  Only finitely many coefficients are nonzero
+at a finite horizon.  The factorization by $b_n$ is legitimate because
+the source prefix and the private sample have their original joint
+law, and the cutoff and copy counts were chosen independently.
+
+\begin{proposition}[Convergence reflection]
+\label{prop:q-convergence}
+For every $\mu\in\V$ and every policy $\pi$, the sequence
+$Y_{Q\mu}^{\pi}(T)$ converges if and only if $Y_\mu^\pi(T)$ converges.
+When they converge,
+\[
+  V_{Q\mu}^{\pi}=-2V_\mu^\pi.
+\]
+\end{proposition}
+
+\begin{proof}
+For $T\ge4$ put $q_{T,n}=a_{T,n}/2$.  As a function of $n$, these
+numbers are nonnegative, nonincreasing, eventually zero, and have
+$q_{T,0}=1$.  For $n\ge1$, both $2^{-n-2}$ and $(T-2n)_+$ are
+nonnegative nonincreasing functions of $n$; their product, followed by
+truncation, has the same property.  For every fixed $n$,
+$q_{T,n}\to1$ as $T\to\infty$.
+
+Finite summation by parts gives
+\begin{equation}
+  \sum_{n\ge0}q_{T,n}b_n
+   =\sum_{n\ge0}(q_{T,n}-q_{T,n+1})S_n.
+  \label{eq:summation-parts}
+\end{equation}
+The coefficients on the right are nonnegative, sum to one, and tend
+to zero at each fixed index.  If $S_n\to s$, choose a fixed index
+beyond which $|S_n-s|<\eta$.  The tail error in
+\eqref{eq:summation-parts} is at most $\eta$, while the finite initial
+error tends to zero.  Thus the sum tends to $s$.  Equations
+\eqref{eq:refund-vanishes} and \eqref{eq:q-decomposition} imply
+$Y_{Q\mu}^{\pi}(T)\to-2s$.
+
+For the converse, use the particular horizons
+\[
+  T_m=2^{m+3}\qquad(m\ge4),
+\]
+and define
+\begin{equation}
+  G_m=S_m+\sum_{n>m}2^{m-n}b_n.
+  \label{eq:geometric-average}
+\end{equation}
+The tail converges absolutely because $|b_n|\le1$.  Let
+$w_{m,n}=1$ for $n\le m$ and $w_{m,n}=2^{m-n}$ for $n>m$.
+For $1\le n<m$, the coefficient $a_{T_m,n}$ is saturated at two.
+At the largest such index this follows from
+$2^{m+3}-2(m-1)\ge2^{m+2}$; the smaller indices only increase the
+untruncated coefficient.  The zeroth coefficient is also two.
+
+For $n\ge m$, comparison with
+$2^{-n-2}T_m=2^{m+1-n}=2w_{m,n}$ gives
+\[
+  |a_{T_m,n}-2w_{m,n}|\le 2n\,2^{-n-2}.
+\]
+When $T_m\le2n$ the actual coefficient is zero, and the same bound
+holds because $2^{-n-2}T_m\le2n\,2^{-n-2}$.  Therefore
+\begin{equation}
+  \sum_{n\ge0}|a_{T_m,n}-2w_{m,n}|
+      \le(m+1)2^{-m}\longrightarrow0.
+  \label{eq:coefficient-error}
+\end{equation}
+It follows from \eqref{eq:q-decomposition} that
+\begin{equation}
+  Y_{Q\mu}^{\pi}(T_m)+2G_m\longrightarrow0.
+  \label{eq:q-geometric-subsequence}
+\end{equation}
+
+The geometric averages have the exact inverse relation
+\begin{equation}
+  S_m=2G_m-G_{m+1}.
+  \label{eq:geometric-inverse}
+\end{equation}
+For $b_n$ with $n\le m$ the coefficient on the right is $2-1=1$;
+for $b_{m+1}$ it is $2(1/2)-1=0$; and all subsequent geometric
+coefficients cancel.  If the full sequence
+$Y_{Q\mu}^{\pi}(T)$ tends to $y$, equation
+\eqref{eq:q-geometric-subsequence} gives $G_m\to-y/2$, and
+\eqref{eq:geometric-inverse} gives $S_m\to-y/2$.  Since
+$Y_\mu^\pi(T)=S_{T-1}$ for $T\ge1$, this proves the converse and
+the asserted relation between limits.
+\end{proof}
+
+The reverse implication uses the specific identity
+\eqref{eq:geometric-inverse}.  A general regular summation method need
+not reflect convergence.  No absolute convergence of
+$\sum_n b_n$, no pathwise reward convergence, and no bound on the
+intermediate $S_m$ were assumed in the reverse argument.
+
+\section{Preserving every entry of the source kernel}
+\label{sec:embedding}
+
+The transformation $Q$ reads its source only along a copied source
+trajectory.  A source entry at an unreachable history need not affect
+its output.  We now add a zero-valued experiment that exposes those
+entries.  A fair choice between the two experiments will also change
+the factor $-2$ into $-1$.
+
+\subsection{A zero-valued probe}
+
+Using the same cutoff law \eqref{eq:cutoff}, define $P\mu$ by the
+following experiment, conditional on $N=n$.
+\begin{enumerate}[label=\arabic*.,leftmargin=*]
+\item At times $0,\ldots,n-1$, emit independent percepts with law $u$.
+      Accept the policy's actual actions.
+\item At time $n$, query $\mu$ at the actual observed history and emit
+      the resulting percept, including its observation.
+\item At times $n+1,\ldots,2n+1$, emit $o_*$ and the negatives of all
+      $n+1$ rewards already emitted, in their original order.
+\item Thereafter emit independent percepts with law $u$.
+\end{enumerate}
+Actions after the probe are ignored.  The source query is made at a
+history generated by the uniform experiment, which can be a null
+history for $\mu$.
+
+\begin{lemma}[The probe]
+\label{lem:probe}
+The map $\mu\mapsto P\mu$ is an effective extensional transformation
+from $\V$ to $\V$.  For every $\mu\in\V$ and every policy,
+\begin{equation}
+  \lim_{T\to\infty}Y_{P\mu}^{\pi}(T)=0.
+  \label{eq:probe-zero}
+\end{equation}
+Moreover, the likelihood of any history $h$ of depth $t$, with its
+actions externally supplied, is at least
+\begin{equation}
+  \Prob(N\ge t)M^{-t}>0.
+  \label{eq:probe-support}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The finite filter enumerates $N=0,\ldots,t$ and $N>t$.  A branch
+before its probe has uniform percept likelihood.  At the probe its
+source query is at the literal prefix of the input history.  Its
+refund and terminal likelihoods are finite rational products.  Thus
+the same finite calculation as in Lemma~\ref{lem:q-computable}
+produces a rational kernel, uniformly and extensionally on $\V$.
+The policy factors cancel, so the calculation realizes the experiment
+for every policy.
+
+Conditional on $N=n$, the sum of rewards through the probe is
+completely refunded by time $2n+1$.  Before that refund is complete,
+the remaining balance has absolute value at most $n+1$.  It is zero
+at every subsequent horizon apart from the terminal tail.  Since
+$\Exp(N+1)=3/2$, dominated convergence makes the expected pending
+balance tend to zero.  The terminal tail has expected total zero at
+each finite horizon.  This proves \eqref{eq:probe-zero}, without
+requiring any convergence assumption on the source.
+
+On the event $N\ge t$, all the first $t$ percepts are independent
+uniform samples.  Their likelihood is $M^{-t}$ for any supplied
+action string.  This gives \eqref{eq:probe-support}.
+\end{proof}
+
+\subsection{The combined transformation}
+
+For a kernel $\rho$ and a history
+$h=(e_0,a_0,\ldots,e_{t-1},a_{t-1})$, write
+\begin{equation}
+  L_\rho(h)=\prod_{i=0}^{t-1}\rho(e_i\mid h_i),
+  \qquad L_\rho(\varnothing)=1,
+  \label{eq:likelihood}
+\end{equation}
+where $h_i$ is the prefix of depth $i$.  This is the percept likelihood
+when the displayed actions are supplied externally.  It is distinct
+from the probability of $h$ under a specified policy, which also
+contains action factors.
+
+Define $F\mu$ by a fair hidden coin, chosen once at the start: run
+$Q\mu$ on one outcome and $P\mu$ on the other.  Its conditional kernel
+is
+\begin{equation}
+ (F\mu)(\cdot\mid h)=
+ \frac{L_{Q\mu}(h)(Q\mu)(\cdot\mid h)
+       +L_{P\mu}(h)(P\mu)(\cdot\mid h)}
+      {L_{Q\mu}(h)+L_{P\mu}(h)}.
+ \label{eq:f-mixture}
+\end{equation}
+The denominator is positive at every history by
+\eqref{eq:probe-support}.  This is a mixture of whole experiments.
+Taking a fresh pointwise average of their conditional outputs at each
+history would in general describe a different process.
+
+\begin{proposition}[Value, support, and duality of $F$]
+\label{prop:f-basic}
+The transformation $F:\V\to\V$ is effective and extensional.  Every
+$F\mu$ has full support at every history.  For every $\mu\in\V$ and
+every policy $\pi$,
+\begin{equation}
+ \begin{split}
+  V_{F\mu}^{\pi}\text{ exists}
+      &\quad\Longleftrightarrow\quad V_\mu^\pi\text{ exists},\\
+  V_{F\mu}^{\pi}&=-V_\mu^\pi
+       \quad\text{when these limits exist}.
+ \end{split}
+ \label{eq:f-antivalue}
+\end{equation}
+Consequently
+\begin{equation}
+  F\mu\in\W\quad\Longleftrightarrow\quad\mu\in\W.
+  \label{eq:f-w-reflection}
+\end{equation}
+On full kernels, $FD=DF$.
+\end{proposition}
+
+\begin{proof}
+Formula \eqref{eq:f-mixture} is an ordinary finite rational computation
+on every valid source.  At a history of depth $t$, the $P$ branch has
+a positive contribution from the event $N>t$, on which the next
+percept is uniform.  Every output coordinate is therefore positive.
+
+Conditioning on the initial fair coin gives an identity of finite
+interaction laws, and hence
+\begin{equation}
+  Y_{F\mu}^{\pi}(T)=
+      \frac12Y_{Q\mu}^{\pi}(T)+\frac12Y_{P\mu}^{\pi}(T)
+  \label{eq:f-finite-mixture}
+\end{equation}
+for every $T$.  Lemma~\ref{lem:probe} and
+Proposition~\ref{prop:q-convergence} prove
+\eqref{eq:f-antivalue} in both directions.  Quantify over all policies
+and use the symmetry of $[-1,1]$ to obtain
+\eqref{eq:f-w-reflection}.  In particular, a source limit outside this
+interval remains outside it after negation.  The auxiliary $Q\mu$
+need not itself belong to $\W$.
+
+For duality, match latent experiments after reversing every reward in
+the input and output.  Cutoffs, copy counts, and the component coin
+have unchanged laws.  In $Q$, the copied rewards, refunds, and
+importance payments all reverse sign.  In $P$, the uniform prefix is
+invariant, the source query is made at the reversed history, its
+sampled percept is reversed, and every refund is reversed.  Both
+terminal laws are invariant.  Thus the unnormalized likelihoods and
+next-percept vectors transform equivariantly.  The null convention
+for $Q$ is also invariant.  Normalizing in
+\eqref{eq:f-mixture} proves $F(D\mu)=D(F\mu)$ at every history,
+including histories null for the source.
+\end{proof}
+
+\subsection{Recovering the initial distribution}
+
+Write $q=\mu(\cdot\mid\varnothing)$, and define the stochastic
+linear map
+\begin{equation}
+  (Jq)(o,r)=\one_{\{o=o_*\}}\sum_{v\in O}q(v,-r).
+  \label{eq:initial-reversal}
+\end{equation}
+It discards the observation and reverses the reward.  At the initial
+step, the $Q$ branch has law $\tfrac14q+\tfrac34Jq$, and the $P$
+branch has law $\tfrac34q+\tfrac14u$.  Therefore the initial-row map
+of $F$ is
+\begin{equation}
+  F_0(q)=\frac12q+\frac38Jq+\frac18u.
+  \label{eq:initial-map}
+\end{equation}
+
+\begin{lemma}[Initial inverse and contraction]
+\label{lem:initial-inverse}
+The map $F_0$ is injective and has an exact rational inverse on its
+image.  In $\ell^1$ distance it is a contraction with factor at most
+$7/8$.
+\end{lemma}
+
+\begin{proof}
+If $v=F_0(q)$, then for $o\ne o_*$,
+\[
+  q(o,r)=2v(o,r)-\frac14u(o,r).
+\]
+These entries determine
+$s(r)=\sum_{o\ne o_*}q(o,r)$.  Put
+\[
+  d(r)=v(o_*,r)-\frac38s(-r)-\frac18u(o_*,r).
+\]
+For each pair $r,-r$ with $r\ne0$, the remaining entries solve
+\[
+ \begin{pmatrix}d(r)\\d(-r)\end{pmatrix}
+   =\begin{pmatrix}1/2&3/8\\3/8&1/2\end{pmatrix}
+     \begin{pmatrix}q(o_*,r)\\q(o_*,-r)\end{pmatrix}.
+\]
+The determinant is $7/64$.  If $0\in R$, its remaining equation is
+$d(0)=(7/8)q(o_*,0)$.  Thus the inverse is unique and rational.
+An arbitrary rational target can be checked for image membership at
+this row by recovering the vector and checking nonnegativity and
+total mass one.
+
+A stochastic linear map does not increase $\ell^1$ distance:
+$\norm{Jq-Jq'}_1\le\norm{q-q'}_1$.  Applying
+\eqref{eq:initial-map} gives
+$\norm{F_0(q)-F_0(q')}_1\le(7/8)\norm{q-q'}_1$.
+\end{proof}
+
+\subsection{A positive triangular coefficient at every history}
+
+At a nonempty history $h$ of depth $t$, all source values at proper
+prefixes of $h$ precede the unknown vector $\mu(\cdot\mid h)$.
+The unnormalized next-percept law of $F\mu$ depends on that vector
+with a strictly positive scalar coefficient.  This is the point of
+the uniform probe.
+
+\begin{lemma}[Triangular form]
+\label{lem:triangular}
+For each $h$ of depth $t\ge1$, there are a scalar $Z_h>0$, a scalar
+$\gamma_h>0$, and a nonnegative vector $C_h$, all determined by the
+proper source-prefix values, such that
+\begin{equation}
+  Z_h(F\mu)(\cdot\mid h)=
+       \gamma_h\mu(\cdot\mid h)+C_h.
+  \label{eq:triangular}
+\end{equation}
+Specifically,
+\begin{align}
+  Z_h&=L_{F\mu}(h),
+     \label{eq:z-definition}\\
+  \gamma_h&=\frac12\,2^{-t-2}L_\mu(h)
+             +\frac12p_tM^{-t},
+     \label{eq:gamma}\\
+  C_h(e)&\ge\delta_t u(e),
+  \qquad\delta_t=2^{-t-3}M^{-t}>0.
+     \label{eq:delta}
+\end{align}
+Moreover,
+\begin{equation}
+  Z_h\ge\frac12\Prob(N\ge t)M^{-t},\qquad
+  0<\frac{\gamma_h}{Z_h}\le1-\delta_t<1.
+  \label{eq:triangular-bounds}
+\end{equation}
+The coefficients extend continuously to arbitrary real probability
+vectors at the proper prefixes.
+\end{lemma}
+
+\begin{proof}
+Consider the joint likelihood of the observed prefix and the next
+percept, with the action string externally supplied.  In the $Q$
+branch, the event $N>t$ has weight $2^{-t-2}$, copies the source
+prefix with likelihood $L_\mu(h)$, and next samples
+$\mu(\cdot\mid h)$.  It contributes the first term in
+\eqref{eq:gamma}, including the fair-mixture factor $1/2$.
+
+Every other $Q$ contribution depends only on proper source prefixes.
+For $N<t$ the private query was at a proper prefix.  For $N=t>0$,
+the next output is the first refund, which does not depend on the
+current private sample.  That sample's probabilities sum to one,
+so the current source vector disappears from this contribution.
+This is why the initial row was treated separately.
+
+In the $P$ branch, the event $N=t$ generates the prefix uniformly and
+then samples $\mu(\cdot\mid h)$.  Its contribution is the second
+term in \eqref{eq:gamma}.  If $N<t$, the probe query was at a proper
+prefix.  If $N>t$, both the prefix and the next percept are uniform.
+The last event contributes $\delta_tu$ and is included in $C_h$.
+This proves \eqref{eq:triangular}--\eqref{eq:delta}.
+
+The prefix mass $Z_h$ depends only on proper source prefixes.  It is
+at least half the lower bound in \eqref{eq:probe-support}, and it is
+at most one.  Summing \eqref{eq:triangular} over the next percept
+gives $Z_h=\gamma_h+\sum_eC_h(e)$.  The second term in
+\eqref{eq:gamma} is positive even if $L_\mu(h)=0$.  Since
+$\sum_eC_h(e)\ge\delta_t$ and $Z_h\le1$, the remaining bounds
+follow.
+
+Finally, $Z_h$, $\gamma_h$, and $C_h$ can be computed directly as
+finite unnormalized latent joint-law polynomials in the proper
+source-prefix entries.  The current private sample in the $N=t$
+refund branch is summed out before this computation.  There is no
+division by a possibly zero $Q$-likelihood.  The only division in the
+conditional formula is by $Z_h$, whose lower bound is uniform over
+all proper-prefix probability vectors.  Thus the normalized
+coefficients are continuous on the finite product of real
+probability simplices, including its boundary.
+\end{proof}
+
+In particular, $F$ has retained a source entry even when
+$L_\mu(h)=0$.  After its proper prefixes have been recovered, the
+entry is obtained from a target $\nu=F\mu$ by
+\begin{equation}
+  \mu(\cdot\mid h)=
+       \frac{Z_h\nu(\cdot\mid h)-C_h}{\gamma_h}.
+  \label{eq:full-inverse}
+\end{equation}
+Together with Lemma~\ref{lem:initial-inverse}, this proves injectivity
+on full kernels.  Equality of reachable interaction laws alone is
+not being used as a substitute for kernel equality.
+
+\section{Finite inverse tests and the zero backward core}
+\label{sec:core}
+
+\subsection{Testing a finite inverse table}
+
+\begin{proposition}[Uniform inverse tests]
+\label{prop:inverse-tests}
+There is an ordinary partial inverse interpreter $I$ which is total
+and valid exactly on $F[\V]$, with $I(F\mu)=\mu$.  There are uniform
+finite rational tests $R(j,\nu,m)$, terminating for every
+$\nu\in\V$ and $j,m\in\N$, such that
+\begin{equation}
+  \nu\in F^j[\V]\quad\Longleftrightarrow\quad
+       \forall m\ R(j,\nu,m).
+  \label{eq:image-tests}
+\end{equation}
+Set $R(0,\nu,m)$ to true.  A failed inverse test returns false rather
+than calling an undefined inverse value.
+\end{proposition}
+
+\begin{proof}
+Given a valid target $\nu$ and depth $m$, recover its prospective
+source table at all histories through depth $m$.  Start with the
+initial inverse in Lemma~\ref{lem:initial-inverse}.  Reject if its
+vector is not a legal rational distribution.  Proceed in increasing
+history depth, using \eqref{eq:full-inverse}, and reject if any
+recovered vector is illegal.  Before each division all proper-prefix
+vectors have been validated, so the strict positive bound for
+$\gamma_h$ applies.  There are finitely many histories through a
+fixed depth, and the computation terminates on every valid target,
+whether or not it lies in the image.
+
+An actual image passes all these tests.  Conversely, if all depths
+pass, the recovered tables agree on overlaps because each row is
+uniquely determined by the target row and previously recovered
+prefixes.  They define a total computable rational kernel $\mu$.
+The initial equation and \eqref{eq:triangular} show $F\mu=\nu$ at
+every history.  Thus all finite tests pass exactly on $F[\V]$.
+
+To compute $I\nu$ at a requested history, perform the reconstruction
+through that history's depth.  Return the recovered vector if it
+passes, and diverge if it fails.  An image has a total inverse.  If a
+target is not an image, some depth fails, so the interpreter is not
+total.  This gives the asserted partial inverse without deciding
+image membership.
+
+For the $j$-fold test, reconstruct the finite depth-$m$ table $j$
+successive times, rejecting at the first failure.  Each reconstruction
+uses only a table of that same depth.  This defines a terminating
+test $R(j,\nu,m)$.  If $\nu=F^j\mu$, the corresponding $j$ inverse
+tables all pass.  If every depth passes, consistency gives successively
+$j$ total computable kernels linked by $F$; equivalently one may
+induct on $j$ using the one-step result.  The last is a preimage of
+$\nu$ under $F^j$.  This proves \eqref{eq:image-tests}.
+\end{proof}
+
+This proposition gives a universal conjunction of finite tests for
+image membership.  It does not give an image-membership decision
+procedure.  Its strength is that each \emph{individual} test is
+total on every valid target, including targets outside the image.
+
+\subsection{The fixed kernel}
+
+\begin{proposition}[A computable fixed point]
+\label{prop:fixed-point}
+There is a unique fixed kernel $H$ for $F$ on $\V$.  It is rational,
+computable, and has full support.  For every finite depth $m$,
+\begin{equation}
+  \sup_{\mu\in\V}\ \max_{|h|_E\le m}
+       \norm{(F^n\mu)(\cdot\mid h)-H(\cdot\mid h)}_1
+       \longrightarrow0
+       \quad(n\to\infty).
+  \label{eq:uniform-convergence}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The initial-row map is a contraction by
+Lemma~\ref{lem:initial-inverse}.  Its unique fixed distribution is
+explicitly
+\begin{equation}
+  H(\cdot\mid\varnothing)=
+  \left(\frac34\delta_{o_*}+\frac14\operatorname{Unif}(O)\right)
+       \otimes u_R.
+  \label{eq:initial-fixed}
+\end{equation}
+Substitution into \eqref{eq:initial-map} verifies this formula.
+
+Suppose the fixed values at all proper prefixes of a nonempty history
+$h$ have been determined.  With those coefficients fixed, write
+\eqref{eq:triangular} in the form
+\begin{equation}
+  (F\mu)(\cdot\mid h)=a_h\mu(\cdot\mid h)+c_h,
+  \qquad a_h=\frac{\gamma_h}{Z_h},\quad c_h=\frac{C_h}{Z_h}.
+  \label{eq:affine-row}
+\end{equation}
+Here $0<a_h\le1-\delta_{|h|_E}$, $c_h$ is nonnegative, and
+$\sum_ec_h(e)=1-a_h$.  The unique fixed row is therefore
+\begin{equation}
+  H(\cdot\mid h)=\frac{c_h}{1-a_h}.
+  \label{eq:fixed-row}
+\end{equation}
+It is a rational probability vector.  Recursion over the finitely many
+prefixes needed for any requested history makes $H$ a total computable
+kernel.  The positive uniform contribution in
+\eqref{eq:delta} makes every coordinate positive.  The same
+recursion proves uniqueness of a fixed kernel, even among all
+real-valued full probability kernels.
+
+It remains to prove the uniform convergence needed later.  Work at
+each fixed depth with the finite product of \emph{real} probability
+simplices; this is compact.  The coefficient maps in
+\eqref{eq:affine-row} are continuous on that whole product by
+Lemma~\ref{lem:triangular}, and hence uniformly continuous.  We do
+not assume that the countable set $\V$ itself is compact.
+
+At depth zero, the contraction factor $7/8$ gives uniform convergence
+from the bounded initial simplex.  Inductively suppose all proper
+prefix rows of $F^n\mu$ converge uniformly in $\mu$ to those of $H$.
+For a depth-$t$ history $h$, let $a_h^{(n)}$ and $c_h^{(n)}$ be the
+coefficients calculated from these rows.  Uniform continuity and the
+induction hypothesis give
+$a_h^{(n)}\to a_h^*$ and $c_h^{(n)}\to c_h^*$ uniformly, where
+the starred coefficients are those of $H$.  Subtract the fixed-row
+equation to obtain
+\begin{align*}
+ &\norm{(F^{n+1}\mu)(\cdot\mid h)-H(\cdot\mid h)}_1\\
+ &\quad\le (1-\delta_t)
+       \norm{(F^n\mu)(\cdot\mid h)-H(\cdot\mid h)}_1
+       + e_t(n),
+\end{align*}
+where $e_t(n)\to0$ uniformly in $\mu$.  There are only finitely
+many histories at depth $t$, so the same error sequence can be used
+for all of them.  For example, it may be taken to bound
+$|a_h^{(n)}-a_h^*|+\norm{c_h^{(n)}-c_h^*}_1$.
+
+If a bounded nonnegative sequence satisfies
+$x_{n+1}\le\rho x_n+e_n$ with $0\le\rho<1$ and $e_n\to0$,
+then
+\[
+  x_n\le\rho^nx_0+\sum_{k<n}\rho^{n-1-k}e_k\longrightarrow0.
+\]
+To see the last limit, split the sum at a fixed index after which
+$e_k$ is arbitrarily small.  The finite initial part decays
+geometrically; the later part is at most
+$\sup_{k\ge K}e_k/(1-\rho)$.  Applying this estimate uniformly
+proves convergence at depth $t$ and completes the induction.
+\end{proof}
+
+\begin{proposition}[The backward core is one zero-valued kernel]
+\label{prop:core}
+The kernel $H$ is independent of the action entries of its history,
+is self-dual, and belongs to $\W$.  Every policy has value zero in it.
+Moreover,
+\begin{equation}
+  \bigcap_{j\ge0}F^j[\V]=\{H\}.
+  \label{eq:core}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Both latent components preserve action independence of the source:
+their schedules and known percept laws ignore actions, and any source
+query then depends only on the percept entries.  Their finite filters
+also ignore the listed actions.  Thus $F$ preserves action independence.
+It preserves self-duality because it commutes with $D$.
+
+Start iteration at the independent uniform kernel.  Each iterate is
+action-independent and self-dual.  These are closed coordinate
+identities, so \eqref{eq:uniform-convergence} passes them to $H$.
+For an action-independent kernel, summing over policy actions leaves
+the same finite percept law for every policy.  Self-duality makes
+that percept law invariant under reversing all rewards.  The expected
+sum of rewards at each finite horizon is therefore zero.  Thus
+$V_H^\pi=0$ for every policy and $H\in\W$.  Both properties are
+used here: self-duality alone would relate a policy to its dual and
+would not force zero for each fixed reward-sensitive policy.
+
+If $\nu\in\bigcap_jF^j[\V]$, for each $j$ choose any kernel
+$\mu_j$ with $F^j\mu_j=\nu$.  For each fixed depth $m$,
+\eqref{eq:uniform-convergence} forces the table of $\nu$ through
+that depth to equal the table of $H$.  Hence $\nu=H$ as a full
+kernel.  This argument requires neither coherent preimages across
+$j$ nor an effective choice of them.  Conversely, $F(H)=H$ puts
+$H$ in every image.  This proves \eqref{eq:core}.
+\end{proof}
+
+The construction has now supplied both the analytic and the effective
+facts needed by the universal machine.  The analytic part is the
+same-policy sign reversal with exact convergence reflection.  The
+effective part consists of a full-kernel injection and terminating
+finite tests for each finite inverse depth.  The single remaining
+kernel in the infinite backward core contributes zero.
+
+\section{Pairing inverse depths with partial programs}
+\label{sec:parity}
+
+The injection $F$ organizes kernels into forward chains, apart from its
+single fixed kernel.  Consecutive kernels in a chain have opposite
+values for every policy.  Pairing consecutive depths is straightforward
+as a set-theoretic operation.  The issue is how to make a universal
+language respect that pairing without deciding inverse depth.
+
+\begin{definition}[Backward depth]
+\label{def:depth}
+For $j\in\N$ and $\nu\in\V$, write
+\[
+  D_j(\nu)\quad\Longleftrightarrow\quad\nu\in F^j[\V].
+\]
+For $\nu\ne H$, its backward depth is
+\[
+  d(\nu)=\max\{j:D_j(\nu)\}.
+\]
+\end{definition}
+
+The images are nested: $F^{j+1}[\V]\subseteq F^j[\V]$.
+Proposition~\ref{prop:core} therefore guarantees that the displayed
+maximum exists for every $\nu\ne H$.  No algorithm for computing it
+is part of this definition.
+
+\begin{lemma}[Adjacent-depth pairing]
+\label{lem:pairing}
+For $\nu\ne H$,
+\[
+  d(F\nu)=d(\nu)+1,
+  \qquad
+  d(I\nu)=d(\nu)-1\quad\text{if }d(\nu)>0.
+\]
+Define
+\begin{equation}
+  T\nu=
+  \begin{cases}
+    H,&\nu=H,\\
+    F\nu,&d(\nu)\text{ is even},\\
+    I\nu,&d(\nu)\text{ is odd}.
+  \end{cases}
+  \label{eq:pairing}
+\end{equation}
+Then $T$ is an involution of $\V$, commutes with $D$, maps $\W$
+bijectively to itself, and satisfies
+\begin{equation}
+  V_{T\nu}^{\pi}=-V_\nu^\pi
+  \qquad(\nu\in\W)
+  \label{eq:t-antivalue}
+\end{equation}
+for every policy.
+\end{lemma}
+
+\begin{proof}
+If $d(\nu)=d$, then $F\nu\in F^{d+1}[\V]$.  If it also belonged
+to $F^{d+2}[\V]$, injectivity of $F$ would imply
+$\nu\in F^{d+1}[\V]$, a contradiction.  This proves the first
+depth identity; the inverse identity follows by cancellation in the
+same way.  Injectivity also gives $F^{-1}\{H\}=\{H\}$.
+
+The definition pairs depths $0$ and $1$, $2$ and $3$, and so on,
+using the unique inverse on positive depths.  Thus $T^2=\id$.
+Proposition~\ref{prop:f-basic} and its inverse implication preserve
+$\W$ and negate the value at each finite-depth pair.  At $H$ the
+value is zero by Proposition~\ref{prop:core}.
+
+Since $D$ is a bijection and commutes with $F$,
+$D(F^j[\V])=F^j[\V]$ for every $j$.  It therefore preserves finite
+depth and the core.  Injectivity gives $ID=DI$ on $F[\V]$:
+both sides are the unique preimage under $F$ of the same dual kernel.
+Using these identities in \eqref{eq:pairing} proves $TD=DT$.
+\end{proof}
+
+\subsection{Two promises of the right logical form}
+
+Define the predicates
+\begin{align}
+  \mathsf{Even}(\nu)
+    &\quad\Longleftrightarrow\quad
+       \forall n\,[D_{2n+1}(\nu)\Rightarrow D_{2n+2}(\nu)],
+       \label{eq:even-predicate}\\
+  \mathsf{Odd}(\nu)
+    &\quad\Longleftrightarrow\quad
+       D_1(\nu)\ \wedge\
+       \forall n\,[D_{2n+2}(\nu)\Rightarrow D_{2n+3}(\nu)].
+       \label{eq:odd-predicate}
+\end{align}
+At a finite depth these hold exactly for the indicated parity.  For
+example, at depth $2k+1$ the $n=k$ implication in
+\eqref{eq:even-predicate} fails; at depth $2k$ all its implications
+hold.  The initial $D_1$ condition removes depth zero from the odd
+predicate.  Both predicates hold at $H$.
+
+The useful feature is their expression as universal families of
+finite-witness searches.  From Proposition~\ref{prop:inverse-tests},
+for any $a,b\in\N$,
+\begin{equation}
+ \begin{split}
+  D_a(\nu)\Rightarrow D_b(\nu)
+  \quad\Longleftrightarrow\quad
+  \forall m\,\exists k\,
+      [\neg R(a,\nu,k)\ \lor\ R(b,\nu,m)].
+ \end{split}
+ \label{eq:guard-normal-form}
+\end{equation}
+If $D_a$ fails, a finite failed test is a witness for every $m$.
+If $D_a$ holds, no such failed test exists, and the right side
+requires every test for $D_b$ to pass.  This proves both directions.
+The bracketed predicate is decidable from finitely many exact outputs
+of a valid $\nu$.
+
+Fix a computable bijective enumeration
+\[
+  h_0,h_1,h_2,\ldots
+\]
+of all histories, and a computable enumeration of all pairs $(n,m)$.
+The inverse index of each supplied finite history is computable, for
+example by searching a length-lexicographic enumeration.  The index
+in this enumeration is separate from the physical time or depth of
+that history.
+
+At a requested history $h_t$, the \emph{even guard} searches for
+witnesses to the first $t+1$ obligations in
+\eqref{eq:guard-normal-form}, with
+$(a,b)=(2n+1,2n+2)$.  It returns only after all those witnesses have
+been found.  The \emph{odd guard} does the same with
+$(a,b)=(2n+2,2n+3)$ and also requires the first $t+1$ finite tests
+$R(1,\nu,m)$ to pass.  If one of those explicit tests fails, the
+request diverges.  These are stateless computations: each request
+performs its own finite collection of searches.
+
+\begin{lemma}[Totality of the guards]
+\label{lem:guards}
+On any $\nu\in\V$, the even guard returns at every requested
+history exactly when $\mathsf{Even}(\nu)$ holds.  The corresponding
+statement holds for the odd guard and $\mathsf{Odd}(\nu)$.
+\end{lemma}
+
+\begin{proof}
+If the predicate holds, each obligation has a witness.  Every test
+performed during a witness search terminates, so any finite collection
+of searches finishes.  In the odd case all the additional $D_1$
+tests also pass.
+
+If an implication predicate fails, one of its enumerated $(n,m)$
+obligations has no witness.  For every history index at or beyond
+that obligation, the guard includes a search which never finishes.
+If the odd predicate fails through $D_1$, some finite test fails and
+likewise prevents all sufficiently late indexed requests from
+returning.  Thus the relevant guarded procedure is not total.
+\end{proof}
+
+\begin{definition}[Partial forward and inverse programs]
+\label{def:partial-branches}
+Given an index for a partial source kernel $\nu$, define two partial
+kernel programs $A_\nu$ and $B_\nu$ as follows.  At a requested
+history, $A_\nu$ first completes the even-guard search and then returns the
+literal value of $F\nu$ there.  The program $B_\nu$ first completes the odd-guard search,
+then runs $I\nu$ there, and returns its result only if it is a legal
+rational distribution.
+\end{definition}
+
+\begin{proposition}[Two partial implementations of the pairing]
+\label{prop:partial-pairing}
+For $\nu\in\V$, the program $A_\nu$ is a full valid kernel exactly
+when $\mathsf{Even}(\nu)$ holds, and then equals $F\nu$.  The program
+$B_\nu$ is a full valid kernel exactly when $\mathsf{Odd}(\nu)$
+holds, and then equals $I\nu$.  At every finite-depth kernel exactly
+one of these programs is full, and it computes $T\nu$.  At $H$ both
+are full and return $H$.
+\end{proposition}
+
+\begin{proof}
+The forward transformation is total on every valid source, so its
+guard alone determines totality.  A true odd guard includes $D_1$,
+which ensures that the inverse interpreter is total and returns a
+valid kernel.  False guards prevent totality by
+Lemma~\ref{lem:guards}.  The parity characterizations above and
+$F(H)=I(H)=H$ give the remaining statements.
+\end{proof}
+
+For clarity, on a chain with root $\rho\notin F[\V]$ the full
+branch and its output are:
+\[
+\begin{array}{c|cccccc}
+ \text{input}&\rho&F\rho&F^2\rho&F^3\rho&F^4\rho&F^5\rho\\
+ \hline
+ \text{full branch}&A&B&A&B&A&B\\
+ \text{output}&F\rho&\rho&F^3\rho&F^2\rho&F^5\rho&F^4\rho
+\end{array}
+\]
+The table is a semantic statement about which programs are total.
+It does not supply a decision procedure for choosing that branch.
+
+In particular, racing $A_\nu$ and $B_\nu$ on one requested history
+does not compute the involution $T$.  A false guard can pass its first
+several obligations, so the wrong branch may return on some histories.
+Its failure is a failure of totality over all histories.  The
+universal machine will contain both partial programs.  The complexity
+argument needs the existence of a correct complete description, not
+an effective choice between them.
+
+\section{An ordinary prefix-free universal machine}
+\label{sec:machine}
+
+Fix the suffix-free RL encoding from Theorem~\ref{thm:main}, and let
+$U_0$ be any ordinary prefix-free universal machine.  We construct a
+new machine $U$ with six instruction tags.  The identity tag leaves
+$U_0$ unrestricted on arbitrary binary inputs.  The other tags
+interpret an encoded environment request and apply duality or one of
+the guarded programs.
+
+\subsection{Tags that cannot consume part of an encoded input}
+
+Let
+\[
+  e_* = \enc(\varnothing),\qquad L=|e_*|.
+\]
+The code $e_*$ is nonempty: an empty word could not belong to the
+prefix-free range of this infinite injective encoding.  Let $b$ be
+its first bit and $c=1-b$.  Choose six distinct three-bit words
+$a_g$, indexed by
+\[
+  g\in\{\id,D,A,DA,B,DB\},
+\]
+and define
+\begin{equation}
+  \tagword_g=a_gc^L,\qquad m=L+3.
+  \label{eq:tags}
+\end{equation}
+All tags have length $m$.  The machine diverges on inputs of length
+less than $m$ and on inputs whose first $m$ bits are not a tag.
+
+\begin{lemma}[Full descriptions contain a whole tag]
+\label{lem:framing}
+For any machine using the tag convention just specified, no program
+of length less than $m$ describes a full environment.  Every full
+environment description has the syntactic form $\tagword_g p$.
+\end{lemma}
+
+\begin{proof}
+Suppose $q$ has length $r<m$, and evaluate it at the empty-history
+code.  Put $j=m-r$.  If $j>L$, the string $qe_*$ has length less
+than $m$ and the machine diverges.  If $1\le j\le L$, the final
+$j$ bits of the first $m$ bits of $qe_*$ are the first $j$ bits of
+$e_*$, which begin with $b$.  The final $j$ bits of every valid
+tag are $c^j$, which begin with $c\ne b$.  Hence the first $m$
+bits cannot form a tag, and the machine again diverges.
+
+A full description must return a value at the empty history, so it
+cannot have length less than $m$.  Its first $m$ bits must then be
+a tag, which gives the claimed form.
+\end{proof}
+
+Equal-length tags alone would not prove this lemma: programs in
+\eqref{eq:complexity} are arbitrary strings prepended to encoded
+inputs.  The tail $c^L$ in \eqref{eq:tags} prevents a purported short
+program from completing its tag with bits from $e_*$.  The encoding
+itself has not been changed.
+
+\subsection{The six branches}
+
+Define the identity branch on every binary string $x$ by
+\begin{equation}
+  U(\tagword_{\id}x)=U_0(x).
+  \label{eq:identity-port}
+\end{equation}
+There is no encoding restriction on this branch.
+
+For any other tag, enumerate histories until one is found whose code
+is a suffix of $x$.  Such a history is unique if it exists: two
+different suffix codes would make the shorter code a suffix of the
+longer one, contradicting suffix-freeness.  Write
+\[
+  x=p\enc(h).
+\]
+If no such history is found, the computation does not return.
+Only a search is required; the encoding's range need not be decidable.
+
+Before applying any transformation, run $U_0(x)$ and require its
+output to encode a legal rational probability vector.  This is the
+\emph{original-input guard}.  Decoding can be implemented by
+enumerating rational probability vectors until the output code is
+found; an output outside that range causes divergence.  From the
+remaining program string $p$, compile the partial kernel
+\begin{equation}
+  \nu_p(\cdot\mid h')=
+      \operatorname{decode}\bigl(U_0(p\enc(h'))\bigr),
+  \label{eq:base-kernel}
+\end{equation}
+where undefined or invalidly encoded answers are treated as
+divergence.
+
+After the original-input guard has succeeded, the tag specifies the
+following output at $h$:
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Tag & Partial kernel evaluated at $h$\\
+\midrule
+$D$  & $D\nu_p$\\
+$A$  & $A_{\nu_p}$\\
+$DA$ & $D(A_{\nu_p})$\\
+$B$  & $B_{\nu_p}$\\
+$DB$ & $D(B_{\nu_p})$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Return the encoded rational vector when this computation terminates
+validly.  For dual tags, $D$ includes evaluating the underlying partial
+kernel at $Dh$ and reversing the output rewards.  Thus it uses the
+same full-kernel duality as Definition~\ref{def:duality}.
+
+Every operation just described is a partial computable operation on
+binary strings.  The finite inverse tests are terminating on valid
+base kernels; the witness searches may wait forever.  No branch
+contains a test deciding that its base kernel is total or that a
+parity predicate holds.
+
+\begin{proposition}[Prefix-freeness and universality]
+\label{prop:universal-machine}
+The machine $U$ is an ordinary prefix-free universal Turing machine.
+\end{proposition}
+
+\begin{proof}
+For every nonidentity tag, a halting input $\tagword_gx$ must first
+pass the original-input guard, so $x\in\dom(U_0)$.  Its untagged
+halting domain is therefore a subset of the prefix-free set
+$\dom(U_0)$.  The identity branch has exactly that halting domain.
+Distinct tags have the same length and are different, so a halting
+word under one tag cannot be a prefix of a halting word under
+another.  The union of the six tagged domains is prefix-free.
+
+For any prefix-free partial computable binary function $f$, choose
+a $U_0$ program $p_f$ with $U_0(p_fx)=f(x)$ for every binary $x$.
+Then \eqref{eq:identity-port} gives
+\[
+  U(\tagword_{\id}p_fx)=f(x)
+\]
+on all inputs, including equality of undefinedness.  Hence $U$ is
+universal in the full sense of Definition~\ref{def:universal}.
+\end{proof}
+
+The original-input guard uses $U_0(x)$ at the \emph{actual} untagged
+input, even when a dual branch subsequently queries a different
+history.  This is what makes each branch's untagged halting domain
+a subset of one fixed prefix-free domain.
+
+\begin{proposition}[Reflection of complete kernels]
+\label{prop:totality-reflection}
+If $\tagword_g p$ describes a complete valid environment under $U$,
+then $\nu_p\in\V$.  For a valid base kernel, the identity and dual
+branches are complete.  The $A$ and $DA$ branches are complete
+exactly on $\mathsf{Even}$, and the $B$ and $DB$ branches exactly
+on $\mathsf{Odd}$.  Every complete branch preserves and reflects
+membership in $\W$.
+\end{proposition}
+
+\begin{proof}
+On the identity branch, validity at every encoded history directly
+asserts that \eqref{eq:base-kernel} is total and legal.  On any
+other branch, a valid output at each $h$ requires the original-input
+guard $U_0(p\enc(h))$ to halt with a legal vector.  The suffix
+parse at such an input is necessarily the displayed $h$, by
+uniqueness.  Thus the same conclusion holds.  In particular, a
+transformation cannot turn a partial base program into a complete
+environment by avoiding some of its inputs or filling in missing
+entries.
+
+On a valid base kernel the original-input guard always finishes.
+Proposition~\ref{prop:partial-pairing} supplies the exact totality
+conditions for $A$ and $B$.  Composing with $D$ does not change
+totality, since $h\mapsto Dh$ is a bijection and reward reversal
+preserves legal distributions.  The identity and dual branches
+are total on every valid base kernel.
+
+Finally, duality preserves and reflects $\W$ by
+Lemma~\ref{lem:duality}.  The same is true of $F$ by
+\eqref{eq:f-w-reflection}, and of its inverse on its image by that
+equivalence in the opposite direction.  The guarded complete
+branches compute exactly these kernels, so each complete branch
+preserves and reflects $\W$.
+\end{proof}
+
+\section{Shortest descriptions and cancellation}
+\label{sec:cancellation}
+
+The preceding construction gave six partial instruction branches,
+not a new definition of the intelligence weight.  The weight remains
+$2^{-K_U(\mu)}$ with the minimum taken over all descriptions.
+We now prove the needed equalities for these actual minima.
+
+\begin{proposition}[Symmetry on all computable kernels]
+\label{prop:shortest-duality}
+For every $\nu\in\V$,
+\[
+  K_U(D\nu)=K_U(\nu).
+\]
+\end{proposition}
+
+\begin{proof}
+Take any complete $U$ description of $\nu$.  By
+Lemma~\ref{lem:framing} it has the form $\tagword_g p$.  Toggle
+the duality flag by the tag pairs
+\[
+  \id\longleftrightarrow D,\qquad
+  A\longleftrightarrow DA,\qquad
+  B\longleftrightarrow DB.
+\]
+Proposition~\ref{prop:totality-reflection} ensures a valid base
+kernel and the same totality of the flagged and unflagged branches.
+The replacement is a complete description of $D\nu$ of the same
+length.  Taking a shortest description gives
+$K_U(D\nu)\le K_U(\nu)$.  Apply the same argument to $D\nu$
+and use $D^2=\id$ for the reverse inequality.
+\end{proof}
+
+This is symmetry on all of $\V$.  Neither well-behavedness nor
+finite backward depth was assumed.
+
+\begin{proposition}[Equal shortest weights for the value pairing]
+\label{prop:shortest-pairing}
+For every $\nu\in\W\setminus\{H\}$,
+\begin{equation}
+  K_U(T\nu)=K_U(\nu).
+  \label{eq:shortest-pairing}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Take an arbitrary complete description $\tagword_g p$ of $\nu$.
+The base kernel $\mu=\nu_p$ is valid by
+Proposition~\ref{prop:totality-reflection}.  It belongs to $\W$
+because the complete branch reflects well-behavedness.  It has finite
+backward depth: otherwise $\mu=H$, and every complete branch on it
+would return $H$, contrary to $\nu\ne H$.
+
+Suppose first that $g$ is $\id$ or $D$, with duality flag
+$\sigma\in\{0,1\}$.  Then $\nu=D^\sigma\mu$.
+Exactly one of $A_\mu$ and $B_\mu$ is complete, and it returns
+$T\mu$.  Replace the tag with that branch, retaining the same
+duality flag.  The new program returns
+\[
+  D^\sigma T\mu=T(D^\sigma\mu)=T\nu
+\]
+and has the same length.
+
+If the tag is $A$, $DA$, $B$, or $DB$, its complete output is
+$D^\sigma T\mu$ for the corresponding flag $\sigma$.  Replace
+it with $\id$ or $D$, respectively.  The new complete output is
+\[
+  D^\sigma\mu=T(D^\sigma T\mu)=T\nu,
+\]
+again with the same length.  Here we used $T^2=\id$ and $TD=DT$.
+
+Thus \emph{every} complete description of $\nu$ has a same-length
+complete description of $T\nu$.  This includes any short program
+through the unrestricted universal branch, regardless of how it
+computes its kernel.  Applying the statement to a shortest
+description gives $K_U(T\nu)\le K_U(\nu)$.  Apply it again to
+$T\nu$ and use involutivity to obtain equality.
+\end{proof}
+
+The replacement of an identity tag in this proof need not be
+computably chosen from the source program.  A Kolmogorov-complexity
+inequality asks whether a description of a certain length exists.
+Both guarded programs already belong to one ordinary machine; the
+proof establishes that one of them is complete.  No noncomputable
+choice is used during execution of $U$.
+
+\begin{lemma}[Absolute convergence with the exact program convention]
+\label{lem:kraft}
+For the fixed encoding and any prefix-free universal machine,
+\begin{equation}
+  \sum_{\mu\in\W}2^{-K_U(\mu)}\le2^L,
+  \qquad L=|\enc(\varnothing)|.
+  \label{eq:shifted-kraft}
+\end{equation}
+Consequently the intelligence series is absolutely convergent for
+every policy.
+\end{lemma}
+
+\begin{proof}
+Choose the lexicographically first shortest description $q_\mu$ for
+each $\mu\in\W$.  Distinct kernels have distinct descriptions:
+one program returning a full kernel at every history cannot describe
+two different functions.  The strings $q_\mu e_*$ are therefore
+distinct members of $\dom(U)$.  They form a prefix-free set, so
+Kraft's inequality gives
+\[
+  \sum_{\mu\in\W}2^{-(|q_\mu|+L)}\le1.
+\]
+Indeed, their binary cylinder sets are disjoint, and the cylinder of a
+word of length $n$ has fair-coin measure $2^{-n}$.
+Multiplying by $2^L$ proves \eqref{eq:shifted-kraft}.  For every
+$\mu\in\W$ and every policy, $|V_\mu^\pi|\le1$ by definition.
+Comparison with \eqref{eq:shifted-kraft} proves absolute
+convergence.
+\end{proof}
+
+The shift by $L$ avoids assuming that the bare program strings
+$q_\mu$ themselves form a prefix code.  Prefix-freeness is known
+for complete halting inputs, and appending one fixed encoded history
+puts all descriptions into that domain.  The precise bound is more
+than is needed; its finiteness licenses rearrangement of the original
+kernel sum.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Proposition~\ref{prop:universal-machine} proves ordinary
+prefix-free universality, and
+Proposition~\ref{prop:shortest-duality} proves symmetry on every
+computable full kernel.  Fix any policy $\pi$.  The contribution
+of $H$ to \eqref{eq:intelligence} is zero by
+Proposition~\ref{prop:core}.  On the remaining kernels, $T$ is a
+bijection of $\W\setminus\{H\}$, preserves the shortest length
+by Proposition~\ref{prop:shortest-pairing}, and negates the value
+by Lemma~\ref{lem:pairing}.  Absolute convergence from
+Lemma~\ref{lem:kraft} permits reindexing, so
+\begin{align*}
+  \Upsilon_U(\pi)
+   &=\sum_{\nu\in\W\setminus\{H\}}
+         2^{-K_U(\nu)}V_\nu^\pi\\
+   &=\sum_{\nu\in\W\setminus\{H\}}
+         2^{-K_U(T\nu)}V_{T\nu}^\pi\\
+   &=-\sum_{\nu\in\W\setminus\{H\}}
+         2^{-K_U(\nu)}V_\nu^\pi
+    =-\Upsilon_U(\pi).
+\end{align*}
+Hence $\Upsilon_U(\pi)=0$.  The argument did not assume that
+$\pi$ is computable.  On a program promised to describe a
+computable policy, the constant-zero algorithm therefore returns
+its strong sign and also satisfies the weak-sign requirement.
+\end{proof}
+
+\section{Consequences and scope}
+\label{sec:scope}
+
+The construction works with arbitrary nonempty finite action and
+observation sets and every finite symmetric rational reward set.
+It applies, for example, when there are two actions and the only
+rewards are $-1$ and $1$.  Zero need not be an available individual
+reward: symmetric terminal randomization has zero finite expected
+contribution.  Thus the conclusion does not depend on using a
+degenerate action or reward alphabet.
+
+Every computable environment retains a positive finite-complexity
+weight.  The universal simulation branch remains unrestricted, and
+the aggregate uses one shortest-description weight per full kernel.
+The cancellation occurs because the additional program branches
+force the minima of two semantically paired kernels to agree.
+Neither suppressing difficult environments nor replacing the kernel
+sum by a sum over descriptions is involved.
+
+The all-policy condition in $\W$ is preserved in full.  The
+convergence argument fixed an arbitrary policy, and finite filtering
+used only its finite action probabilities.  The same-policy value
+identity therefore holds even for noncomputable policies, and
+well-behavedness is reflected as well as preserved.  This reflection
+is needed when an arbitrary complete universal description is
+reinterpreted by another tag: a well-behaved output must come from
+a well-behaved base kernel.
+
+The result separates the sign question from the usefulness of the
+score as a ranking.  The constructed score and its absolute value
+are both zero for all policies.  A strengthened question could ask
+for a symmetric universal machine with computable sign and with
+$\Upsilon_U(\pi)\ne0$ for at least one policy.  Another could require
+two computable policies to receive different scores.  The argument
+here establishes neither strengthening.  It shows that an explicit
+nontriviality requirement is necessary if the existence question is
+intended to rule out universal cancellation.
+
+\section*{Provenance}
+
+The repository owner selected the source problem and directed the
+research.  OpenAI Codex developed the mathematical arguments and
+exposition.  The proof is presented in full for mathematical scrutiny;
+independent human mathematical review, formal verification, and
+historical priority are not claimed.
+
+\begin{thebibliography}{9}
+
+\bibitem{AlexanderHutter2021}
+Samuel Allen Alexander and Marcus Hutter.
+\newblock Reward-Punishment Symmetric Universal Intelligence.
+\newblock In Ben Goertzel, Matthew Ikl\'e, and Alexey Potapov, editors,
+\emph{Artificial General Intelligence (AGI 2021)}, volume 13154 of
+\emph{Lecture Notes in Computer Science}, pp.~1--10. Springer, Cham, 2022.
+\newblock \href{https://doi.org/10.1007/978-3-030-93758-4_1}
+  {doi:10.1007/978-3-030-93758-4\_1}.
+\newblock Preprint: \href{https://arxiv.org/abs/2110.02450v1}
+  {arXiv:2110.02450v1}.
+
+\bibitem{LeggHutter2007}
+Shane Legg and Marcus Hutter.
+\newblock Universal Intelligence: A Definition of Machine Intelligence.
+\newblock \emph{Minds and Machines}, 17(4):391--444, 2007.
+\newblock \href{https://doi.org/10.1007/s11023-007-9079-x}
+  {doi:10.1007/s11023-007-9079-x}.
+\newblock Preprint: \href{https://arxiv.org/abs/0712.3329}
+  {arXiv:0712.3329}.
+
+\end{thebibliography}
+\end{document}
