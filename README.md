@@ -4,6 +4,15 @@ This repository is a research packet for discussion. It is not a journal submiss
 makes no claim to established priority. Each numbered folder is a research entry with
 paper sources, a PDF or a pointer to a consolidated paper, and any scripts with their recorded output.
 
+**New explanatory paper, 17 November 2026:**
+[A symmetric universal machine with identically zero universal intelligence](20-symmetric-zero-intelligence/README.md)
+([21-page PDF](20-symmetric-zero-intelligence/paper.pdf)) addresses Alexander–Hutter's Section 5
+sign question. The original shortest-description-weighted aggregate is zero
+for every policy, for an ordinary symmetric universal machine and every fixed
+suffix-free encoding. The paper includes the full proof and states the
+remaining nonzero/discriminating strengthening separately. This is a new
+hand-proof paper, independent of the dissertation Lean development.
+
 **Explanatory editions, 21 October 2026:**
 [Specieslike clusters with several founders](06-founding-cohort-species/founding-cohort-species.pdf)
 combines entries 06, 10 and 11 into one paper.
@@ -99,6 +108,7 @@ Nothing here duplicates it.
 | 17 | [Dissertation Question 3-1-3 — standalone finite-guard proof](17-dissertation-question-3-1-3/REVISED-3-1-3-PROOF.pdf): knowing machines that know everyone's truthfulness, particular codes of their subordinates, and everyone's mechanicalness exist for every r.e. well-founded hierarchy and unrestricted modal formulas. Current 33-page paper with abstract and complete introduction; [earlier editions archived](17-dissertation-question-3-1-3/README.md#earlier-editions-and-construction-history). | same, Def. 1.1.1, Question 3-1-3 | standalone prose proof; completed comparator targets pass public Lean CI; scope recorded in the comparison |
 | 18 | [Dissertation Open Problem 3.2.1](18-dissertation-problem-3-2-1/successor-knowers-3-2-1.pdf): no infinite successor chain with full particular-code knowledge and known successor truthfulness in the standard canonical semantics, even without ordinal knowledge. [Supplement](18-dissertation-problem-3-2-1/supplemental/README.md) includes uniform enumeration, computable-path and arithmetic separation consequences. | same, §3.2, Open Problem 3.2.1, printed p. 89 | full hand proof using Pakhomov–Walsh; no independent human review or formal certificate |
 | 19 | [Explicit ill-founded hierarchy](19-explicit-ill-founded-hierarchy/ill-founded-hierarchy.pdf): a recursive order with no arithmetic-truth-computable descending path, and effective construction of a true uniformly r.e. family with particular codes of everyone and truthfulness of subordinates. | *Self-referential theories*, Theorem 79(1): explicit witness for the published existence result | 13-page explanatory hand proof; Computer Modern; no independent review or formal verification |
+| 20 | [Symmetric universal machine with zero intelligence](20-symmetric-zero-intelligence/paper.pdf): an ordinary symmetric universal machine whose original shortest-description aggregate is zero for every policy, for each fixed suffix-free RL encoding. | Alexander–Hutter, *Reward-Punishment Symmetric Universal Intelligence* (AGI 2021; published 2022), §5 | 21-page full hand-proof exposition; AI review, no formal certificate |
 
 ## Dissertation formalisation and revised proof
 
@@ -155,7 +165,8 @@ see [its README](17-dissertation-question-3-1-3/README.md). The archived 3 Octob
 LaTeX paper retains its original build script in its archive.
 Note 18 has a separate [offline build](18-dissertation-problem-3-2-1/README.md#rebuild)
 for its main paper and supplement; the Markdown files are their canonical sources.
-`SHA256SUMS` lists checksums of the committed files.
+Entry 20 has its own standalone pdfLaTeX build: run `python3 build_pdf.py` inside `20-symmetric-zero-intelligence`.
+`SHA256SUMS` lists checksums of the committed files; entry 20 also includes a local manifest.
 
 ## Provenance
 

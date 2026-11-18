@@ -1,0 +1,48 @@
+{
+  "pdf": "paper.pdf",
+  "pages": 21,
+  "pdf_bytes": 372454,
+  "pdf_sha256": "fc8cf6ec4c7d166a181fc796b718a30a85d80088bc7d25d3a6fe904a2bd2635b",
+  "warnings": [],
+  "fonts": "name                                 type              encoding         emb sub uni object ID\n------------------------------------ ----------------- ---------------- --- --- --- ---------\nJOXQGY+LMRoman17-Regular             Type 1            Custom           yes yes yes     95  0\nFJLSCC+LMRoman12-Regular             Type 1            Custom           yes yes yes     96  0\nMQMDNZ+LMRoman10-Bold                Type 1            Custom           yes yes yes     97  0\nKILMRW+LMRoman10-Regular             Type 1            Custom           yes yes yes     98  0\nEMBNZF+LMRoman12-Bold                Type 1            Custom           yes yes yes     99  0\nBMASGB+LMMathItalic10-Regular        Type 1            Custom           yes yes yes    108  0\nQJURVR+LMMathItalic8-Regular         Type 1            Custom           yes yes yes    109  0\nKILMRW+LMRoman10-Regular             Type 1            Custom           yes yes yes    110  0\nHCNRWH+LMMathSymbols10-Regular       Type 1            Custom           yes yes yes    111  0\nAWLZEO+LMRoman10-Italic              Type 1            Custom           yes yes yes    112  0\nKISBNF+MSBM10                        Type 1            Builtin          yes yes yes    125  0\nBRVDCW+LMMathSymbols8-Regular        Type 1            Custom           yes yes yes    126  0\nMBZURX+LMRoman8-Regular              Type 1            Custom           yes yes yes    127  0\nJBVOYT+LMMathExtension10-Regular     Type 1            Custom           yes yes yes    130  0\nBYTHLM+LMMathItalic6-Regular         Type 1            Custom           yes yes yes    148  0\nDTFCKV+LMMathSymbols6-Regular        Type 1            Custom           yes yes yes    155  0\nMQMDNZ+LMRoman10-Bold                Type 1            Custom           yes yes yes    234  0\nNOILYW+LMSans10-Regular              Type 1            Custom           yes yes yes    301  0\n",
+  "build": "pdfLaTeX, three passes; BibTeX when required",
+  "edition_date": "2026-11-17",
+  "formal_verification": false,
+  "review_kind": "AI-assisted mathematical hand review and document inspection",
+  "scope": "Build and document checks are not proof-assistant verification or independent human review.",
+  "standalone_rebuild": {
+    "command": "python3 build_pdf.py",
+    "inputs": "Only the bundled TeX, bibliography and build script in an isolated directory",
+    "network_downloads": false,
+    "pdf_text_identical": true,
+    "result": "pass"
+  },
+  "visual_review": {
+    "pages_inspected": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "method": "Poppler page rendering, contact-sheet inspection, individual page checks and reinspection after corrections",
+    "result": "pass",
+    "outstanding_document_defects": []
+  }
+}
